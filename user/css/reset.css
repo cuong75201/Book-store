@@ -1,0 +1,142 @@
+/* 1. Đảm bảo tất cả phần tử sử dụng box-sizing: border-box */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Định nghĩa font chữ mặc định */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+
+/* 3. Reset body */
+body {
+    background-color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 4. Reset các phần tử HTML5 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+/* 5. Xóa margin, padding và font mặc định trên các phần tử thường dùng */
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+    font: inherit;
+}
+
+/* 6. Định dạng danh sách */
+ol, ul {
+    list-style: none;
+}
+
+/* 7. Reset blockquote và q */
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+}
+
+/* 8. Reset bảng */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 9. Cải thiện trải nghiệm người dùng khi focus */
+[tabindex="-1"]:focus {
+    outline: none !important;
+}
+
+/* 10. Định dạng mặc định cho hình ảnh */
+img {
+    max-width: 100%;
+    height: auto;
+    border-style: none;
+    vertical-align: middle;
+}
+
+/* 11. Thiết lập mặc định cho form control */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+/* 12. Điều chỉnh hiển thị của button */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+    appearance: button;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* 13. Loại bỏ hiệu ứng mặc định của input type search */
+[type="search"]::-webkit-search-decoration,
+[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+/* 14. Loại bỏ nút tăng/giảm trên input number */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+    appearance: none;
+}
+
+/* 15. Định dạng mặc định cho thẻ inline */
+a,a:hover {
+    text-decoration: none;
+    color: #2e2d2d;
+}
+
+
+b, strong {
+    font-weight: bold;
+}
+
+i, em {
+    font-style: italic;
+}
+
+/* 16. Định dạng mặc định cho SVG */
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* 17. Ẩn các phần tử không mong muốn */
+[hidden] {
+    display: none !important;
+}
