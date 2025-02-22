@@ -24,6 +24,7 @@
 - File Admin: Chứa các chức năng và giao diện trang admin
 - File User: Chứa các chức năng và giao diện người dùng
 - File data: Chứa dữ liệu sản phẩm (Hình ảnh, thông tin sản phẩm)
+- File public: Chứa các file dùng chung cho admin, user
 ## Công nghệ được sử dụng trong đồ án
 - BOOSTRAP  4.5
 - PHP
