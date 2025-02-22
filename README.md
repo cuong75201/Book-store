@@ -1,7 +1,7 @@
 # Book-store
 ## ĐỒ ÁN MÔN HỌC: XÂY DỰNG WEBSITE QUẢN LÝ SÁCH
 ## Mô tả đề tài
-- Mục tiêu đề tài: Một ứng dụng website giúp người sử dụng có thể sách trực tuyến.
+- Mục tiêu đề tài: Một ứng dụng website giúp người sử dụng có thể mua sách trực tuyến.
 - Môi trường sử dụng: Web browser
 - 2 actors chính:Người dùng, Admin
 - Dữ cần quản lý: Thông tin người dùng, thông tin của admin, thông tin của sản phẩm
