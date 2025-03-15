@@ -30,14 +30,14 @@
 - index.php: Cửa vào, gọi route(app.php)
 - File mvc: Chứa dữ liệu theo mô hình MVC
     + core:
-        -app.php: Điều hướng url đến controller tương ứng
-        -controller.php: Lớp cha  để các lớp trong folder controllers kế thừa
-        -dbconnect: Kết nối database
+        +app.php: Điều hướng url đến controller tương ứng
+        +controller.php: Lớp cha  để các lớp trong folder controllers kế thừa
+        +dbconnect: Kết nối database
     + models: Chứa các model để giao tiếp với database
     + views: Giao diện người dùng
-        index.php: Giao diện bắt dầu
-        main_layout.php: Include để hiển thị các giao diện sau này
-    Controller: Gọi giữa views và models
+        +index.php: Giao diện bắt dầu
+        +main_layout.php: Include để hiển thị các giao diện sau này
+    +Controller: Gọi giữa views và models
 ## Mô tả cách hoạt động
 - Nhận url từ trang web đi vào app.php, trong app.php nếu url không tồn tại thì sẽ gọi trang myerrol.php, trong app.php sẽ có 3 thuộc tính (controller: Tên class trong controller, action: Tên phương thức trong class, params: Tham số truyền vào). Mặc định mới vào app.php sẽ gọi controller home.php, home.php sẽ gọi đến index.php ở view để hiển thị.
 - Nếu người dùng click vào url ở thẻ a thì app.php sẽ nhận và điều hướng đến controller tương ứng.
