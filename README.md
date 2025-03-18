@@ -33,8 +33,8 @@
         -app.php: Điều hướng url đến controller tương ứng
         -controller.php: Lớp cha  để các lớp trong folder controllers kế thừa
         -dbconnect: Kết nối database
-    models: Chứa các model để giao tiếp với database
-    views: Giao diện người dùng
+    + models: Chứa các model để giao tiếp với database
+    + views: Giao diện người dùng
         index.php: Giao diện bắt dầu
         main_layout.php: Include để hiển thị các giao diện sau này
     Controller: Gọi giữa views và models
