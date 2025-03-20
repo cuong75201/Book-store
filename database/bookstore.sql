@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 13, 2025 lúc 03:58 AM
+-- Thời gian đã tạo: Th3 20, 2025 lúc 03:28 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Phiên bản PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `bookstore`
+-- Cơ sở dữ liệu: `book_store`
 --
 
 -- --------------------------------------------------------
@@ -107,6 +107,20 @@ CREATE TABLE `danh_muc` (
   `Ten_The_Loai` varchar(100) NOT NULL,
   `Mo_Ta` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `danh_muc`
+--
+
+INSERT INTO `danh_muc` (`ID_The_Loai`, `Ten_The_Loai`, `Mo_Ta`) VALUES
+(1, 'SÁCH MẦM NON', ''),
+(2, 'SÁCH THIẾU NHI', ''),
+(3, 'SÁCH KĨ NĂNG', ''),
+(4, 'SÁCH KINH DOANH', ''),
+(5, 'SÁCH MẸ VÀ BÉ', ''),
+(6, 'SÁCH VĂN HỌC', ''),
+(7, 'SÁCH THAM KHẢO', ''),
+(8, 'NOTEBOOK', '');
 
 -- --------------------------------------------------------
 
@@ -218,9 +232,11 @@ CREATE TABLE `sach` (
   `Nam_Xuat_Ban` int(11) DEFAULT NULL,
   `ID_The_Loai` int(11) DEFAULT NULL,
   `Gia_Ban` decimal(10,2) NOT NULL,
+  `GiamGia(%)` int(11) NOT NULL,
   `So_Luong_Ton` int(11) DEFAULT 0,
   `Mo_Ta` text DEFAULT NULL,
-  `ID_Cart` int(11) NOT NULL
+  `Images` varchar(1000) NOT NULL,
+  `ID_Cart` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -361,7 +377,7 @@ ALTER TABLE `chucnang`
 -- AUTO_INCREMENT cho bảng `danh_muc`
 --
 ALTER TABLE `danh_muc`
-  MODIFY `ID_The_Loai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_The_Loai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hang`
@@ -403,7 +419,7 @@ ALTER TABLE `pttt`
 -- AUTO_INCREMENT cho bảng `sach`
 --
 ALTER TABLE `sach`
-  MODIFY `ID_Sach` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Sach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
