@@ -95,12 +95,13 @@
                             <ul class="grid__item one-whole">
                                 <li>
                                     <a href="pages/about"><span>Giới thiệu</span></a>
+                                    <!-- ?url=pages/about -->
                                 </li>
                                 <li>
-                                    <a href="/blogs/all"><span>Điểm sách</span></a>
+                                    <a href="blogs/all"><span>Điểm sách</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://minhlongbook.vn/blogs/tuyen-dung"><span>Tuyển dụng</span></a>
+                                    <a href="blogs/tuyen-dung"><span>Tuyển dụng</span></a>
                                 </li>
                                 <li>
                                     <a href="/blogs/su-kien"><span>Sự kiện</span></a>
