@@ -2065,7 +2065,7 @@
         </div>
     </div>
     <!-- FOOTER -->
-    <?php require 'inc/footer.php   '; ?>
+    <?php require 'inc/footer.php'; ?>
 
 </body>
 
