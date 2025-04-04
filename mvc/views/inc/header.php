@@ -19,13 +19,38 @@
                           <i class="fa fa-shopping-cart"></i>
                           <span class="d-block">Giỏ hàng</span>
                       </div>
-                      <div class="header__user">
+                      <?php
+                        if (isset($_COOKIE['user_email'])) {
+                            echo ' <div class="header__user">
                           <a>
                               <i class="fa fa-user"></i>
                               <span class="d-block">Tài khoản</span>
                           </a>
+                          
                           <ul class="dropdown-menu">
+                             
                               <li>
+
+                                  <i class="fa fa-user"></i>
+                                  <a href="#">Thông tin</a>
+                              </li>
+                              <li>
+                                  <i class="fa fa-sign-in-alt"></i>
+                                  <a href="account/logout">Đăng xuất</a>
+                              </li>
+                          </ul>
+                      </div>';
+                        } else {
+                            echo '<div class="header__user">
+                          <a>
+                              <i class="fa fa-user"></i>
+                              <span class="d-block">Tài khoản</span>
+                          </a>
+                          
+                          <ul class="dropdown-menu">
+                             
+                              <li>
+
                                   <i class="fa fa-sign-in-alt"></i>
                                   <a href="account/login">Đăng nhập</a>
                               </li>
@@ -34,7 +59,9 @@
                                   <a href="#">Đăng ký</a>
                               </li>
                           </ul>
-                      </div>
+                      </div>';
+                        }
+                        ?>
 
                   </div>
               </div>

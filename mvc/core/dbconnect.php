@@ -4,7 +4,7 @@
 require 'config.php';
 class dbconnect
 {
-    private $con;
+    public $con;
     private $servername = host_name;
     private $username = db_user;
     private $password = db_password;

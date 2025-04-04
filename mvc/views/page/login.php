@@ -11,16 +11,15 @@
                     <h1 class="title-box-login">Đăng nhập</h1>
                     <div class="content-cus-form cus-login">
                         <div id="login">
-                            <form accept-charset="UTF-8" action="/account/login" id="customer_login" method="post">
-                                <input name="form_type" type="hidden" value="customer_login">
-                                <input name="utf8" type="hidden" value="✓">
+                            <form accept-charset="UTF-8" id="customer_login">
                                 <div class="col_full">
-                                    <input type="email" id="login-form-username" name="customer[email]" placeholder="Email của bạn" class="form-control" required>
-                                    <span class="not-null">*</span>
+                                    <input type="text" id="login-form-username" placeholder="Email của bạn" class="form-control">
+
                                 </div>
                                 <div class="col_full">
-                                    <input type="password" id="login-form-password" name="customer[password]" placeholder="Nhập mật khẩu" class="form-control" required>
-                                    <span class="not-null">*</span>
+                                    <input type="password" id="login-form-password" placeholder="Nhập mật khẩu" class="form-control">
+                                    <span class="error error_login"></span>
+
                                 </div>
                                 <div class="col_full nobottommargin action">
                                     <button class="button button-3d button-black nomargin" type="submit">Đăng nhập</button>
@@ -34,31 +33,36 @@
                 <div class="auth-box">
                     <h1 class="title-box-login">Đăng ký thành viên mới</h1>
                     <div class="content-cus-form cus-reg">
-                        <form accept-charset="UTF-8" action="/account" id="create_customer" method="post">
-                            <input name="form_type" type="hidden" value="create_customer">
-                            <input name="utf8" type="hidden" value="✓">
+                        <form accept-charset="UTF-8" id="create_customer">
                             <div class="col_full">
-                                <input type="text" name="customer[last_name]" placeholder="Họ" required>
-                                <span class="not-null">*</span>
+                                <input type="text" id="last_name" placeholder="Họ">
+
+                                <span class="error error_last_name"></span>
                             </div>
                             <div class="col_full">
-                                <input type="text" name="customer[first_name]" placeholder="Tên" required>
-                                <span class="not-null">*</span>
+                                <input type="text" id="first_name" placeholder="Tên">
+
+                                <span class="error error_first_name"></span>
                             </div>
                             <div class="col_full">
-                                <input type="email" name="customer[email]" placeholder="Email" required>
-                                <span class="not-null">*</span>
+                                <input type="email" id="email" placeholder="Email">
+
+                                <span class="error error_email"></span>
                             </div>
                             <div class="col_full">
-                                <input type="password" name="customer[password]" placeholder="Mật khẩu" required>
-                                <span class="not-null">*</span>
+                                <input type="password" id="password" placeholder="Mật khẩu">
+
+                                <span class="error error_password"></span>
+
                             </div>
                             <div class="col_full">
-                                <input type="password" name="customer[repassword]" placeholder="Nhập lại mật khẩu" required>
-                                <span class="not-null">*</span>
+                                <input type="password" id="confirm_password" placeholder="Nhập lại mật khẩu">
+
+                                <span class="error error_confirmpassword"></span>
+
                             </div>
                             <div class="col_full nobottommargin action">
-                                <button class="button button-3d button-black nomargin" type="submit">Đăng ký</button>
+                                <button class="button button-3d button-black nomargin btn-register" type="submit">Đăng ký</button>
                             </div>
                         </form>
                     </div>

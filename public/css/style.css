@@ -75,10 +75,15 @@ header .header__item .header__user:hover .dropdown-menu {
 
 header .header__item .header__user .dropdown-menu {
     padding: .5rem .6rem;
+    margin: 0;
 }
 
 header .header__item .header__user li {
     margin: .2rem 0 .5rem;
+}
+
+header .header__item .header__user li:hover a {
+    color: #026e36;
 }
 
 /* NAVBAR */
@@ -621,6 +626,7 @@ h1.title-box-login {
 .col_full {
     display: block;
     position: relative;
+    margin-bottom: 15px;
 }
 
 /* Định dạng ô nhập không bị tràn */
@@ -636,7 +642,6 @@ h1.title-box-login {
     text-align: left;
     background: #fff;
     /* Đảm bảo nền trắng */
-    margin-bottom: 15px;
     outline: none !important;
     box-shadow: none !important;
 }
@@ -803,4 +808,11 @@ span.repassword_warning {
     .auth-box {
         max-width: 90%;
     }
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    text-align: left;
+    display: block;
 }
