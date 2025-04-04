@@ -120,22 +120,22 @@
                             <ul class="grid__item one-whole">
 
                                 <li>
-                                    <a href="/pages/dieu-khoan-su-dung"><span>Điều khoản sử dụng</span></a>
+                                    <a href="pages/userole"><span>Điều khoản sử dụng</span></a>
                                 </li>
                                 <li>
-                                    <a href="/pages/huong-dan-mua-hang"><span>Hướng dẫn mua hàng</span></a>
+                                    <a href="pages/hdmua"><span>Hướng dẫn mua hàng</span></a>
                                 </li>
                                 <li>
-                                    <a href="/pages/phuong-thuc-thanh-toan"><span>Phương thức thanh toán</span></a>
+                                    <a href="pages/ptthanhtoan"><span>Phương thức thanh toán</span></a>
                                 </li>
                                 <li>
-                                    <a href="/pages/phuong-thuc-van-chuyen-1"><span>Phương thức giao hàng</span></a>
+                                    <a href="pages/ptgiaohang"><span>Phương thức giao hàng</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://minhlongbook.vn/pages/chinh-sach-tra-hang"><span>Chính sách đổi trả</span></a>
+                                    <a href="pages/csdoitra"><span>Chính sách đổi trả</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://minhlongbook.vn/pages/chinh-sach-bao-mat-thong-tin"><span>Bảo mật thông tin</span></a>
+                                    <a href="pages/baomat"><span>Bảo mật thông tin</span></a>
                                 </li>
                             </ul>
                         </div>
