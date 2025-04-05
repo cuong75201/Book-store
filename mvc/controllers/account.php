@@ -11,6 +11,18 @@ class Account extends Controller
         $result = $this->userModel->create($lastname, $fisrtname, $email, $password, $date);
         return $result;
     }
+    function default()
+    {
+        $this->view('main_layout', [
+            'Title' => 'Tài khoản – MINH LONG BOOK',
+            'page' => 'information',
+            "plugin" => [
+                "reset" => 1,
+                "style" => 1,
+            ],
+            "script" => "AjaxLogin"
+        ]);
+    }
     function Signup()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
