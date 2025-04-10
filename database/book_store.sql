@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 10, 2025 lúc 04:10 AM
+-- Thời gian đã tạo: Th4 10, 2025 lúc 06:05 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -227,6 +227,7 @@ CREATE TABLE `pnh` (
   `ID_PNH` int(11) NOT NULL,
   `ID_NCC` int(11) NOT NULL,
   `Ngay_Nhap` date NOT NULL,
+  `ID_NV` int(11) NOT NULL,
   `Tong_Tien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -519,6 +520,7 @@ ALTER TABLE `nhomquyen`
 --
 ALTER TABLE `pnh`
   ADD PRIMARY KEY (`ID_PNH`),
+  ADD UNIQUE KEY `ID_NV` (`ID_NV`),
   ADD KEY `ID_NXB` (`ID_NCC`);
 
 --
@@ -643,6 +645,13 @@ ALTER TABLE `ncc`
 --
 ALTER TABLE `nhomquyen`
   ADD CONSTRAINT `nhomquyen_ibfk_1` FOREIGN KEY (`MaQuyen`) REFERENCES `nhanvien` (`MaQuyen`);
+
+--
+-- Các ràng buộc cho bảng `pnh`
+--
+ALTER TABLE `pnh`
+  ADD CONSTRAINT `pnh_ibfk_1` FOREIGN KEY (`ID_NV`) REFERENCES `nhanvien` (`ID_NV`),
+  ADD CONSTRAINT `pnh_ibfk_2` FOREIGN KEY (`ID_PNH`) REFERENCES `ctiet_pnh` (`ID_pnh`);
 
 --
 -- Các ràng buộc cho bảng `sach`
