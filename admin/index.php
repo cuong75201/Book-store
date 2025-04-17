@@ -4,8 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <title>AdminKKKKK</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/style1.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style1.css">
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     </head>
@@ -156,7 +156,7 @@
             </div>
         </div>
         
-        <script src="../js/loginout_v2.js"></script>
+        <script src="js/loginout_v2.js"></script>
         <!--<script src="../js/admin.js"></script>
         <script src="../js/admin1.js"></script>-->
     </body>
