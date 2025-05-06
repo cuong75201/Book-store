@@ -11,43 +11,43 @@
                       <div class="vertical-menu-content">
                           <ul class="vertical-menu-list">
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-mam-non">
                                       <img src="media//logo-banner/s2.jpg" alt="">
                                       <span>SÁCH MẦM NON</span>
                                   </a>
                               </li>
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-thieu-nhi">
                                       <img src="media//logo-banner/s3.jpg" alt="">
                                       <span>SÁCH THIẾU NHI</span>
                                   </a>
                               </li>
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-ki-nang">
                                       <img src="media//logo-banner/s4.jpg" alt="">
                                       <span>SÁCH KĨ NĂNG</span>
                                   </a>
                               </li>
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-kinh-doanh">
                                       <img src="media//logo-banner/s5.jpg" alt="">
                                       <span>SÁCH KINH DOANH</span>
                                   </a>
                               </li>
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-me-va-be">
                                       <img src="media//logo-banner/s6.jpg" alt="">
                                       <span>SÁCH MẸ VÀ BÉ</span>
                                   </a>
                               </li>
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-van-hoc">
                                       <img src="media//logo-banner/s7.jpg" alt="">
                                       <span>SÁCH VĂN HỌC</span>
                                   </a>
                               </li>
                               <li class="liChild">
-                                  <a href="#">
+                                  <a href="collections/sach-tham-khao">
                                       <img src="media//logo-banner/s8.jpg" alt="">
                                       <span>SÁCH THAM KHẢO</span>
                                   </a>

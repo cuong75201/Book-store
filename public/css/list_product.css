@@ -1,0 +1,67 @@
+.tabs-container h2 a:hover {
+    color: black;
+}
+
+.tabs-container h2 {
+    margin: 0;
+}
+
+.product_top_bestseller {
+    margin: 25px 0 20px;
+    background: #fff;
+}
+
+.article-container ul {
+    padding: 10px 0 10px 30px;
+}
+
+.article-container ul li {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.article-container ul li:hover {
+    background-color: #ccc;
+
+}
+
+.article-container ul li:hover a,
+.article-container .active a {
+    color: #026e36;
+
+}
+
+.article-container .active {
+
+    background-color: #ccc;
+}
+
+.content-list {
+    background: #fff;
+}
+
+.item_product {
+    background: #fff;
+    position: relative;
+    list-style-type: none;
+}
+
+.pagi {
+    padding: 20px 10px;
+    display: block;
+    border: none;
+}
+
+.pagination .active,
+.pagination li:hover a {
+    background-color: #026e36;
+}
+
+.pagination li a {
+    display: inline-block;
+    padding: 1px 10px;
+    margin: 0 2px;
+    background: #fff;
+    border: 1px solid #026e36;
+}

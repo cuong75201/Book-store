@@ -4,4 +4,3 @@ define('ADMIN_ROOT', __DIR__);
 
 // Đường dẫn tương đối dùng cho URL
 define('ADMIN_URL', '/Book-store/admin/');
-?>

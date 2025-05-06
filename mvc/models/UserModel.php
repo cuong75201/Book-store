@@ -13,6 +13,37 @@ class  UserModel extends dbconnect
         }
         return $check;
     }
+    public function updateUser($lastname, $firstname, $email, $password, $phone, $address)
+    {
+        $name = $lastname . " " . $firstname;
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE `khach_hang` SET `Ten_Khach_Hang`='$name',`Mat_Khau`='$password',`So_Dien_Thoai`='$phone',`Dia_Chi`='$address' WHERE `Email`='$email'";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function setStatus($status, $email)
+    {
+        $sql = "UPDATE `khach_hang` SET `status`='$status' WHERE `Email='$email'";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function deleteUser($email)
+    {
+        $sql = "DELETE FROM `khach_hang` WHERE `Email`='$email'";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function getAllUser()
+    {
+        $sql = "SELECT * FROM `khach_hang`";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     public function checkLogin($email, $password)
     {
         if (empty($email) || empty($password)) {
