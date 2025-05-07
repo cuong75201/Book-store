@@ -100,7 +100,204 @@ class Account extends Controller
             $email = $_POST['email'];
 
             $result = $this->userModel->checkLogin($email, $password);
+            if ($result === "success") {
+                setcookie("user_email", $email, time() + 3600 * 24 * 30, "/");
+            }
             echo $result;
         }
     }
+    function information()
+    {
+        $user = null;
+
+        if (isset($_COOKIE['user_email'])) {
+        $email = $_COOKIE['user_email'];
+        $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
+        }
+        $this->view('main_layout', [
+            'Title' => 'Thông tin tài khoản – MINH LONG BOOK',
+            'page' => 'information',
+            "plugin" => [
+                "reset" => 1,
+                "style" => 1,
+            ],
+            "script" => "AjaxLogin",
+            "user" => $user // truyền sang view
+        ]);
+    
+    }
+    function addresses()
+{
+    // Kiểm tra người dùng đã đăng nhập chưa
+    if (!isset($_COOKIE['user_email'])) {
+        header("Location: ../account/login");
+        return;
+    }
+    
+    $email = $_COOKIE['user_email'];
+    $user = $this->userModel->getUserByEmail($email);
+    $addresses = $this->userModel->getAddresses($email);
+    
+    $this->view('main_layout', [
+        'Title' => 'Sổ địa chỉ – MINH LONG BOOK',
+        'page' => 'addresses',
+        "plugin" => [
+            "reset" => 1,
+            "style" => 1,
+        ],
+        "script" => "address",
+        "user" => $user,
+        "addresses" => $addresses
+    ]);
+}
+
+    function orders()
+    {
+        $this->view('main_layout', [
+            'Title' => 'Đơn hàng của tôi – MINH LONG BOOK',
+            'page' => 'oders',
+            "plugin" => [
+                "reset" => 1,
+                "style" => 1,
+            ],
+            "script" => "AjaxLogin"
+        ]);
+    }
+
+    function addAddress()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $_COOKIE['user_email'] ?? null;
+        $name = $_POST['name'] ?? '';
+        $address = $_POST['address'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $is_default = isset($_POST['is_default']) && $_POST['is_default'] == '1';
+
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
+        if (empty($name) || empty($address) || empty($phone)) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin']);
+            return;
+        }
+        // Validate phone number
+        if (!preg_match('/^(\+84|0)[0-9]{9,10}$/', $phone)) {
+            echo json_encode(['status' => 'error', 'message' => 'Số điện thoại không hợp lệ']);
+            return;
+        }
+
+        $result = $this->userModel->addAddress($email, $name, $address, $phone, $is_default);
+        if ($result) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Không thể thêm địa chỉ']);
+        }
+    }
+}
+
+function updateAddress()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST['id'] ?? 0;
+        $email = $_COOKIE['user_email'] ?? null;
+        $name = $_POST['name'] ?? '';
+        $address = $_POST['address'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $is_default = isset($_POST['is_default']) && $_POST['is_default'] == '1';
+
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
+        if (empty($name) || empty($address) || empty($phone) || !$id) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin']);
+            return;
+        }
+        // Validate phone number
+        if (!preg_match('/^(\+84|0)[0-9]{9,10}$/', $phone)) {
+            echo json_encode(['status' => 'error', 'message' => 'Số điện thoại không hợp lệ']);
+            return;
+        }
+
+        $result = $this->userModel->updateAddress($id, $email, $name, $address, $phone, $is_default);
+        if ($result) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Không thể cập nhật địa chỉ']);
+        }
+    }
+}
+
+function deleteAddress()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST['id'] ?? 0;
+        $email = $_COOKIE['user_email'] ?? null;
+
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
+        if (!$id) {
+            echo json_encode(['status' => 'error', 'message' => 'ID địa chỉ không hợp lệ']);
+            return;
+        }
+
+        $result = $this->userModel->deleteAddress($id, $email);
+        if ($result) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Không thể xóa địa chỉ']);
+        }
+    }
+}
+
+function setDefaultAddress()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST['id'] ?? 0;
+        $email = $_COOKIE['user_email'] ?? null;
+
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
+        if (!$id) {
+            echo json_encode(['status' => 'error', 'message' => 'ID địa chỉ không hợp lệ']);
+            return;
+        }
+
+        $result = $this->userModel->setDefaultAddress($id, $email);
+        if ($result) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Không thể đặt địa chỉ mặc định']);
+        }
+    }
+}
+
+function getAddress()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $id = $_GET['id'] ?? 0;
+        $email = $_COOKIE['user_email'] ?? null;
+
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
+        if (!$id) {
+            echo json_encode(['status' => 'error', 'message' => 'ID địa chỉ không hợp lệ']);
+            return;
+        }
+
+        $address = $this->userModel->getAddressById($id, $email);
+        if ($address) {
+            echo json_encode(['status' => 'success', 'address' => $address]);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy địa chỉ']);
+        }
+    }
+}
 }

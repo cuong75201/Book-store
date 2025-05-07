@@ -816,3 +816,394 @@ span.repassword_warning {
     text-align: left;
     display: block;
 }
+
+/* CSS Information */
+.content-wrap {
+  padding: 1.25rem 0; /* 20px chuyển thành 1.25rem (20/16) */
+  width: 100%;
+  max-width: 73.125rem; /* 1170px chuyển thành 73.125rem (1170/16) */
+  height: 26.85rem;
+  margin: 0 auto;
+}
+.fancy-title h3 {
+	font-size: 1.5rem;
+}
+div.account-table {
+	margin-bottom: 0rem;
+}
+.table > thead > tr > th {
+	vertical-align: bottom;
+	border-bottom: 0.125rem solid #ddd;
+	padding: 0.5rem;
+}
+.table > tbody tr > td {
+	padding: 0.5rem;
+	vertical-align: middle;
+}
+.fancy-title {
+	position: relative;
+	margin-bottom: 0.625rem;
+}
+#content p {
+	line-height: 1.8;
+}
+div.account-table p {
+	margin-bottom: 0.625rem;
+}
+a.logout {
+    position: absolute;
+	right: 30rem;
+	top: 2rem;
+	text-decoration: underline;
+	color: #000;
+	font-size: 0.75rem;
+	font-family: 'brandon_textregular';
+}
+a.viewADR {
+    position: absolute;
+	right: 15rem;
+	top: 0.3rem;
+	text-decoration: underline;
+	color: #000;
+	font-size: 0.75rem;
+	font-family: 'brandon_textregular';
+}
+.accountAddress a.logout.clickOut {
+    right: 25rem;
+}
+.accountSidebar {
+	float: left;
+	width: 20%;
+}
+.accountSidebar.bg_w {
+    background-color: #ffffff; /* bg_w thường đại diện cho background màu trắng */
+}
+.feature_user {
+	padding: 0.625rem;
+	background: #026e36;
+	color: #fff;
+	margin-bottom: 0.625rem;
+}
+.accountNeworder tr td:first-child a {
+	color: #026e36;
+}
+.feature_user span {
+	font-size: 0.75rem;
+	line-height: 1.5;
+	display: block;
+}
+.feature_user h3 {
+	font-size: 0.9375rem;
+	line-height: normal;
+	color: #fff;
+}
+.link_account {
+	padding: 0.625rem;
+}
+.link_account li {
+	padding: 0.3125rem 0.3125rem 0.3125rem 0.9375rem;
+}
+.link_account li.active {
+	background: #f1f1f1;
+	font-weight: bold;
+}
+.link_account li a {
+	color: #000;
+}
+.ctAccount {
+	float: left;
+	width: 80%;
+	padding: 0rem 0.625rem;
+}
+.detailAccount {
+	padding: 0.625rem;
+}
+.feature_user .icon {
+	width: 2.8125rem;
+	margin-right: 0.3125rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+.feature_user .user {
+	display: inline-block;
+	vertical-align: middle;
+}
+.accountInfo > h3 {
+	font-size: 1rem;
+	font-weight: bold;
+	margin-bottom: 1.25rem;
+	text-transform: uppercase;
+}
+.user_info {
+	width: 50%;
+}
+.user_info h3, .accountNeworder h3, .accountAddress > h3, #addNewaddress > h3 {
+	font-size: 1rem;
+	margin-bottom: 0.625rem;
+	color: #333;
+}
+.user_info .main {
+	padding: 0.625rem;
+	border: 0.0625rem solid #eaeaea;
+	font-size: 0.75rem;
+	margin-bottom: 1.25rem;
+}
+.user_info .main li {
+	display: block;
+	line-height: 1.25rem;
+}
+.user_info .main li span.first {
+	width: 30%;
+	display: inline-block;
+}
+.account-table > p {
+	line-height: normal;
+	padding: 0rem 0.9375rem;
+	font-style: italic;
+}
+.view_address p {
+	line-height: 1.4 !important;
+	font-size: 0.8125rem;
+}
+.accountAddress > h3 {
+	margin-bottom: 1.25rem;
+	position: relative;
+}
+.view_address {
+	padding: 0.625rem;
+	border: 0.0625rem dashed #ccc;
+	position: relative;
+}
+.address_defaul .view_address {
+	border: 0.0625rem dashed #090;
+}
+.view_address p.name {
+	font-size: 0.9375rem;
+	font-weight: bold;
+}
+.address_actions > span {
+	display: inline-block;
+	margin-right: 0.625rem;
+	font-size: 0.75rem;
+	margin-top: 0.3125rem;
+}
+.address_actions > span a {
+	color: #333;
+	padding: 0.3125rem 0.9375rem;
+	border: 0.0625rem solid #ccc;
+	display: block;
+}
+span.label_defaul {
+	font-size: 0.6875rem;
+	position: absolute;
+	right: 0.625rem;
+	color: #090;
+}
+.address_table .input-group {
+	margin-bottom: 0.3125rem;
+}
+.action_bottom .btn {
+	padding: 0;
+	font-size: 0.75rem;
+	width: 6.25rem;
+	height: 2.1875rem;
+	border-radius: 0;
+	border: 0.0625rem solid #026e36;
+	color: #fff !important;
+	background: #026e36;
+	text-transform: uppercase;
+	outline: none;
+}
+.action_bottom .btn:hover {
+	color: #026e36 !important;
+	background: transparent;
+}
+.address_table .input-group, .edit_address .input-group {
+	margin-bottom: 0.3125rem;
+}
+.address > div {
+	margin-bottom: 1.25rem;
+}
+.detailAccount .header-page h1 {
+	font-size: 1.125rem;
+	font-weight: bold;
+	margin-bottom: 0.625rem;
+}
+.detailAccount .content-page {
+	margin: 0.9375rem 0rem;
+}
+.detailAccount.bg_w {
+    background-color: #ffffff; /* bg_w thường đại diện cho background màu trắng */
+    padding: 0.625rem; /* Khoảng 10px */
+    padding-bottom: 0rem;
+    border-radius: 0.25rem; /* Bo góc nhẹ, khoảng 4px */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+    width: 100%;
+    max-width: 54.25rem; /* 868px / 16 = 54.25rem */
+    min-height: 25.8rem; /* 428.8px / 16 = 26.8rem */
+  }
+@media screen and (min-width: 62rem) and (max-width: 74.9375rem) {
+	.feature_user .icon {
+		width: 1.875rem;
+	}
+	.feature_user span {
+		font-size: 0.625rem;
+	}
+	.feature_user h3 {
+		font-size: 0.75rem;
+	}
+}
+@media screen and (max-width: 61.9375rem) {
+	.accountSidebar, .ctAccount, .user_info {
+		width: 100% !important;
+	}
+	.accountSidebar {
+		margin-bottom: 1.25rem;
+	}
+	.detailAccount div#layout-page > div {
+		padding: 0;
+	}
+}
+@media screen and (max-width: 47.9375rem) {
+	.accountAddress {
+		margin-top: 1.25rem;
+	}
+}
+.accountAddress .address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.accountAddress h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    background-color: #c0392b;
+}
+
+.no-address {
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.address-list {
+    margin: 0 -10px;
+}
+
+.address-item {
+    margin-bottom: 20px;
+}
+
+.address-box {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    position: relative;
+    height: 100%;
+    min-height: 180px;
+}
+
+.address-box.is-default {
+    border-color: #e74c3c;
+}
+
+.label-default {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.address-box .name {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.address-box .address,
+.address-box .phone {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.address-actions {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.address-actions button {
+    background: none;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+    margin-right: 15px;
+}
+
+.address-actions .btn-delete {
+    color: #e74c3c;
+}
+
+.address-actions .btn-set-default {
+    color: #2ecc71;
+}
+
+.modal-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.checkbox {
+    margin: 15px 0;
+}

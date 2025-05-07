@@ -170,3 +170,4 @@
      <?php  
      require  __DIR__.'/script.php';?>
     <script src="public/js/script.js"></script>
+    

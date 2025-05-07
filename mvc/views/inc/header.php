@@ -32,7 +32,7 @@
                               <li>
 
                                   <i class="fa fa-user"></i>
-                                  <a href="#">Thông tin</a>
+                                  <a href="account/information">Thông tin</a>
                               </li>
                               <li>
                                   <i class="fa fa-sign-in-alt"></i>

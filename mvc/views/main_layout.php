@@ -1,4 +1,3 @@
-
 <?php require 'inc/head.php';?>
 
 <body>
