@@ -16,10 +16,7 @@ class Account extends Controller
         $this->view('main_layout', [
             'Title' => 'Tài khoản – MINH LONG BOOK',
             'page' => 'information',
-            "plugin" => [
-                "reset" => 1,
-                "style" => 1,
-            ],
+
             "script" => "AjaxLogin"
         ]);
     }
