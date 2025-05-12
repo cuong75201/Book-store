@@ -139,7 +139,7 @@ class SachModel extends dbconnect
     }
 // SachModel.php
 public function getProductsByCategory($categoryId) {
-    $sql = "SELECT * FROM sach WHERE ID_The_Loai = $categoryId LIMIT 8"; // Lấy 8 sản phẩm
+    $sql = "SELECT * FROM sach WHERE ID_TheLoai = $categoryId LIMIT 8"; // Lấy 8 sản phẩm
     $result = mysqli_query($this->con, $sql);
     $products = [];
     while ($row = mysqli_fetch_assoc($result)) {
