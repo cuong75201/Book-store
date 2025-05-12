@@ -343,20 +343,20 @@ function AddNhanvien() {
         alert("Các trường không được để trống");
         return;
     }
-    let pattern = /(03|05|07|08|09)[0-9]{8}/;
-    if (pattern.test(sdt)) {
+    let pattern = /^(03|05|07|08|09)[0-9]{8}$/;
+    if (!pattern.test(sdt)) {
         alert("Số điện thoại không hợp lệ (Chỉ chấp nhận đầu số 03,05,07,08,09)");
+        return;
     }
     $.ajax({
         url: "admin/addNhanVien",
         method: "POST",
         data: { name: name, diachi: diachi, sdt: sdt, luong: luong, quyen: quyen, status: status, pass: pass },
-        contentType: false,
-        processData: false,
+        dataType: "json",
         success: function (data) {
             console.log(data);
-            // alert("Thêm thành công");
-            // closeModal();
+            alert("Thêm thành công");
+            closeModal();
         },
         error: function (xhr, status, error) {
             console.error("AJAX Error:", error);
