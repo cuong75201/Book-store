@@ -7,6 +7,20 @@
         function __construct()
         {
             $arr = $this->URLprocess();
+            // [PHẦN THÊM] Xử lý route product/detail/{slug}-{id}
+            if (!empty($arr) && $arr[0] === 'product' && isset($arr[1]) && $arr[1] === 'detail' && isset($arr[2])) {
+                // Tách id từ phần cuối URL (ví dụ: "ten-sp-123" → id=123)
+                $slugParts = explode('-', $arr[2]);
+                $productId = end($slugParts); // Lấy phần tử cuối cùng làm ID
+
+                $this->controller = "ProductController";
+                require "mvc/controllers/" . $this->controller . ".php";
+                $this->controller = new $this->controller;
+                $this->action = "detail";
+                $this->params = [$productId]; // Truyền ID vào controller
+                call_user_func_array([$this->controller, $this->action], $this->params);
+                return;
+            }
             if ($arr != NULL) {
                 if (file_exists('mvc/controllers/' . $arr[0] . ".php")) {
                     $this->controller = $arr[0];

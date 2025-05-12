@@ -118,5 +118,43 @@ class SachModel extends dbconnect
     return $result->fetch_all(MYSQLI_ASSOC);
 
 }
+    public function getAllProducts() 
+    {
+        $sql = "SELECT * FROM sach"; // Truy vấn tất cả sách
+        $result = mysqli_query($this->con, $sql);
+        
+        $products = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $products[] = $row;
+        }
+        
+        return $products;
+    }
+    public function slugify($string) {
+        $string = trim($string);
+        $string = mb_strtolower($string, 'UTF-8');
+        $string = preg_replace('/[%]/u', '', $string);
+        $string = preg_replace('/[\s-]+/', '-', $string);
+        return $string;
+    }
+// SachModel.php
+public function getProductsByCategory($categoryId) {
+    $sql = "SELECT * FROM sach WHERE ID_The_Loai = $categoryId LIMIT 8"; // Lấy 8 sản phẩm
+    $result = mysqli_query($this->con, $sql);
+    $products = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+    return $products;
+}
 
+public function getNewProducts($limit = 6) {
+    $sql = "SELECT * FROM sach ORDER BY ID_Sach DESC LIMIT $limit"; // Sách mới nhất
+    $result = mysqli_query($this->con, $sql);
+    $products = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+    return $products;
+}
 }
