@@ -1,0 +1,106 @@
+<?php
+class Admin extends Controller
+{
+    public $nhanvienModel;
+    public $sachModel;
+    public $theloaiModel;
+    public $danhmucModel;
+    function __construct()
+    {
+        $this->sachModel = $this->model("SachModel");
+        $this->nhanvienModel = $this->model("NhanVienModel");
+        $this->theloaiModel = $this->model("TheLoaiModel");
+        $this->danhmucModel = $this->model("DanhMucModel");
+    }
+    function default()
+    {
+        $this->view("page/loginAdmin", []);
+    }
+    function product()
+    {
+        $list_product = $this->sachModel->getSach();
+        foreach ($list_product as &$product) {
+            $product['DanhMuc'] = $this->danhmucModel->getNamebyId($product['ID_DanhMuc'])[0];
+            $product['TheLoai'] = $this->theloaiModel->getNamebyIDTL($product['ID_TheLoai'])[0];
+        }
+        $this->view("admin_view", [
+            "title" => "Sản phẩm - Admin Web",
+            "content" => "Sản phẩm",
+            "Page" => "product",
+            "list_product" => $list_product,
+            "script" => "product",
+        ]);
+    }
+    function checkLogin()
+    {
+        $sdt = isset($_POST['username']) ? $_POST['username'] : "";
+        $password = isset($_POST["password"]) ? $_POST['password'] : "";
+        $result = $this->nhanvienModel->KiemTraNhanVien($sdt, $password);
+        if ($result) {
+            echo "Đăng nhập thành công";
+        } else {
+            echo "Fail";
+        }
+    }
+    function getDanhMuc()
+    {
+        if (isset($_POST['danhmuc'])) {
+            echo json_encode($this->danhmucModel->getAllDanhMuc());
+        }
+    }
+    function getTheLoai()
+    {
+        if (isset($_POST['theloai'])) {
+            echo json_encode($this->theloaiModel->getAllTL());
+        }
+    }
+    function uploadImage()
+    {
+        $namesach = $_POST['namesach'];
+        $tacgia = $_POST['tacgia'];
+        $name_nxb = $_POST['name_nxb'];
+        $namxb = $_POST['namxb'];
+        $giaban = $_POST['giaban'];
+        $giamgia = $_POST['giamgia'];
+        $danhmuc = $_POST['danhmuc'];
+        $theloai = $_POST['theloai'];
+        $mota = $_POST['mota'];
+        if (isset($_FILES['image'])) {
+            $targetDir = "media/img_product/";
+            if (!is_dir($targetDir)) {
+                // Thông báo lỗi
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Thư mục '$targetDir' không tồn tại."
+                ]);
+                exit;
+            }
+            $fileName = uniqid() . "-" . basename($_FILES['image']['name']);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+
+            // Kiểm tra định dạng file hợp lệ
+            $allowedTypes = array("jpg", "jpeg", "png", "gif");
+            if (!in_array($fileType, $allowedTypes)) {
+                echo json_encode(["status" => "error", "message" => "Chỉ chấp nhận file JPG, JPEG, PNG, GIF."]);
+                exit;
+            }
+
+            // Di chuyển file vào thư mục "media"
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+                $result = $this->sachModel->create($namesach, $tacgia, $name_nxb, $namxb, $danhmuc, $theloai, $giaban, $giamgia, 0, $mota, $fileName, 1);
+                echo json_encode($result);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Lỗi khi tải lên file."]);
+            }
+        } else {
+            echo json_encode(["status" => "error", "message" => "Không tìm thấy file."]);
+        }
+    }
+    function getSach()
+    {
+        if (isset($_POST['id'])) {
+            echo json_encode($this->sachModel->getSachfromID($_POST['id']));
+        }
+    }
+}

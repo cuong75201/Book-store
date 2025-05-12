@@ -1,6 +1,18 @@
 <?php
 class TheLoaiModel extends dbconnect
 {
+    public function getAllTL()
+    {
+        $sql = "SELECT * from `theloai`";
+        $result = mysqli_query($this->con, $sql);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
     public function getTenbyID($id)
     {
         $sql = "SELECT `TenTheLoai` from `theloai` WHERE `id_danhmuc`='$id'";

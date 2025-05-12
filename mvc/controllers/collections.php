@@ -95,4 +95,18 @@ class Collections extends Controller
 
         echo json_encode($list_product);
     }
+    public function searchSach(){
+        $tenSach = isset($_POST['ten']) ? $_POST['ten'] : "";
+     //   $tenSach = isset($_POST['tenSach']) ? $_POST['tenSach'] : "";
+      //  $tenSach = isset($_POST['tenSach']) ? $_POST['tenSach'] : "";
+        $result = $this->bookModel->searchTheoTenSach($tenSach);
+        echo json_encode($result);
+    }
+     public function searchSachNangCao(){
+        $sql = isset($_POST['truyVan']) ? $_POST['truyVan'] : "";
+     //   $tenSach = isset($_POST['tenSach']) ? $_POST['tenSach'] : "";
+      //  $tenSach = isset($_POST['tenSach']) ? $_POST['tenSach'] : "";
+        $result = $this->bookModel->searchSachNangCao($sql);
+        echo json_encode($result);
+    }
 }

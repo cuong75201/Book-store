@@ -92,4 +92,31 @@ class SachModel extends dbconnect
         $total = count($this->getIDfromTheLoai($id_tl));
         return ceil($total / $limit);
     }
+    public function searchTheoTenSach($keyword){
+   $sql = "SELECT * FROM sach WHERE Ten_Sach LIKE '%$keyword%'";
+
+    $result = mysqli_query($this->con, $sql);
+    
+    // Kiểm tra nếu có lỗi trong truy vấn
+    if (!$result) {
+        die('Lỗi truy vấn: ' . mysqli_error($this->con));
+    }
+    
+    // Trả về kết quả
+    return $result->fetch_all(MYSQLI_ASSOC);
+
+}
+ public function searchSachNangCao($sql){
+    $result = mysqli_query($this->con, $sql);
+    
+    // Kiểm tra nếu có lỗi trong truy vấn
+    if (!$result) {
+        die('Lỗi truy vấn: ' . mysqli_error($this->con));
+    }
+    
+    // Trả về kết quả
+    return $result->fetch_all(MYSQLI_ASSOC);
+
+}
+
 }

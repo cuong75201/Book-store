@@ -38,8 +38,23 @@ section {
 }
 
 /* 5. Xóa margin, padding và font mặc định trên các phần tử thường dùng */
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+caption {
     margin: 0;
     padding: 0;
     font-size: 100%;
@@ -48,17 +63,21 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 /* 6. Định dạng danh sách */
-ol, ul {
+ol,
+ul {
     list-style: none;
 }
 
 /* 7. Reset blockquote và q */
-blockquote, q {
+blockquote,
+q {
     quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
     content: '';
 }
 
@@ -116,17 +135,20 @@ button,
 }
 
 /* 15. Định dạng mặc định cho thẻ inline */
-a,a:hover {
+a,
+a:hover {
     text-decoration: none;
     color: #2e2d2d;
 }
 
 
-b, strong {
+b,
+strong {
     font-weight: bold;
 }
 
-i, em {
+i,
+em {
     font-style: italic;
 }
 

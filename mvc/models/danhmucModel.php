@@ -13,4 +13,16 @@ class DanhMucModel extends dbconnect
             return $rows;
         }
     }
+    public function getAllDanhMuc()
+    {
+        $sql = "SELECT * from `danh_muc`";
+        $result = mysqli_query($this->con, $sql);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
 }
