@@ -5,13 +5,20 @@ class Admin extends Controller
     public $sachModel;
     public $theloaiModel;
     public $danhmucModel;
+    public $donhangModel;
+    public $ctietdonhangModel;
+    public $nhomquyenModel;
     function __construct()
     {
         $this->sachModel = $this->model("SachModel");
         $this->nhanvienModel = $this->model("NhanVienModel");
         $this->theloaiModel = $this->model("TheLoaiModel");
         $this->danhmucModel = $this->model("DanhMucModel");
+        $this->donhangModel = $this->model("DonHangModel");
+        $this->ctietdonhangModel = $this->model("ctiet_don_hangModel");
+        $this->nhomquyenModel = $this->model("NhomQuyenModel");
     }
+
     function default()
     {
         $this->view("page/loginAdmin", []);
@@ -29,6 +36,20 @@ class Admin extends Controller
             "Page" => "product",
             "list_product" => $list_product,
             "script" => "product",
+        ]);
+    }
+    function nhanvien()
+    {
+        $list_nhanvien = $this->nhanvienModel->getAll();
+        foreach ($list_nhanvien as &$nhanvien) {
+            $nhanvien['TenQuyen'] = $this->nhomquyenModel->getNamebyId($nhanvien['MaQuyen'])[0];
+        }
+        $this->view("admin_view", [
+            "title" => "Nhân viên - Admin Web",
+            "content" => "Nhân viên",
+            "Page" => "nhanvien",
+            'list_nhanvien' => $list_nhanvien,
+            "script" => "nhanvien",
         ]);
     }
     function checkLogin()
@@ -102,5 +123,81 @@ class Admin extends Controller
         if (isset($_POST['id'])) {
             echo json_encode($this->sachModel->getSachfromID($_POST['id']));
         }
+    }
+    function UpdateProduct()
+    {
+        $id_sach = $_POST['idsach'];
+        $namesach = $_POST['namesach'];
+        $tacgia = $_POST['tacgia'];
+        $name_nxb = $_POST['name_nxb'];
+        $namxb = $_POST['namxb'];
+        $giaban = $_POST['giaban'];
+        $giamgia = $_POST['giamgia'];
+        $danhmuc = $_POST['danhmuc'];
+        $theloai = $_POST['theloai'];
+        $mota = $_POST['mota'];
+        $soluong = $_POST['soluong'];
+        if (isset($_FILES['image'])) {
+            $targetDir = "media/img_product/";
+            if (!is_dir($targetDir)) {
+                // Thông báo lỗi
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Thư mục '$targetDir' không tồn tại."
+                ]);
+                exit;
+            }
+            $fileName = uniqid() . "-" . basename($_FILES['image']['name']);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+
+            // Kiểm tra định dạng file hợp lệ
+            $allowedTypes = array("jpg", "jpeg", "png", "gif");
+            if (!in_array($fileType, $allowedTypes)) {
+                echo json_encode(["status" => "error", "message" => "Chỉ chấp nhận file JPG, JPEG, PNG, GIF."]);
+                exit;
+            }
+
+            // Di chuyển file vào thư mục "media"
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+                $result = $this->sachModel->update($id_sach, $namesach, $tacgia, $name_nxb, $namxb, $danhmuc, $theloai, $giaban, $giamgia, $soluong, $mota, $fileName);
+                echo json_encode($result);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Lỗi khi tải lên file."]);
+            }
+        } else {
+            $image = $_POST['image'];
+            $result = $this->sachModel->update($id_sach, $namesach, $tacgia, $name_nxb, $namxb, $danhmuc, $theloai, $giaban, $giamgia, $soluong, $mota, $image);
+            echo json_encode($result);
+        }
+    }
+    function XoaSanPham()
+    {
+        $id = $_POST['id'];
+        $list_product = $this->ctietdonhangModel->searchBySanPham($id);
+        if (empty($list_product)) {
+            $result = $this->sachModel->delete($id);
+        } else {
+            $result = $this->sachModel->setTrangThai($id);
+        }
+        echo json_encode($result);
+    }
+    function getQuyen()
+    {
+        if (isset($_POST['quyen'])) {
+            echo json_encode($this->nhomquyenModel->getAll());
+        }
+    }
+    function addNhanVien()
+    {
+        $name = $_POST['name'];
+        $diachi = $_POST['diachi'];
+        $sdt = $_POST['sdt'];
+        $luong = $_POST['luong'];
+        $quyen = $_POST['quyen'];
+        $status = $_POST['status'];
+        $pass = md5($_POST['pass']);
+        $result = $this->nhanvienModel->add($name, $diachi, $sdt, $luong, $quyen, $pass, $status);
+        echo json_encode($result);
     }
 }

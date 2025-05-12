@@ -9,11 +9,11 @@ class NhanVienModel extends dbconnect
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function add($ID_NV, $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau)
+    public function add($Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $TrangThai)
     {
-        $sql = "INSERT INTO nhanvien (ID_NV, Ten_NV, DiaChi, SDT, Luong, MaQuyen, Mat_khau) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO nhanvien ( Ten_NV, DiaChi, SDT, Luong, MaQuyen, Mat_khau,TrangThai) VALUES ( ?, ?, ?, ?, ?, ?,?)";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("isssiis", $ID_NV, $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau);
+        $stmt->bind_param("isssiis", $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $TrangThai);
         return $stmt->execute();
     }
 

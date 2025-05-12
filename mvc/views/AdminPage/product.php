@@ -11,6 +11,7 @@
         <div class="modal__product"></div>
         <button class="close-btn" onclick="closeModal()">Đóng</button>
         <button class="Save-btn">Lưu</button>
+        <button class="delete-btn">Xóa</button>
 
     </div>
 </div>
