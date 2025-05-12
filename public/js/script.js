@@ -42,7 +42,7 @@ $(document).ready(function() {
     // Khai báo biến
     let isEditing = false;
     let deleteAddressId = 0;
-    const baseUrl = window.location.origin + '/';
+    const baseUrl = window.location.origin + '/Book_store/';
     
     // Mở modal thêm địa chỉ
     $('#btn-add-address').click(function() {
@@ -55,6 +55,9 @@ $(document).ready(function() {
     // Mở modal sửa địa chỉ
     $(document).on('click', '.btn-edit', function() {
         const addressId = $(this).data('id');
+        if (!addressId) {
+            showNotification('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+        } 
         $('#addressModalLabel').text('Cập nhật địa chỉ');
         isEditing = true;
         
@@ -63,128 +66,218 @@ $(document).ready(function() {
             url: baseUrl + 'account/getAddress',
             type: 'GET',
             data: {
-                id: addressId
+                ID: addressId
             },
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
                     const address = response.address;
-                    $('#addressId').val(address.id);
-                    $('#addressName').val(address.ten_nguoi_nhan);
-                    $('#addressAddress').val(address.dia_chi);
-                    $('#addressPhone').val(address.so_dien_thoai);
-                    $('#isDefault').prop('checked', address.is_default == 1);
+                    
+                    // Điền thông tin vào form
+                    $('#address_id').val(address.ID);
+                    $('#name').val(address.Ten_Nguoi_Nhan);
+                    $('#address').val(address.Dia_Chi);
+                    $('#phone').val(address.So_Dien_Thoai);
+                    $('#is_default').prop('checked', address.Mac_Dinh == 1);
+                    
+                    // Hiển thị modal
                     $('#addressModal').modal('show');
                 } else {
-                    alert(response.message || 'Không thể lấy thông tin địa chỉ.');
+                    showNotification('error', response.message);
                 }
             },
             error: function() {
-                alert('Đã xảy ra lỗi khi lấy thông tin địa chỉ.');
+                showNotification('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
             }
         });
     });
     
-    // Submit form (thêm hoặc sửa địa chỉ)
-    $('#addressForm').submit(function(e) {
-        e.preventDefault();
-        
-        // Validate phone number (Vietnamese format: 10 digits starting with 0)
-        const phone = $('#addressPhone').val();
-        const phoneRegex = /^0[0-9]{9}$/;
-        if (!phoneRegex.test(phone)) {
-            $('#errorMessage').text('Số điện thoại không hợp lệ. Vui lòng nhập số điện thoại 10 chữ số bắt đầu bằng 0.').show();
+    // Lưu địa chỉ (thêm mới hoặc cập nhật)
+    $('#saveAddress').click(function() {
+        // Kiểm tra form
+        if (!validateAddressForm()) {
             return;
         }
         
-        const url = isEditing ? baseUrl + 'account/updateAddress' : baseUrl + 'account/addAddress';
-        const data = {
-            id: $('#addressId').val(),
-            name: $('#addressName').val(),
-            address: $('#addressAddress').val(),
-            phone: $('#addressPhone').val(),
-            is_default: $('#isDefault').is(':checked') ? 1 : 0
+        // Chuẩn bị dữ liệu
+        const formData = {
+            ID: $('#address_id').val(),
+            name: $('#name').val(),
+            address: $('#address').val(),
+            phone: $('#phone').val(),
+            is_default: $('#is_default').is(':checked') ? '1' : '0'
         };
         
+        console.log('Form Data:', formData);
+
+        // Gửi request
+        const endpoint = isEditing ? 'updateAddress' : 'addAddress';
+        
         $.ajax({
-            url: url,
+            url: baseUrl + 'account/' + endpoint,
             type: 'POST',
-            data: data,
+            data: formData,
             dataType: 'json',
             success: function(response) {
+                console.log('Response:', response); // Debug phản hồi
                 if (response.status === 'success') {
+                    // Đóng modal và reload trang
                     $('#addressModal').modal('hide');
-                    location.reload(); // Làm mới trang để cập nhật danh sách địa chỉ
+                    showNotification('success', isEditing ? 'Cập nhật địa chỉ thành công' : 'Thêm địa chỉ mới thành công');
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
                 } else {
-                    $('#errorMessage').text(response.message || 'Đã xảy ra lỗi khi lưu địa chỉ.').show();
+                    showNotification('error', response.message);
                 }
             },
             error: function() {
-                $('#errorMessage').text('Đã xảy ra lỗi khi lưu địa chỉ.').show();
+                showNotification('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
             }
         });
     });
     
-    // Xóa địa chỉ
+    // Mở modal xác nhận xóa
     $(document).on('click', '.btn-delete', function() {
         deleteAddressId = $(this).data('id');
-        $('#confirmDeleteModal').modal('show');
+        $('#deleteModal').modal('show');
     });
     
     // Xác nhận xóa địa chỉ
-    $('#confirmDeleteBtn').click(function() {
+    $('#confirmDelete').click(function() {
+        if (!deleteAddressId) {
+            return;
+        }
+        
         $.ajax({
             url: baseUrl + 'account/deleteAddress',
             type: 'POST',
             data: {
-                id: deleteAddressId
+                ID: deleteAddressId
             },
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
-                    $('#confirmDeleteModal').modal('hide');
-                    location.reload();
+                    // Đóng modal và reload trang
+                    $('#deleteModal').modal('hide');
+                    showNotification('success', 'Xóa địa chỉ thành công');
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
                 } else {
-                    alert(response.message || 'Đã xảy ra lỗi khi xóa địa chỉ.');
+                    showNotification('error', response.message);
                 }
             },
             error: function() {
-                alert('Đã xảy ra lỗi khi xóa địa chỉ.');
+                showNotification('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
             }
         });
     });
     
-    // Đặt làm địa chỉ mặc định
-    $(document).on('click', '.btn-default', function() {
+    // Thiết lập địa chỉ mặc định
+    $(document).on('click', '.btn-set-default', function() {
         const addressId = $(this).data('id');
+        
         $.ajax({
             url: baseUrl + 'account/setDefaultAddress',
             type: 'POST',
             data: {
-                id: addressId
+                ID: addressId
             },
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
-                    location.reload();
+                    showNotification('success', 'Đã thiết lập địa chỉ mặc định');
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
                 } else {
-                    alert(response.message || 'Đã xảy ra lỗi khi đặt địa chỉ mặc định.');
+                    showNotification('error', response.message);
                 }
             },
             error: function() {
-                alert('Đã xảy ra lỗi khi đặt địa chỉ mặc định.');
+                showNotification('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
             }
         });
     });
     
     // Hàm reset form
     function resetAddressForm() {
-        $('#addressId').val('');
-        $('#addressName').val('');
-        $('#addressAddress').val('');
-        $('#addressPhone').val('');
-        $('#isDefault').prop('checked', false);
-        $('#errorMessage').hide();
+        $('#address_id').val(0);
+        $('#name').val('');
+        $('#address').val('');
+        $('#phone').val('');
+        $('#is_default').prop('checked', false);
+        
+        // Xóa thông báo lỗi
+        $('.form-group').removeClass('has-error');
+        $('.error-message').remove();
+    }
+    
+    // Hàm kiểm tra form
+    function validateAddressForm() {
+        let isValid = true;
+        
+        // Xóa thông báo lỗi cũ
+        $('.form-group').removeClass('has-error');
+        $('.error-message').remove();
+        
+        // Kiểm tra họ tên
+        const name = $('#name').val().trim();
+        if (!name) {
+            isValid = false;
+            $('#name').closest('.form-group').addClass('has-error')
+                .append('<div class="error-message text-danger">Vui lòng nhập họ tên</div>');
+        }
+        
+        // Kiểm tra địa chỉ
+        const address = $('#address').val().trim();
+        if (!address) {
+            isValid = false;
+            $('#address').closest('.form-group').addClass('has-error')
+                .append('<div class="error-message text-danger">Vui lòng nhập địa chỉ</div>');
+        }
+        
+        // Kiểm tra số điện thoại
+        const phone = $('#phone').val().trim();
+        if (!phone) {
+            isValid = false;
+            $('#phone').closest('.form-group').addClass('has-error')
+                .append('<div class="error-message text-danger">Vui lòng nhập số điện thoại</div>');
+        } else if (!isValidPhone(phone)) {
+            isValid = false;
+            $('#phone').closest('.form-group').addClass('has-error')
+                .append('<div class="error-message text-danger">Số điện thoại không hợp lệ</div>');
+        }
+        
+        return isValid;
+    }
+    
+    // Hàm kiểm tra số điện thoại
+    function isValidPhone(phone) {
+        return /^(\+84|0)[0-9]{9,10}$/.test(phone);
+    }
+    
+    // Hàm hiển thị thông báo
+    function showNotification(type, message) {
+        // Nếu có thư viện toastr
+        if (typeof toastr !== 'undefined') {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-right',
+                timeOut: 3000
+            };
+            
+            if (type === 'success') {
+                toastr.success(message);
+            } else if (type === 'error') {
+                toastr.error(message);
+            }
+        } else {
+            // Fallback nếu không có toastr
+            alert(message);
+        }
     }
 });
  document.getElementById('hienformtimkiem').addEventListener('click', function() {

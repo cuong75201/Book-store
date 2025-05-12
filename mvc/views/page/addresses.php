@@ -8,7 +8,11 @@
                 </div>
                 <div class="user">
                     <span>Tài khoản của</span>
-                    <h3><?php echo $_SESSION['username'] ?? 'Khách'; ?></h3>
+                    <h3><?php if (isset($data['user']) && isset($data['user']['Ten_Khach_Hang'])): ?>
+                <?= htmlspecialchars($data['user']['Ten_Khach_Hang']) ?>
+                    <?php else: ?>
+                    <h3>Khách</h3>
+                    <?php endif; ?></h3>
                 </div>
             </div>
             <div class="link_account">
@@ -38,25 +42,25 @@
                     <?php else: ?>
                     <div class="address-list row">
                         <?php foreach($data['addresses'] as $address): ?>
-                        <div class="col-sm-6 col-xs-12 address-item" data-id="<?php echo $address['id']; ?>">
-                            <div class="address-box <?php echo $address['is_default'] ? 'is-default' : ''; ?>">
-                                <?php if($address['is_default']): ?>
+                        <div class="col-sm-6 col-xs-12 address-item" data-id="<?php echo $address['ID']; ?>">
+                            <div class="address-box <?php echo $address['Mac_Dinh'] ? 'is-default' : ''; ?>">
+                                <?php if($address['Mac_Dinh']): ?>
                                 <span class="label-default">Mặc định</span>
                                 <?php endif; ?>
                                 
-                                <p class="name"><?php echo htmlspecialchars($address['name']); ?></p>
-                                <p class="address">Địa chỉ: <?php echo htmlspecialchars($address['address']); ?></p>
-                                <p class="phone">Điện thoại: <?php echo htmlspecialchars($address['phone']); ?></p>
+                                <p class="name"><?php echo htmlspecialchars($address['Ten_Nguoi_Nhan']); ?></p>
+                                <p class="address">Địa chỉ: <?php echo htmlspecialchars($address['Dia_Chi']); ?></p>
+                                <p class="phone">Điện thoại: <?php echo htmlspecialchars($address['So_Dien_Thoai']); ?></p>
                                 
                                 <div class="address-actions">
-                                    <button type="button" class="btn-edit" data-id="<?php echo $address['id']; ?>">
+                                    <button type="button" class="btn-edit" data-id="<?php echo $address['ID']; ?>">
                                         <i class="fa fa-pencil" aria-hidden="true"></i> Sửa
                                     </button>
-                                    <button type="button" class="btn-delete" data-id="<?php echo $address['id']; ?>">
+                                    <button type="button" class="btn-delete" data-id="<?php echo $address['ID']; ?>">
                                         <i class="fa fa-trash" aria-hidden="true"></i> Xóa
                                     </button>
-                                    <?php if(!$address['is_default']): ?>
-                                    <button type="button" class="btn-set-default" data-id="<?php echo $address['id']; ?>">
+                                    <?php if(!$address['Mac_Dinh']): ?>
+                                    <button type="button" class="btn-set-default" data-id="<?php echo $address['ID']; ?>">
                                         Thiết lập mặc định
                                     </button>
                                     <?php endif; ?>

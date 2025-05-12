@@ -9,7 +9,11 @@
                 </div>
                 <div class="user">
                     <span>Tài khoản của</span>
-                    <h3><?php echo $_SESSION['username'] ?? 'Khách'; ?></h3>
+                    <h3><?php if (isset($data['user']) && isset($data['user']['Ten_Khach_Hang'])): ?>
+                <?= htmlspecialchars($data['user']['Ten_Khach_Hang']) ?>
+                    <?php else: ?>
+                    <h3>Khách</h3>
+                    <?php endif; ?></h3>
                 </div>
             </div>
             <div class="link_account">

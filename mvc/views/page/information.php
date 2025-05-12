@@ -66,19 +66,23 @@
                                 <div class="address_table">
                                     <div class="customer_address">
                                         <div class="view_address">
-                                            <span class="label_defaul">Mặc định</span>
-                                            <p class="name"><?php echo $_SESSION['username'] ?? 'Người dùng'; ?></p>
-                                            <p class="address">Địa chỉ: Vietnam</p>
-                                            <p class="phone">Điện thoại: </p>
-                                            <p class="address_actions">
-                                                <span class="action_link action_edit">
-                                                    <a href="account/information" onclick="Haravan.CustomerAddress.toggleForm(10228293922); return false;">Sửa</a>
-                                                </span>
-                                                <span class="action_link action_delete">
-                                                    <a href="account/information" onclick="Haravan.CustomerAddress.destroy(10228293922); return false;">Xóa</a>
-                                                </span>
-                                            </p>
-                                        </div>
+    <?php if (isset($data['default_address']) && $data['default_address']): ?>
+        <span class="label_defaul">Mặc định</span>
+        <p class="name"><?php echo htmlspecialchars($data['default_address']['Ten_Nguoi_Nhan']); ?></p>
+        <p class="address">Địa chỉ: <?php echo htmlspecialchars($data['default_address']['Dia_Chi']); ?></p>
+        <p class="phone">Điện thoại: <?php echo htmlspecialchars($data['default_address']['So_Dien_Thoai']); ?></p>
+    <?php else: ?>
+        <span class="label_defaul">Mặc định</span>
+        <p class="name"><?php echo $_SESSION['username'] ?? 'Người dùng'; ?></p>
+        <p class="address">Địa chỉ: Chưa có địa chỉ mặc định</p>
+        <p class="phone">Điện thoại: </p>
+        <p class="address_actions">
+            <span class="action_link action_edit">
+                <a href="account/addresses">Thêm địa chỉ</a>
+            </span>
+        </p>
+    <?php endif; ?>
+</div>
                                     </div>
 
                                     

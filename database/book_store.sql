@@ -251,8 +251,61 @@ CREATE TABLE `sach` (
   `Images` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Đang đổ dữ liệu cho bảng `sach`
+-- Cấu trúc bảng cho bảng `dia_chi`
+--
+
+CREATE TABLE `dia_chi` (
+  `ID` int(11) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Ten_Nguoi_Nhan` varchar(255) NOT NULL,
+  `Dia_Chi` text NOT NULL,
+  `So_Dien_Thoai` varchar(15) NOT NULL,
+  `Mac_Dinh` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dia_chi`
+--
+
+INSERT INTO `dia_chi` (`ID`, `Email`, `Ten_Nguoi_Nhan`, `Dia_Chi`, `So_Dien_Thoai`, `Mac_Dinh`) VALUES
+(1, 'ntuanaanh2k5@gmail.com', 'Tuan Anh', '213', '0968403295', 1);
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `dia_chi`
+--
+ALTER TABLE `dia_chi`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Email` (`Email`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `dia_chi`
+--
+ALTER TABLE `dia_chi`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `dia_chi`
+--
+ALTER TABLE `dia_chi`
+  ADD CONSTRAINT `dia_chi_ibfk_1` FOREIGN KEY (`Email`) REFERENCES `khach_hang` (`Email`);
+COMMIT;
+--
+
 --
 
 INSERT INTO `sach` (`ID_Sach`, `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_Xuat_Ban`, `ID_The_Loai`, `Gia_Ban`, `GiamGia(%)`, `So_Luong_Ton`, `Mo_Ta`, `Images`) VALUES

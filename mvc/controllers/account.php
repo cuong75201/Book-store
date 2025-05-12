@@ -110,6 +110,8 @@ class Account extends Controller
         if (isset($_COOKIE['user_email'])) {
         $email = $_COOKIE['user_email'];
         $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
+        $default_address = $this->userModel->getDefaultAddressbyEmail($email);
+        $addresses = $this->userModel->getAddresses($email);
         }
         $this->view('main_layout', [
             'Title' => 'Thông tin tài khoản – MINH LONG BOOK',
@@ -119,7 +121,10 @@ class Account extends Controller
                 "style" => 1,
             ],
             "script" => "AjaxLogin",
-            "user" => $user // truyền sang view
+            "user" => $user, // truyền sang view
+            "default_address" => $default_address,
+            "addresses" => $addresses
+
         ]);
     
     }
@@ -150,6 +155,12 @@ class Account extends Controller
 
     function orders()
     {
+         $user = null;
+
+        if (isset($_COOKIE['user_email'])) {
+        $email = $_COOKIE['user_email'];
+        $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
+        }
         $this->view('main_layout', [
             'Title' => 'Đơn hàng của tôi – MINH LONG BOOK',
             'page' => 'oders',
@@ -157,7 +168,8 @@ class Account extends Controller
                 "reset" => 1,
                 "style" => 1,
             ],
-            "script" => "AjaxLogin"
+            "script" => "AjaxLogin",
+            "user" => $user
         ]);
     }
 
@@ -195,19 +207,22 @@ class Account extends Controller
 
 function updateAddress()
 {
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST['id'] ?? 0;
+        $id = $_POST['ID'] ?? 0;
         $email = $_COOKIE['user_email'] ?? null;
         $name = $_POST['name'] ?? '';
         $address = $_POST['address'] ?? '';
         $phone = $_POST['phone'] ?? '';
         $is_default = isset($_POST['is_default']) && $_POST['is_default'] == '1';
 
+        error_log("updateAddress: ID=$id, Email=$email");
+        
         if (!$email) {
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
             return;
         }
-        if (empty($name) || empty($address) || empty($phone) || !$id) {
+        if (empty($name) || empty($address) || empty($phone)) {
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin']);
             return;
         }
@@ -229,7 +244,7 @@ function updateAddress()
 function deleteAddress()
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST['id'] ?? 0;
+        $id = $_POST['ID'] ?? 0;
         $email = $_COOKIE['user_email'] ?? null;
 
         if (!$email) {
@@ -253,7 +268,7 @@ function deleteAddress()
 function setDefaultAddress()
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST['id'] ?? 0;
+        $id = $_POST['ID'] ?? 0;
         $email = $_COOKIE['user_email'] ?? null;
 
         if (!$email) {
@@ -277,9 +292,8 @@ function setDefaultAddress()
 function getAddress()
 {
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $id = $_GET['id'] ?? 0;
+        $id = $_GET['ID'] ?? 0;
         $email = $_COOKIE['user_email'] ?? null;
-
         if (!$email) {
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
             return;

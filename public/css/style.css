@@ -1121,8 +1121,23 @@ span.label_defaul {
     position: relative;
     height: 100%;
     min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
+.address-box .name,
+.address-box .address,
+.address-box .phone {
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+    word-wrap: break-word; /* Đảm bảo xuống dòng */
+    overflow-wrap: break-word;
+    white-space: normal; /* Cho phép xuống dòng */
+    max-width: 100%; /* Giới hạn chiều rộng */
+}
 .address-box.is-default {
     border-color: #e74c3c;
 }
@@ -1144,6 +1159,14 @@ span.label_defaul {
     font-size: 16px;
 }
 
+.address-box .address {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn số dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .address-box .address,
 .address-box .phone {
     margin-bottom: 8px;
@@ -1151,10 +1174,11 @@ span.label_defaul {
 }
 
 .address-actions {
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    justify-content: flex-start;
 }
 
 .address-actions button {
@@ -1163,8 +1187,8 @@ span.label_defaul {
     color: #3498db;
     cursor: pointer;
     font-size: 13px;
-    padding: 0;
-    margin-right: 15px;
+    padding: 5px 10px;
+    white-space: nowrap;
 }
 
 .address-actions .btn-delete {
@@ -1175,6 +1199,17 @@ span.label_defaul {
     color: #2ecc71;
 }
 
+.label-default {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    z-index: 1;
+}
 .modal-title {
     font-weight: bold;
     color: #333;
@@ -1206,4 +1241,13 @@ textarea.form-control {
 
 .checkbox {
     margin: 15px 0;
+}
+@media screen and (max-width: 767px) {
+    .address-list .col-sm-6 {
+        width: 100%;
+    }
+    
+    .address-box {
+        min-height: 200px;
+    }
 }
