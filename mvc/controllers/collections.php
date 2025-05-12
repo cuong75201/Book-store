@@ -29,6 +29,7 @@ class Collections extends Controller
                     'list_product' => $list_product,
                     'list_category' => $list_category,
                     'id_danhmuc' => $i,
+
                     'id_theloai' => $this->theloaiModel->getIDbyIDdanhmuc($i),
                     'total_page' => $total_page,
                     'name' => $this->danhmucModel->getNamebyId($i)[0],

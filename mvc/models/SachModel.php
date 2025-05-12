@@ -1,12 +1,28 @@
 <?php
 class SachModel extends dbconnect
 {
-    public function create($name, $tacgia, $nxb, $namxb, $idTheLoai, $giaban, $giamgia, $Soluong, $Mo_ta, $image)
+    public function getSach()
+    {
+        $sql = "SELECT * FROM `sach`";
+        $result = mysqli_query($this->con, $sql);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+        return mysqli_error($this->con);
+    }
+    public function create($name, $tacgia, $nxb, $namxb, $id_danhmuc, $idTheLoai, $giaban, $giamgia, $Soluong, $Mo_ta, $image)
     {
         $mota = mysqli_real_escape_string($this->con, $Mo_ta);
-        $sql = "INSERT INTO `sach`( `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_Xuat_Ban`, `ID_The_Loai`, `Gia_Ban`, `GiamGia(%)`, 
-        `So_Luong_Ton`, `Mo_Ta`, `Images`) VALUES ('$name','$tacgia','$nxb','$namxb','$idTheLoai','$giaban','$giamgia','$Soluong','$mota','$image')";
+        $sql = "INSERT INTO `sach`( `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_Xuat_Ban`, `ID_DanhMuc`, `ID_TheLoai`, `Gia_Ban`, `GiamGia(%)`, `So_Luong_Ton`, `Mo_Ta`, `Images`, `TrangThai`) VALUES ('$name','$tacgia','$nxb','$namxb','$id_danhmuc','$idTheLoai','$giaban','$giamgia','$Soluong','$mota','$image','1')";
         $result = mysqli_query($this->con, $sql);
+        if (!$result) {
+            // Nếu truy vấn thất bại, trả về lỗi
+            return "Lỗi truy vấn: " . mysqli_error($this->con);
+        }
         return $result;
     }
     public function update($id_sach, $name, $tacgia, $nxb, $namxb, $idTheLoai, $giaban, $giamgia, $Soluong, $Mo_ta, $image)
