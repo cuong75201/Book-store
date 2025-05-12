@@ -48,13 +48,13 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
                                     <div class="owl-item">
                                         <div class="chir_loop">
-                                <?php foreach ($newProducts as $product): ?>                                           
+                                         <?php foreach ($newProducts as $product): ?>                                           
                                             <div class="chir_img">
-                                                <a href="/Book-store/product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                <a href="/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
                                                     <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="/Book-store/product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
+                                                    <a href="/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
