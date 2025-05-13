@@ -52,6 +52,17 @@ class Admin extends Controller
             "script" => "nhanvien",
         ]);
     }
+    function donhang()
+    {
+        $list_donhang = $this->donhangModel->getAll();
+        $this->view("admin_view", [
+            "title" => "Đơn hàng - Admin Web",
+            "content" => "Đơn hàng",
+            "Page" => "donhang",
+            "list_donhang" => $list_donhang,
+            "script" => "donhang",
+        ]);
+    }
     function checkLogin()
     {
         $sdt = isset($_POST['username']) ? $_POST['username'] : "";

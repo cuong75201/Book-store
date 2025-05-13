@@ -79,7 +79,6 @@ i {
     justify-content: center;
 
     padding: 10px;
-    height: 100px;
 }
 
 .sidebar .top-sidebar .mini-logo {
@@ -1410,6 +1409,7 @@ tr.selected {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 
 .delete-btn:hover {
     background-color: #d32f2f;

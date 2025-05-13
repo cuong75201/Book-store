@@ -1,11 +1,11 @@
 <?php
 class  UserModel extends dbconnect
 {
-    public function create($lastname, $fisrtname, $email, $password, $date)
+    public function create($lastname, $fisrtname, $email, $phone, $password, $date, $address)
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $name = $lastname . " " . $fisrtname;
-        $sql = "INSERT INTO `khach_hang`( `Ten_Khach_Hang`, `Email`, `Mat_Khau`, `Ngay_Dang_Ky`,`status`) VALUES ('$name','$email','$password','$date',0)";
+        $sql = "INSERT INTO `khach_hang`( `Ten_Khach_Hang`, `Email`,`So_Dien_Thoai`, `Mat_Khau`, `Ngay_Dang_Ky`,`Dia_Chi,`status`,`Trang_Thai) VALUES ('$name','$email','$password','$phone','$date',$address,1,1)";
         $result = mysqli_query($this->con, $sql);
         $check = true;
         if (!$result) {
@@ -21,9 +21,32 @@ class  UserModel extends dbconnect
         $result = mysqli_query($this->con, $sql);
         return $result;
     }
+    public function updateUserByAdmin($name, $email, $password, $phone)
+    {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE `khach_hang` SET `Ten_Khach_Hang`='$name',`Mat_Khau`='$password',`So_Dien_Thoai`='$phone', WHERE `Email`='$email'";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function xoaUserByAdmin($id)
+    {
+        $sql = "update khach_hang set  Trang_Thai = 0 where ID_Khach_Hang = $id ";
+        $result = mysqli_query($this->con, $sql);
+        if (!$result) {
+            return false;
+        }
+        return true;
+    }
+
+    public function setStatusByAdmin($status, $id)
+    {
+        $sql = "UPDATE `khach_hang` SET `status`=$status WHERE ID_Khach_Hang = $id";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
     public function setStatus($status, $email)
     {
-        $sql = "UPDATE `khach_hang` SET `status`='$status' WHERE `Email='$email'";
+        $sql = "UPDATE `khach_hang` SET `status`=$status WHERE `Email='$email'";
         $result = mysqli_query($this->con, $sql);
         return $result;
     }
@@ -35,7 +58,7 @@ class  UserModel extends dbconnect
     }
     public function getAllUser()
     {
-        $sql = "SELECT * FROM `khach_hang`";
+        $sql = "SELECT * FROM `khach_hang` where Trang_Thai = 1";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
         while ($row = mysqli_fetch_assoc($result)) {
@@ -67,178 +90,114 @@ class  UserModel extends dbconnect
         }
     }
     public function getUserByEmail($email)
-{
-    $stmt = $this->con->prepare("SELECT * FROM `khach_hang` WHERE `Email` = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-    return $user;
-}
-public function getAddresses($email)
     {
-        $query = "SELECT * FROM dia_chi WHERE Email = ? ORDER BY Mac_Dinh DESC";
-        $stmt = $this->con->prepare($query);
+        $stmt = $this->con->prepare("SELECT * FROM `khach_hang` WHERE `Email` = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+        $user = $result->fetch_assoc();
+        return $user;
+    }
+    public function getAddresses($email)
+    {
+        $stmt = $this->con->prepare("SELECT * FROM `dia_chi` WHERE `email` = ? ORDER BY `Mac_Dinh` DESC");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $addresses = [];
         while ($row = $result->fetch_assoc()) {
             $addresses[] = $row;
         }
-        
+        $stmt->close();
         return $addresses;
     }
 
-    // Lấy địa chỉ mặc định của người dùng
-    public function getDefaultAddress($email)
+    public function addAddress($email, $name, $address, $phone, $is_default)
     {
-        $query = "SELECT * FROM dia_chi WHERE Email = ? AND Mac_Dinh = 1";
-        $stmt = $this->con->prepare($query);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        }
-        
-        return null;
-    }
-
-    // Thêm địa chỉ mới
-    public function addAddress($email, $name, $address, $phone, $is_default = false)
-    {
-        // Nếu đây là địa chỉ mặc định, hủy mặc định của các địa chỉ khác
         if ($is_default) {
-            $this->resetDefaultAddresses($email);
+            $stmt = $this->con->prepare("UPDATE `dia_chi` SET `Mac_Dinh` = 0 WHERE `email` = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->close();
         }
-        
-        $query = "INSERT INTO dia_chi (Email, Ten_Nguoi_Nhan, Dia_Chi, So_Dien_Thoai, Mac_Dinh) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $this->con->prepare($query);
-        $default = $is_default ? 1 : 0;
-        $stmt->bind_param("ssssi", $email, $name, $address, $phone, $default);
-        
-        return $stmt->execute();
+
+        $stmt = $this->con->prepare("INSERT INTO `dia_chi` (`email`, `ten_nguoi_nhan`, `dia_chi`, `so_dien_thoai`, `Mac_Dinh`) VALUES (?, ?, ?, ?, ?)");
+        $Mac_Dinh = $is_default ? 1 : 0;
+        $stmt->bind_param("ssssi", $email, $name, $address, $phone, $Mac_Dinh);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 
-    // Cập nhật địa chỉ
-    public function updateAddress($id, $email, $name, $address, $phone, $is_default = false)
-{
-    if ($is_default) {
-        $this->resetDefaultAddresses($email);
-    }
-    
-    $query = "UPDATE dia_chi SET Ten_Nguoi_Nhan = ?, Dia_Chi = ?, So_Dien_Thoai = ?, Mac_Dinh = ? 
-              WHERE ID = ? AND Email = ?";
-    $stmt = $this->con->prepare($query);
-    if (!$stmt) {
-        error_log("Prepare failed: " . $this->con->error);
-        return false;
-    }
-    
-    $default = $is_default ? 1 : 0;
-    $stmt->bind_param("sssiss", $name, $address, $phone, $default, $id, $email);
-    
-    if (!$stmt->execute()) {
-        error_log("SQL Error in updateAddress: " . $stmt->error);
-        return false;
-    }
-    
-    $affected_rows = $stmt->affected_rows;
-    error_log("updateAddress: affected_rows=$affected_rows, ID=$id, Email=$email");
-    return $affected_rows > 0;
-}
+    public function updateAddress($id, $email, $name, $address, $phone, $is_default)
+    {
+        if ($is_default) {
+            $stmt = $this->con->prepare("UPDATE `dia_chi` SET `Mac_Dinh` = 0 WHERE `email` = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->close();
+        }
 
-    public function getDefaultAddressbyEmail($email)
-{
-    $query = "SELECT * FROM dia_chi WHERE Email = ? AND Mac_Dinh = 1 LIMIT 1";
-    $stmt = $this->con->prepare($query);
-    if (!$stmt) {
-        error_log("Prepare failed in getDefaultAddress: " . $this->con->error);
-        return null;
+        $stmt = $this->con->prepare("UPDATE `dia_chi` SET `ten_nguoi_nhan` = ?, `dia_chi` = ?, `so_dien_thoai` = ?, `Mac_Dinh` = ? WHERE `id` = ? AND `email` = ?");
+        $Mac_Dinh = $is_default ? 1 : 0;
+        $stmt->bind_param("sssiss", $name, $address, $phone, $Mac_Dinh, $id, $email);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
-    
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        $address = $result->fetch_assoc();
-        error_log("getDefaultAddress: Email=$email, Address=" . json_encode($address));
-        return $address;
-    }
-    
-    error_log("getDefaultAddress: No default address found for Email=$email");
-    return null;
-}
 
-    // Xóa địa chỉ
     public function deleteAddress($id, $email)
     {
-        // Kiểm tra xem địa chỉ có phải là mặc định không
-        $query = "SELECT Mac_Dinh FROM dia_chi WHERE ID = ? AND Email = ?";
-        $stmt = $this->con->prepare($query);
+        $stmt = $this->con->prepare("DELETE FROM `dia_chi` WHERE `id` = ? AND `email` = ?");
         $stmt->bind_param("is", $id, $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        
-        // Nếu địa chỉ là mặc định, đặt địa chỉ đầu tiên khác làm mặc định (nếu có)
-        if ($row && $row['is_default'] == 1) {
-            $query = "UPDATE dia_chi SET Mac_Dinh = 1 
-                      WHERE Email = ? AND ID != ? LIMIT 1";
-            $stmt = $this->con->prepare($query);
-            $stmt->bind_param("si", $email, $id);
-            $stmt->execute();
-        }
-        
-        // Xóa địa chỉ
-        $query = "DELETE FROM dia_chi WHERE ID = ? AND Email = ?";
-        $stmt = $this->con->prepare($query);
-        $stmt->bind_param("is", $id, $email);
-        
-        return $stmt->execute();
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 
-    // Thiết lập địa chỉ mặc định
     public function setDefaultAddress($id, $email)
     {
-        // Hủy mặc định của các địa chỉ khác
-        $this->resetDefaultAddresses($email);
-        
-        // Đặt địa chỉ được chọn làm mặc định
-        $query = "UPDATE Dia_Chi SET Mac_Dinh = 1 WHERE ID = ? AND Email = ?";
-        $stmt = $this->con->prepare($query);
-        $stmt->bind_param("is", $id, $email);
-        
-        return $stmt->execute();
-    }
-
-    // Hủy đánh dấu mặc định của tất cả địa chỉ
-    private function resetDefaultAddresses($email)
-    {
-        $query = "UPDATE dia_chi SET Mac_Dinh = 0 WHERE Email = ?";
-        $stmt = $this->con->prepare($query);
+        $stmt = $this->con->prepare("UPDATE `dia_chi` SET `Mac_Dinh` = 0 WHERE `email` = ?");
         $stmt->bind_param("s", $email);
-        
-        return $stmt->execute();
+        $stmt->execute();
+        $stmt->close();
+
+        $stmt = $this->con->prepare("UPDATE `dia_chi` SET `Mac_Dinh` = 1 WHERE `id` = ? AND `email` = ?");
+        $stmt->bind_param("is", $id, $email);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 
-    // Lấy thông tin một địa chỉ cụ thể
-    public function getAddressById($id, $email)
+    // Thêm phương thức để lấy thông tin địa chỉ từ khach_hang (nếu cần)
+    public function getUserAddress($email)
     {
-        $query = "SELECT * FROM dia_chi WHERE ID = ? AND Email = ?";
-        $stmt = $this->con->prepare($query);
-        $stmt->bind_param("is", $id, $email);
+        $stmt = $this->con->prepare("SELECT `Dia_Chi`, `So_Dien_Thoai` FROM `khach_hang` WHERE `Email` = ?");
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
+        $address = $result->fetch_assoc();
+        $stmt->close();
+        return $address;
+    }
+
+    // Thêm phương thức để cập nhật địa chỉ trong khach_hang (nếu cần)
+    public function updateUserAddress($email, $address, $phone)
+    {
+        $stmt = $this->con->prepare("UPDATE `khach_hang` SET `Dia_Chi` = ?, `So_Dien_Thoai` = ? WHERE `Email` = ?");
+        $stmt->bind_param("sss", $address, $phone, $email);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+    public function getUserById($id)
+    {
+        $sql = "SELECT * FROM `khach_hang` where ID_Khach_Hang = $id";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
         }
-        
-        return null;
+        return $rows;
     }
 }

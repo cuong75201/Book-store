@@ -32,28 +32,25 @@
                 <th>ID khách hàng</th>
                 <th>Ngày đặt hàng</th>
                 <th>Tông tiền</th>
-                <th>Trạng thái</th>
-                <th>Phương thức thanh toán</th>
                 <th>Địa chỉ giao hàng</th>
+                <th>Phương thức thanh toán</th>
+                <th>Trạng thái</th>
             </tr>
         </thead>
 
         <tbody id="product-details">
             <?php
-            foreach ($data['list_nhanvien'] as $nhanvien) {
-                if ($nhanvien['TrangThai'] == 1) $status = "Đang hoạt động";
-                else $status = "Đã khóa";
+            foreach ($data['list_donhang'] as $donhang) {
                 echo '
-                <tr id=' . $nhanvien["ID_NV"] . '>
-                    <td>' .  $nhanvien["ID_NV"] . '</td>
-                    <td>' .  $nhanvien["Ten_NV"] . '</td>
-                    <td>' . $nhanvien["DiaChi"] . '</td>
-                    <td>' . $nhanvien["SDT"] . '</td>
-                    <td>' . $nhanvien["Luong"] . '</td>
-                    <td>' . $nhanvien["TenQuyen"] . '</td>
-                    <td>' . $status . '</td>
-                    
-                  
+                <tr id=' . $donhang["ID_Don_Hang"] . '>
+                    <td>' .  $donhang["ID_Don_Hang"] . '</td>
+                    <td>' .  $donhang["ID_Khach_Hang"] . '</td>
+                    <td>' .  $donhang["Ngay_Dat_Hang"] . '</td>
+                    <td>' .  $donhang["Tong_Tien"] . '</td>
+                    <td>' .  $donhang["Dia_Chi_Giao_Hang"] . '</td>
+                    <td>' .  $donhang["Phuong_Thuc_Thanh_Toan"] . '</td>
+                    <td>' .  $donhang["Trang_Thai"] . '</td>
+
                 </tr>
                 ';
             }

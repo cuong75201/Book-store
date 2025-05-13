@@ -59,6 +59,12 @@
                     </a>
                 </div>
                 <div class="sidebar-item">
+                    <a href="admin/phieunhap">
+                        <i class="fa fa-file-invoice-dollar"></i>
+                        <h3>Phiếu nhập</h3>
+                    </a>
+                </div>
+                <div class="sidebar-item">
                     <a href="admin/thongke">
                         <i class="fa-solid fa-chart-simple"></i>
                         <h3>Thống kê</h3>
