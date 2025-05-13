@@ -76,10 +76,13 @@ class SachModel extends dbconnect
         $rows = [];
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
+                // Thêm slug vào mỗi sản phẩm
+                $row['slug'] = $this->slugify($row['Ten_Sach']);
                 $rows[] = $row;
             }
             return $rows;
         }
+        return [];
     }
     public function getToTalPageDanhMuc($id_dm, $limit)
     {
@@ -141,5 +144,48 @@ class SachModel extends dbconnect
 
         // Trả về kết quả
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllProducts()
+    {
+        $sql = "SELECT * FROM sach"; // Truy vấn tất cả sách
+        $result = mysqli_query($this->con, $sql);
+
+        $products = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $products[] = $row;
+        }
+
+        return $products;
+    }
+    public function slugify($string)
+    {
+        $string = trim($string);
+        $string = mb_strtolower($string, 'UTF-8');
+        $string = preg_replace('/[%]/u', '', $string);
+        $string = preg_replace('/[\s-]+/', '-', $string);
+        return $string;
+    }
+    // SachModel.php
+    public function getProductsByCategory($categoryId)
+    {
+        $sql = "SELECT * FROM sach WHERE ID_TheLoai = $categoryId LIMIT 8"; // Lấy 8 sản phẩm
+        $result = mysqli_query($this->con, $sql);
+        $products = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $products[] = $row;
+        }
+        return $products;
+    }
+
+    public function getNewProducts($limit = 6)
+    {
+        $sql = "SELECT * FROM sach ORDER BY ID_Sach DESC LIMIT $limit"; // Sách mới nhất
+        $result = mysqli_query($this->con, $sql);
+        $products = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $products[] = $row;
+        }
+        return $products;
     }
 }

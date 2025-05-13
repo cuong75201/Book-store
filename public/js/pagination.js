@@ -22,6 +22,8 @@ $(document).ready(function () {
                 console.log(data);
                 var str = '';
                 for (let product of data) {
+                    let slug = product.slug;
+                    let detailUrl = `product/detail/${slug}-${product.ID_Sach}`;
                     let GiaGiam = Number(product['Gia_Ban']) * (1 - Number(product["GiamGia(%)"]) / 100);
                     let GiaGoc = Number(product['Gia_Ban']);
                     GiaGiam = GiaGiam.toLocaleString('vi-VN') + "đ";
@@ -30,11 +32,11 @@ $(document).ready(function () {
                     <div class="item-product col-4">
                     <div class="chir_loop">
                         <div class="chir_img">
-                            <a href="#">
+                            <a href="${detailUrl}">
                                 <img src="media/img_product/${product['Images']}" alt="">
                             </a>
                             <div class="insActionloop">
-                                <a href="#">
+                                <a href="${detailUrl}">
                                     <img src="media/logo-banner/eye.png" alt="">
                                 </a>
                                 <a href="#">
@@ -139,6 +141,8 @@ $(document).ready(function () {
             console.log(data);
             var str = '';
             for (let product of data) {
+                let slug = product.slug;
+                let detailUrl = `product/detail/${slug}-${product.ID_Sach}`;
                 let GiaGiam = Number(product['Gia_Ban']) * (1 - Number(product["GiamGia(%)"]) / 100);
                 let GiaGoc = Number(product['Gia_Ban']);
                 GiaGiam = GiaGiam.toLocaleString('vi-VN') + "đ";
@@ -147,11 +151,11 @@ $(document).ready(function () {
                     <div class="item-product col-4">
                     <div class="chir_loop">
                         <div class="chir_img">
-                            <a href="#">
+                            <a href="${detailUrl}">
                                 <img src="media/img_product/${product['Images']}" alt="">
                             </a>
                             <div class="insActionloop">
-                                <a href="#">
+                            <a href="${detailUrl}">
                                     <img src="media/logo-banner/eye.png" alt="">
                                 </a>
                                 <a href="#">

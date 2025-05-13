@@ -1,4 +1,15 @@
-
+<?php 
+// Thêm ở đầu file main.php
+require_once 'mvc/models/SachModel.php'; // Đường dẫn đến file SachModel
+$sachModel = new SachModel();
+$products = $sachModel->getAllProducts(); // Lấy danh sách sản phẩm
+// Lấy dữ liệu cho các phần
+$newProducts = $sachModel->getNewProducts(6); // Sách mới
+$comboProducts = $sachModel->getProductsByCategory(2); // Ví dụ: Combo (ID_DanhMuc = 2)
+$skillBooks = $sachModel->getProductsByCategory(3); // Sách kỹ năng sống
+$childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
+// ... Thêm các danh mục khác
+?>
 <?php require 'inc/head.php'; ?>
 
 
@@ -34,6 +45,37 @@
                             <div class="content-product-list">
                                 <div class="owl-stage" id='1' style=" transform: translate3d(0px, 0px, 0px);
                                 transition: all .5s;">
+
+                                    <div class="owl-item">
+                                        <div class="chir_loop">
+                                         <?php foreach ($newProducts as $product): ?>                                           
+                                            <div class="chir_img">
+                                                <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                    <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
+                                                </a>
+                                                <div class="insActionloop">
+                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
+                                                        <img src="media/logo-banner/eye.png" alt="">
+                                                    </a>
+                                                    <a href="#">
+                                                        <img src="media/logo-banner/cart.png" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="chir_content">
+                                            <h3><?= $product['Ten_Sach'] ?></h3>
+
+                                                <p class="pro-price">
+                                                <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
+                                                <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
+                                                <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
+                                                </p>
+
+                                            </div>
+                                        <?php endforeach; ?>
+
+                                </div>
+                                    </div>
                                     <div class="owl-item">
                                         <div class="chir_loop">
                                             <div class="chir_img">
@@ -41,7 +83,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -73,7 +115,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -105,7 +147,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -136,7 +178,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -168,7 +210,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -200,102 +242,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -326,7 +273,39 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
+                                                        <img src="media/logo-banner/eye.png" alt="">
+                                                    </a>
                                                     <a href="#">
+                                                        <img src="media/logo-banner/cart.png" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="chir_content">
+                                                <h3>
+                                                    <a href="#">
+                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                                    </a>
+                                                </h3>
+                                                <p class="pro-price">
+                                                    <del>74,000đ</del>
+                                                    59,200₫ <span class="sale-price">
+                                                        <span>-20%</span>
+                                                    </span>
+                                                </p>
+
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="chir_loop">
+                                            <div class="chir_img">
+                                                <a href="#">
+                                                    <img src="media/img_product/5.1.png" alt="">
+                                                </a>
+                                                <div class="insActionloop">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
@@ -358,39 +337,7 @@
                                                     <img src="media/logo-banner/sach1.jpg" alt="">
                                                 </a>
                                                 <div class="insActionloop">
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="#">
+                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
                                                         <img src="media/logo-banner/eye.png" alt="">
                                                     </a>
                                                     <a href="#">
