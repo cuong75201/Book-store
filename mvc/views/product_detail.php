@@ -25,7 +25,7 @@ $product = $data['product'];
 
     <div id="product-container">
         <div class="left-section">
-            <img class="product-image" src="/Book-store/media/img_product/<?= htmlspecialchars($product['Images']) ?>" alt="<?= htmlspecialchars($product['Ten_Sach']) ?>">
+            <img class="product-image" src="media/img_product/<?= htmlspecialchars($product['Images']) ?>" alt="<?= htmlspecialchars($product['Ten_Sach']) ?>">
             <div class="action-buttons">
                 <button class="btn-outline">Thêm vào giỏ hàng</button>
                 <button class="btn-solid">Mua ngay</button>
@@ -33,7 +33,7 @@ $product = $data['product'];
         </div>
         <div class="right-section">
             <div class="product-info">
-            <h1><?= htmlspecialchars($product['Ten_Sach'])                                                                                                        ?></h1>
+            <h1><?= htmlspecialchars($product['Ten_Sach'])?></h1>
             <div class="info-row">
             <div class="meta-info">
                 <span><strong>Tác giả:</strong> <?= htmlspecialchars($product['Tac_Gia']) ?></span>
@@ -54,7 +54,7 @@ $product = $data['product'];
             </div>
         </div>
     </div>
-    <script src="/Book-store/public/js/script.js"></script>
+    <script src="public/js/script.js"></script>
     </body>
 </html>
 <?php require 'inc/footer.php'; ?>
