@@ -1,6 +1,7 @@
 <?php require 'inc/head.php';?>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" href="public/css/style.css">
+<link rel="stylesheet" href="public/css/reset.css">
 </head>
 <body>
     <?php

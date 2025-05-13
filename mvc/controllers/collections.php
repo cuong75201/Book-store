@@ -93,7 +93,12 @@ class Collections extends Controller
         $id_dm = isset($_POST['id_dm']) ? $_POST['id_dm'] : 1;
         $list_product = $this->listSachPage($page, $id_dm, $id_tl);
 
-        echo json_encode($list_product);
+        // Thêm slug vào mỗi sản phẩm
+        foreach ($list_product as &$product) {
+            $product['slug'] = $this->bookModel->slugify($product['Ten_Sach']);
+        }
+
+        echo json_encode($list_product); 
     }
     public function searchSach(){
         $tenSach = isset($_POST['ten']) ? $_POST['ten'] : "";

@@ -39,15 +39,17 @@
                     $GiaGoc = (int) $product['Gia_Ban'];
                     $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                     $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $this->bookModel->slugify($product['Ten_Sach']);
+
                     echo '
                  <div class="item-product col-4">
                     <div class="chir_loop">
                         <div class="chir_img">
-                            <a href="#">
+                <a href="product/detail/' . $slug . '-' . $product['ID_Sach'] . '">
                                 <img src="media/img_product/' . $product['Images'] . '" alt="">
                             </a>
                             <div class="insActionloop">
-                                <a href="#">
+                    <a href="product/detail/' . $slug . '-' . $product['ID_Sach'] . '">
                                     <img src="media/logo-banner/eye.png" alt="">
                                 </a>
                                 <a href="#">

@@ -52,10 +52,13 @@ class SachModel extends dbconnect
         $rows = [];
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
+                // Thêm slug vào mỗi sản phẩm
+                $row['slug'] = $this->slugify($row['Ten_Sach']);
                 $rows[] = $row;
             }
             return $rows;
         }
+        return [];
     }
     public function getToTalPageDanhMuc($id_dm, $limit)
     {
