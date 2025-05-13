@@ -293,6 +293,17 @@ function openModal(action) {
                             $("#giamgia").val(product[0]['GiamGia(%)']);
                             $("#message").val(product[0].Mo_Ta);
                             $("#soluong").val(product[0].So_Luong_Ton);
+                            $('#danhmuc-select').val(product[0].ID_DanhMuc);
+                            let html_tl = "";
+                            for (let key of list_tl) {
+                                if (key.id_danhmuc == $("#danhmuc-select").val()) {
+                                    html_tl += `
+                     <option id ="${key.id_theloai}"value="${key.id_theloai}">${key.TenTheLoai}</option>
+                    `
+                                }
+                            }
+                            $("#theloai-select").html(html_tl);
+                            $("#theloai-select").val(product[0].ID_TheLoai);
                             $("#previewImage").attr("src", "media/img_product/" + product[0].Images);
                             $("#previewImage").css("display", "block");
                             $("#danhmuc-select").on("change", function () {

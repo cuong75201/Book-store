@@ -188,6 +188,12 @@ class Admin extends Controller
             echo json_encode($this->nhomquyenModel->getAll());
         }
     }
+    function getNhanVien()
+    {
+        if (isset($_POST['id'])) {
+            echo json_encode($this->nhanvienModel->getNhanVienfromID($_POST['id']));
+        }
+    }
     function addNhanVien()
     {
         $name = $_POST['name'];
@@ -198,6 +204,26 @@ class Admin extends Controller
         $status = $_POST['status'];
         $pass = md5($_POST['pass']);
         $result = $this->nhanvienModel->add($name, $diachi, $sdt, $luong, $quyen, $pass, $status);
+        echo json_encode($result);
+    }
+    function udtNhanVien()
+    {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $diachi = $_POST['diachi'];
+        $sdt = $_POST['sdt'];
+        $luong = $_POST['luong'];
+        $quyen = $_POST['quyen'];
+        $status = $_POST['status'];
+        $pass = !empty($_POST['pass']) ? md5($_POST['pass']) : "";
+
+        $result = $this->nhanvienModel->update($id, $name, $diachi, $sdt, $luong, $quyen, $pass, $status);
+        echo json_encode($result);
+    }
+    function XoaNhanVien()
+    {
+        $id = $_POST['id'];
+        $result = $this->nhanvienModel->remove($id);
         echo json_encode($result);
     }
 }

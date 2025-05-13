@@ -13,15 +13,21 @@ class NhanVienModel extends dbconnect
     {
         $sql = "INSERT INTO nhanvien ( Ten_NV, DiaChi, SDT, Luong, MaQuyen, Mat_khau,TrangThai) VALUES ( ?, ?, ?, ?, ?, ?,?)";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("isssiis", $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $TrangThai);
+        $stmt->bind_param("sssiisi", $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $TrangThai);
         return $stmt->execute();
     }
 
-    public function update($ID_NV, $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau)
+    public function update($ID_NV, $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $TrangThai)
     {
-        $sql = "UPDATE nhanvien SET Ten_NV = ?, DiaChi = ?, SDT = ?, Luong = ?, MaQuyen = ?, Mat_khau = ? WHERE ID_NV = ?";
+        if (empty($Mat_khau)) {
+            $sql = "UPDATE nhanvien SET Ten_NV = ?, DiaChi = ?, SDT = ?, Luong = ?, MaQuyen = ?, TrangThai = ? WHERE ID_NV = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bind_param("sssiiii", $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $TrangThai, $ID_NV);
+            return $stmt->execute();
+        }
+        $sql = "UPDATE nhanvien SET Ten_NV = ?, DiaChi = ?, SDT = ?, Luong = ?, MaQuyen = ?, Mat_khau = ?, TrangThai = ? WHERE ID_NV = ?";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("sssiisi", $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $ID_NV);
+        $stmt->bind_param("sssiisii", $Ten_NV, $DiaChi, $SDT, $Luong, $MaQuyen, $Mat_khau, $TrangThai, $ID_NV);
         return $stmt->execute();
     }
 
@@ -52,5 +58,11 @@ class NhanVienModel extends dbconnect
         }
 
         return false;
+    }
+    public function getNhanVienfromID($id)
+    {
+        $sql = "SELECT * FROM nhanvien WHERE ID_NV ='$id'";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 }
