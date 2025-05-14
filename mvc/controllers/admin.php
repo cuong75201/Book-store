@@ -8,8 +8,14 @@ class Admin extends Controller
     public $donhangModel;
     public $ctietdonhangModel;
     public $nhomquyenModel;
+    public $khachhangModel;
+    public $ctietpnhModel;
+    public $ctietquyenModel;
     function __construct()
     {
+        $this->ctietquyenModel = $this->model("ctiet_quyenModel");
+        $this->ctietpnhModel = $this->model("ctiet_pnhModel");
+        $this->khachhangModel = $this->model("UserModel");
         $this->sachModel = $this->model("SachModel");
         $this->nhanvienModel = $this->model("NhanVienModel");
         $this->theloaiModel = $this->model("TheLoaiModel");
@@ -63,12 +69,57 @@ class Admin extends Controller
             "script" => "donhang",
         ]);
     }
+    function thongke()
+    {
+        $list_khachhang = $this->donhangModel->getAllKH();
+
+        foreach ($list_khachhang as &$khachhang) {
+            $khachhang['nameKH'] = $this->khachhangModel->getNamebyId($khachhang['ID_Khach_Hang'])[0];
+        }
+        $list_sach = $this->ctietpnhModel->getAllbyIDSach();
+        foreach ($list_sach as &$sach) {
+            $sach['name_sach'] = $this->sachModel->getSachfromID($sach['ID_Sach'])[0];
+        }
+
+        $this->view("admin_view", [
+            "title" => "Thống kê - Admin Web",
+            "content" => "Thống kê",
+            "Page" => "thongke",
+            'list_kh' => $list_khachhang,
+            'list_sach' => $list_sach,
+            "script" => "thongke",
+        ]);
+    }
+    function phanquyen()
+    {
+        $list_quyen = $this->nhomquyenModel->getAll();
+        $this->view("admin_view", [
+            "title" => "Phân quyền - Admin Web",
+            "content" => "Phân quyền",
+            "Page" => "phanquyen",
+            'list_quyen' => $list_quyen,
+            "script" => "phanquyen",
+        ]);
+    }
     function checkLogin()
     {
+
         $sdt = isset($_POST['username']) ? $_POST['username'] : "";
         $password = isset($_POST["password"]) ? $_POST['password'] : "";
         $result = $this->nhanvienModel->KiemTraNhanVien($sdt, $password);
         if ($result) {
+
+
+            $nv = $this->nhanvienModel->getNVfromSDT($sdt);
+            $idnv = $nv['ID_NV'];
+            $ctiet = $this->ctietquyenModel->getById($nv['MaQuyen'])[0];
+            $hanhdong = [];
+            foreach ($ctiet as $ct) {
+                $hanhdong[] = $ct['hanhdong'];
+            }
+            if (!setcookie("id_nv", 5, time() + 3600 * 248 * 30, "/")) {
+                return;
+            };
             echo "Đăng nhập thành công";
         } else {
             echo "Fail";

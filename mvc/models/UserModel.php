@@ -200,4 +200,14 @@ class  UserModel extends dbconnect
         }
         return $rows;
     }
+    public function getNamebyId($id)
+    {
+        $sql = "SELECT Ten_Khach_Hang FROM `khach_hang` where ID_Khach_Hang = $id";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row['Ten_Khach_Hang'];
+        }
+        return $rows;
+    }
 }

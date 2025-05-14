@@ -44,4 +44,49 @@ class DonHangModel extends dbconnect
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+    public function setTrangthai($id, $trangthai)
+    {
+        $sql = " update don_hang set Trang_Thai = '$trangthai' where ID_Don_Hang=$id";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function LocDonHang($donhang)
+    {
+        if (isset($donhang['Trang_Thai'])) {
+
+            if (!empty($donhang['Trang_Thai'])) {
+                $trangthai = $donhang['Trang_Thai'] . " AND";
+            } else {
+                $trangthai = $donhang['Trang_Thai'];
+            }
+            if (!empty($donhang['diachi'])) {
+                $diachi = $donhang['diachi'] . " AND";
+            } else {
+                $diachi = $donhang['diachi'];
+            }
+            $ngaydathang = $donhang['Ngay_Dat_Hang'];
+            $sql = "SELECT * FROM don_hang WHERE $trangthai $diachi $ngaydathang";
+            if (empty($ngaydathang)) {
+                $sql = substr($sql, 0, -4);
+            }
+            $result = mysqli_query($this->con, $sql);
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+            // return $sql;
+        }
+    }
+    public function getAllKH()
+    {
+        $sql = "SELECT ID_Khach_Hang, SUM(Tong_Tien) AS Tong_Tien 
+            FROM don_hang 
+            WHERE Trang_Thai = 3
+            GROUP BY ID_Khach_Hang";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    public function getDonHangbyDate($id, $start, $end)
+    {
+        $sql = "SELECT * FROM don_hang WHERE ID_Khach_Hang = $id AND Ngay_Dat_Hang BETWEEN '$start 00:00:00' AND '$end 23:59:59'";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
 }

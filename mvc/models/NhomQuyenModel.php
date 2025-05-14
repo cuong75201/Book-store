@@ -10,11 +10,11 @@ class NhomQuyenModel extends dbconnect
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function add($MaQuyen, $TenQuyen)
+    public function add($TenQuyen)
     {
-        $sql = "INSERT INTO nhomquyen (MaQuyen, TenQuyen) VALUES (?, ?)";
+        $sql = "INSERT INTO nhomquyen (TenQuyen) VALUES (?)";
         $stmt = $this->con->prepare($sql);
-        $stmt->bind_param("is", $MaQuyen, $TenQuyen);
+        $stmt->bind_param("s", $TenQuyen);
         return $stmt->execute();
     }
 
@@ -51,6 +51,18 @@ class NhomQuyenModel extends dbconnect
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $rows[] = $row['TenQuyen'];
+            }
+            return $rows;
+        }
+    }
+    public function getMaQuyenbyName($name)
+    {
+        $sql = "SELECT `MaQuyen` FROM `nhomquyen` WHERE `TenQuyen`='$name'";
+        $result = mysqli_query($this->con, $sql);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row['MaQuyen'];
             }
             return $rows;
         }

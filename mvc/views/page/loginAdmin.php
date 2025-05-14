@@ -105,9 +105,9 @@
                 </div>
 
                 <div class="bottom-form">
-                    <a href="#" class="login-btn">
+                    <span class="login-btn">
                         <div>Đăng nhập</div>
-                    </a>
+                    </span>
                 </div>
             </div>
         </div>

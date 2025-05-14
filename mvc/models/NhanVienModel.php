@@ -65,4 +65,10 @@ class NhanVienModel extends dbconnect
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+    public function getNVfromSDT($sdt)
+    {
+        $sql = "SELECT * FROM nhanvien WHERE SDT ='$sdt'";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_assoc($result);
+    }
 }

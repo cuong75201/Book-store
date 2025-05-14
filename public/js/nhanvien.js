@@ -297,6 +297,7 @@ function AddNhanvien() {
         dataType: "json",
         success: function (data) {
             alert("Thêm thành công");
+            location.reload()
             closeModal();
         },
         error: function (xhr, status, error) {
@@ -331,8 +332,9 @@ function UpdateNhanVien() {
         dataType: "json",
         success: function (data) {
             console.log(data);
-            // alert("Sửa thành công");
-            // closeModal();
+            alert("Sửa thành công");
+            location.reload()
+            closeModal();
         },
         error: function (xhr, status, error) {
             console.error("AJAX Error:", error);
