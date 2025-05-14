@@ -110,7 +110,7 @@ class Account extends Controller
         if (isset($_COOKIE['user_email'])) {
         $email = $_COOKIE['user_email'];
         $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
-        $default_address = $this->userModel->getDefaultAddressbyEmail($email);
+        $default_address = $this->userModel->getDefaultAddress($email);
         $addresses = $this->userModel->getAddresses($email);
         }
         $this->view('main_layout', [
@@ -189,7 +189,11 @@ class Account extends Controller
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_COOKIE['user_email'] ?? null;
         $name = $_POST['name'] ?? '';
-        $address = $_POST['address'] ?? '';
+        $duong = $_POST['duong'] ?? '';
+        $phuong = $_POST['phuong'] ?? '';
+        $quan = $_POST['quan'] ?? '';
+        $thanhpho = $_POST['thanhpho'] ?? '';
+        $address = trim("$duong, $phuong, $quan, $thanhpho"); // Nối 4 ô
         $phone = $_POST['phone'] ?? '';
         $is_default = isset($_POST['is_default']) && $_POST['is_default'] == '1';
 
@@ -201,7 +205,6 @@ class Account extends Controller
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin']);
             return;
         }
-        // Validate phone number
         if (!preg_match('/^(\+84|0)[0-9]{9,10}$/', $phone)) {
             echo json_encode(['status' => 'error', 'message' => 'Số điện thoại không hợp lệ']);
             return;
@@ -218,12 +221,14 @@ class Account extends Controller
 
 function updateAddress()
 {
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST['ID'] ?? 0;
         $email = $_COOKIE['user_email'] ?? null;
         $name = $_POST['name'] ?? '';
-        $address = $_POST['address'] ?? '';
+        $duong = $_POST['duong'] ?? '';
+        $quan = $_POST['quan'] ?? '';
+        $thanhpho = $_POST['thanhpho'] ?? '';
+        $address = trim("$duong, $quan, $thanhpho"); // Nối 4 ô
         $phone = $_POST['phone'] ?? '';
         $is_default = isset($_POST['is_default']) && $_POST['is_default'] == '1';
 
@@ -237,7 +242,6 @@ function updateAddress()
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin']);
             return;
         }
-        // Validate phone number
         if (!preg_match('/^(\+84|0)[0-9]{9,10}$/', $phone)) {
             echo json_encode(['status' => 'error', 'message' => 'Số điện thoại không hợp lệ']);
             return;

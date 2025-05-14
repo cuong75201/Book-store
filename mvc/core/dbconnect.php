@@ -11,8 +11,9 @@ class dbconnect
     private $dbname = db_name;
     function __construct()
     {
-        $this->con = new mysqli($this->servername, $this->username, $this->password, $this->dbname, 3307);
+        $this->con = new mysqli($this->servername, $this->username, $this->password, $this->dbname, 3306);
         mysqli_query($this->con, "SET NAMES 'utf8'");
+        mysqli_set_charset($this->con, "utf8mb4");
     }
     function get_conn()
     {

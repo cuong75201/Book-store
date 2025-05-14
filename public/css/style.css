@@ -1253,7 +1253,6 @@ textarea.form-control {
     }
 }
 
-<<<<<<< Updated upstream
 /* Chi tiết sản phẩm */
 #product-container {
     display: flex;
@@ -1424,7 +1423,6 @@ textarea.form-control {
   }
   
   
-=======
 /* Đảm bảo bảng đơn hàng hiển thị đẹp */
 .account-table table {
     width: 100%;
@@ -1500,5 +1498,7 @@ textarea.form-control {
         max-width: 100%;
         margin: 10px;
     }
+
+
+    
 }
->>>>>>> Stashed changes

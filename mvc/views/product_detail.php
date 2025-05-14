@@ -27,8 +27,8 @@ $product = $data['product'];
         <div class="left-section">
             <img class="product-image" src="media/img_product/<?= htmlspecialchars($product['Images']) ?>" alt="<?= htmlspecialchars($product['Ten_Sach']) ?>">
             <div class="action-buttons">
-                <button class="btn-outline">Thêm vào giỏ hàng</button>
-                <button class="btn-solid">Mua ngay</button>
+                <button class="btn-outline" >Thêm vào giỏ hàng</button>
+                <button class="btn-solid"><a href="/Book_store/checkout/index/<?= $product['ID_Sach'] ?>/1">Mua ngay</a></button>
             </div>
         </div>
         <div class="right-section">

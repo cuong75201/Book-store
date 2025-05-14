@@ -98,6 +98,8 @@ class  UserModel extends dbconnect
         $user = $result->fetch_assoc();
         return $user;
     }
+
+
     public function getAddresses($email)
     {
         $stmt = $this->con->prepare("SELECT * FROM `dia_chi` WHERE `email` = ? ORDER BY `Mac_Dinh` DESC");
@@ -110,6 +112,33 @@ class  UserModel extends dbconnect
         }
         $stmt->close();
         return $addresses;
+    }
+
+    public function getAddressById($id, $email)
+    {
+        $stmt = $this->con->prepare("SELECT * FROM `dia_chi` WHERE `ID` = ? AND `Email` = ?");
+        $stmt->bind_param("is", $id, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $address = $result->fetch_assoc();
+        $stmt->close();
+        return $address;
+    }
+
+    // Lấy địa chỉ mặc định của người dùng
+    public function getDefaultAddress($email)
+    {
+        $query = "SELECT * FROM dia_chi WHERE Email = ? AND Mac_Dinh = 1";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+        
+        return null;
     }
 
     public function addAddress($email, $name, $address, $phone, $is_default)
@@ -131,6 +160,12 @@ class  UserModel extends dbconnect
 
     public function updateAddress($id, $email, $name, $address, $phone, $is_default)
     {
+
+        // Đảm bảo $address không rỗng
+    if (empty($address)) {
+        error_log("Update Address Failed: Address is empty for ID=$id, Email=$email");
+        return false;
+    }
         if ($is_default) {
             $stmt = $this->con->prepare("UPDATE `dia_chi` SET `Mac_Dinh` = 0 WHERE `email` = ?");
             $stmt->bind_param("s", $email);
@@ -180,29 +215,6 @@ class  UserModel extends dbconnect
         $stmt->close();
         return $address;
     }
-<<<<<<< Updated upstream
-
-    // Thêm phương thức để cập nhật địa chỉ trong khach_hang (nếu cần)
-    public function updateUserAddress($email, $address, $phone)
-    {
-        $stmt = $this->con->prepare("UPDATE `khach_hang` SET `Dia_Chi` = ?, `So_Dien_Thoai` = ? WHERE `Email` = ?");
-        $stmt->bind_param("sss", $address, $phone, $email);
-        $result = $stmt->execute();
-        $stmt->close();
-        return $result;
-    }
-    public function getUserById($id)
-    {
-        $sql = "SELECT * FROM `khach_hang` where ID_Khach_Hang = $id";
-        $result = mysqli_query($this->con, $sql);
-        $rows = array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
-}
-=======
     // Lấy ID_Khach_Hang từ email
 public function getCustomerIdByEmail($email)
 {
@@ -274,5 +286,24 @@ public function getOrderDetails($orderId)
     }
     return $details;
 }
+    public function createOrder($orderData)
+{
+    $query = "INSERT INTO don_hang (ID_Khach_Hang, Ngay_Dat_Hang, Tong_Tien, Trang_Thai, Phuong_Thuc_Thanh_Toan, Dia_Chi_Giao_Hang) 
+              VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $this->con->prepare($query);
+    $stmt->bind_param("ississ",$orderData['ID_Khach_Hang'], $orderData['Ngay_Dat_Hang'], 
+                      $orderData['Tong_Tien'], $orderData['Trang_Thai'], 
+                      $orderData['Phuong_Thuc_Thanh_Toan'], $orderData['Dia_Chi_Giao_Hang']);
+    $success = $stmt->execute();
+    $orderId = $success ? $this->con->insert_id : null;
+    $stmt->close();
+    return $orderId;
 }
->>>>>>> Stashed changes
+public function addOrderDetail($orderId,  $productId, $quantity, $price, $thanhtien)
+{
+    $query = "INSERT INTO chi_tiet_don_hang (ID_Don_Hang, ID_Sach, So_Luong, Don_Gia, Thanh_Tien) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->con->prepare($query);
+    $stmt->bind_param("iiidi",$orderId, $productId, $quantity, $price, $thanhtien);
+    return $stmt->execute();
+}
+}

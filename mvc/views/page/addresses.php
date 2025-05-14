@@ -96,8 +96,16 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="address">Địa chỉ</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                        <label for="duong">Đường</label>
+                        <input type="text" class="form-control" id="duong" name="duong" placeholder="Nhập đường">
+                    </div>
+                    <div class="form-group">
+                        <label for="quan">Quận/Huyện</label>
+                        <input type="text" class="form-control" id="quan" name="quan" placeholder="Nhập quận/huyện">
+                    </div>
+                    <div class="form-group">
+                        <label for="thanhpho">Thành phố/Tỉnh</label>
+                        <input type="text" class="form-control" id="thanhpho" name="thanhpho" placeholder="Nhập thành phố/tỉnh">
                     </div>
                     
                     <div class="form-group">
