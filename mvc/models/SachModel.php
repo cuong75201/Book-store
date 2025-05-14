@@ -166,7 +166,6 @@ class SachModel extends dbconnect
         $string = preg_replace('/[\s-]+/', '-', $string);
         return $string;
     }
-    // SachModel.php
     public function getProductsByCategory($categoryId)
     {
         $sql = "SELECT * FROM sach WHERE ID_TheLoai = $categoryId LIMIT 8"; // Lấy 8 sản phẩm
@@ -188,4 +187,25 @@ class SachModel extends dbconnect
         }
         return $products;
     }
+public function updateTonKho($id_sach, $so_luong_them, $con = null) {
+    if (!$con) {
+        $con = $this->con;
+    }
+
+    $sql = "UPDATE sach SET So_Luong_Ton = So_Luong_Ton + ? WHERE ID_Sach = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ii", $so_luong_them, $id_sach);
+    return $stmt->execute();
+}
+public function giamTonKho($id_sach, $so_luong_giam, $con = null) {
+    if (!$con) {
+        $con = $this->con;
+    }
+
+    $sql = "UPDATE sach SET So_Luong_Ton = So_Luong_Ton - ? WHERE ID_Sach = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ii", $so_luong_giam, $id_sach);
+    return $stmt->execute();
+}
+
 }
