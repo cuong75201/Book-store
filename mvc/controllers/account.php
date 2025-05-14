@@ -154,24 +154,35 @@ class Account extends Controller
 }
 
     function orders()
-    {
-         $user = null;
+{
+    $user = null;
+    $email = $_COOKIE['user_email'] ?? null;
 
-        if (isset($_COOKIE['user_email'])) {
-        $email = $_COOKIE['user_email'];
-        $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
+    if ($email) {
+        $customerId = $this->userModel->getCustomerIdByEmail($email);
+        if (!$customerId) {
+            echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy thông tin khách hàng']);
+            return;
         }
-        $this->view('main_layout', [
-            'Title' => 'Đơn hàng của tôi – MINH LONG BOOK',
-            'page' => 'oders',
-            "plugin" => [
-                "reset" => 1,
-                "style" => 1,
-            ],
-            "script" => "AjaxLogin",
-            "user" => $user
-        ]);
+        if ($customerId) {
+            $user = $this->userModel->getUserByEmail($email); // Giả định getUserByEmail trả về thông tin khách hàng
+            $order = $this->userModel->getOrdersByCustomerId($customerId);
+        }
     }
+
+    $data['user'] = $user;
+    $this->view('main_layout', [
+        'Title' => 'Đơn hàng của tôi – MINH LONG BOOK',
+        'page' => 'orders',
+        "plugin" => [
+            "reset" => 1,
+            "style" => 1,
+        ],
+        "script" => "orders",
+        "user" => $user,
+        "orders" => $order
+    ]);
+}
 
     function addAddress()
 {
@@ -309,6 +320,37 @@ function getAddress()
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy địa chỉ']);
         }
+    }
+}
+function getOrderDetails()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $orderId = $_POST['order_id'] ?? 0;
+        $email = $_COOKIE['user_email'] ?? null;
+        $customerId = $this->userModel->getCustomerIdByEmail($email);
+
+        if (!$email || !$customerId) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
+        if (!$orderId) {
+            echo json_encode(['status' => 'error', 'message' => 'Mã đơn hàng không hợp lệ']);
+            return;
+        }
+
+        // Kiểm tra đơn hàng thuộc về người dùng
+        $query = "SELECT ID_Don_Hang FROM don_hang WHERE ID_Don_Hang = ? AND ID_Khach_Hang = ?";
+        $stmt = $this->userModel->con->prepare($query);
+        $stmt->bind_param("ii", $orderId, $customerId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows == 0) {
+            echo json_encode(['status' => 'error', 'message' => 'Đơn hàng không tồn tại']);
+            return;
+        }
+
+        $details = $this->userModel->getOrderDetails($orderId);
+        echo json_encode(['status' => 'success', 'details' => $details]);
     }
 }
 }

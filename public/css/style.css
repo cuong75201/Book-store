@@ -1162,6 +1162,7 @@ span.label_defaul {
 .address-box .address {
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Giới hạn số dòng */
+    line-clamp: 2; /* Standard property for compatibility */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1252,6 +1253,7 @@ textarea.form-control {
     }
 }
 
+<<<<<<< Updated upstream
 /* Chi tiết sản phẩm */
 #product-container {
     display: flex;
@@ -1422,3 +1424,81 @@ textarea.form-control {
   }
   
   
+=======
+/* Đảm bảo bảng đơn hàng hiển thị đẹp */
+.account-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.account-table th, .account-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.account-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.account-table td {
+    vertical-align: top;
+}
+
+/* Giới hạn chiều rộng và xử lý xuống dòng cho cột địa chỉ */
+.account-table td:nth-child(3) {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    max-width: 300px !important;
+}
+
+/* Style cho nút Xem chi tiết */
+.btn-view-details {
+    background: none;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+.btn-view-details:hover {
+    text-decoration: underline;
+}
+
+/* Style cho modal chi tiết đơn hàng */
+#orderDetailsModal .modal-dialog {
+    max-width: 800px;
+}
+
+#orderDetailsModal .modal-body {
+    padding: 20px;
+}
+
+#orderDetailsModal .table {
+    margin-bottom: 0;
+}
+
+#orderDetailsModal img {
+    object-fit: cover;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media screen and (max-width: 767px) {
+    .account-table th, .account-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .account-table td:nth-child(3) {
+        max-width: 200px !important;
+    }
+
+    #orderDetailsModal .modal-dialog {
+        max-width: 100%;
+        margin: 10px;
+    }
+}
+>>>>>>> Stashed changes

@@ -180,6 +180,7 @@ class  UserModel extends dbconnect
         $stmt->close();
         return $address;
     }
+<<<<<<< Updated upstream
 
     // Thêm phương thức để cập nhật địa chỉ trong khach_hang (nếu cần)
     public function updateUserAddress($email, $address, $phone)
@@ -201,3 +202,77 @@ class  UserModel extends dbconnect
         return $rows;
     }
 }
+=======
+    // Lấy ID_Khach_Hang từ email
+public function getCustomerIdByEmail($email)
+{
+    $query = "SELECT ID_Khach_Hang FROM khach_hang WHERE Email = ?";
+    $stmt = $this->con->prepare($query);
+    if (!$stmt) {
+        error_log("Prepare failed: " . $this->con->error);
+        return null;
+    }
+    
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        error_log("Found customer ID: " . $row['ID_Khach_Hang']);
+        return $row['ID_Khach_Hang'];
+    }
+    error_log("No customer found for email: $email");
+    return null;
+}
+
+// Lấy danh sách đơn hàng dựa trên ID_Khach_Hang, sử dụng Dia_Chi_Giao_Hang
+public function getOrdersByCustomerId($customerId)
+{
+    error_log("Fetching orders for customer ID: $customerId");
+    $query = "SELECT dh.ID_Don_Hang, dh.ID_Khach_Hang, dh.Ngay_Dat_Hang, dh.Tong_Tien, dh.Trang_Thai, dh.Phuong_Thuc_Thanh_Toan, dh.Dia_Chi_Giao_Hang 
+              FROM don_hang dh 
+              WHERE dh.ID_Khach_Hang = ?";
+    $stmt = $this->con->prepare($query);
+    if (!$stmt) {
+        error_log("Prepare failed: " . $this->con->error);
+        return [];
+    }
+    
+    $stmt->bind_param("i", $customerId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $orders = [];
+    while ($row = $result->fetch_assoc()) {
+        $orders[] = $row;
+    }
+    error_log("Number of orders found: " . count($orders));
+    return $orders;
+}
+
+// Lấy chi tiết đơn hàng từ ctiet_cart
+public function getOrderDetails($orderId)
+{
+    $query = "SELECT ctdh.*, s.Ten_Sach, s.Images, s.Gia_Ban 
+              FROM chi_tiet_don_hang ctdh 
+              JOIN sach s ON ctdh.ID_Sach = s.ID_Sach 
+              WHERE ctdh.ID_Don_Hang = ?";
+    $stmt = $this->con->prepare($query);
+    if (!$stmt) {
+        error_log("Prepare failed: " . $this->con->error);
+        return [];
+    }
+    
+    $stmt->bind_param("i", $orderId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $details = [];
+    while ($row = $result->fetch_assoc()) {
+        $details[] = $row;
+    }
+    return $details;
+}
+}
+>>>>>>> Stashed changes

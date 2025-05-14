@@ -279,7 +279,63 @@ $(document).ready(function() {
             alert(message);
         }
     }
+
+
+
+
+    $(document).on('click', '.btn-view-details', function() {
+        const orderId = $(this).data('id');
+        console.log('View Details - Order ID:', orderId);
+
+        if (!orderId) {
+            showNotification('error', 'Mã đơn hàng không hợp lệ');
+            return;
+        }
+
+        // Gửi yêu cầu AJAX để lấy chi tiết đơn hàng
+        $.ajax({
+            url: baseUrl + 'account/getOrderDetails',
+            type: 'POST',
+            data: { order_id: orderId },
+            dataType: 'json',
+            beforeSend: function() {
+                $('#order-details-content').html('<p>Đang tải...</p>');
+                $('#orderDetailsModal').modal('show');
+            },
+            success: function(response) {
+                console.log('Order Details Response:', response);
+                if (response.status === 'success') {
+                    let detailsHtml = '<table class="table table-bordered">';
+                    detailsHtml += '<thead><tr><th>Hình ảnh</th><th>Tên sách</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead>';
+                    detailsHtml += '<tbody>';
+                    response.details.forEach(function(item) {
+                        const totalPrice = item.So_Luong * item.Don_Gia; // Sử dụng Don_Gia từ bảng chi_tiet_don_hang
+                        const imageName = item.Images ? item.Images.replace('.png', '.jpg') : 'default_book.jpg';
+                        detailsHtml += '<tr>';
+                        detailsHtml += `<td><img src="media/img_product/${imageName}" alt="${item.Ten_Sach}" style="width: 50px; height: 50px;"></td>`;
+                        detailsHtml += '<td>' + item.Ten_Sach + '</td>';
+                        detailsHtml += '<td>' + item.So_Luong + '</td>';
+                        detailsHtml += '<td>' + item.Don_Gia.toLocaleString('vi-VN') + ' VNĐ</td>';
+                        detailsHtml += '<td>' + totalPrice.toLocaleString('vi-VN') + ' VNĐ</td>';
+                        detailsHtml += '</tr>';
+                    });
+
+                    detailsHtml += '</tbody></table>';
+                    $('#order-details-content').html(detailsHtml);
+                } else {
+                    $('#order-details-content').html('<p>' + (response.message || 'Không thể tải chi tiết đơn hàng') + '</p>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', status, error);
+                console.error('Response Text:', xhr.responseText);
+                $('#order-details-content').html('<p>Đã có lỗi xảy ra. Vui lòng thử lại sau.</p>');
+            }
+        });
+    });
+
 });
+
  document.getElementById('hienformtimkiem').addEventListener('click', function() {
    // alert("clieck vaof hop thoai tim kiem");
     const form = document.getElementById('advancedSearchForm');
