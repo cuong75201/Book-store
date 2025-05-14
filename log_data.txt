@@ -1,0 +1,16 @@
+Array
+(
+    [NgayNhap] => 2025-05-07T20:48
+    [ID_NCC] => 1
+    [ChiTiet] => Array
+        (
+            [0] => Array
+                (
+                    [ID_Sach] => 163
+                    [SoLuong] => 1
+                    [GiaNhap] => 122222
+                )
+
+        )
+
+)

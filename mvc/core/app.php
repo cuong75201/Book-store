@@ -7,8 +7,7 @@
         function __construct()
         {
             $arr = $this->URLprocess();
-            // [PHẦN THÊM] Xử lý route product/detail/{slug}-{id}
-            // Trong phần xử lý route product/detail
+            // Xử lý route product/detail/{slug}-{id}
             if (!empty($arr) && $arr[0] === 'product' && isset($arr[1]) && $arr[1] === 'detail' && isset($arr[2])) {
                 $slugWithId = $arr[2];
                 // Tách ID từ phần cuối URL (ví dụ: "ten-sp-123" → id=123)

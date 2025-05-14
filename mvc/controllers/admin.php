@@ -8,6 +8,8 @@ class Admin extends Controller
     public $donhangModel;
     public $ctietdonhangModel;
     public $nhomquyenModel;
+    public $phieunhapModel;
+    public $nhaCungCapModel;
     function __construct()
     {
         $this->sachModel = $this->model("SachModel");
@@ -17,6 +19,9 @@ class Admin extends Controller
         $this->donhangModel = $this->model("DonHangModel");
         $this->ctietdonhangModel = $this->model("ctiet_don_hangModel");
         $this->nhomquyenModel = $this->model("NhomQuyenModel");
+        $this->phieunhapModel = $this->model("PhieuNhapModel");
+        $this->nhaCungCapModel = $this->model("NhaCungCapModel");
+
     }
 
     function default()
@@ -129,12 +134,14 @@ class Admin extends Controller
             echo json_encode(["status" => "error", "message" => "Không tìm thấy file."]);
         }
     }
-    function getSach()
-    {
-        if (isset($_POST['id'])) {
+    public function getSach() {
+        if (!empty($_POST['id']) && $_POST['id'] !== 'all') {
             echo json_encode($this->sachModel->getSachfromID($_POST['id']));
+        } else {
+            echo json_encode($this->sachModel->getSach());
         }
     }
+
     function UpdateProduct()
     {
         $id_sach = $_POST['idsach'];
@@ -237,4 +244,83 @@ class Admin extends Controller
         $result = $this->nhanvienModel->remove($id);
         echo json_encode($result);
     }
+// Action chính
+function phieunhap() {
+    $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
+    $this->view("admin_view", [
+        "title" => "Quản lý Phiếu nhập",
+        "content" => "Phiếu nhập",
+        "Page" => "phieunhap",
+        "script" => "phieunhap",
+        "listPhieu" => $listPhieu
+    ]);
+}
+function getPhieuNhap()
+{
+    if (isset($_POST['id'])) {
+        echo json_encode($this->phieunhapModel->getphieunhap($_POST['id']));
+    }
+}
+function getChiTietPhieu() {
+    if (isset($_POST['id'])) {
+        echo json_encode($this->phieunhapModel->getChiTietPhieu($_POST['id']));
+    }
+}
+public function getNCC() {
+    header('Content-Type: application/json');
+    echo json_encode($this->nhaCungCapModel->getAllNCC());
+}
+
+
+// API: Xử lý thêm phiếu
+function addPhieuNhap()
+{
+    // Nhận dữ liệu JSON gửi từ client
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['ChiTiet'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Dữ liệu không hợp lệ!'
+        ]);
+        return;
+    }
+
+    // Tách dữ liệu
+    $ngayNhap = $data['NgayNhap'];
+    $idNCC = $data['ID_NCC'];
+    $chiTiet = $data['ChiTiet']; // Mảng chứa các sách: [ ['ID_Sach'=>..., 'SoLuong'=>..., 'GiaNhap'=>...], ...]
+
+    // Gọi model để thêm phiếu nhập
+    $result = $this->phieunhapModel->addPhieuNhap($ngayNhap, $idNCC, $chiTiet);
+
+    // Trả về kết quả JSON
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Them phieu nhap thanh cong']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
+    }
+}
+
+
+// API: Xóa phiếu
+function deletePhieu() {
+    $id = $_POST['id'];
+    $result = $this->phieunhapModel->deletePhieuNhap($id);
+    echo json_encode(['success' => $result]);
+}
+
+function updatePhieuNhap()
+{
+    $id_phieunhap = $_POST['id_phieunhap'];
+    $id_ncc = $_POST['id_ncc'];
+    $ngaynhap = $_POST['ngaynhap'];
+    $tongtien = $_POST['tongtien'];
+    $id_nv = $_POST['id_nv'];
+
+    $result = $this->phieunhapModel->updatephieunhap($id_phieunhap, $id_ncc, $ngaynhap, $tongtien, $id_nv);
+    echo json_encode($result);
+}
+
 }
