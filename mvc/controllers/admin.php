@@ -8,14 +8,11 @@ class Admin extends Controller
     public $donhangModel;
     public $ctietdonhangModel;
     public $nhomquyenModel;
-<<<<<<< HEAD
     public $khachhangModel;
     public $ctietpnhModel;
     public $ctietquyenModel;
-=======
     public $phieunhapModel;
     public $nhaCungCapModel;
->>>>>>> 69a78782e45b6eba0e05f132a4b3617c40fe8201
     function __construct()
     {
         $this->ctietquyenModel = $this->model("ctiet_quyenModel");

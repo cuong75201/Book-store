@@ -561,14 +561,6 @@ ALTER TABLE `chucnang`
   ADD PRIMARY KEY (`ID_ChucNang`);
 
 --
--- Chỉ mục cho bảng `ctiet_pnh`
---
-ALTER TABLE `ctiet_pnh`
-  ADD PRIMARY KEY (`ID_Sach`,`ID_phieunhap`),
-  ADD KEY `ID_Sach` (`ID_Sach`,`ID_phieunhap`),
-  ADD KEY `ID_phieunhap` (`ID_phieunhap`);
-
---
 -- Chỉ mục cho bảng `danh_gia_sach`
 --
 ALTER TABLE `danh_gia_sach`
