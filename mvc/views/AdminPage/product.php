@@ -16,6 +16,7 @@
     </div>
 </div>
 <?php
+
 ?>
 <div class="product-title">
     <h1>Danh sách sản phẩm</h1>

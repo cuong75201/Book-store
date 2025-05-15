@@ -100,7 +100,6 @@
                         <br>
                         <input type="password" id="password" name="password" placeholder="Mật khẩu">
                         <span class="text-danger" id="errol_pass_disabled"></span>
-
                     </form>
                 </div>
 

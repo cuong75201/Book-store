@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Thêm ở đầu file main.php
 require_once 'mvc/models/SachModel.php'; // Đường dẫn đến file SachModel
 $sachModel = new SachModel();
@@ -14,12 +14,12 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
 
 <body>
-<?php require 'inc/header.php'; ?>
-<?php require 'inc/navbar.php'; ?>
-<?php require 'inc/carousel.php'; ?>
+    <?php require 'inc/header.php'; ?>
+    <?php require 'inc/navbar.php'; ?>
+    <?php require 'inc/carousel.php'; ?>
 
-  
-  
+
+
     <!-- PRODUCT  -->
     <div class="ins_main  col-12">
         <div class="container">
@@ -48,33 +48,33 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
                                     <div class="owl-item">
                                         <div class="chir_loop">
-                                         <?php foreach ($newProducts as $product): ?>                                           
-                                            <div class="chir_img">
-                                                <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
-                                                    <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
+                                            <?php foreach ($newProducts as $product): ?>
+                                                <div class="chir_img">
+                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                        <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
                                                     </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
+                                                    <div class="insActionloop">
+                                                        <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                            <img src="media/logo-banner/eye.png" alt="">
+                                                        </a>
+                                                        <a href="#">
+                                                            <img src="media/logo-banner/cart.png" alt="">
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="chir_content">
-                                            <h3><?= $product['Ten_Sach'] ?></h3>
+                                                <div class="chir_content">
+                                                    <h3><?= $product['Ten_Sach'] ?></h3>
 
-                                                <p class="pro-price">
-                                                <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
-                                                <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
-                                                <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
-                                                </p>
+                                                    <p class="pro-price">
+                                                        <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
+                                                        <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫
+                                                        <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
+                                                    </p>
 
-                                            </div>
-                                        <?php endforeach; ?>
+                                                </div>
+                                            <?php endforeach; ?>
 
-                                </div>
+                                        </div>
                                     </div>
                                     <div class="owl-item">
                                         <div class="chir_loop">
@@ -1730,6 +1730,282 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
 
 
+                                </div>
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            <div class="show-all">
+                                <a href="#">Xem tất cả</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 literature-books px-0 list-book">
+                        <div class="books_title">
+                            <h3>SÁCH VĂN HỌC </h3>
+                        </div>
+                        <div class="content_product">
+                            <div class="list_product  d-flex">
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            <div class="show-all">
+                                <a href="#">Xem tất cả</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 literature-books px-0 list-book">
+                        <div class="books_title">
+                            <h3>SÁCH VĂN HỌC </h3>
+                        </div>
+                        <div class="content_product">
+                            <div class="list_product  d-flex">
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="#">
+                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                            <a href="#">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>74,000đ</del>
+                                            59,200₫ <span class="sale-price">
+                                                <span>-20%</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
                                 </div>
                                 <div class="chir_loop">
                                     <div class="chir_img">

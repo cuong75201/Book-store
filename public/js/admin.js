@@ -21,10 +21,10 @@ $(document).ready(function () {
             url: "checkLogin",
             method: "POST",
             data: data,
-            dataType: "text",
+            dataType: "json",
             success: function (data) {
-                console.log(data.trim() === "Fail", data);
-                if (data.trim() === "Fail") {
+                console.log(data);
+                if (!data) {
                     $("#errol_pass_disabled").html("Số điện thoại hoặc mật khẩu không chính xác");
 
                 }

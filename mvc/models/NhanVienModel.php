@@ -56,7 +56,6 @@ class NhanVienModel extends dbconnect
         if ($result->num_rows > 0) {
             return true;
         }
-
         return false;
     }
     public function getNhanVienfromID($id)
