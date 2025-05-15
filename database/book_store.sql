@@ -26,258 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Cấu trúc bảng cho bảng `cart`
 --
-
-CREATE TABLE `cart` (
-  `ID_Cart` int(11) NOT NULL,
-  `ID_Khachhang` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `chi_tiet_don_hang`
---
-
-CREATE TABLE `chi_tiet_don_hang` (
-  `ID_Chi_Tiet` int(11) NOT NULL,
-  `ID_Don_Hang` int(11) DEFAULT NULL,
-  `ID_Sach` int(11) DEFAULT NULL,
-  `So_Luong` int(11) NOT NULL,
-  `Don_Gia` decimal(10,2) NOT NULL,
-  `Thanh_Tien` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
---
-
-INSERT INTO `chi_tiet_don_hang` (`ID_Chi_Tiet`, `ID_Don_Hang`, `ID_Sach`, `So_Luong`, `Don_Gia`, `Thanh_Tien`) VALUES
-(1, 5, 170, 2, 50000.00, 100000);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `chi_tiet_quyen`
---
-
-CREATE TABLE `chi_tiet_quyen` (
-  `MaQuyen` int(11) NOT NULL,
-  `ID_ChucNang` int(11) NOT NULL,
-  `Action` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `chucnang`
---
-
-CREATE TABLE `chucnang` (
-  `ID_ChucNang` int(11) NOT NULL,
-  `Ten_ChucNang` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `ctiet_pnh`
---
-
-CREATE TABLE `ctiet_pnh` (
-  `ID_sach` int(11) NOT NULL,
-  `ID_pnh` int(11) NOT NULL,
-  `so_luong` int(11) NOT NULL,
-  `don_gia` int(11) NOT NULL,
-  `thanh_tien` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `danh_gia_sach`
---
-
-CREATE TABLE `danh_gia_sach` (
-  `ID_sach` int(11) NOT NULL,
-  `ID_Khachhang` int(11) NOT NULL,
-  `danh_gia` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `danh_muc`
---
-
-CREATE TABLE `danh_muc` (
-  `ID_The_Loai` int(11) NOT NULL,
-  `Ten_The_Loai` varchar(100) NOT NULL,
-  `Mo_Ta` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `danh_muc`
---
-
-INSERT INTO `danh_muc` (`ID_The_Loai`, `Ten_The_Loai`, `Mo_Ta`) VALUES
-(1, 'SÁCH MẦM NON', ''),
-(2, 'SÁCH THIẾU NHI', ''),
-(3, 'SÁCH KĨ NĂNG', ''),
-(4, 'SÁCH KINH DOANH', ''),
-(5, 'SÁCH MẸ VÀ BÉ', ''),
-(6, 'SÁCH VĂN HỌC', ''),
-(7, 'SÁCH THAM KHẢO', ''),
-(8, 'NOTEBOOK', '');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `dia_chi`
---
-
-CREATE TABLE `dia_chi` (
-  `ID` int(11) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Ten_Nguoi_Nhan` varchar(255) NOT NULL,
-  `Dia_Chi` text NOT NULL,
-  `So_Dien_Thoai` varchar(15) NOT NULL,
-  `Mac_Dinh` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `dia_chi`
---
-
-INSERT INTO `dia_chi` (`ID`, `Email`, `Ten_Nguoi_Nhan`, `Dia_Chi`, `So_Dien_Thoai`, `Mac_Dinh`) VALUES
-(1, 'ntuanaanh2k5@gmail.com', 'Tuan Anh', '213', '0968403295', 1);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `don_hang`
---
-
-CREATE TABLE `don_hang` (
-  `ID_Don_Hang` int(11) NOT NULL,
-  `ID_Khach_Hang` int(11) DEFAULT NULL,
-  `Ngay_Dat_Hang` datetime NOT NULL,
-  `Tong_Tien` decimal(10,2) DEFAULT NULL,
-  `Trang_Thai` varchar(50) DEFAULT NULL,
-  `Phuong_Thuc_Thanh_Toan` int(11) DEFAULT NULL,
-  `Dia_Chi_Giao_Hang` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `don_hang`
---
-
-INSERT INTO `don_hang` (`ID_Don_Hang`, `ID_Khach_Hang`, `Ngay_Dat_Hang`, `Tong_Tien`, `Trang_Thai`, `Phuong_Thuc_Thanh_Toan`, `Dia_Chi_Giao_Hang`) VALUES
-(5, 36, '2025-05-12 12:07:53', NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `khach_hang`
---
-
-CREATE TABLE `khach_hang` (
-  `ID_Khach_Hang` int(11) NOT NULL,
-  `Ten_Khach_Hang` varchar(100) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Mat_Khau` varchar(255) NOT NULL,
-  `So_Dien_Thoai` varchar(15) DEFAULT NULL,
-  `Dia_Chi` text DEFAULT NULL,
-  `Ngay_Dang_Ky` date DEFAULT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `khach_hang`
---
-
-INSERT INTO `khach_hang` (`ID_Khach_Hang`, `Ten_Khach_Hang`, `Email`, `Mat_Khau`, `So_Dien_Thoai`, `Dia_Chi`, `Ngay_Dang_Ky`, `status`) VALUES
-(36, 'Cường Trần', 'cuong2982005@gmail.com', '$2y$10$Q4Q8PxaooJZJZdD5ZlMVe.eg4iUJ904mV6el0yiSz983aXfps5k7m', NULL, NULL, '2025-04-05', 0),
-(37, 'nguy a', 'ntuanaanh2k5@gmail.com', '$2y$10$WLDLrWGryMmC15g.Otw99uxwdUVC9mbaYPq32oX0d/goOk2sZ9J4.', NULL, NULL, '2025-04-10', 0);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `ncc`
---
-
-CREATE TABLE `ncc` (
-  `ID_NCC` int(11) NOT NULL,
-  `Ten_NCC` varchar(100) NOT NULL,
-  `DiaChi` varchar(100) NOT NULL,
-  `LienHe` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `nhanvien`
---
-
-CREATE TABLE `nhanvien` (
-  `ID_NV` int(11) NOT NULL,
-  `Ten_NV` varchar(100) NOT NULL,
-  `DiaChi` varchar(100) NOT NULL,
-  `SDT` varchar(10) NOT NULL,
-  `Luong` int(11) NOT NULL,
-  `MaQuyen` int(11) DEFAULT NULL,
-  `Mat_khau` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `nhanvien`
---
-
-INSERT INTO `nhanvien` (`ID_NV`, `Ten_NV`, `DiaChi`, `SDT`, `Luong`, `MaQuyen`, `Mat_khau`) VALUES
-(1, 'Trần Hồ Hoàng Cường', '220 An DUong Vuong, Quan Binh Tan, thanh pho HoChiMinh', '0363589035', 50000, 1, '0192023a7bbd73250516f069df18b500');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `nhomquyen`
---
-
-CREATE TABLE `nhomquyen` (
-  `MaQuyen` int(11) NOT NULL,
-  `TenQuyen` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `pnh`
---
-
-CREATE TABLE `pnh` (
-  `ID_PNH` int(11) NOT NULL,
-  `ID_NCC` int(11) NOT NULL,
-  `Ngay_Nhap` date NOT NULL,
-  `Tong_Tien` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `pttt`
---
-
-CREATE TABLE `pttt` (
-  `ID_PTTT` int(11) NOT NULL,
-  `Ten_PTTT` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `sach`
---
-
 CREATE TABLE `sach` (
-  `ID_Sach` int(11) NOT NULL,
+  `ID_Sach` int(11) NOT NULL PRIMARY KEY,
   `Ten_Sach` varchar(200) NOT NULL,
   `Tac_Gia` varchar(100) DEFAULT NULL,
   `Ten_Nha_Xuat_Ban` varchar(100) DEFAULT NULL,
@@ -293,9 +43,6 @@ CREATE TABLE `sach` (
   `TrangThai` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `sach`
---
 
 INSERT INTO `sach` (`ID_Sach`, `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_Xuat_Ban`, `ID_DanhMuc`, `ID_TheLoai`, `Gia_Ban`, `GiamGia(%)`, `So_Luong_Ton`, `Mo_Ta`, `Images`, `ID_Cart`, `TrangThai`) VALUES
 (163, 'Take Note - Văn 9! (Gáy Lò Xo)', 'Nguyễn Quốc Khánh, Ngô Minh Hương, Phạm Ngọc Minh', 'Hà Nội', 2024, 1, 1, 64000.00, 0, 100, ' <div class=\'container-fluid product-description-wrapper\'><p>Take Note - Văn 9!\r\n\r\nBạn đang tìm kiếm một phương pháp học văn hiệu quả, dễ nhớ, dễ hiểu và dễ áp dụng?\r\n\r\nCuốn \"Take Note! Văn 9\" chính là trợ thủ đắc lực dành cho bạn!\r\n\r\nVới hình ảnh minh họa dễ thương và cách trình bày sáng tạo, cuốn sách này giúp các bạn học sinh lớp 9 nắm bắt nội dung chương trình ngữ văn theo sách giáo khoa mới nhất một cách nhanh chóng và nhẹ nhàng. Không chỉ vậy, cuốn sách còn giúp các bạn=>\r\n\r\n- Tăng khả năng ghi nhớ kiến thức\r\n\r\n- Hiểu sâu các tác phẩm văn học quan trọng\r\n\r\n- Áp dụng hiệu quả vào bài kiểm tra và bài thi.\r\n\r\nHãy để \"Take Note! Văn 9\" đồng hành cùng bạn trên con đường chinh phục môn văn nhé! Liên hệ ngay với Nhà sách Minh Thắng để sở hữu trợ thủ đắc lực này ngay thôi nào</p></div>', '8.1.jpg', NULL, 1),
@@ -460,6 +207,292 @@ INSERT INTO `sach` (`ID_Sach`, `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_X
 (320, 'Quan hệ kinh tế Quốc tế', 'Lê Minh Tuấn', 'NXB Lao Động', 2024, 4, 8, 380000.00, 20, 30, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>QUAN HỆ KINH TẾ QUỐC TẾ</strong></span></span></p><p> </p><p>Trong bối cảnh toàn cầu hóa, việc xây dựng văn hóa doanh nghiệp là yếu tố quan trọng giúp doanh nghiệp tạo dựng sự đoàn kết và phát triển bền vững. Nhiều doanh nghiệp gặp khó khăn trong việc tạo dựng văn hóa doanh nghiệp phù hợp, dẫn đến thiếu sự gắn kết trong đội ngũ. Do đó, việc học cách xây dựng văn hóa doanh nghiệp là điều cần thiết để thành công.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>QUAN HỆ KINH TẾ QUỐC TẾ</strong> sẽ hướng dẫn bạn cách xây dựng văn hóa doanh nghiệp, từ đó giúp bạn tạo dựng một môi trường làm việc hiệu quả và phát triển trong bối cảnh quốc tế.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh79.jpg', NULL, 1),
 (321, 'Rich Dad', 'Lê Minh Tuấn', 'NXB Thế Giới', 2024, 4, 8, 390000.00, 10, 25, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>RICH DAD</strong></span></span></p><p> </p><p>Trong kinh doanh, việc phát triển kỹ năng lãnh đạo chiến lược là yếu tố quan trọng giúp bạn dẫn dắt doanh nghiệp đạt được thành công và phát triển bền vững. Nhiều nhà lãnh đạo gặp khó khăn trong việc định hướng chiến lược, dẫn đến hiệu quả kinh doanh thấp. Do đó, việc rèn luyện kỹ năng lãnh đạo chiến lược là điều cần thiết để làm giàu.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>RICH DAD</strong> sẽ hướng dẫn bạn cách phát triển kỹ năng lãnh đạo chiến lược, từ đó giúp bạn tự tin dẫn dắt doanh nghiệp và đạt được mục tiêu tài chính.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh80.jpg', NULL, 1);
 
+CREATE TABLE `cart` (
+  `ID_Cart` int(11) NOT NULL,
+  `ID_Khachhang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chi_tiet_don_hang`
+--
+
+CREATE TABLE `chi_tiet_don_hang` (
+  `ID_Chi_Tiet` int(11) NOT NULL,
+  `ID_Don_Hang` int(11) DEFAULT NULL,
+  `ID_Sach` int(11) DEFAULT NULL,
+  `So_Luong` int(11) NOT NULL,
+  `Don_Gia` decimal(10,2) NOT NULL,
+  `Thanh_Tien` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
+--
+
+INSERT INTO `chi_tiet_don_hang` (`ID_Chi_Tiet`, `ID_Don_Hang`, `ID_Sach`, `So_Luong`, `Don_Gia`, `Thanh_Tien`) VALUES
+(1, 5, 170, 2, 50000.00, 100000);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chi_tiet_quyen`
+--
+
+CREATE TABLE `chi_tiet_quyen` (
+  `MaQuyen` int(11) NOT NULL,
+  `ID_ChucNang` int(11) NOT NULL,
+  `Action` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chucnang`
+--
+
+CREATE TABLE `chucnang` (
+  `ID_ChucNang` int(11) NOT NULL,
+  `Ten_ChucNang` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ctiet_pnh`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `danh_gia_sach`
+--
+
+CREATE TABLE `danh_gia_sach` (
+  `ID_Sach` int(11) NOT NULL,
+  `ID_Khachhang` int(11) NOT NULL,
+  `danh_gia` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `danh_muc`
+--
+
+CREATE TABLE `danh_muc` (
+  `ID_The_Loai` int(11) NOT NULL,
+  `Ten_The_Loai` varchar(100) NOT NULL,
+  `Mo_Ta` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `danh_muc`
+--
+
+INSERT INTO `danh_muc` (`ID_The_Loai`, `Ten_The_Loai`, `Mo_Ta`) VALUES
+(1, 'SÁCH MẦM NON', ''),
+(2, 'SÁCH THIẾU NHI', ''),
+(3, 'SÁCH KĨ NĂNG', ''),
+(4, 'SÁCH KINH DOANH', ''),
+(5, 'SÁCH MẸ VÀ BÉ', ''),
+(6, 'SÁCH VĂN HỌC', ''),
+(7, 'SÁCH THAM KHẢO', ''),
+(8, 'NOTEBOOK', '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `dia_chi`
+--
+
+CREATE TABLE `dia_chi` (
+  `ID` int(11) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Ten_Nguoi_Nhan` varchar(255) NOT NULL,
+  `Dia_Chi` text NOT NULL,
+  `So_Dien_Thoai` varchar(15) NOT NULL,
+  `Mac_Dinh` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dia_chi`
+--
+
+INSERT INTO `dia_chi` (`ID`, `Email`, `Ten_Nguoi_Nhan`, `Dia_Chi`, `So_Dien_Thoai`, `Mac_Dinh`) VALUES
+(1, 'ntuanaanh2k5@gmail.com', 'Tuan Anh', '213', '0968403295', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `don_hang`
+--
+
+CREATE TABLE `don_hang` (
+  `ID_Don_Hang` int(11) NOT NULL,
+  `ID_Khach_Hang` int(11) DEFAULT NULL,
+  `Ngay_Dat_Hang` datetime NOT NULL,
+  `Tong_Tien` decimal(10,2) DEFAULT NULL,
+  `Trang_Thai` varchar(50) DEFAULT NULL,
+  `Phuong_Thuc_Thanh_Toan` int(11) DEFAULT NULL,
+  `Dia_Chi_Giao_Hang` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hang`
+--
+
+INSERT INTO `don_hang` (`ID_Don_Hang`, `ID_Khach_Hang`, `Ngay_Dat_Hang`, `Tong_Tien`, `Trang_Thai`, `Phuong_Thuc_Thanh_Toan`, `Dia_Chi_Giao_Hang`) VALUES
+(5, 36, '2025-05-12 12:07:53', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khach_hang`
+--
+
+CREATE TABLE `khach_hang` (
+  `ID_Khach_Hang` int(11) NOT NULL,
+  `Ten_Khach_Hang` varchar(100) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Mat_Khau` varchar(255) NOT NULL,
+  `So_Dien_Thoai` varchar(15) DEFAULT NULL,
+  `Dia_Chi` text DEFAULT NULL,
+  `Ngay_Dang_Ky` date DEFAULT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khach_hang`
+--
+
+INSERT INTO `khach_hang` (`ID_Khach_Hang`, `Ten_Khach_Hang`, `Email`, `Mat_Khau`, `So_Dien_Thoai`, `Dia_Chi`, `Ngay_Dang_Ky`, `status`) VALUES
+(36, 'Cường Trần', 'cuong2982005@gmail.com', '$2y$10$Q4Q8PxaooJZJZdD5ZlMVe.eg4iUJ904mV6el0yiSz983aXfps5k7m', NULL, NULL, '2025-04-05', 0),
+(37, 'nguy a', 'ntuanaanh2k5@gmail.com', '$2y$10$WLDLrWGryMmC15g.Otw99uxwdUVC9mbaYPq32oX0d/goOk2sZ9J4.', NULL, NULL, '2025-04-10', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ncc`
+--
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhanvien`
+--
+
+CREATE TABLE `nhanvien` (
+  `ID_NV` int(11) NOT NULL,
+  `Ten_NV` varchar(100) NOT NULL,
+  `DiaChi` varchar(100) NOT NULL,
+  `SDT` varchar(10) NOT NULL,
+  `Luong` int(11) NOT NULL,
+  `MaQuyen` int(11) DEFAULT NULL,
+  `Mat_khau` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`ID_NV`, `Ten_NV`, `DiaChi`, `SDT`, `Luong`, `MaQuyen`, `Mat_khau`) VALUES
+(1, 'Trần Hồ Hoàng Cường', '220 An DUong Vuong, Quan Binh Tan, thanh pho HoChiMinh', '0363589035', 50000, 1, '0192023a7bbd73250516f069df18b500');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhomquyen`
+--
+
+CREATE TABLE `nhomquyen` (
+  `MaQuyen` int(11) NOT NULL,
+  `TenQuyen` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Bảng Nhà cung cấp
+CREATE TABLE nha_cung_cap (
+    ID_NCC INT PRIMARY KEY AUTO_INCREMENT,
+    Ten_NCC VARCHAR(255) NOT NULL,
+    Dia_Chi TEXT,
+    SDT VARCHAR(15),
+    Email VARCHAR(100),
+    TrangThai INT DEFAULT 1 -- 1: Hoạt động, 0: Ngừng hợp tác
+);
+-- Bảng Phiếu nhập
+CREATE TABLE phieu_nhap (
+    ID_PhieuNhap INT PRIMARY KEY AUTO_INCREMENT,
+    NgayNhap DATETIME NOT NULL,
+    ID_NCC INT,
+    TongTien DECIMAL(15,2) DEFAULT 0,
+    TrangThai INT DEFAULT 1, -- 1: Đã hoàn thành, 0: Đã hủy
+    FOREIGN KEY (ID_NCC) REFERENCES nha_cung_cap(ID_NCC)
+);
+-- Bảng Chi tiết Phiếu nhập
+CREATE TABLE chi_tiet_phieu_nhap (
+    ID_CTietPhieuNhap INT PRIMARY KEY AUTO_INCREMENT,
+    ID_PhieuNhap INT,
+    ID_Sach INT,
+    SoLuong INT NOT NULL,
+    GiaNhap DECIMAL(15,2) NOT NULL,
+    TrangThai INT DEFAULT 1, -- 1: Hiệu lực, 0: Đã hủy
+    FOREIGN KEY (ID_PhieuNhap) REFERENCES phieu_nhap(ID_PhieuNhap),
+    FOREIGN KEY (ID_Sach) REFERENCES sach(ID_Sach)
+);
+-- 1. Thêm dữ liệu cho bảng Nhà cung cấp
+INSERT INTO nha_cung_cap (Ten_NCC, Dia_Chi, SDT, Email) VALUES
+  ('Công ty Sách ABC',   '123 Đường A, Quận 1, TP.HCM', '0909123456', 'contact@abcbooks.vn'),
+  ('Nhà Sách XYZ',       '456 Đường B, Quận 3, TP.HCM', '0909765432', 'info@xyzbooks.vn'),
+  ('Phân phối Văn Hóa',  '789 Đường C, Quận 5, TP.HCM', '0912345678', 'sales@vnhphoi.vn');
+
+-- 2. Thêm dữ liệu cho bảng Phiếu nhập
+-- Lưu ý: cột TongTien để mặc định 0; sau khi chèn chi tiết có thể update lại
+INSERT INTO phieu_nhap (NgayNhap, ID_NCC) VALUES
+  ('2025-05-10 09:30:00', 1),
+  ('2025-05-11 14:15:00', 2),
+  ('2025-05-12 10:00:00', 3);
+
+-- 3. Thêm dữ liệu cho bảng Chi tiết Phiếu nhập
+-- Giả sử trong bảng sach đã có sẵn các sách với ID_Sach = 1,2,3,4
+INSERT INTO chi_tiet_phieu_nhap (ID_PhieuNhap, ID_Sach, SoLuong, GiaNhap) VALUES
+  -- Phiếu #1 (nhập từ NCC 1)
+  (1, 321,  10,  50000.00),
+  (1, 321,   5,  75000.00),
+  -- PHiếu #2 (nhập từ NCC 2)
+  (2, 321,   7,  60000.00),
+  (2, 321,  12,  45000.00),
+  -- Phiếu #3 (nhập từ NCC 3)
+  (3, 321,   3,  52000.00),
+  (3, 321,   8,  47000.00);
+
+--
+-- Cấu trúc bảng cho bảng `phieunhap`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pttt`
+--
+
+CREATE TABLE `pttt` (
+  `ID_PTTT` int(11) NOT NULL,
+  `Ten_PTTT` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `sach`
+--
+
+
+--
+-- Đang đổ dữ liệu cho bảng `sach`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -531,16 +564,16 @@ ALTER TABLE `chucnang`
 -- Chỉ mục cho bảng `ctiet_pnh`
 --
 ALTER TABLE `ctiet_pnh`
-  ADD PRIMARY KEY (`ID_sach`,`ID_pnh`),
-  ADD KEY `ID_sach` (`ID_sach`,`ID_pnh`),
-  ADD KEY `ID_pnh` (`ID_pnh`);
+  ADD PRIMARY KEY (`ID_Sach`,`ID_phieunhap`),
+  ADD KEY `ID_Sach` (`ID_Sach`,`ID_phieunhap`),
+  ADD KEY `ID_phieunhap` (`ID_phieunhap`);
 
 --
 -- Chỉ mục cho bảng `danh_gia_sach`
 --
 ALTER TABLE `danh_gia_sach`
-  ADD PRIMARY KEY (`ID_sach`,`ID_Khachhang`),
-  ADD KEY `ID_sach` (`ID_sach`,`ID_Khachhang`),
+  ADD PRIMARY KEY (`ID_Sach`,`ID_Khachhang`),
+  ADD KEY `ID_Sach` (`ID_Sach`,`ID_Khachhang`),
   ADD KEY `ID_Khachhang` (`ID_Khachhang`);
 
 --
@@ -592,10 +625,10 @@ ALTER TABLE `nhomquyen`
   ADD PRIMARY KEY (`MaQuyen`);
 
 --
--- Chỉ mục cho bảng `pnh`
+-- Chỉ mục cho bảng `phieunhap`
 --
-ALTER TABLE `pnh`
-  ADD PRIMARY KEY (`ID_PNH`),
+ALTER TABLE `phieunhap`
+  ADD PRIMARY KEY (`ID_phieunhap`),
   ADD KEY `ID_NXB` (`ID_NCC`);
 
 --
@@ -679,10 +712,10 @@ ALTER TABLE `nhanvien`
   MODIFY `ID_NV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `pnh`
+-- AUTO_INCREMENT cho bảng `phieunhap`
 --
-ALTER TABLE `pnh`
-  MODIFY `ID_PNH` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `phieunhap`
+  MODIFY `ID_phieunhap` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `pttt`
@@ -729,14 +762,14 @@ ALTER TABLE `chucnang`
 -- Các ràng buộc cho bảng `ctiet_pnh`
 --
 ALTER TABLE `ctiet_pnh`
-  ADD CONSTRAINT `ctiet_pnh_ibfk_1` FOREIGN KEY (`ID_pnh`) REFERENCES `pnh` (`ID_PNH`),
-  ADD CONSTRAINT `ctiet_pnh_ibfk_2` FOREIGN KEY (`ID_sach`) REFERENCES `sach` (`ID_Sach`);
+  ADD CONSTRAINT `ctiet_pnh_ibfk_1` FOREIGN KEY (`ID_phieunhap`) REFERENCES `phieunhap` (`ID_phieunhap`),
+  ADD CONSTRAINT `ctiet_pnh_ibfk_2` FOREIGN KEY (`ID_Sach`) REFERENCES `sach` (`ID_Sach`);
 
 --
 -- Các ràng buộc cho bảng `danh_gia_sach`
 --
 ALTER TABLE `danh_gia_sach`
-  ADD CONSTRAINT `danh_gia_sach_ibfk_1` FOREIGN KEY (`ID_sach`) REFERENCES `sach` (`ID_Sach`),
+  ADD CONSTRAINT `danh_gia_sach_ibfk_1` FOREIGN KEY (`ID_Sach`) REFERENCES `sach` (`ID_Sach`),
   ADD CONSTRAINT `danh_gia_sach_ibfk_2` FOREIGN KEY (`ID_Khachhang`) REFERENCES `khach_hang` (`ID_Khach_Hang`);
 
 --
@@ -755,7 +788,7 @@ ALTER TABLE `don_hang`
 -- Các ràng buộc cho bảng `ncc`
 --
 ALTER TABLE `ncc`
-  ADD CONSTRAINT `ncc_ibfk_1` FOREIGN KEY (`ID_NCC`) REFERENCES `pnh` (`ID_NCC`);
+  ADD CONSTRAINT `ncc_ibfk_1` FOREIGN KEY (`ID_NCC`) REFERENCES `phieunhap` (`ID_NCC`);
 
 --
 -- Các ràng buộc cho bảng `nhomquyen`

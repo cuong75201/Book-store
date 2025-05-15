@@ -98,6 +98,8 @@ class  UserModel extends dbconnect
         $user = $result->fetch_assoc();
         return $user;
     }
+
+
     public function getAddresses($email)
     {
         $stmt = $this->con->prepare("SELECT * FROM `dia_chi` WHERE `email` = ? ORDER BY `Mac_Dinh` DESC");
@@ -110,6 +112,33 @@ class  UserModel extends dbconnect
         }
         $stmt->close();
         return $addresses;
+    }
+
+    public function getAddressById($id, $email)
+    {
+        $stmt = $this->con->prepare("SELECT * FROM `dia_chi` WHERE `ID` = ? AND `Email` = ?");
+        $stmt->bind_param("is", $id, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $address = $result->fetch_assoc();
+        $stmt->close();
+        return $address;
+    }
+
+    // Lấy địa chỉ mặc định của người dùng
+    public function getDefaultAddress($email)
+    {
+        $query = "SELECT * FROM dia_chi WHERE Email = ? AND Mac_Dinh = 1";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+
+        return null;
     }
 
     public function addAddress($email, $name, $address, $phone, $is_default)
@@ -131,6 +160,12 @@ class  UserModel extends dbconnect
 
     public function updateAddress($id, $email, $name, $address, $phone, $is_default)
     {
+
+        // Đảm bảo $address không rỗng
+        if (empty($address)) {
+            error_log("Update Address Failed: Address is empty for ID=$id, Email=$email");
+            return false;
+        }
         if ($is_default) {
             $stmt = $this->con->prepare("UPDATE `dia_chi` SET `Mac_Dinh` = 0 WHERE `email` = ?");
             $stmt->bind_param("s", $email);
@@ -180,25 +215,28 @@ class  UserModel extends dbconnect
         $stmt->close();
         return $address;
     }
-
-    // Thêm phương thức để cập nhật địa chỉ trong khach_hang (nếu cần)
-    public function updateUserAddress($email, $address, $phone)
+    // Lấy ID_Khach_Hang từ email
+    public function getCustomerIdByEmail($email)
     {
-        $stmt = $this->con->prepare("UPDATE `khach_hang` SET `Dia_Chi` = ?, `So_Dien_Thoai` = ? WHERE `Email` = ?");
-        $stmt->bind_param("sss", $address, $phone, $email);
-        $result = $stmt->execute();
-        $stmt->close();
-        return $result;
-    }
-    public function getUserById($id)
-    {
-        $sql = "SELECT * FROM `khach_hang` where ID_Khach_Hang = $id";
-        $result = mysqli_query($this->con, $sql);
-        $rows = array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            $rows[] = $row;
+        $query = "SELECT ID_Khach_Hang FROM khach_hang WHERE Email = ?";
+        $stmt = $this->con->prepare($query);
+        if (!$stmt) {
+            error_log("Prepare failed: " . $this->con->error);
+            return null;
         }
-        return $rows;
+
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            error_log("Found customer ID: " . $row['ID_Khach_Hang']);
+            return $row['ID_Khach_Hang'];
+        }
+
+        error_log("No customer found for email: $email");
+        return null;
     }
     public function getNamebyId($id)
     {
@@ -209,5 +247,79 @@ class  UserModel extends dbconnect
             $rows[] = $row['Ten_Khach_Hang'];
         }
         return $rows;
+    }
+    // Lấy danh sách đơn hàng dựa trên ID_Khach_Hang, sử dụng Dia_Chi_Giao_Hang
+    public function getOrdersByCustomerId($customerId)
+    {
+        error_log("Fetching orders for customer ID: $customerId");
+        $query = "SELECT dh.ID_Don_Hang, dh.ID_Khach_Hang, dh.Ngay_Dat_Hang, dh.Tong_Tien, dh.Trang_Thai, dh.Phuong_Thuc_Thanh_Toan, dh.Dia_Chi_Giao_Hang 
+              FROM don_hang dh 
+              WHERE dh.ID_Khach_Hang = ?";
+        $stmt = $this->con->prepare($query);
+        if (!$stmt) {
+            error_log("Prepare failed: " . $this->con->error);
+            return [];
+        }
+
+        $stmt->bind_param("i", $customerId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $orders = [];
+        while ($row = $result->fetch_assoc()) {
+            $orders[] = $row;
+        }
+        error_log("Number of orders found: " . count($orders));
+        return $orders;
+    }
+
+    // Lấy chi tiết đơn hàng từ ctiet_cart
+    public function getOrderDetails($orderId)
+    {
+        $query = "SELECT ctdh.*, s.Ten_Sach, s.Images, s.Gia_Ban 
+              FROM chi_tiet_don_hang ctdh 
+              JOIN sach s ON ctdh.ID_Sach = s.ID_Sach 
+              WHERE ctdh.ID_Don_Hang = ?";
+        $stmt = $this->con->prepare($query);
+        if (!$stmt) {
+            error_log("Prepare failed: " . $this->con->error);
+            return [];
+        }
+
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $details = [];
+        while ($row = $result->fetch_assoc()) {
+            $details[] = $row;
+        }
+        return $details;
+    }
+    public function createOrder($orderData)
+    {
+        $query = "INSERT INTO don_hang (ID_Khach_Hang, Ngay_Dat_Hang, Tong_Tien, Trang_Thai, Phuong_Thuc_Thanh_Toan, Dia_Chi_Giao_Hang) 
+              VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param(
+            "ississ",
+            $orderData['ID_Khach_Hang'],
+            $orderData['Ngay_Dat_Hang'],
+            $orderData['Tong_Tien'],
+            $orderData['Trang_Thai'],
+            $orderData['Phuong_Thuc_Thanh_Toan'],
+            $orderData['Dia_Chi_Giao_Hang']
+        );
+        $success = $stmt->execute();
+        $orderId = $success ? $this->con->insert_id : null;
+        $stmt->close();
+        return $orderId;
+    }
+    public function addOrderDetail($orderId,  $productId, $quantity, $price, $thanhtien)
+    {
+        $query = "INSERT INTO chi_tiet_don_hang (ID_Don_Hang, ID_Sach, So_Luong, Don_Gia, Thanh_Tien) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param("iiidi", $orderId, $productId, $quantity, $price, $thanhtien);
+        return $stmt->execute();
     }
 }

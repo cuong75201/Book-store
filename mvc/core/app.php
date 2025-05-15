@@ -7,8 +7,7 @@
         function __construct()
         {
             $arr = $this->URLprocess();
-            // [PHẦN THÊM] Xử lý route product/detail/{slug}-{id}
-            // Trong phần xử lý route product/detail
+            // Xử lý route product/detail/{slug}-{id}
             if (!empty($arr) && $arr[0] === 'product' && isset($arr[1]) && $arr[1] === 'detail' && isset($arr[2])) {
                 $slugWithId = $arr[2];
                 // Tách ID từ phần cuối URL (ví dụ: "ten-sp-123" → id=123)
@@ -24,6 +23,29 @@
                 call_user_func_array([$this->controller, $this->action], $this->params);
                 return;
             }
+
+            // Handle checkout/index/{productId}/{quantity}
+        if (!empty($arr) && $arr[0] === 'checkout' && isset($arr[1]) && $arr[1] === 'index' && isset($arr[2]) && isset($arr[3])) {
+            $this->controller = "CheckoutController";
+            require "mvc/controllers/" . $this->controller . ".php";
+            $this->controller = new $this->controller;
+            $this->action = "index";
+            $this->params = [$arr[2], $arr[3]]; // productId, quantity
+            call_user_func_array([$this->controller, $this->action], $this->params);
+            return;
+        }
+
+        // Handle checkout/index and checkout/process
+        if (!empty($arr) && $arr[0] === 'checkout') {
+            $this->controller = "CheckoutController";
+            require "mvc/controllers/" . $this->controller . ".php";
+            $this->controller = new $this->controller;
+            $this->action = isset($arr[1]) && method_exists($this->controller, $arr[1]) ? $arr[1] : "index";
+            $this->params = array_slice($arr, 2);
+            call_user_func_array([$this->controller, $this->action], $this->params);
+            return;
+        }
+        
             if ($arr != NULL) {
                 if (file_exists('mvc/controllers/' . $arr[0] . ".php")) {
                     $this->controller = $arr[0];
