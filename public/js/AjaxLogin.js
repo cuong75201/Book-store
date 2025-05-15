@@ -28,7 +28,7 @@ $(document).ready(function () {
                     $(".error_email").html("Email đã được đăng ký");
                 }
                 else {
-                    window.location = "/Book_store";
+                    window.location = "/Book-store";
                 }
             },
             error: function (xhr, status, error) {
@@ -57,7 +57,7 @@ $(document).ready(function () {
                     $(".error_login").html(data.message);
                 }
                 else {
-                    window.location = "/Book_store";
+                    window.location = "/Book-store";
                 }
             },
             error: function (xhr, status, error) {
