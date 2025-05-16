@@ -76,5 +76,38 @@ class pages extends Controller{
             ],
             'script' => 'script'
         ]);
-    }      
+    }  
+    function lienhe(){
+        $this->view('main_layout',[
+            'Title' => 'Liên hệ',
+            'page' => 'lienhe',
+            "plugin" =>[
+                "reset" => 1 ,
+                "style" => 1 ,
+            ],
+            'script' => 'script'
+        ]);
+    } 
+    function diemsach(){
+        $this->view('main_layout',[
+            'Title' =>'Điểm sách – MINH LONG BOOK',
+            'page'=>empty($thamso) ? 'diemsach' : 'diemsach/'.$thamso,
+            "plugin" =>[
+                "reset" => 1 ,
+                "style"=> 1,
+            ],
+            'script' => 'script'
+        ]);
+    }
+     function tuyendung() {
+        $this->view('main_layout', [
+            'Title' => 'Tuyển dụng – MINH LONG BOOK',
+            'page' => empty($thamso) ? 'tuyendung' : 'tuyendung/'.$thamso,
+            "plugin" => [
+                "reset" => 1,
+                "style" => 1,
+            ],
+            'script' => 'script'
+        ]);
+    }    
 }
