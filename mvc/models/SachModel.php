@@ -84,6 +84,32 @@ class SachModel extends dbconnect
         }
         return [];
     }
+     public function get4SPfromDanhMuc($id_danhmuc)
+    {
+        $sql = "SELECT * FROM `sach` WHERE `ID_DanhMuc` = '$id_danhmuc' LIMIT 4 OFFSET 1;" ;
+        $result = mysqli_query($this->con, $sql);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+        return mysqli_error($this->con);
+    }
+      public function get15SP($soLuong,$viTri)
+    {
+        $sql = "SELECT * FROM `sach`  LIMIT $soLuong OFFSET $viTri" ;
+        $result = mysqli_query($this->con, $sql);
+        $rows = [];
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+        return mysqli_error($this->con);
+    }
     public function getToTalPageDanhMuc($id_dm, $limit)
     {
         $total = count($this->getIDfromDanhMuc($id_dm));
