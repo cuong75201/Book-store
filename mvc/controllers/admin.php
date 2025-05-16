@@ -13,6 +13,8 @@ class Admin extends Controller
     public $ctietquyenModel;
     public $phieunhapModel;
     public $nhaCungCapModel;
+    public $userModel;
+    public $nccModel;
     function __construct()
     {
         $this->ctietquyenModel = $this->model("ctiet_quyenModel");
@@ -27,6 +29,9 @@ class Admin extends Controller
         $this->nhomquyenModel = $this->model("NhomQuyenModel");
         $this->phieunhapModel = $this->model("PhieuNhapModel");
         $this->nhaCungCapModel = $this->model("NhaCungCapModel");
+         $this->userModel = $this->model("UsersModel");
+        $this->nccModel = $this->model("NccModel");
+
     }
 
     function default()
@@ -72,6 +77,28 @@ class Admin extends Controller
             "script" => "product",
         ]);
     }
+    function khachhang()
+    {
+        $list_user = $this->userModel->getAllUser();
+        $this->view("admin_view", [
+            "title" => "Khách hàng - Admin Web",
+            "content" => "Khách hàng",
+            "Page" => "khachhang",
+            "list_khachhang" => $list_user,
+            "script" => "khachhang",
+        ]);
+    }
+    function nhacungcap()
+    {
+        $list_ncc = $this->nccModel->getAllNCC();
+        $this->view("admin_view", [
+            "title" => "Nhà cung cấp - Admin Web",
+            "content" => "Nhà cung cấp",
+            "Page" => "nhacungcap",
+            "list_nhacungcap" => $list_ncc,
+            "script" => "nhacungcap",
+        ]);
+    } 
     function nhanvien()
     {
         if (!isset($_SESSION)) {
@@ -458,4 +485,152 @@ class Admin extends Controller
         $result = $this->phieunhapModel->updatephieunhap($id_phieunhap, $id_ncc, $ngaynhap, $tongtien, $id_nv);
         echo json_encode($result);
     }
+    function getUser()
+    {
+        if (isset($_POST['idkhachhang'])) {
+            
+            echo json_encode($this->userModel->getUserById($_POST['idkhachhang']));
+        }
+    }
+     function getNCCap()
+    {
+        if (isset($_POST['id'])) {
+            
+            echo json_encode($this->nccModel->getNCC($_POST['id']));
+        }
+    }
+    function themKhachHang(){
+        $lastName = (isset($_POST["lastName"]) ) ? $_POST["lastName"] : "";
+        $firstName= (isset($_POST["firstName"]) ) ? $_POST["firstName"] : "";
+        $email= (isset($_POST["email"]) ) ? $_POST["email"] : "";
+         $matKhau= (isset($_POST["matKhau"]) ) ? $_POST["matKhau"] : "";
+        $phone= (isset($_POST["phone"]) ) ? $_POST["phone"] : "";
+        $diaChi= (isset($_POST["diaChi"]) ) ? $_POST["diaChi"] : "";
+        $ngayDangKy= (isset($_POST["ngayDangKy"]) ) ? $_POST["ngayDangKy"] : "";
+
+        $check = $this->userModel->create($lastName, $firstName, $email,$phone,$matKhau,$ngayDangKy,$diaChi);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+        echo json_encode("thành coong");
+    }
+     function suaKhachHang(){
+        $name= (isset($_POST["name"]) ) ? $_POST["name"] : "";
+        $id= (isset($_POST["id"]) ) ? $_POST["id"] : "";
+        $phone= (isset($_POST["phone"]) ) ? $_POST["phone"] : "";
+
+        $check = $this->userModel->updateUserByAdmin( $id,$name,$phone);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+        echo json_encode("thành coong");
+    }
+    function setStatusKhachHang(){
+         $id= (isset($_POST["id"]) ) ? $_POST["id"] : "";
+          $status= (isset($_POST["status"]) ) ? $_POST["status"] : "";
+        $check = $this->userModel->setStatusByAdmin($id,$status);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+         echo json_encode("thành coong");
+    }
+      function xoaKhachHang(){
+        $id= (isset($_POST["id"]) ) ? $_POST["id"] : "";
+        $check = $this->userModel->xoaUserByAdmin($id);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+         echo json_encode("thành coong");
+    }
+   function layDanhSachKhachHang() {
+    // Lấy danh sách khách hàng từ model
+    $data['list_khachhang'] = $this->userModel->getAllUser();
+
+      foreach ($data['list_khachhang'] as $user) {
+        $trangThai = ($user["status"] == 0) ? "bị khóa" : "hoạt động";
+        echo '
+        <tr  id="' . $user["ID_Khach_Hang"] . '">
+            <td>' . $user["ID_Khach_Hang"] . '</td>
+            <td>' . $user["Ten_Khach_Hang"] . '</td>
+            <td>' . $user["Email"] . '</td>
+            <td>' . $user["So_Dien_Thoai"] . '</td>
+            <td>' . $user["Dia_Chi"] . '</td>
+            <td>' . $user["Ngay_Dang_Ky"] . '</td>
+            <td>' . $trangThai . '</td>
+        </tr>
+        ';
+    }
+}
+    function themNhaCungCap(){
+        $name = (isset($_POST["name"]) ) ? $_POST["name"] : "";
+        $lienHe= (isset($_POST["lienHe"]) ) ? $_POST["lienHe"] : "";
+        $diaChi= (isset($_POST["diaChi"]) ) ? $_POST["diaChi"] : "";
+        $check = $this->nccModel->addNCC($name,$diaChi,$lienHe);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+        echo json_encode("thành coong");
+    }
+     function suaNhaCungCap(){
+        $name = (isset($_POST["name"]) ) ? $_POST["name"] : "";
+        $lienHe= (isset($_POST["lienHe"]) ) ? $_POST["lienHe"] : "";
+        $diaChi= (isset($_POST["diaChi"]) ) ? $_POST["diaChi"] : "";
+        $id= (isset($_POST["id"]) ) ? $_POST["id"] : "";
+
+        $check = $this->nccModel->updateNCC( $id,$name,$diaChi, $lienHe);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+        echo json_encode("thành coong");
+    }
+     function setStatusNCC(){
+         $id= (isset($_POST["id"]) ) ? $_POST["id"] : "";
+          $status= (isset($_POST["status"]) ) ? $_POST["status"] : "";
+        $check = $this->nccModel->setStatus($id,$status);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+         echo json_encode("thành coong");
+    }
+     function xoaNhaCungCap(){
+         $id= (isset($_POST["id"]) ) ? $_POST["id"] : "";
+        $check = $this->nccModel->xoaNhaCungCap($id);
+        if(!$check){
+            echo json_encode("không thành coong");
+
+        }
+         echo json_encode("thành coong");
+    }
+     function layDanhSachNCC() {
+    // Lấy danh sách khách hàng từ model
+        $result = $this->nccModel->getAllNCC();
+      foreach ($result as $ncc) {
+        echo '
+        <tr  id="' . $ncc["ID_NCC"] . '">
+            <td>' . $ncc["ID_NCC"] . '</td>
+            <td>' . $ncc["Ten_NCC"] . '</td>
+            <td>' . $ncc["DiaChi"] . '</td>
+            <td>' . $ncc["LienHe"] . '</td>
+        </tr>
+        ';
+    }
+}   
+public function checkEmail(){
+     $email = isset($_POST['email']) ? $_POST['email']: "";
+     $result = $this->userModel->getAllUser();
+    foreach( $result as $user){
+       if($user["Email"] === $email){
+            echo "1";
+            return;
+       }
+    }
+    echo "0";
+}
 }
