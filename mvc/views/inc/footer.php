@@ -157,7 +157,7 @@
                                 <a href="/pages/tra-cuu-don-hang"><span>Tra cứu đơn hàng</span></a>
                             </li>
                             <li>
-                                <a href="https://minhlongbook.vn/pages/lien-he"><span>Liên hệ</span></a>
+                                <a href="pages/lienhe"><span>Liên hệ</span></a>
                             </li>
                         </ul>
                     </div>
