@@ -5,7 +5,8 @@ class  UserModel extends dbconnect
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $name = $lastname . " " . $fisrtname;
-        $sql = "INSERT INTO `khach_hang`( `Ten_Khach_Hang`, `Email`,`So_Dien_Thoai`, `Mat_Khau`, `Ngay_Dang_Ky`,`Dia_Chi,`status`,`Trang_Thai) VALUES ('$name','$email','$password','$phone','$date',$address,1,1)";
+        $sql = "INSERT INTO `khach_hang`( `Ten_Khach_Hang`, `Email`, `Mat_Khau`,`So_Dien_Thoai`, `Ngay_Dang_Ky`,`Dia_Chi`,`status`,`Trang_Thai`)
+         VALUES ($name,$email,$password,$phone,$date,$address,1,1)";
         $result = mysqli_query($this->con, $sql);
         $check = true;
         if (!$result) {

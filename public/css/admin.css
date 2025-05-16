@@ -37,6 +37,27 @@ i {
     margin: auto;
 }
 
+.chi-tiet-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chi-tiet-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.chi-tiet-row>div {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+}
 
 /* SIDEBAR */
 .sidebar {
@@ -815,6 +836,18 @@ tr.selected {
 .sort-content form input {
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+.sort-right,
+.sort-center {
+    display: flex;
+    align-items: center;
+
+}
+
+.sort-right input,
+.sort-right label {
+    margin-left: 15px;
 }
 
 .sort-submt {

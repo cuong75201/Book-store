@@ -31,10 +31,34 @@ class Admin extends Controller
 
     function default()
     {
-        $this->view("page/loginAdmin", []);
+        if (isset($_SESSION)) {
+            $this->dashboard();
+        } else {
+            $this->view("page/loginAdmin", []);
+        }
+    }
+
+    function dashboard()
+    {
+        $this->view("admin_view", [
+            "title" => "Trang chủ - Admin Web",
+            "content" => "Trang chủ",
+            "Page" => "dashboard"
+        ]);
     }
     function product()
     {
+        if (!isset($_SESSION)) {
+            $this->view("page/loginAdmin", []);
+            return;
+        } else {
+            if (!in_array(1, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_product = $this->sachModel->getSach();
         foreach ($list_product as &$product) {
             $product['DanhMuc'] = $this->danhmucModel->getNamebyId($product['ID_DanhMuc'])[0];
@@ -50,6 +74,17 @@ class Admin extends Controller
     }
     function nhanvien()
     {
+        if (!isset($_SESSION)) {
+            $this->view("page/loginAdmin", []);
+            return;
+        } else {
+            if (!in_array(3, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_nhanvien = $this->nhanvienModel->getAll();
         foreach ($list_nhanvien as &$nhanvien) {
             $nhanvien['TenQuyen'] = $this->nhomquyenModel->getNamebyId($nhanvien['MaQuyen'])[0];
@@ -64,6 +99,17 @@ class Admin extends Controller
     }
     function donhang()
     {
+        if (!isset($_SESSION)) {
+            $this->view("page/loginAdmin", []);
+            return;
+        } else {
+            if (!in_array(5, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_donhang = $this->donhangModel->getAll();
         $this->view("admin_view", [
             "title" => "Đơn hàng - Admin Web",
@@ -75,6 +121,17 @@ class Admin extends Controller
     }
     function thongke()
     {
+        if (!isset($_SESSION)) {
+            $this->view("page/loginAdmin", []);
+            return;
+        } else {
+            if (!in_array(7, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_khachhang = $this->donhangModel->getAllKH();
 
         foreach ($list_khachhang as &$khachhang) {
@@ -96,6 +153,17 @@ class Admin extends Controller
     }
     function phanquyen()
     {
+        if (!isset($_SESSION)) {
+            $this->view("page/loginAdmin", []);
+            return;
+        } else {
+            if (!in_array(8, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_quyen = $this->nhomquyenModel->getAll();
         $this->view("admin_view", [
             "title" => "Phân quyền - Admin Web",
@@ -104,6 +172,11 @@ class Admin extends Controller
             'list_quyen' => $list_quyen,
             "script" => "phanquyen",
         ]);
+    }
+    function login()
+    {
+        session_destroy();
+        $this->view("page/loginAdmin", []);
     }
     function checkLogin()
     {
@@ -116,7 +189,7 @@ class Admin extends Controller
 
             $nv = $this->nhanvienModel->getNVfromSDT($sdt);
             $idnv = $nv['ID_NV'];
-            $ctiet = $this->ctietquyenModel->getById($idnv);
+            $ctiet = $this->ctietquyenModel->getById($nv['MaQuyen']);
             $hanhdong = [];
             foreach ($ctiet as $ct) {
                 $hanhdong[] = $ct['hanhdong'];
@@ -295,6 +368,17 @@ class Admin extends Controller
     // Action chính
     function phieunhap()
     {
+        if (!isset($_SESSION)) {
+            $this->view("page/loginAdmin", []);
+            return;
+        } else {
+            if (!in_array(6, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
         $this->view("admin_view", [
             "title" => "Quản lý Phiếu nhập",

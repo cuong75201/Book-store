@@ -32,17 +32,7 @@ function openModal() {
                         </div>
                         <button type="button" class="button add-button" onclick="themDongChiTiet()">Thêm chi tiết</button>
                         <div class="adding-content-item">
-                            <table id="chiTietTable">
-                                <thead>
-                                    <tr>
-                                        <th>Sách</th>
-                                        <th>Số lượng</th>
-                                        <th>Giá nhập</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                            <div id="chiTietContainer" class="chi-tiet-container"></div>
                         </div>
                 </div>
             `;
@@ -70,16 +60,27 @@ function themDongChiTiet() {
                 <option value="${s.ID_Sach}">${s.Ten_Sach}</option>
             `).join('');
 
-            const newRow = `
-                <tr>
-                    <td><select class="select-sach">${options}</select></td>
-                    <td><input type="number" class="soLuong" min="1" value="1"></td>
-                    <td><input type="number" class="giaNhap" min="0" value="0"></td>
-                    <td><button type="button" onclick="xoaDong(this)">Xóa</button></td>
-                </tr>
-            `;
-            $("#chiTietTable tbody").append(newRow);
-        },
+        const newRow = `
+            <div class="chi-tiet-row">
+                <div>
+                    <label>Sách:</label>
+                    <select class="select-sach">${options}</select>
+                </div>
+                <div>
+                    <label>Số lượng:</label>
+                    <input type="number" class="soLuong" min="1" value="1">
+                </div>
+                <div>
+                    <label>Giá nhập:</label>
+                    <input type="number" class="giaNhap" min="0" value="0">
+                </div>
+                <div>
+                    <button type="button" onclick="xoaDong(this)">Xóa</button>
+                </div>
+            </div>
+        `;
+        $("#chiTietContainer").append(newRow)},
+
         error: function (xhr) {
             console.error("Lỗi khi lấy danh sách sách:", xhr.responseText);
         }
@@ -87,12 +88,7 @@ function themDongChiTiet() {
 }
 
 function xoaDong(btn) {
-    $(btn).closest('tr').remove();
-}
-
-// Xóa dòng chi tiết
-function xoaDong(btn) {
-    $(btn).closest('tr').remove();
+    $(btn).closest('.chi-tiet-row').remove();
 }
 
 // Lưu phiếu
@@ -103,7 +99,7 @@ function savePhieu() {
         ChiTiet: []
     };
 
-    $("#chiTietTable tbody tr").each(function () {
+    $(".chi-tiet-container .chi-tiet-row").each(function () {
         const row = {
             ID_Sach: $(this).find('.select-sach').val(),
             SoLuong: $(this).find('.soLuong').val(),
