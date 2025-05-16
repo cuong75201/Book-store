@@ -86,15 +86,9 @@
                 <input type="text" id = "tenSach"class="form-control border-success" placeholder="Nhập tên sách">
             </div>
 
-            <div class="form-group">
-                <label class="text-success"><i class="fa fa-user mr-1"></i>Tác giả</label>
-                <input type="text" id = "tacGia" class="form-control border-success" placeholder="Nhập tên tác giả">
-            </div>
+           
 
-             <div class="form-group">
-                <label class="text-success"><i class="fa fa-box mr-1"></i>Nhà xuất bản</label>
-                <input type="text"id = "tenNhaXuatBán" class="form-control border-success" placeholder="Nhập nhà xuất bản">
-            </div>
+          
 
             <div class="form-group">
                 <label class="text-success"><i class="fa fa-tags mr-1"></i>Thể loại</label>
@@ -115,11 +109,7 @@
 
         <!-- Cột phải -->
         <div class="col-md-6">
-            <div class="form-group">
-                <label class="text-success"><i class="fa fa-calendar mr-1"></i>Năm xuất bản</label>
-                <input type="number" id = "tenNamXuatBan" class="form-control border-success" placeholder="Nhập năm">
-            </div>
-
+            
             <div class="form-group">
                 <label class="text-success"><i class="fa fa-dollar-sign mr-1"></i>Khoảng giá (VNĐ)</label>
                 <div class="input-group">
@@ -131,15 +121,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="text-success"><i class="fa fa-percentage mr-1"></i>Giảm giá (%)</label>
-                <input type="number" id = "giamGia"class="form-control border-success" placeholder="Nhập giảm giá (%)">
-            </div>
-
-            <div class="form-group">
-                <label class="text-success"><i class="fa fa-box mr-1"></i>Số lượng tồn</label>
-                <input type="number"id = "soLuongTon" class="form-control border-success" placeholder="Từ bao nhiêu">
-            </div>
+            
         </div>
     </div>
 
@@ -147,7 +129,7 @@
         <button type="button" class="btn btn-outline-success mr-2" id="resetAdvancedSearch">
             <i class="fa fa-undo mr-1"></i>Đặt lại
         </button>
-        <button type="button" class="btn btn-success" id="timkiemnangcao">
+        <button type="button" class="btn btn-outline-success mr-2" id="timkiemnangcao">
             <i class="fa fa-check mr-1" ></i>Tìm kiếm
         </button>
     </div>
