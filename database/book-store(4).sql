@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3307
--- Thời gian đã tạo: Th5 17, 2025 lúc 06:11 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: May 17, 2025 at 01:45 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `book_store`
+-- Database: `book_store`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -35,7 +35,7 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chi_tiet_don_hang`
+-- Table structure for table `chi_tiet_don_hang`
 --
 
 CREATE TABLE `chi_tiet_don_hang` (
@@ -48,7 +48,7 @@ CREATE TABLE `chi_tiet_don_hang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
+-- Dumping data for table `chi_tiet_don_hang`
 --
 
 INSERT INTO `chi_tiet_don_hang` (`ID_Chi_Tiet`, `ID_Don_Hang`, `ID_Sach`, `So_Luong`, `Don_Gia`, `Thanh_Tien`) VALUES
@@ -60,7 +60,7 @@ INSERT INTO `chi_tiet_don_hang` (`ID_Chi_Tiet`, `ID_Don_Hang`, `ID_Sach`, `So_Lu
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chi_tiet_phieu_nhap`
+-- Table structure for table `chi_tiet_phieu_nhap`
 --
 
 CREATE TABLE `chi_tiet_phieu_nhap` (
@@ -73,33 +73,29 @@ CREATE TABLE `chi_tiet_phieu_nhap` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chi_tiet_phieu_nhap`
+-- Dumping data for table `chi_tiet_phieu_nhap`
 --
 
 INSERT INTO `chi_tiet_phieu_nhap` (`ID_CTietPhieuNhap`, `ID_PhieuNhap`, `ID_Sach`, `SoLuong`, `GiaNhap`, `TrangThai`) VALUES
-(1, 1, 321, 10, 50000.00, 1),
-(2, 1, 321, 5, 75000.00, 1),
-(3, 2, 321, 7, 60000.00, 1),
-(4, 2, 321, 12, 45000.00, 1),
-(5, 3, 321, 3, 52000.00, 1),
-(6, 3, 321, 8, 47000.00, 1),
-(7, 1, 321, 10, 50000.00, 1),
-(8, 1, 321, 5, 75000.00, 1),
-(9, 2, 321, 7, 60000.00, 1),
-(10, 2, 321, 12, 45000.00, 1),
-(11, 3, 321, 3, 52000.00, 1),
-(12, 3, 321, 8, 47000.00, 1),
-(13, 1, 321, 10, 50000.00, 1),
-(14, 1, 321, 5, 75000.00, 1),
-(15, 2, 321, 7, 60000.00, 1),
-(16, 2, 321, 12, 45000.00, 1),
-(17, 3, 321, 3, 52000.00, 1),
-(18, 3, 321, 8, 47000.00, 1);
+(20, 11, 163, 1, 15000.00, 1),
+(21, 12, 163, 1, 13333.00, 1),
+(22, 12, 163, 1, 1123.00, 1),
+(23, 13, 321, 4, 1444.00, 1),
+(24, 14, 321, 26, 150000.00, 1),
+(25, 15, 320, 1, 2.00, 1),
+(26, 15, 321, 100, 510000.00, 1),
+(27, 16, 163, 1, 15.00, 1),
+(28, 17, 163, 1, 5.00, 1),
+(29, 18, 163, 1, 1234.00, 1),
+(30, 19, 163, 1, 12.00, 1),
+(31, 20, 163, 1, 51.00, 1),
+(32, 21, 163, 1, 15.00, 1),
+(33, 22, 163, 1, 155000.00, 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chi_tiet_quyen`
+-- Table structure for table `chi_tiet_quyen`
 --
 
 CREATE TABLE `chi_tiet_quyen` (
@@ -109,7 +105,7 @@ CREATE TABLE `chi_tiet_quyen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chi_tiet_quyen`
+-- Dumping data for table `chi_tiet_quyen`
 --
 
 INSERT INTO `chi_tiet_quyen` (`idchitiet`, `MaQuyen`, `hanhdong`) VALUES
@@ -129,7 +125,7 @@ INSERT INTO `chi_tiet_quyen` (`idchitiet`, `MaQuyen`, `hanhdong`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chucnang`
+-- Table structure for table `chucnang`
 --
 
 CREATE TABLE `chucnang` (
@@ -140,7 +136,7 @@ CREATE TABLE `chucnang` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `ctiet_pnh`
+-- Table structure for table `ctiet_pnh`
 --
 
 CREATE TABLE `ctiet_pnh` (
@@ -152,7 +148,7 @@ CREATE TABLE `ctiet_pnh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `ctiet_pnh`
+-- Dumping data for table `ctiet_pnh`
 --
 
 INSERT INTO `ctiet_pnh` (`ID_sach`, `ID_pnh`, `so_luong`, `don_gia`, `thanh_tien`) VALUES
@@ -163,7 +159,7 @@ INSERT INTO `ctiet_pnh` (`ID_sach`, `ID_pnh`, `so_luong`, `don_gia`, `thanh_tien
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `danh_gia_sach`
+-- Table structure for table `danh_gia_sach`
 --
 
 CREATE TABLE `danh_gia_sach` (
@@ -175,7 +171,7 @@ CREATE TABLE `danh_gia_sach` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `danh_muc`
+-- Table structure for table `danh_muc`
 --
 
 CREATE TABLE `danh_muc` (
@@ -185,7 +181,7 @@ CREATE TABLE `danh_muc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `danh_muc`
+-- Dumping data for table `danh_muc`
 --
 
 INSERT INTO `danh_muc` (`ID_The_Loai`, `Ten_The_Loai`, `Mo_Ta`) VALUES
@@ -201,7 +197,7 @@ INSERT INTO `danh_muc` (`ID_The_Loai`, `Ten_The_Loai`, `Mo_Ta`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `dia_chi`
+-- Table structure for table `dia_chi`
 --
 
 CREATE TABLE `dia_chi` (
@@ -214,7 +210,7 @@ CREATE TABLE `dia_chi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `dia_chi`
+-- Dumping data for table `dia_chi`
 --
 
 INSERT INTO `dia_chi` (`ID`, `Email`, `Ten_Nguoi_Nhan`, `Dia_Chi`, `So_Dien_Thoai`, `Mac_Dinh`) VALUES
@@ -223,7 +219,7 @@ INSERT INTO `dia_chi` (`ID`, `Email`, `Ten_Nguoi_Nhan`, `Dia_Chi`, `So_Dien_Thoa
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `don_hang`
+-- Table structure for table `don_hang`
 --
 
 CREATE TABLE `don_hang` (
@@ -237,7 +233,7 @@ CREATE TABLE `don_hang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `don_hang`
+-- Dumping data for table `don_hang`
 --
 
 INSERT INTO `don_hang` (`ID_Don_Hang`, `ID_Khach_Hang`, `Ngay_Dat_Hang`, `Tong_Tien`, `Trang_Thai`, `Phuong_Thuc_Thanh_Toan`, `Dia_Chi_Giao_Hang`) VALUES
@@ -248,7 +244,7 @@ INSERT INTO `don_hang` (`ID_Don_Hang`, `ID_Khach_Hang`, `Ngay_Dat_Hang`, `Tong_T
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `khach_hang`
+-- Table structure for table `khach_hang`
 --
 
 CREATE TABLE `khach_hang` (
@@ -264,7 +260,7 @@ CREATE TABLE `khach_hang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `khach_hang`
+-- Dumping data for table `khach_hang`
 --
 
 INSERT INTO `khach_hang` (`ID_Khach_Hang`, `Ten_Khach_Hang`, `Email`, `Mat_Khau`, `So_Dien_Thoai`, `Dia_Chi`, `Ngay_Dang_Ky`, `status`, `Trang_Thai`) VALUES
@@ -276,7 +272,7 @@ INSERT INTO `khach_hang` (`ID_Khach_Hang`, `Ten_Khach_Hang`, `Email`, `Mat_Khau`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `ncc`
+-- Table structure for table `ncc`
 --
 
 CREATE TABLE `ncc` (
@@ -288,16 +284,17 @@ CREATE TABLE `ncc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `ncc`
+-- Dumping data for table `ncc`
 --
 
 INSERT INTO `ncc` (`ID_NCC`, `Ten_NCC`, `DiaChi`, `LienHe`, `Trang_Thai`) VALUES
-(2, 'Phương Nam', 'Pham Ngoc Thach, Binh Thanh, Ho Chi Minh', '0914151611', 1);
+(2, 'Phương Nam', 'Pham Ngoc Thach, Binh Thanh, Ho Chi Minh', '0914151611', 1),
+(3, 'phương nam', 'abc', '0923456789', 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhanvien`
+-- Table structure for table `nhanvien`
 --
 
 CREATE TABLE `nhanvien` (
@@ -312,19 +309,20 @@ CREATE TABLE `nhanvien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `nhanvien`
+-- Dumping data for table `nhanvien`
 --
 
 INSERT INTO `nhanvien` (`ID_NV`, `Ten_NV`, `DiaChi`, `SDT`, `Luong`, `MaQuyen`, `Mat_khau`, `TrangThai`) VALUES
 (1, 'Trần Hồ Hoàng Cường', '220 An Duong Vuong, Quan Binh Tan,Ho Chi Minh', '0363589035', 50000, 1, '0192023a7bbd73250516f069df18b500', 1),
-(3, 'Tran Chi Luc', '220 An Duong Vuong, Quan Binh Tan, Ho Chi Minh', '0123456789', 50000, 6, '0192023a7bbd73250516f069df18b500', 1),
-(4, 'Tran Van A', '220 An Duong Vuong, Quan Binh Tan, Ho Chi Minh', '0123123123', 50000, 7, '0192023a7bbd73250516f069df18b500', 1),
-(5, 'Tran Van B', '220 An Duong Vuong, Quan Binh Tan, Ho Chi Minh', '0987654321', 50000, 6, '0192023a7bbd73250516f069df18b500', 1);
+(3, 'Nguyễn Hoàng Anh', '34 Hung Vuong, Quan 5, Ho Chi Minh', '0123456789', 50000, 6, '0192023a7bbd73250516f069df18b500', 1),
+(3, 'Phạm Thị Hồng', '83 Ly Thuong Kiet , Quan 3, Ho Chi Minh', '0123456789', 50000, 6, '0192023a7bbd73250516f069df18b500', 1),
+(4, 'Nguyễn Thành Trung', '137 Nguyen Trãi, Quan 5, Ho Chi Minh', '0123123123', 50000, 7, '0192023a7bbd73250516f069df18b500', 1),
+(5, 'Nguyễn Văn Bắc', '2 Ham Nghi, Quan 1, Ho Chi Minh', '0987654321', 50000, 6, '0192023a7bbd73250516f069df18b500', 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nha_cung_cap`
+-- Table structure for table `nha_cung_cap`
 --
 
 CREATE TABLE `nha_cung_cap` (
@@ -337,24 +335,20 @@ CREATE TABLE `nha_cung_cap` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `nha_cung_cap`
+-- Dumping data for table `nha_cung_cap`
 --
 
 INSERT INTO `nha_cung_cap` (`ID_NCC`, `Ten_NCC`, `Dia_Chi`, `SDT`, `Email`, `TrangThai`) VALUES
-(1, 'Công ty Sách ABC', '123 Đường A, Quận 1, TP.HCM', '0909123456', 'contact@abcbooks.vn', 1),
-(2, 'Nhà Sách XYZ', '456 Đường B, Quận 3, TP.HCM', '0909765432', 'info@xyzbooks.vn', 1),
-(3, 'Phân phối Văn Hóa', '789 Đường C, Quận 5, TP.HCM', '0912345678', 'sales@vnhphoi.vn', 1),
-(4, 'Công ty Sách ABC', '123 Đường A, Quận 1, TP.HCM', '0909123456', 'contact@abcbooks.vn', 1),
-(5, 'Nhà Sách XYZ', '456 Đường B, Quận 3, TP.HCM', '0909765432', 'info@xyzbooks.vn', 1),
-(6, 'Phân phối Văn Hóa', '789 Đường C, Quận 5, TP.HCM', '0912345678', 'sales@vnhphoi.vn', 1),
-(7, 'Công ty Sách ABC', '123 Đường A, Quận 1, TP.HCM', '0909123456', 'contact@abcbooks.vn', 1),
-(8, 'Nhà Sách XYZ', '456 Đường B, Quận 3, TP.HCM', '0909765432', 'info@xyzbooks.vn', 1),
-(9, 'Phân phối Văn Hóa', '789 Đường C, Quận 5, TP.HCM', '0912345678', 'sales@vnhphoi.vn', 1);
+(1, 'Công ty Sách Hồng HàHà', '123 Đường A, Quận 1, TP.HCM', '0909123456', 'contact@abcbooks.vn', 1),
+(2, 'Nhà Sách Phương Nam', '456 Đường B, Quận 3, TP.HCM', '0909765432', 'info@xyzbooks.vn', 1),
+(3, 'Phân phối Văn Hóa', '789 Đường D, Quận 5, TP.HCM', '0912345678', 'sales@vnhphoi.vn', 1),
+(4, 'Công ty Sách Nhân Văn', '123 Đường A, Quận 1, TP.HCM', '0909123456', 'contact@abcbooks.vn', 1),
+(5, 'Nhà phân phối Đại Lực', '555 Đường X, Quận 8, TP.HCM', '0909123456', 'contact@abcbooks.vn', 1),
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhomquyen`
+-- Table structure for table `nhomquyen`
 --
 
 CREATE TABLE `nhomquyen` (
@@ -363,7 +357,7 @@ CREATE TABLE `nhomquyen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `nhomquyen`
+-- Dumping data for table `nhomquyen`
 --
 
 INSERT INTO `nhomquyen` (`MaQuyen`, `TenQuyen`) VALUES
@@ -374,7 +368,7 @@ INSERT INTO `nhomquyen` (`MaQuyen`, `TenQuyen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phieu_nhap`
+-- Table structure for table `phieu_nhap`
 --
 
 CREATE TABLE `phieu_nhap` (
@@ -382,28 +376,32 @@ CREATE TABLE `phieu_nhap` (
   `NgayNhap` datetime NOT NULL,
   `ID_NCC` int(11) DEFAULT NULL,
   `TongTien` decimal(15,2) DEFAULT 0.00,
-  `TrangThai` int(11) DEFAULT 1
+  `TrangThai` int(11) DEFAULT 1,
+  `ID_NV` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `phieu_nhap`
+-- Dumping data for table `phieu_nhap`
 --
 
-INSERT INTO `phieu_nhap` (`ID_PhieuNhap`, `NgayNhap`, `ID_NCC`, `TongTien`, `TrangThai`) VALUES
-(1, '2025-05-10 09:30:00', 1, 0.00, 1),
-(2, '2025-05-11 14:15:00', 2, 0.00, 1),
-(3, '2025-05-12 10:00:00', 3, 0.00, 1),
-(4, '2025-05-10 09:30:00', 1, 0.00, 1),
-(5, '2025-05-11 14:15:00', 2, 0.00, 1),
-(6, '2025-05-12 10:00:00', 3, 0.00, 1),
-(7, '2025-05-10 09:30:00', 1, 0.00, 1),
-(8, '2025-05-11 14:15:00', 2, 0.00, 1),
-(9, '2025-05-12 10:00:00', 3, 0.00, 1);
+INSERT INTO `phieu_nhap` (`ID_PhieuNhap`, `NgayNhap`, `ID_NCC`, `TongTien`, `TrangThai`, `ID_NV`) VALUES
+(11, '2025-05-15 12:04:00', 1, 15000.00, 1, 1),
+(12, '2025-05-02 12:04:00', 1, 14456.00, 0, 5),
+(13, '2025-05-01 12:05:00', 2, 5776.00, 0, 5),
+(14, '2025-05-21 12:05:00', 1, 3900000.00, 0, 1),
+(15, '2025-05-02 12:07:00', 4, 51000002.00, 0, 3),
+(16, '2025-05-08 12:12:00', 3, 15.00, 1, 3),
+(17, '2025-05-08 12:12:00', 5, 5.00, 1, 5),
+(18, '2025-05-17 12:30:00', 1, 1234.00, 1, 3),
+(19, '2025-05-09 12:31:00', 2, 12.00, 1, 3),
+(20, '2025-05-16 12:36:00', 5, 51.00, 1, 5),
+(21, '2025-05-14 12:44:00', 4, 15.00, 1, 3),
+(22, '2025-05-17 18:37:00', 3, 155000.00, 0, 3);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `pnh`
+-- Table structure for table `pnh`
 --
 
 CREATE TABLE `pnh` (
@@ -414,7 +412,7 @@ CREATE TABLE `pnh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `pnh`
+-- Dumping data for table `pnh`
 --
 
 INSERT INTO `pnh` (`ID_PNH`, `ID_NCC`, `Ngay_Nhap`, `Tong_Tien`) VALUES
@@ -425,7 +423,7 @@ INSERT INTO `pnh` (`ID_PNH`, `ID_NCC`, `Ngay_Nhap`, `Tong_Tien`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `pttt`
+-- Table structure for table `pttt`
 --
 
 CREATE TABLE `pttt` (
@@ -434,7 +432,7 @@ CREATE TABLE `pttt` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `pttt`
+-- Dumping data for table `pttt`
 --
 
 INSERT INTO `pttt` (`ID_PTTT`, `Ten_PTTT`) VALUES
@@ -444,7 +442,7 @@ INSERT INTO `pttt` (`ID_PTTT`, `Ten_PTTT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sach`
+-- Table structure for table `sach`
 --
 
 CREATE TABLE `sach` (
@@ -465,11 +463,11 @@ CREATE TABLE `sach` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `sach`
+-- Dumping data for table `sach`
 --
 
 INSERT INTO `sach` (`ID_Sach`, `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_Xuat_Ban`, `ID_DanhMuc`, `ID_TheLoai`, `Gia_Ban`, `GiamGia(%)`, `So_Luong_Ton`, `Mo_Ta`, `Images`, `ID_Cart`, `TrangThai`) VALUES
-(163, 'Take Note - Văn 9! (Gáy Lò Xo)', 'Nguyễn Quốc Khánh, Ngô Minh Hương, Phạm Ngọc Minh', 'Hà Nội', 2024, 1, 1, 64000.00, 0, 100, ' <div class=\'container-fluid product-description-wrapper\'><p>Take Note - Văn 9!\r\n\r\nBạn đang tìm kiếm một phương pháp học văn hiệu quả, dễ nhớ, dễ hiểu và dễ áp dụng?\r\n\r\nCuốn \"Take Note! Văn 9\" chính là trợ thủ đắc lực dành cho bạn!\r\n\r\nVới hình ảnh minh họa dễ thương và cách trình bày sáng tạo, cuốn sách này giúp các bạn học sinh lớp 9 nắm bắt nội dung chương trình ngữ văn theo sách giáo khoa mới nhất một cách nhanh chóng và nhẹ nhàng. Không chỉ vậy, cuốn sách còn giúp các bạn=>\r\n\r\n- Tăng khả năng ghi nhớ kiến thức\r\n\r\n- Hiểu sâu các tác phẩm văn học quan trọng\r\n\r\n- Áp dụng hiệu quả vào bài kiểm tra và bài thi.\r\n\r\nHãy để \"Take Note! Văn 9\" đồng hành cùng bạn trên con đường chinh phục môn văn nhé! Liên hệ ngay với Nhà sách Minh Thắng để sở hữu trợ thủ đắc lực này ngay thôi nào</p></div>', '8.1.jpg', NULL, 1),
+(163, 'Take Note - Văn 9! (Gáy Lò Xo)', 'Nguyễn Quốc Khánh, Ngô Minh Hương, Phạm Ngọc Minh', 'Hà Nội', 2024, 1, 1, 64000.00, 0, 108, ' <div class=\'container-fluid product-description-wrapper\'><p>Take Note - Văn 9!\r\n\r\nBạn đang tìm kiếm một phương pháp học văn hiệu quả, dễ nhớ, dễ hiểu và dễ áp dụng?\r\n\r\nCuốn \"Take Note! Văn 9\" chính là trợ thủ đắc lực dành cho bạn!\r\n\r\nVới hình ảnh minh họa dễ thương và cách trình bày sáng tạo, cuốn sách này giúp các bạn học sinh lớp 9 nắm bắt nội dung chương trình ngữ văn theo sách giáo khoa mới nhất một cách nhanh chóng và nhẹ nhàng. Không chỉ vậy, cuốn sách còn giúp các bạn=>\r\n\r\n- Tăng khả năng ghi nhớ kiến thức\r\n\r\n- Hiểu sâu các tác phẩm văn học quan trọng\r\n\r\n- Áp dụng hiệu quả vào bài kiểm tra và bài thi.\r\n\r\nHãy để \"Take Note! Văn 9\" đồng hành cùng bạn trên con đường chinh phục môn văn nhé! Liên hệ ngay với Nhà sách Minh Thắng để sở hữu trợ thủ đắc lực này ngay thôi nào</p></div>', '8.1.jpg', NULL, 1),
 (164, 'Sổ Tay Lịch Sử - Everything You Need To Ace History In One Big Fat Notebook', 'Hà Văn Minh', 'Dân Trí', 2024, 8, 15, 298350.00, 0, 100, '<div class=\'container-fluid product-description-wrapper\'><p>Sổ Tay Lịch Sử - Everything You Need To Ace History In One Big Fat Notebook\n\n- BẠN CÓ BIẾT - giúp học sinh bổ sung kiến thức MỚI, những câu chuyện văn hoá, lịch sử mà trong sách giáo khoa không có.\n\n- Hình ảnh minh họa trực quan cho các sự kiện, địa danh, nhân vật; thể hiện qua các nét vẽ sinh động, dễ hiểu.\n\n- Có phần câu hỏi trắc nghiệm và đáp án để học sinh kiểm tra lại các kiến thức đã học\n\n- Câu hỏi ôn tập kiến thức đều bám sát nội dung chương trình học và cấu trúc đề thi THPT\n\n- Trợ thủ đắc lực hướng dẫn tự học hoàn chỉnh cho học sinh\n\nVới sự đồng hành của SỔ TAY LỊCH SỬ, bạn SẼ=>\n\n- Có tư duy bao quát\n\n- Ghi nhớ kiến thức trọng tâm\n\n- Biết cách tìm từ khóa\n\n- Có thêm kiến thức xã hội\n\n- Ứng dụng lịch sử vào cuộc sống\n\nSỔ TAY LỊCH SỬ,GỒM=>\n\n- 60 bài học, 22 phần về kiến thức bám sát chương trình Lịch sử Việt Nam và thế giới lớp 10, 11, 12\n\n- “Mục tiêu bài học”=> những kiến thức, sự kiện, mốc thời gian, nhân vật lịch sử được highlight, kẻ bảng biểu, sơ đồ tư duy\n\n- “Bạn có biết”=> những kiến thức về văn hóa, xã hội, câu chuyện lịch sử thú vị không có trong SGK\n\n- Kiến thức đi theo tiến trình lịch sử, có độ logic, khoa học cao\n\n- Các chủ đề được chia nhỏ giúp học sinh dễ dàng tiếp cận và xử lí.\n\n- Đặc biệt trong phần nội dung quan trọng đều được trình bày sơ đồ hóa cực dễ hiểu.</p></div>', '8.2.jpg', NULL, 1),
 (165, 'Sổ Tay Đội Viên', 'Nhiều Tác Giả', 'Trẻ', 2018, 8, 15, 35700.00, 0, 100, '<div class=\'container-fluid product-description-wrapper\'><p>Sổ Tay Đội Viên\n\nSách trang bị những kỹ năng cần thiết cho đội viên thiếu niên tiền phong Hồ Chí Minh=> những vấn đề chung về tổ chức Đội=> lịch sử hình thành, phát triển; những biểu trưng, quy định, kỹ năng đội viên; Những bài hát dùng trong sinh hoạt Đội; Những kỹ năng thực hành xã hội cần thiết của người đội viên.</p></div>', '8.3.jpg', NULL, 1),
 (166, 'Sổ Tay Viết Văn', 'Tô Hoài', 'Kim Đồng', 2022, 8, 15, 51000.00, 0, 100, '<div class=\'container-fluid product-description-wrapper\'><p>Tô Hoài không chỉ là nhà văn lớn của văn đàn Việt Nam mà còn là bậc thầy trên giảng đường truyền thụ cảm hứng sáng tác. Qua những bài viết của ông về công việc viết văn cùng những kỹ năng “bí truyền” tư duy ngôn ngữ, từ quan sát, ghi chép, tới viết truyện ngắn, truyện dài, ký, hồi ký, xây dựng nhân vật… Sổ tay viết văn xứng là cuốn cẩm nang có giá trị, hữu ích dành cho những người yêu thích tìm hiểu và sáng tác văn chương.</p></div>', '8.4.jpg', NULL, 1),
@@ -628,13 +626,13 @@ INSERT INTO `sach` (`ID_Sach`, `Ten_Sach`, `Tac_Gia`, `Ten_Nha_Xuat_Ban`, `Nam_X
 (317, 'Phân tích hoạt động kinh doanh', 'Phạm Ngọc Ánh', 'NXB Lao Động', 2024, 4, 8, 350000.00, 5, 15, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>PHÂN TÍCH HOẠT ĐỘNG KINH DOANH</strong></span></span></p><p> </p><p>Trong kinh doanh, việc đàm phán hiệu quả là yếu tố quan trọng giúp doanh nghiệp đạt được các thỏa thuận có lợi và phát triển bền vững. Nhiều doanh nhân gặp khó khăn trong việc thương lượng, dẫn đến mất cơ hội hợp tác. Do đó, việc phát triển kỹ năng đàm phán kinh doanh là điều cần thiết để thành công.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>PHÂN TÍCH HOẠT ĐỘNG KINH DOANH</strong> sẽ hướng dẫn bạn cách phát triển kỹ năng đàm phán kinh doanh, từ đó giúp bạn tự tin đạt được các thỏa thuận tốt nhất trong kinh doanh.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh76.jpg', NULL, 1),
 (318, 'The learn starup', 'Lê Văn Nam', 'NXB Kim Đồng', 2024, 4, 8, 360000.00, 10, 10, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>THE LEARN STARUP</strong></span></span></p><p> </p><p>Trong hành trình khởi nghiệp, việc phân tích tài chính doanh nghiệp là yếu tố quan trọng giúp bạn đưa ra các quyết định kinh doanh chính xác. Nhiều startup gặp khó khăn trong việc quản lý tài chính, dẫn đến thất bại trong giai đoạn đầu. Do đó, việc học cách phân tích tài chính doanh nghiệp là điều cần thiết để thành công.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>THE LEARN STARUP</strong> sẽ hướng dẫn bạn cách phân tích tài chính doanh nghiệp, từ đó giúp bạn xây dựng một startup vững mạnh và phát triển bền vững.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh77.jpg', NULL, 1),
 (319, 'Cái đuôi dài', 'Lê Minh Tuấn', 'NXB Thế Giới', 2024, 4, 8, 370000.00, 15, 5, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>CÁI ĐUÔI DÀI</strong></span></span></p><p> </p><p>Trong kinh doanh, việc quản lý khủng hoảng là yếu tố quan trọng giúp doanh nghiệp vượt qua những giai đoạn khó khăn và phát triển bền vững. Nhiều doanh nghiệp gặp khó khăn trong việc xử lý khủng hoảng, dẫn đến mất uy tín và thiệt hại lớn. Do đó, việc học cách quản lý khủng hoảng là điều cần thiết để thành công.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>CÁI ĐUÔI DÀI</strong> sẽ cung cấp chiến lược quản lý khủng hoảng hiệu quả, từ đó giúp bạn tự tin đối mặt và vượt qua mọi thử thách trong kinh doanh.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh78.jpg', NULL, 1),
-(320, 'Quan hệ kinh tế Quốc tế', 'Lê Minh Tuấn', 'NXB Lao Động', 2024, 4, 8, 380000.00, 20, 30, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>QUAN HỆ KINH TẾ QUỐC TẾ</strong></span></span></p><p> </p><p>Trong bối cảnh toàn cầu hóa, việc xây dựng văn hóa doanh nghiệp là yếu tố quan trọng giúp doanh nghiệp tạo dựng sự đoàn kết và phát triển bền vững. Nhiều doanh nghiệp gặp khó khăn trong việc tạo dựng văn hóa doanh nghiệp phù hợp, dẫn đến thiếu sự gắn kết trong đội ngũ. Do đó, việc học cách xây dựng văn hóa doanh nghiệp là điều cần thiết để thành công.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>QUAN HỆ KINH TẾ QUỐC TẾ</strong> sẽ hướng dẫn bạn cách xây dựng văn hóa doanh nghiệp, từ đó giúp bạn tạo dựng một môi trường làm việc hiệu quả và phát triển trong bối cảnh quốc tế.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh79.jpg', NULL, 1),
-(321, 'Rich Dad', 'Lê Minh Tuấn', 'NXB Thế Giới', 2024, 4, 8, 390000.00, 10, 25, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>RICH DAD</strong></span></span></p><p> </p><p>Trong kinh doanh, việc phát triển kỹ năng lãnh đạo chiến lược là yếu tố quan trọng giúp bạn dẫn dắt doanh nghiệp đạt được thành công và phát triển bền vững. Nhiều nhà lãnh đạo gặp khó khăn trong việc định hướng chiến lược, dẫn đến hiệu quả kinh doanh thấp. Do đó, việc rèn luyện kỹ năng lãnh đạo chiến lược là điều cần thiết để làm giàu.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>RICH DAD</strong> sẽ hướng dẫn bạn cách phát triển kỹ năng lãnh đạo chiến lược, từ đó giúp bạn tự tin dẫn dắt doanh nghiệp và đạt được mục tiêu tài chính.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh80.jpg', NULL, 1);
+(320, 'Quan hệ kinh tế Quốc tế', 'Lê Minh Tuấn', 'NXB Lao Động', 2024, 4, 8, 380000.00, 20, 29, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>QUAN HỆ KINH TẾ QUỐC TẾ</strong></span></span></p><p> </p><p>Trong bối cảnh toàn cầu hóa, việc xây dựng văn hóa doanh nghiệp là yếu tố quan trọng giúp doanh nghiệp tạo dựng sự đoàn kết và phát triển bền vững. Nhiều doanh nghiệp gặp khó khăn trong việc tạo dựng văn hóa doanh nghiệp phù hợp, dẫn đến thiếu sự gắn kết trong đội ngũ. Do đó, việc học cách xây dựng văn hóa doanh nghiệp là điều cần thiết để thành công.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>QUAN HỆ KINH TẾ QUỐC TẾ</strong> sẽ hướng dẫn bạn cách xây dựng văn hóa doanh nghiệp, từ đó giúp bạn tạo dựng một môi trường làm việc hiệu quả và phát triển trong bối cảnh quốc tế.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh79.jpg', NULL, 1),
+(321, 'Rich Dad', 'Lê Minh Tuấn', 'NXB Thế Giới', 2024, 4, 8, 390000.00, 10, -124, '<div class=\"container-fluid product-description-wrapper\"><p style=\"text-align=> center;\"><span style=\"color=>#1abc9c\"><span style=\"font-size=>28px\"><strong>RICH DAD</strong></span></span></p><p> </p><p>Trong kinh doanh, việc phát triển kỹ năng lãnh đạo chiến lược là yếu tố quan trọng giúp bạn dẫn dắt doanh nghiệp đạt được thành công và phát triển bền vững. Nhiều nhà lãnh đạo gặp khó khăn trong việc định hướng chiến lược, dẫn đến hiệu quả kinh doanh thấp. Do đó, việc rèn luyện kỹ năng lãnh đạo chiến lược là điều cần thiết để làm giàu.</p><p> </p><p>Hiểu được điều ấy, cuốn sách <strong>RICH DAD</strong> sẽ hướng dẫn bạn cách phát triển kỹ năng lãnh đạo chiến lược, từ đó giúp bạn tự tin dẫn dắt doanh nghiệp và đạt được mục tiêu tài chính.</p><p> </p><p>Bởi cha mẹ chính là \"những người thầy đầu tiên\" của con, nên trong quá trình đọc sách, cha mẹ cần đồng hành cùng con, cần có những khoảng dừng để đặt câu hỏi, quan sát và tương tác với con.</p><p> </p><p>Với nội dung thú vị, hình vẽ đáng yêu, các câu chuyện thực tế đầy mới mẻ và hấp dẫn, mong rằng bộ sách sẽ được các bậc cha mẹ và các em nhỏ yêu thích và đón nhận!</p></div>', 'kinhdoanh80.jpg', NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `theloai`
+-- Table structure for table `theloai`
 --
 
 CREATE TABLE `theloai` (
@@ -644,7 +642,7 @@ CREATE TABLE `theloai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `theloai`
+-- Dumping data for table `theloai`
 --
 
 INSERT INTO `theloai` (`id_theloai`, `TenTheLoai`, `id_danhmuc`) VALUES
@@ -666,18 +664,18 @@ INSERT INTO `theloai` (`id_theloai`, `TenTheLoai`, `id_danhmuc`) VALUES
 (16, 'Cung hoàng đạo', 8);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`ID_Cart`),
   ADD KEY `ID_Khachhang` (`ID_Khachhang`);
 
 --
--- Chỉ mục cho bảng `chi_tiet_don_hang`
+-- Indexes for table `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
   ADD PRIMARY KEY (`ID_Chi_Tiet`),
@@ -685,7 +683,7 @@ ALTER TABLE `chi_tiet_don_hang`
   ADD KEY `ID_Sach` (`ID_Sach`);
 
 --
--- Chỉ mục cho bảng `chi_tiet_phieu_nhap`
+-- Indexes for table `chi_tiet_phieu_nhap`
 --
 ALTER TABLE `chi_tiet_phieu_nhap`
   ADD PRIMARY KEY (`ID_CTietPhieuNhap`),
@@ -693,20 +691,20 @@ ALTER TABLE `chi_tiet_phieu_nhap`
   ADD KEY `ID_Sach` (`ID_Sach`);
 
 --
--- Chỉ mục cho bảng `chi_tiet_quyen`
+-- Indexes for table `chi_tiet_quyen`
 --
 ALTER TABLE `chi_tiet_quyen`
   ADD PRIMARY KEY (`idchitiet`),
   ADD KEY `MaQuyen` (`MaQuyen`);
 
 --
--- Chỉ mục cho bảng `chucnang`
+-- Indexes for table `chucnang`
 --
 ALTER TABLE `chucnang`
   ADD PRIMARY KEY (`ID_ChucNang`);
 
 --
--- Chỉ mục cho bảng `ctiet_pnh`
+-- Indexes for table `ctiet_pnh`
 --
 ALTER TABLE `ctiet_pnh`
   ADD PRIMARY KEY (`ID_sach`,`ID_pnh`),
@@ -714,7 +712,7 @@ ALTER TABLE `ctiet_pnh`
   ADD KEY `ID_pnh` (`ID_pnh`);
 
 --
--- Chỉ mục cho bảng `danh_gia_sach`
+-- Indexes for table `danh_gia_sach`
 --
 ALTER TABLE `danh_gia_sach`
   ADD PRIMARY KEY (`ID_sach`,`ID_Khachhang`),
@@ -722,20 +720,20 @@ ALTER TABLE `danh_gia_sach`
   ADD KEY `ID_Khachhang` (`ID_Khachhang`);
 
 --
--- Chỉ mục cho bảng `danh_muc`
+-- Indexes for table `danh_muc`
 --
 ALTER TABLE `danh_muc`
   ADD PRIMARY KEY (`ID_The_Loai`);
 
 --
--- Chỉ mục cho bảng `dia_chi`
+-- Indexes for table `dia_chi`
 --
 ALTER TABLE `dia_chi`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `Email` (`Email`);
 
 --
--- Chỉ mục cho bảng `don_hang`
+-- Indexes for table `don_hang`
 --
 ALTER TABLE `don_hang`
   ADD PRIMARY KEY (`ID_Don_Hang`),
@@ -743,7 +741,7 @@ ALTER TABLE `don_hang`
   ADD KEY `Phuong_Thuc_Thanh_Toan` (`Phuong_Thuc_Thanh_Toan`);
 
 --
--- Chỉ mục cho bảng `khach_hang`
+-- Indexes for table `khach_hang`
 --
 ALTER TABLE `khach_hang`
   ADD PRIMARY KEY (`ID_Khach_Hang`),
@@ -751,52 +749,53 @@ ALTER TABLE `khach_hang`
   ADD UNIQUE KEY `Email_2` (`Email`);
 
 --
--- Chỉ mục cho bảng `ncc`
+-- Indexes for table `ncc`
 --
 ALTER TABLE `ncc`
   ADD PRIMARY KEY (`ID_NCC`);
 
 --
--- Chỉ mục cho bảng `nhanvien`
+-- Indexes for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD PRIMARY KEY (`ID_NV`),
   ADD KEY `MaQuyen` (`MaQuyen`);
 
 --
--- Chỉ mục cho bảng `nha_cung_cap`
+-- Indexes for table `nha_cung_cap`
 --
 ALTER TABLE `nha_cung_cap`
   ADD PRIMARY KEY (`ID_NCC`);
 
 --
--- Chỉ mục cho bảng `nhomquyen`
+-- Indexes for table `nhomquyen`
 --
 ALTER TABLE `nhomquyen`
   ADD PRIMARY KEY (`MaQuyen`);
 
 --
--- Chỉ mục cho bảng `phieu_nhap`
+-- Indexes for table `phieu_nhap`
 --
 ALTER TABLE `phieu_nhap`
   ADD PRIMARY KEY (`ID_PhieuNhap`),
-  ADD KEY `ID_NCC` (`ID_NCC`);
+  ADD KEY `ID_NCC` (`ID_NCC`),
+  ADD KEY `fk_nv` (`ID_NV`);
 
 --
--- Chỉ mục cho bảng `pnh`
+-- Indexes for table `pnh`
 --
 ALTER TABLE `pnh`
   ADD PRIMARY KEY (`ID_PNH`),
   ADD KEY `ID_NXB` (`ID_NCC`);
 
 --
--- Chỉ mục cho bảng `pttt`
+-- Indexes for table `pttt`
 --
 ALTER TABLE `pttt`
   ADD PRIMARY KEY (`ID_PTTT`);
 
 --
--- Chỉ mục cho bảng `sach`
+-- Indexes for table `sach`
 --
 ALTER TABLE `sach`
   ADD PRIMARY KEY (`ID_Sach`),
@@ -806,194 +805,194 @@ ALTER TABLE `sach`
   ADD KEY `ID_Nha_Xuat_Ban` (`Ten_Nha_Xuat_Ban`);
 
 --
--- Chỉ mục cho bảng `theloai`
+-- Indexes for table `theloai`
 --
 ALTER TABLE `theloai`
   ADD PRIMARY KEY (`id_theloai`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
   MODIFY `ID_Cart` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
+-- AUTO_INCREMENT for table `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
   MODIFY `ID_Chi_Tiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `chi_tiet_phieu_nhap`
+-- AUTO_INCREMENT for table `chi_tiet_phieu_nhap`
 --
 ALTER TABLE `chi_tiet_phieu_nhap`
-  MODIFY `ID_CTietPhieuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID_CTietPhieuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT cho bảng `chi_tiet_quyen`
+-- AUTO_INCREMENT for table `chi_tiet_quyen`
 --
 ALTER TABLE `chi_tiet_quyen`
   MODIFY `idchitiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT cho bảng `chucnang`
+-- AUTO_INCREMENT for table `chucnang`
 --
 ALTER TABLE `chucnang`
   MODIFY `ID_ChucNang` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `danh_muc`
+-- AUTO_INCREMENT for table `danh_muc`
 --
 ALTER TABLE `danh_muc`
   MODIFY `ID_The_Loai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `dia_chi`
+-- AUTO_INCREMENT for table `dia_chi`
 --
 ALTER TABLE `dia_chi`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `don_hang`
+-- AUTO_INCREMENT for table `don_hang`
 --
 ALTER TABLE `don_hang`
   MODIFY `ID_Don_Hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `khach_hang`
+-- AUTO_INCREMENT for table `khach_hang`
 --
 ALTER TABLE `khach_hang`
   MODIFY `ID_Khach_Hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT cho bảng `ncc`
+-- AUTO_INCREMENT for table `ncc`
 --
 ALTER TABLE `ncc`
-  MODIFY `ID_NCC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_NCC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `nhanvien`
+-- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   MODIFY `ID_NV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `nha_cung_cap`
+-- AUTO_INCREMENT for table `nha_cung_cap`
 --
 ALTER TABLE `nha_cung_cap`
   MODIFY `ID_NCC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT cho bảng `nhomquyen`
+-- AUTO_INCREMENT for table `nhomquyen`
 --
 ALTER TABLE `nhomquyen`
   MODIFY `MaQuyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT cho bảng `phieu_nhap`
+-- AUTO_INCREMENT for table `phieu_nhap`
 --
 ALTER TABLE `phieu_nhap`
-  MODIFY `ID_PhieuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID_PhieuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT cho bảng `pnh`
+-- AUTO_INCREMENT for table `pnh`
 --
 ALTER TABLE `pnh`
   MODIFY `ID_PNH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `pttt`
+-- AUTO_INCREMENT for table `pttt`
 --
 ALTER TABLE `pttt`
   MODIFY `ID_PTTT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `sach`
+-- AUTO_INCREMENT for table `sach`
 --
 ALTER TABLE `sach`
   MODIFY `ID_Sach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 
 --
--- AUTO_INCREMENT cho bảng `theloai`
+-- AUTO_INCREMENT for table `theloai`
 --
 ALTER TABLE `theloai`
   MODIFY `id_theloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `cart`
+-- Constraints for table `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`ID_Cart`) REFERENCES `sach` (`ID_Cart`);
 
 --
--- Các ràng buộc cho bảng `chi_tiet_don_hang`
+-- Constraints for table `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
   ADD CONSTRAINT `chi_tiet_don_hang_ibfk_1` FOREIGN KEY (`ID_Don_Hang`) REFERENCES `don_hang` (`ID_Don_Hang`),
   ADD CONSTRAINT `chi_tiet_don_hang_ibfk_2` FOREIGN KEY (`ID_Sach`) REFERENCES `sach` (`ID_Sach`);
 
 --
--- Các ràng buộc cho bảng `chi_tiet_phieu_nhap`
+-- Constraints for table `chi_tiet_phieu_nhap`
 --
 ALTER TABLE `chi_tiet_phieu_nhap`
   ADD CONSTRAINT `chi_tiet_phieu_nhap_ibfk_1` FOREIGN KEY (`ID_PhieuNhap`) REFERENCES `phieu_nhap` (`ID_PhieuNhap`),
   ADD CONSTRAINT `chi_tiet_phieu_nhap_ibfk_2` FOREIGN KEY (`ID_Sach`) REFERENCES `sach` (`ID_Sach`);
 
 --
--- Các ràng buộc cho bảng `ctiet_pnh`
+-- Constraints for table `ctiet_pnh`
 --
 ALTER TABLE `ctiet_pnh`
   ADD CONSTRAINT `ctiet_pnh_ibfk_1` FOREIGN KEY (`ID_pnh`) REFERENCES `pnh` (`ID_PNH`),
   ADD CONSTRAINT `ctiet_pnh_ibfk_2` FOREIGN KEY (`ID_sach`) REFERENCES `sach` (`ID_Sach`);
 
 --
--- Các ràng buộc cho bảng `danh_gia_sach`
+-- Constraints for table `danh_gia_sach`
 --
 ALTER TABLE `danh_gia_sach`
   ADD CONSTRAINT `danh_gia_sach_ibfk_1` FOREIGN KEY (`ID_sach`) REFERENCES `sach` (`ID_Sach`),
   ADD CONSTRAINT `danh_gia_sach_ibfk_2` FOREIGN KEY (`ID_Khachhang`) REFERENCES `khach_hang` (`ID_Khach_Hang`);
 
 --
--- Các ràng buộc cho bảng `dia_chi`
+-- Constraints for table `dia_chi`
 --
 ALTER TABLE `dia_chi`
   ADD CONSTRAINT `dia_chi_ibfk_1` FOREIGN KEY (`Email`) REFERENCES `khach_hang` (`Email`);
 
 --
--- Các ràng buộc cho bảng `don_hang`
+-- Constraints for table `don_hang`
 --
 ALTER TABLE `don_hang`
   ADD CONSTRAINT `don_hang_ibfk_1` FOREIGN KEY (`ID_Khach_Hang`) REFERENCES `khach_hang` (`ID_Khach_Hang`),
   ADD CONSTRAINT `don_hang_ibfk_2` FOREIGN KEY (`Phuong_Thuc_Thanh_Toan`) REFERENCES `pttt` (`ID_PTTT`);
 
 --
--- Các ràng buộc cho bảng `nhanvien`
+-- Constraints for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MaQuyen`) REFERENCES `nhomquyen` (`MaQuyen`);
 
 --
--- Các ràng buộc cho bảng `phieu_nhap`
+-- Constraints for table `phieu_nhap`
 --
 ALTER TABLE `phieu_nhap`
-  ADD CONSTRAINT `phieu_nhap_ibfk_1` FOREIGN KEY (`ID_NCC`) REFERENCES `nha_cung_cap` (`ID_NCC`);
+  ADD CONSTRAINT `fk_nv` FOREIGN KEY (`ID_NV`) REFERENCES `nhanvien` (`ID_NV`);
 
 --
--- Các ràng buộc cho bảng `pnh`
+-- Constraints for table `pnh`
 --
 ALTER TABLE `pnh`
   ADD CONSTRAINT `pnh_ibfk_1` FOREIGN KEY (`ID_NCC`) REFERENCES `ncc` (`ID_NCC`);
 
 --
--- Các ràng buộc cho bảng `sach`
+-- Constraints for table `sach`
 --
 ALTER TABLE `sach`
   ADD CONSTRAINT `sach_ibfk_1` FOREIGN KEY (`ID_DanhMuc`) REFERENCES `danh_muc` (`ID_The_Loai`),
