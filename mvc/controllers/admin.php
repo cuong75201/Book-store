@@ -29,9 +29,9 @@ class Admin extends Controller
         $this->nhaCungCapModel = $this->model("NhaCungCapModel");
     }
 
-    function default($params)
+    function default($params = "")
     {
-        if (isset($params)) {
+        if (!empty($params)) {
             $this->view("page/myerrol", [
                 'href' => 'login'
             ]);
