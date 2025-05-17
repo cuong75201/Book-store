@@ -10,22 +10,23 @@ public function __construct() {
 }
 
     public function getAllPhieuNhap() {
-        $sql = "SELECT pn.*, ncc.Ten_NCC 
+        $sql = "SELECT pn.*, ncc.Ten_NCC, nv.Ten_NV 
                 FROM phieu_nhap pn
-                LEFT JOIN nha_cung_cap ncc ON pn.ID_NCC = ncc.ID_NCC";
+                LEFT JOIN nha_cung_cap ncc ON pn.ID_NCC = ncc.ID_NCC
+                LEFT JOIN nhanvien nv ON pn.ID_NV = nv.ID_NV";               
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-public function addPhieuNhap($ngayNhap, $id_ncc, $chiTiet) {
+public function addPhieuNhap($ngayNhap, $id_ncc, $chiTiet, $id_nv) {
     $con = $this->con;
     $con->query("SET innodb_lock_wait_timeout = 5");
     $con->begin_transaction();
 
     try {
         // 1. Thêm phiếu nhập
-        $stmt1 = $con->prepare("INSERT INTO phieu_nhap (NgayNhap, ID_NCC) VALUES (?, ?)");
-        $stmt1->bind_param("ss", $ngayNhap, $id_ncc);
+        $stmt1 = $con->prepare("INSERT INTO phieu_nhap (NgayNhap, ID_NCC, ID_NV) VALUES (?, ?, ?)");
+        $stmt1->bind_param("sii", $ngayNhap, $id_ncc, $id_nv);
         $stmt1->execute();
         $id_phieunhap = $con->insert_id;
 

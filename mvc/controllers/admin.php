@@ -17,6 +17,8 @@ class Admin extends Controller
     public $nccModel;
     function __construct()
     {
+        if (!isset($_SESSION)) session_start();
+        parent::__construct();
         $this->ctietquyenModel = $this->model("ctiet_quyenModel");
         $this->ctietpnhModel = $this->model("ctiet_pnhModel");
         $this->khachhangModel = $this->model("UserModel");
@@ -242,22 +244,21 @@ class Admin extends Controller
     }
     function checkLogin()
     {
-
         $sdt = isset($_POST['username']) ? $_POST['username'] : "";
         $password = isset($_POST["password"]) ? $_POST['password'] : "";
         $result = $this->nhanvienModel->KiemTraNhanVien($sdt, $password);
+        
         if ($result) {
-
-
             $nv = $this->nhanvienModel->getNVfromSDT($sdt);
-            $idnv = $nv['ID_NV'];
+            $_SESSION['id_nv'] = $nv['ID_NV'];
+            
+            // Khởi tạo mảng trước khi sử dụng
+            $_SESSION['hanhdong'] = []; // <-- Thêm dòng này
+            
             $ctiet = $this->ctietquyenModel->getById($nv['MaQuyen']);
-            $hanhdong = [];
             foreach ($ctiet as $ct) {
-                $hanhdong[] = $ct['hanhdong'];
+                $_SESSION['hanhdong'][] = $ct['hanhdong']; // <-- Sử dụng [] để thêm phần tử
             }
-            $_SESSION['id_nv'] = $idnv;
-            $_SESSION['hanhdong'] = $hanhdong;
         }
         echo json_encode($result);
     }
@@ -430,31 +431,17 @@ class Admin extends Controller
     // Action chính
     function phieunhap()
     {
-        if (!isset($_SESSION['hanhdong'])) {
-            // $this->view("page/loginAdmin", []);
-            header("Location: login");
+        // Kiểm tra session tồn tại
+        if (!isset($_SESSION) || !isset($_SESSION['hanhdong'])) {
+            $this->view("page/loginAdmin", []);
             return;
-        } else {
-            if (!in_array(6, $_SESSION['hanhdong'])) {
-                $this->view("page/myerrol", [
-                    'href' => 'dashboard'
-                ]);
-                return;
-            }
         }
-        // if (!isset($_SESSION)) {
-        //     $this->view("page/loginAdmin", []);
-        //     return;
-        // } else {
-        //     if (!in_array(6, $_SESSION['hanhdong'])) {
-        //         $this->view("page/myerrol", [
-        //             'href' => 'dashboard'
-        //         ]);
-        //         return;
-        //     }
-        // }
-        if (!isset($_SESSION)) session_start();
-        if (!isset($_SESSION['hanhdong'])) $_SESSION['hanhdong'] = []; // gán rỗng nếu chưa có
+
+        // Kiểm tra quyền với mảng đã được khởi tạo
+        if (!in_array(6, $_SESSION['hanhdong'])) {
+            $this->view("page/myerrol", ['href' => 'dashboard']);
+            return;
+        }
 
         $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
         $this->view("admin_view", [
@@ -489,9 +476,21 @@ class Admin extends Controller
     {
         // Nhận dữ liệu JSON gửi từ client
         $data = json_decode(file_get_contents('php://input'), true);
+        // Kiểm tra session nhân viên
+        if (!isset($_SESSION['id_nv'])) {
+            echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
 
+        $id_nv = $_SESSION['id_nv']; // Lấy từ session
+        $result = $this->phieunhapModel->addPhieuNhap(
+            $data['NgayNhap'], 
+            $data['ID_NCC'], 
+            $data['ChiTiet'], 
+            $id_nv // Thêm ID_NV
+        );
         // Kiểm tra dữ liệu đầu vào
-        if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['ChiTiet'])) {
+        if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['id_nv'])) {
             echo json_encode([
                 'success' => false,
                 'message' => 'Dữ liệu không hợp lệ!'
@@ -514,7 +513,6 @@ class Admin extends Controller
             echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
         }
     }
-
 
     // API: Xóa phiếu
     function deletePhieu()

@@ -29,7 +29,7 @@ $(document).ready(function () {
 
                 }
                 else {
-                    window.location = "/Book_store/admin/dashboard";
+                    window.location = "dashboard";
                 }
             },
             error: function (xhr, status, error) {
