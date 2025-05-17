@@ -149,16 +149,25 @@ function viewDetail(idPhieu) {
         dataType: 'json',
         data: { id: idPhieu },
         success: function (chiTiet) {
+            // Kiểm tra dữ liệu trả về
+            console.log("Chi tiết phiếu:", chiTiet); 
+
+            // Lấy ID_NV từ phần tử đầu tiên (nếu có)
+            const idNv = chiTiet.length > 0 ? chiTiet[0].ID_NV : 'Không xác định';
+            
             let html = `
-        <div class="detail-header">
-          <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
-        </div>
-        <ul class="detail-list">
-        <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
-      `;
+                <div class="detail-header">
+                    <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
+                </div>
+                <ul class="detail-list">
+                    <p><strong>Mã nhân viên:</strong> ${idNv}</p> <!-- Hiển thị ID_NV -->
+                    <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
+            `;
+            
             chiTiet.forEach(ct => {
                 html += `<li>${ct.Ten_Sach} — SL: ${ct.SoLuong} — Giá: ${ct.GiaNhap}</li>`;
             });
+            
             html += `</ul>`;
             $("#phieuModal .modal-body").html(html);
             $("#phieuModal").addClass('active');
@@ -168,7 +177,6 @@ function viewDetail(idPhieu) {
         }
     });
 }
-
 // Thêm hàm ẩn modal
 function closePhieuModal() {
     $('#phieuModal').removeClass('active');

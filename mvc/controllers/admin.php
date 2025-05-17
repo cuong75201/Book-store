@@ -472,48 +472,43 @@ class Admin extends Controller
 
 
     // API: Xử lý thêm phiếu
-    function addPhieuNhap()
-    {
-        // Nhận dữ liệu JSON gửi từ client
-        $data = json_decode(file_get_contents('php://input'), true);
-        // Kiểm tra session nhân viên
-        if (!isset($_SESSION['id_nv'])) {
-            echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập']);
-            return;
-        }
+    function addPhieuNhap() {
+    // Nhận dữ liệu JSON gửi từ client
+    $data = json_decode(file_get_contents('php://input'), true);
 
-        $id_nv = $_SESSION['id_nv']; // Lấy từ session
-        $result = $this->phieunhapModel->addPhieuNhap(
-            $data['NgayNhap'], 
-            $data['ID_NCC'], 
-            $data['ChiTiet'], 
-            $id_nv // Thêm ID_NV
-        );
-        // Kiểm tra dữ liệu đầu vào
-        if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['id_nv'])) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Dữ liệu không hợp lệ!'
-            ]);
-            return;
-        }
-
-        // Tách dữ liệu
-        $ngayNhap = $data['NgayNhap'];
-        $idNCC = $data['ID_NCC'];
-        $chiTiet = $data['ChiTiet']; // Mảng chứa các sách: [ ['ID_Sach'=>..., 'SoLuong'=>..., 'GiaNhap'=>...], ...]
-
-        // Gọi model để thêm phiếu nhập
-        $result = $this->phieunhapModel->addPhieuNhap($ngayNhap, $idNCC, $chiTiet);
-
-        // Trả về kết quả JSON
-        if ($result) {
-            echo json_encode(['success' => true, 'message' => 'Them phieu nhap thanh cong']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
-        }
+    // Kiểm tra session nhân viên
+    if (!isset($_SESSION['id_nv'])) {
+        echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập']);
+        return;
     }
 
+    // Lấy ID_NV từ session
+    $id_nv = $_SESSION['id_nv'];
+
+    // Kiểm tra dữ liệu đầu vào (LOẠI BỎ KIỂM TRA id_nv TRONG $data)
+    if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['ChiTiet'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Dữ liệu không hợp lệ!'
+        ]);
+        return;
+    }
+
+    // Gọi model và truyền ID_NV từ session
+    $result = $this->phieunhapModel->addPhieuNhap(
+        $data['NgayNhap'], 
+        $data['ID_NCC'], 
+        $data['ChiTiet'], 
+        $id_nv // Truyền ID_NV từ session vào đây
+    );
+
+    // Trả về kết quả
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Thêm phiếu nhập thành công']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
+    }
+}
     // API: Xóa phiếu
     function deletePhieu()
     {

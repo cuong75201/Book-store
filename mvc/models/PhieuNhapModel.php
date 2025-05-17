@@ -107,9 +107,10 @@ public function deletePhieuNhap($id_phieunhap) {
 
 
     public function getChiTietPhieu($idPhieu) {
-        $sql = "SELECT ct.ID_Sach, s.Ten_Sach, ct.SoLuong, ct.GiaNhap 
+        $sql = "SELECT ct.ID_Sach, s.Ten_Sach, ct.SoLuong, ct.GiaNhap, pn.ID_NV 
                 FROM chi_tiet_phieu_nhap ct
                 JOIN sach s ON ct.ID_Sach = s.ID_Sach
+                JOIN phieu_nhap pn ON ct.ID_PhieuNhap = pn.ID_PhieuNhap
                 WHERE ct.ID_PhieuNhap = $idPhieu";
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
