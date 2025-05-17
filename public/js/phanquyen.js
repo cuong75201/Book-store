@@ -7,7 +7,7 @@ function openModal(action) {
         $(".Save-btn").on("click", function () {
             let name = $("#name").val();
             if (!name) {
-                alert("Vui lòng nhập tên quyền");
+                toast({ title: 'WARNING', message: "Vui lòng nhập tên quyền", type: 'warning', duration: 3000 });
                 return;
             }
             let ids = [];
@@ -17,7 +17,8 @@ function openModal(action) {
                 ids.push($(this).attr('id'));
             });
             if (ids.length == 0) {
-                alert("Vui lòng chọn ít nhất 1 quyền");
+                toast({ title: 'WARNING', message: "Vui lòng chọn ít nhất 1 quyền", type: 'warning', duration: 3000 });
+
                 return;
             }
             $.ajax({
@@ -26,8 +27,8 @@ function openModal(action) {
                 data: { name: name, ids: ids },
                 dataType: 'json',
                 success: function (data) {
-                    alert("Thêm thành công");
-                    location.reload();
+                    toast({ title: 'SUCCESS', message: 'Thêm thành công', type: 'success', duration: 3000 });
+
                 },
                 error: function (xhr, status, error) {
                     console.error("AJAX Error:", error);
@@ -106,14 +107,14 @@ function openModal(action) {
     }
     else if (action === "Sửa") {
         if (!$("tr").hasClass("selected")) {
-            alert("Vui lòng chọn dòng cần sửa");
+            toast({ title: 'WARNING', message: "Vui lòng chọn dòng cần sửa", type: 'warning', duration: 3000 });
         }
         else {
             let id = $("tr.selected").attr("id");
             $(".Save-btn").on("click", function () {
                 let name = $("#name").val();
                 if (!name) {
-                    alert("Vui lòng nhập tên quyền");
+                    toast({ title: 'WARNING', message: "Vui lòng nhập tên quyền", type: 'warning', duration: 3000 });
                     return;
                 }
                 let ids = [];
@@ -123,7 +124,7 @@ function openModal(action) {
                     ids.push($(this).attr('id'));
                 });
                 if (ids.length == 0) {
-                    alert("Vui lòng chọn ít nhất 1 quyền");
+                    toast({ title: 'WARNING', message: "Vui lòng chọn ít nhất 1 quyền", type: 'warning', duration: 3000 });
                     return;
                 }
                 $.ajax({
@@ -132,8 +133,7 @@ function openModal(action) {
                     data: { id: id, name: name, ids: ids },
                     dataType: 'json',
                     success: function (data) {
-                        alert("Sửa thành công");
-                        location.reload();
+                        toast({ title: 'SUCCESS', message: "Sửa thành công", type: 'success', duration: 3000 });
                     },
                     error: function (xhr, status, error) {
                         console.error("AJAX Error:", error);
@@ -254,8 +254,8 @@ function openModal(action) {
                     data: { id: id },
                     dataType: 'json',
                     success: function (data) {
-                        alert("Xóa thành công!");
-                        location.reload();
+                        toast({ title: 'SUCCESS', message: 'Xóa thành công"', type: 'success', duration: 3000 });
+
                     },
                     error: function (xhr, status, error) {
                         console.error("AJAX Error:", error);
@@ -275,4 +275,5 @@ function openModal(action) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
+    location.reload();
 }

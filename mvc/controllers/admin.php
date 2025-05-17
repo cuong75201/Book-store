@@ -29,9 +29,15 @@ class Admin extends Controller
         $this->nhaCungCapModel = $this->model("NhaCungCapModel");
     }
 
-    function default()
+    function default($params)
     {
-        if (isset($_SESSION)) {
+        if (isset($params)) {
+            $this->view("page/myerrol", [
+                'href' => 'login'
+            ]);
+            return;
+        }
+        if (isset($_SESSION['hanhdong'])) {
             $this->dashboard();
         } else {
             $this->view("page/loginAdmin", []);
@@ -48,8 +54,9 @@ class Admin extends Controller
     }
     function product()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
             return;
         } else {
             if (!in_array(1, $_SESSION['hanhdong'])) {
@@ -74,8 +81,9 @@ class Admin extends Controller
     }
     function nhanvien()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
             return;
         } else {
             if (!in_array(3, $_SESSION['hanhdong'])) {
@@ -99,8 +107,9 @@ class Admin extends Controller
     }
     function donhang()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
             return;
         } else {
             if (!in_array(5, $_SESSION['hanhdong'])) {
@@ -121,8 +130,9 @@ class Admin extends Controller
     }
     function thongke()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
             return;
         } else {
             if (!in_array(7, $_SESSION['hanhdong'])) {
@@ -153,8 +163,9 @@ class Admin extends Controller
     }
     function phanquyen()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
             return;
         } else {
             if (!in_array(8, $_SESSION['hanhdong'])) {
@@ -368,8 +379,9 @@ class Admin extends Controller
     // Action chính
     function phieunhap()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
             return;
         } else {
             if (!in_array(6, $_SESSION['hanhdong'])) {

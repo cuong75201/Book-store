@@ -14,6 +14,19 @@ class  UserModel extends dbconnect
         }
         return $check;
     }
+    public function creatUserLog($lastname, $fisrtname, $email,  $password, $date)
+    {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $name = $lastname . " " . $fisrtname;
+        $sql = "INSERT INTO `khach_hang`( `Ten_Khach_Hang`, `Email`, `Mat_Khau`, `Ngay_Dang_Ky`,`status`,`Trang_Thai`)
+         VALUES ('$name','$email','$password','$date',1,1)";
+        $result = mysqli_query($this->con, $sql);
+        $check = true;
+        if (!$result) {
+            $check = false;
+        }
+        return $check;
+    }
     public function updateUser($lastname, $firstname, $email, $password, $phone, $address)
     {
         $name = $lastname . " " . $firstname;

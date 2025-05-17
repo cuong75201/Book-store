@@ -370,7 +370,7 @@ function openModal(action) {
                     dataType: "json",
                     success: function (data) {
                         console.log(data);
-                        alert("Xóa thành công");
+                        toast({ title: 'SUCCESS', message: 'Xóa thành công', type: 'success', duration: 3000 });
                         closeModal();
                         $("tr.selected").remove();
                     },
@@ -390,6 +390,7 @@ function openModal(action) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
+    location.reload();
 }
 function AddProduct() {
     let namesach = $("#name").val().trim();
@@ -442,9 +443,7 @@ function AddProduct() {
         contentType: false,
         processData: false,
         success: function (data) {
-            alert("Thêm thành công");
-            location.reload()
-            closeModal();
+            toast({ title: 'SUCCESS', message: 'Thêm thành công', type: 'success', duration: 3000 });
         },
         error: function (xhr, status, error) {
             console.error("AJAX Error:", error);
@@ -508,8 +507,9 @@ function UpdateProduct() {
         processData: false,
         success: function (data) {
             console.log(data);
-            alert("Sửa thành công");
-            location.reload();
+            toast({ title: 'SUCCESS', message: "Sửa thành công", type: 'success', duration: 3000 });
+
+
             closeModal();
         },
         error: function (xhr, status, error) {

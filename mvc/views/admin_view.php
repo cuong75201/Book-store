@@ -80,6 +80,8 @@ for ($i = 0; $i < count($hanhdong); $i++) {
 </head>
 
 <body>
+    <div id="toast"></div>
+
     <div class="container " style="display: flex;">
         <div class="sidebar">
             <div class="top-sidebar">

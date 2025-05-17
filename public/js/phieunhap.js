@@ -60,7 +60,7 @@ function themDongChiTiet() {
                 <option value="${s.ID_Sach}">${s.Ten_Sach}</option>
             `).join('');
 
-        const newRow = `
+            const newRow = `
             <div class="chi-tiet-row">
                 <div>
                     <label>Sách:</label>
@@ -79,7 +79,8 @@ function themDongChiTiet() {
                 </div>
             </div>
         `;
-        $("#chiTietContainer").append(newRow)},
+            $("#chiTietContainer").append(newRow)
+        },
 
         error: function (xhr) {
             console.error("Lỗi khi lấy danh sách sách:", xhr.responseText);
@@ -118,72 +119,72 @@ function savePhieu() {
     }
     console.log("Dữ liệu gửi đi:", JSON.stringify(data, null, 2)); // Debug
 
-$.ajax({
-    url: 'admin/addPhieuNhap',
-    method: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify(data),
-    success: function (response) {
-        console.log(response); // In ra để kiểm tra phản hồi từ server
-        if (!response.success) {
-            alert('Them phieu nhap thanh cong');
-            closeModal();
-            location.reload();
-        } else {
-            alert('Thêm thất bại: ' + (response.message || 'Có lỗi xảy ra'));
+    $.ajax({
+        url: 'admin/addPhieuNhap',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            console.log(response); // In ra để kiểm tra phản hồi từ server
+            if (!response.success) {
+                alert('Them phieu nhap thanh cong');
+                closeModal();
+
+            } else {
+                alert('Thêm thất bại: ' + (response.message || 'Có lỗi xảy ra'));
+            }
+        },
+        error: function (xhr) {
+            alert('Lỗi khi gửi dữ liệu: ' + xhr.responseText);
         }
-    },
-    error: function (xhr) {
-        alert('Lỗi khi gửi dữ liệu: ' + xhr.responseText);
-    }
-});
+    });
 
 }
 
 // Xem chi tiết
 function viewDetail(idPhieu) {
-  $.ajax({
-    url: 'admin/getChiTietPhieu',
-    method: 'POST',
-    dataType: 'json',
-    data: { id: idPhieu },
-    success: function(chiTiet) {
-      let html = `
+    $.ajax({
+        url: 'admin/getChiTietPhieu',
+        method: 'POST',
+        dataType: 'json',
+        data: { id: idPhieu },
+        success: function (chiTiet) {
+            let html = `
         <div class="detail-header">
           <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
         </div>
         <ul class="detail-list">
         <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
       `;
-      chiTiet.forEach(ct => {
-        html += `<li>${ct.Ten_Sach} — SL: ${ct.SoLuong} — Giá: ${ct.GiaNhap}</li>`;
-      });
-      html += `</ul>`;
-      $("#phieuModal .modal-body").html(html);
-      $("#phieuModal").addClass('active');
-    },
-    error: function(xhr) {
-      alert('Không thể lấy chi tiết phiếu.');
-    }
-  });
+            chiTiet.forEach(ct => {
+                html += `<li>${ct.Ten_Sach} — SL: ${ct.SoLuong} — Giá: ${ct.GiaNhap}</li>`;
+            });
+            html += `</ul>`;
+            $("#phieuModal .modal-body").html(html);
+            $("#phieuModal").addClass('active');
+        },
+        error: function (xhr) {
+            alert('Không thể lấy chi tiết phiếu.');
+        }
+    });
 }
 
 // Thêm hàm ẩn modal
 function closePhieuModal() {
-  $('#phieuModal').removeClass('active');
+    $('#phieuModal').removeClass('active');
 }
 function closeModal() {
     $('#phieuModal').removeClass('active');
 }
 
 function deletePhieu(id) {
-    if(confirm('Xóa phiếu này?')) {
+    if (confirm('Xóa phiếu này?')) {
         $.ajax({
             url: 'admin/deletePhieu',
             method: 'POST',
             data: { id: id },
-            success: function(response) {
-                if(response.success) {
+            success: function (response) {
+                if (response.success) {
                     $(`tr[data-id="${id}"]`).remove();
                 }
             }
@@ -194,9 +195,10 @@ function deletePhieu(id) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
+    location.reload();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".add-button").addEventListener("click", openModal);
+    document.querySelector(".add-button").addEventListener("click", openModal);
 });
 

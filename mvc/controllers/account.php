@@ -8,7 +8,7 @@ class Account extends Controller
     }
     function addUser($lastname, $fisrtname, $email, $password, $date)
     {
-        $result = $this->userModel->create($lastname, $fisrtname, $email, $password, $date);
+        $result = $this->userModel->creatUserLog($lastname, $fisrtname, $email, $password, $date);
         return $result;
     }
     function default()
@@ -29,7 +29,7 @@ class Account extends Controller
             $password = $_POST["password"];
             $confirmpassword = $_POST["confirmpassword"];
             date_default_timezone_set("Asia/Ho_Chi_Minh");
-            $date = date("Y-m-d H:i:s");
+            $date = date("Y-m-d");
             $error = [];
             if (empty($last_name)) {
                 $error["last_name"] = "Không được để trống";
