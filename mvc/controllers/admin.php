@@ -51,6 +51,7 @@ class Admin extends Controller
             "Page" => "dashboard"
         ]);
     }
+    
     function product()
     {
         if (!isset($_SESSION)) {
@@ -395,17 +396,20 @@ class Admin extends Controller
     // Action chính
     function phieunhap()
     {
-        if (!isset($_SESSION)) {
-            $this->view("page/loginAdmin", []);
-            return;
-        } else {
-            if (!in_array(6, $_SESSION['hanhdong'])) {
-                $this->view("page/myerrol", [
-                    'href' => 'dashboard'
-                ]);
-                return;
-            }
-        }
+        // if (!isset($_SESSION)) {
+        //     $this->view("page/loginAdmin", []);
+        //     return;
+        // } else {
+        //     if (!in_array(6, $_SESSION['hanhdong'])) {
+        //         $this->view("page/myerrol", [
+        //             'href' => 'dashboard'
+        //         ]);
+        //         return;
+        //     }
+        // }
+        if (!isset($_SESSION)) session_start();
+if (!isset($_SESSION['hanhdong'])) $_SESSION['hanhdong'] = []; // gán rỗng nếu chưa có
+
         $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
         $this->view("admin_view", [
             "title" => "Quản lý Phiếu nhập",

@@ -114,321 +114,33 @@ $result10 =$sachModel->get15SP(5,50);
 
                                     <div class="owl-item">
                                         <div class="chir_loop">
-                                         <?php foreach ($newProducts as $product): ?>                                           
-                                            <div class="chir_img">
-                                                <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
-                                                    <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
+                                            <?php foreach ($newProducts as $product): ?>                                           
+                                                <div class="chir_img">
+                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                        <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
                                                     </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
+                                                    <div class="insActionloop">
+                                                        <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
+                                                            <img src="media/logo-banner/eye.png" alt="">
+                                                        </a>
+                                                        <a href="#">
+                                                            <img src="media/logo-banner/cart.png" alt="">
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="chir_content">
-                                            <h3><?= $product['Ten_Sach'] ?></h3>
+                                                <div class="chir_content">
+                                                <h3><?= $product['Ten_Sach'] ?></h3>
 
-                                                <p class="pro-price">
-                                                <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
-                                                <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
-                                                <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
-                                                </p>
-
-                                            </div>
-                                        <?php endforeach; ?>
-
-                                </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
+                                                    <p class="pro-price">
+                                                    <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
+                                                    <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
+                                                    <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
+                                                    </p>
                                                 </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/img_product/5.1.png" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-                                        </div>
+                                            <?php endforeach; ?>
+                                       </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -461,18 +173,19 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result1 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
-                            echo ' <div class="chir_loop">
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";                        
+                        echo '<div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                            <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -494,9 +207,6 @@ $result10 =$sachModel->get15SP(5,50);
                                         </p>
 
                                     </div>
-
-
-
                                 </div>';
                         }         
                         ?>
@@ -513,18 +223,18 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result2 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
-                            echo ' <div class="chir_loop">
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";                              echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -568,18 +278,19 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result3 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
                             echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -622,18 +333,19 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result4 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
                             echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -680,14 +392,15 @@ $result10 =$sachModel->get15SP(5,50);
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
                             echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -730,18 +443,19 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result6 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
                             echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -784,18 +498,19 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result7 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
                             echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -838,18 +553,19 @@ $result10 =$sachModel->get15SP(5,50);
                         <div class="content_product">
                             <div class="list_product  d-flex"> 
                         <?php foreach($result8 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
                         $GiaGoc = (int) $row['Gia_Ban'];
                         $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
                         $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                     //   $slug = $this->bookModel->slugify($row['Ten_Sach']);
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
                             echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
+                                        <a href="'.$detailUrl.'">
                                             <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
