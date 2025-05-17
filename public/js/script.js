@@ -682,94 +682,331 @@ $(document).ready(function () {
 
 document.getElementById('hienformtimkiem').addEventListener('click', function () {
     // alert("clieck vaof hop thoai tim kiem");
-    const form = document.getElementById('advancedSearchForm');
-    form.style.display = form.style.display == 'none' ? 'block' : 'none';
-    // form.style.display = 'none';
-    this.classList.toggle('active');
-});
-document.getElementById('resetAdvancedSearch').addEventListener('click', function () {
-    const form = document.getElementById('advancedSearchForm');
-    const inputs = form.querySelectorAll('input, select');
-    inputs.forEach(input => input.value = '');
-});
+    document.getElementById('hienformtimkiem').addEventListener('click', function () {
+        // alert("clieck vaof hop thoai tim kiem");
+        const form = document.getElementById('advancedSearchForm');
+        form.style.display = form.style.display == 'none' ? 'block' : 'none';
+        // form.style.display = 'none';
+        this.classList.toggle('active');
+    });
+    document.getElementById('resetAdvancedSearch').addEventListener('click', function () {
+        const form = document.getElementById('advancedSearchForm');
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(input => input.value = '');
+    });
 
-document.getElementById("timkiemnangcao").addEventListener("click", function (e) {
-    e.preventDefault();
-    var tenSach = document.getElementById("tenSach").value.trim();
-    var tacGia = document.getElementById("tacGia").value.trim();
-    // var tenNhaXuatBan = document.getElementById("tenNhaXuatBan").value.trim();
-    var idDanhMuc = (document.getElementById("danhmuc").value !== '') ? document.getElementById("danhmuc").value : '';
-    var giaBatDau = (document.getElementById("giaBatDau").value !== '') ? Number(document.getElementById("giaBatDau").value) : '';
-    var giaKetThuc = (document.getElementById("giaKetThuc").value !== '') ? Number(document.getElementById("giaKetThuc").value) : '';
-    var giamGia = (document.getElementById("giamGia").value !== '') ? Number(document.getElementById("giamGia").value) : '';
-    var soLuongTon = (document.getElementById("soLuongTon").value !== '') ? Number(document.getElementById("soLuongTon").value) : '';
-    var value = [];
+    document.getElementById("timkiemnangcao").addEventListener("click", function (e) {
+        e.preventDefault();
+        var tenSach = document.getElementById("tenSach").value.trim();
+        var tacGia = document.getElementById("tacGia").value.trim();
+        // var tenNhaXuatBan = document.getElementById("tenNhaXuatBan").value.trim();
+        var idDanhMuc = (document.getElementById("danhmuc").value !== '') ? document.getElementById("danhmuc").value : '';
+        var giaBatDau = (document.getElementById("giaBatDau").value !== '') ? Number(document.getElementById("giaBatDau").value) : '';
+        var giaKetThuc = (document.getElementById("giaKetThuc").value !== '') ? Number(document.getElementById("giaKetThuc").value) : '';
+        var giamGia = (document.getElementById("giamGia").value !== '') ? Number(document.getElementById("giamGia").value) : '';
+        var soLuongTon = (document.getElementById("soLuongTon").value !== '') ? Number(document.getElementById("soLuongTon").value) : '';
+        var value = [];
 
-    if (tenSach !== '') {
-        value.push("Ten_Sach LIKE '%" + tenSach + "%'");
+        if (tenSach !== '') {
+            value.push("Ten_Sach LIKE '%" + tenSach + "%'");
 
-    }
-    if (tacGia !== '') {
-        value.push("Tac_Gia  LIKE '%" + tacGia + "%'");
-    }
-    // if (tenNhaXuatBan !== '') {
-    //     value.push("Ten_Nha_Xuat_Ban = '" + tenNhaXuatBan + "'");
-    // }
-    if (idDanhMuc !== '') {
-        value.push("ID_The_Loai = " + idDanhMuc);
-    }
-    if (giaBatDau !== '') {
-        value.push("Gia_Ban >= " + giaBatDau);
-    }
-    if (giaKetThuc !== '') {
-        value.push("Gia_Ban <= " + giaKetThuc);
-    }
-    if (giamGia !== '') {
-        value.push("`GiamGia(%)` = " + giamGia);
-    }
-    if (soLuongTon !== '') {
-        value.push("So_Luong_Ton = " + soLuongTon);
-    }
+        }
+        if (tacGia !== '') {
+            value.push("Tac_Gia  LIKE '%" + tacGia + "%'");
+        }
+        // if (tenNhaXuatBan !== '') {
+        //     value.push("Ten_Nha_Xuat_Ban = '" + tenNhaXuatBan + "'");
+        // }
+        if (idDanhMuc !== '') {
+            value.push("ID_The_Loai = " + idDanhMuc);
+        }
+        if (giaBatDau !== '') {
+            value.push("Gia_Ban >= " + giaBatDau);
+        }
+        if (giaKetThuc !== '') {
+            value.push("Gia_Ban <= " + giaKetThuc);
+        }
+        if (giamGia !== '') {
+            value.push("`GiamGia(%)` = " + giamGia);
+        }
+        if (soLuongTon !== '') {
+            value.push("So_Luong_Ton = " + soLuongTon);
+        }
 
-    // Kiểm tra nếu mảng value rỗng
-    if (value.length === 0) {
-        alert("Vui lòng nhập ít nhất một tiêu chí tìm kiếm.");
-        return;
-    }
+        // Kiểm tra nếu mảng value rỗng
+        if (value.length === 0) {
+            alert("Vui lòng nhập ít nhất một tiêu chí tìm kiếm.");
+            return;
+        }
 
-    var sql = "SELECT * FROM sach WHERE ";
-    sql += value.join(' AND '); // Sử dụng AND để nối các điều kiện lại
-    console.log(sql);
+        var sql = "SELECT * FROM sach WHERE ";
+        sql += value.join(' AND '); // Sử dụng AND để nối các điều kiện lại
+        console.log(sql);
+    });
+    function timKiemSachNangCao(sql) {
+        $.ajax({
+            url: "collections/searchSachNangCao",
+            method: "POST",
+            data: { truyVan: sql },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.length === 0) {
+                    $(".ins_main").html("<div>Không tìm thấy sách</div>");
+                    $("#phantrang").html("");
+                    return;
+                }
 
-    $.ajax({
-        url: "collections/searchSachNangCao",
-        method: "POST",
-        data: { truyVan: sql },
-        dataType: "json",
-        success: function (data) {
-            if (data.length === 0) {
-                $(".ins_main").html("<div>Không tìm thấy sách</div>");
-                $("#phantrang").html("");
-                return;
+                let sanPham1Trang = 12;
+                let tongSoTrang = Math.ceil(data.length / sanPham1Trang);
+
+                function hienThiTrang(trang) {
+                    let batDau = (trang - 1) * sanPham1Trang;
+                    let ketThuc = batDau + sanPham1Trang;
+                    let danhSachHienThi = data.slice(batDau, ketThuc);
+
+                    let html = `
+                    <div class="col-13">
+                         <div class="alert alert-info">Kết quả tìm kiếm:</div>
+                        <div class="content-list row">`;
+                    danhSachHienThi.forEach(function (product) {
+                        var GiaGoc = parseFloat(product.Gia_Ban);
+                        var GiaGiam = (GiaGoc - GiaGoc * product.GiamGia / 100);
+                        console.log(product.GiamGia);
+                        console.log(GiaGiam);
+
+                        html += `
+                        <div class="item-product col-3">
+                            <div class="chir_loop">
+                                <div class="chir_img">
+                                    <a href="#">
+                                        <img src="media/img_product/${product.Images}" alt="${product.Ten_Sach}">
+                                    </a>
+                                    <div class="insActionloop">
+                                        <a href="#"><img src="media/logo-banner/eye.png" alt="View"></a>
+                                        <a href="#"><img src="media/logo-banner/cart.png" alt="Add to Cart"></a>
+                                    </div>
+                                </div>
+                                <div class="chir_content">
+                                    <h3><a href="#">${product.Ten_Sach}</a></h3>
+                                    <p class="pro-price">
+                                        <del>${GiaGoc}đ</del> ${GiaGiam}đ
+                                        <span class="sale-price">
+                                            <span>-${product.GiamGia}%</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+
+                    html += `
+                        </div>
+                    </div>`; // đóng content-list và col-13
+
+                    $(".ins_main").html(html);
+                    if (tongSoTrang > 1) {
+                        if (!document.getElementById("phantrang")) {
+                            $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
+                        }
+                    }
+                    // hiển thị danh sách sản phẩm
+                }
+
+                function hienThiPhanTrang() {
+                    if (tongSoTrang <= 1) {
+                        $("#phantrang").html("");
+                        return;
+                    } else {
+                        $("#phantrang").html("");
+                        if (!document.getElementById("phantrang")) {
+                            $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
+                        }
+
+                        // Tạo CSS nếu chưa có
+                        if (!document.getElementById('phantrang-style')) {
+                            const style = document.createElement('style');
+                            style.id = 'phantrang-style';
+                            style.innerHTML = `
+                            #phantrang {
+                                text-align: center;
+                                margin-top: 20px;
+                            }
+                            #phantrang .nut-trang {
+                                background-color: #4CAF50;
+                                color: white;
+                                border: none;
+                                padding: 8px 16px;
+                                margin: 0 4px;
+                                cursor: pointer;
+                                border-radius: 4px;
+                                transition: background-color 0.3s;
+                            }
+                            #phantrang .nut-trang:hover {
+                                background-color: #45a049;
+                            }
+                            #phantrang .nut-trang.active {
+                                background-color: #2e7d32;
+                                font-weight: bold;
+                            }`;
+                            document.head.appendChild(style);
+                        }
+
+                        // Tạo HTML các nút trang
+                        let html = "";
+                        for (let i = 1; i <= tongSoTrang; i++) {
+                            html += `<button class="nut-trang" data-trang="${i}">${i}</button> `;
+                        }
+                        $("#phantrang").html(html);
+                    }
+                }
+                // Tạo các nút trước
+                hienThiTrang(1);
+                hienThiPhanTrang();
+                // Rồi mới hiển thị trang đầu
+                // Bắt sự kiện chuyển trang
+                $(document).off("click", ".nut-trang").on("click", ".nut-trang", function () {
+                    let trang = parseInt($(this).data("trang"));
+                    hienThiTrang(trang);
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Lỗi AJAX:", {
+                    status: jqXHR.status,
+                    message: textStatus,
+                    error: errorThrown,
+                    response: jqXHR.responseText
+                });
+                alert("Có lỗi xảy ra khi tìm kiếm.");
             }
+        });
+        document.getElementById("advancedSearchForm").style.display = 'none';
+        document.querySelector(".owl-carousel").style.display = 'none';
+    }
+    document.getElementById("timkiemnangcao").addEventListener("click", function (e) {
+        e.preventDefault();
+        var tenSach = document.getElementById("tenSach").value.trim();
+        // var tacGia = document.getElementById("tacGia").value.trim();
+        // var tenNhaXuatBan = document.getElementById("tenNhaXuatBan").value.trim();
+        var idDanhMuc = (document.getElementById("danhmuc").value !== '') ? document.getElementById("danhmuc").value : '';
+        var giaBatDau = (document.getElementById("giaBatDau").value !== '') ? Number(document.getElementById("giaBatDau").value) : '';
+        var giaKetThuc = (document.getElementById("giaKetThuc").value !== '') ? Number(document.getElementById("giaKetThuc").value) : '';
+        // var giamGia = (document.getElementById("giamGia").value !== '') ? Number(document.getElementById("giamGia").value) : '';
+        // var soLuongTon = (document.getElementById("soLuongTon").value !== '') ? Number(document.getElementById("soLuongTon").value) : '';
+        var value = [];
+        let url = [];
+        if (tenSach !== '') {
+            value.push("Ten_Sach LIKE '%" + tenSach + "%'");
+            url.push('TuKhoa=' + encodeURIComponent(tenSach));
+        }
 
-            let sanPham1Trang = 6;
-            let tongSoTrang = Math.ceil(data.length / sanPham1Trang);
+        if (idDanhMuc !== '') {
+            value.push("ID_DanhMuc = " + idDanhMuc);
+            url.push('IDDanhMuc=' + encodeURIComponent(idDanhMuc));
+        }
 
-            function hienThiTrang(trang) {
-                let batDau = (trang - 1) * sanPham1Trang;
-                let ketThuc = batDau + sanPham1Trang;
-                let danhSachHienThi = data.slice(batDau, ketThuc);
+        if (giaBatDau !== '') {
+            value.push("Gia_Ban >= " + giaBatDau);
+            url.push('GiaBatDau=' + encodeURIComponent(giaBatDau));
+        }
 
-                let html = `
+        if (giaKetThuc !== '') {
+            value.push("Gia_Ban <= " + giaKetThuc);
+            url.push('GiaKetThuc=' + encodeURIComponent(giaKetThuc));
+        }
+
+        if (value.length === 0) {
+            alert("Vui lòng nhập ít nhất một tiêu chí tìm kiếm.");
+            return;
+        }
+
+        let urll = "?" + url.join("&");
+        history.pushState(null, "", window.location.pathname + urll);
+
+        let sql = "SELECT Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE " + value.join(' AND ');
+        console.log(sql);
+        // Đưa từ khóa lên URL
+        timKiemSachNangCao(sql);
+    });
+
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        let value = [];
+        let url = [];
+        if (!urlParams.has("TuKhoa") && !urlParams.has("IDDanhMuc") && !urlParams.has("GiaBatDau") && !urlParams.has("GiaKetThuc")) {
+            return; // Không có tham số nào thì thoát khỏi hàm
+        }
+        if (urlParams.has("TuKhoa")) {
+            const tuKhoa = urlParams.get("TuKhoa");
+            value.push("Ten_Sach LIKE '%" + tuKhoa + "%'");
+            url.push('TuKhoa=' + tuKhoa);
+        }
+
+        if (urlParams.has("IDDanhMuc")) {
+            const idDanhMuc = urlParams.get("IDDanhMuc");
+            value.push("ID_DanhMuc = " + idDanhMuc);
+            url.push('IDDanhMuc=' + idDanhMuc);
+        }
+
+        if (urlParams.has("GiaBatDau")) {
+            const giaBatDau = urlParams.get("GiaBatDau");
+            value.push("Gia_Ban >= " + giaBatDau);
+            url.push('GiaBatDau=' + giaBatDau);
+        }
+
+        if (urlParams.has("GiaKetThuc")) {
+            const giaKetThuc = urlParams.get("GiaKetThuc");
+            value.push("Gia_Ban <= " + giaKetThuc);
+            url.push('GiaKetThuc=' + giaKetThuc);
+        }
+
+        if (value.length === 0) {
+            return;
+        }
+
+        let sql = "SELECT Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE " + value.join(' AND ');
+        console.log(sql);
+        timKiemSachNangCao(sql); // Gọi hàm xử lý truy vấn
+    });
+
+
+    document.getElementById("timkiem").addEventListener("click", function (e) {
+        e.preventDefault();
+        var tuKhoa = document.getElementById("tuKhoa").value.trim();
+        if (tuKhoa === "") {
+            alert("Vui lòng nhập từ khóa tìm kiếm");
+            return;
+        }
+
+        $.ajax({
+            url: "collections/searchSach",
+            method: "POST",
+            data: { ten: tuKhoa },
+            dataType: "json",
+            success: function (data) {
+                if (data.length === 0) {
+                    $(".ins_main").html("<div>Không tìm thấy sách</div>");
+                    $("#phantrang").html("");
+                    return;
+                }
+
+                let sanPham1Trang = 6;
+                let tongSoTrang = Math.ceil(data.length / sanPham1Trang);
+
+                function hienThiTrang(trang) {
+                    let batDau = (trang - 1) * sanPham1Trang;
+                    let ketThuc = batDau + sanPham1Trang;
+                    let danhSachHienThi = data.slice(batDau, ketThuc);
+
+                    let html = `
                     <div class="col-13">
                          <div class="alert alert-info">Kết quả tìm kiếm: <strong>${tuKhoa}</strong></div>
                         <div class="content-list row">`;
-                danhSachHienThi.forEach(function (product) {
-                    var GiaGoc = parseFloat(product.Gia_Ban).toFixed(0);
-                    var GiaGiam = (GiaGoc - GiaGoc * product.GiamGia / 100).toFixed(0);
+                    danhSachHienThi.forEach(function (product) {
+                        var GiaGoc = parseFloat(product.Gia_Ban).toFixed(0);
+                        var GiaGiam = (GiaGoc - GiaGoc * product.GiamGia / 100).toFixed(0);
 
-                    html += `
+                        html += `
                         <div class="item-product col-4">
                             <div class="chir_loop">
                                 <div class="chir_img">
@@ -792,179 +1029,35 @@ document.getElementById("timkiemnangcao").addEventListener("click", function (e)
                                 </div>
                             </div>
                         </div>`;
-                });
-
-                html += `
-                        </div>
-                    </div>`; // đóng content-list và col-13
-
-                $(".ins_main").html(html);
-                if (tongSoTrang > 1) {
-                    if (!document.getElementById("phantrang")) {
-                        $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
-                    }
-                }
-                // hiển thị danh sách sản phẩm
-            }
-
-            function hienThiPhanTrang() {
-                if (tongSoTrang <= 1) {
-                    $("#phantrang").html("");
-                    return;
-                } else {
-                    $("#phantrang").html("");
-                    if (!document.getElementById("phantrang")) {
-                        $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
-                    }
-
-                    // Tạo CSS nếu chưa có
-                    if (!document.getElementById('phantrang-style')) {
-                        const style = document.createElement('style');
-                        style.id = 'phantrang-style';
-                        style.innerHTML = `
-                            #phantrang {
-                                text-align: center;
-                                margin-top: 20px;
-                            }
-                            #phantrang .nut-trang {
-                                background-color: #4CAF50;
-                                color: white;
-                                border: none;
-                                padding: 8px 16px;
-                                margin: 0 4px;
-                                cursor: pointer;
-                                border-radius: 4px;
-                                transition: background-color 0.3s;
-                            }
-                            #phantrang .nut-trang:hover {
-                                background-color: #45a049;
-                            }
-                            #phantrang .nut-trang.active {
-                                background-color: #2e7d32;
-                                font-weight: bold;
-                            }`;
-                        document.head.appendChild(style);
-                    }
-
-                    // Tạo HTML các nút trang
-                    let html = "";
-                    for (let i = 1; i <= tongSoTrang; i++) {
-                        html += `<button class="nut-trang" data-trang="${i}">${i}</button> `;
-                    }
-                    $("#phantrang").html(html);
-                }
-            }
-            // Tạo các nút trước
-            hienThiTrang(1);
-            hienThiPhanTrang();
-            // Rồi mới hiển thị trang đầu
-            // Bắt sự kiện chuyển trang
-            $(document).off("click", ".nut-trang").on("click", ".nut-trang", function () {
-                let trang = parseInt($(this).data("trang"));
-                hienThiTrang(trang);
-            });
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Lỗi AJAX:", {
-                status: jqXHR.status,
-                message: textStatus,
-                error: errorThrown,
-                response: jqXHR.responseText
-            });
-            alert("Có lỗi xảy ra khi tìm kiếm.");
-        }
-    });
-    document.getElementById("advancedSearchForm").style.display = 'none';
-    document.querySelector(".owl-carousel").style.display = 'none';
-});
-document.getElementById("timkiem").addEventListener("click", function (e) {
-    e.preventDefault();
-    var tuKhoa = document.getElementById("tuKhoa").value.trim();
-    if (tuKhoa === "") {
-        alert("Vui lòng nhập từ khóa tìm kiếm");
-        return;
-    }
-
-    $.ajax({
-        url: "collections/searchSach",
-        method: "POST",
-        data: { ten: tuKhoa },
-        dataType: "json",
-        success: function (data) {
-            if (data.length === 0) {
-                $(".ins_main").html("<div>Không tìm thấy sách</div>");
-                $("#phantrang").html("");
-                return;
-            }
-
-            let sanPham1Trang = 6;
-            let tongSoTrang = Math.ceil(data.length / sanPham1Trang);
-
-            function hienThiTrang(trang) {
-                let batDau = (trang - 1) * sanPham1Trang;
-                let ketThuc = batDau + sanPham1Trang;
-                let danhSachHienThi = data.slice(batDau, ketThuc);
-
-                let html = `
-                    <div class="col-13">
-                         <div class="alert alert-info">Kết quả tìm kiếm: <strong>${tuKhoa}</strong></div>
-                        <div class="content-list row">`;
-                danhSachHienThi.forEach(function (product) {
-                    var GiaGoc = parseFloat(product.Gia_Ban).toFixed(0);
-                    var GiaGiam = (GiaGoc - GiaGoc * product.GiamGia / 100).toFixed(0);
+                    });
 
                     html += `
-                        <div class="item-product col-4">
-                            <div class="chir_loop">
-                                <div class="chir_img">
-                                    <a href="#">
-                                        <img src="media/img_product/${product.Images}" alt="${product.Ten_Sach}">
-                                    </a>
-                                    <div class="insActionloop">
-                                        <a href="#"><img src="media/logo-banner/eye.png" alt="View"></a>
-                                        <a href="#"><img src="media/logo-banner/cart.png" alt="Add to Cart"></a>
-                                    </div>
-                                </div>
-                                <div class="chir_content">
-                                    <h3><a href="#">${product.Ten_Sach}</a></h3>
-                                    <p class="pro-price">
-                                        <del>${GiaGoc}đ</del> ${GiaGiam}đ
-                                        <span class="sale-price">
-                                            <span>-${product.GiamGia}%</span>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>`;
-                });
-
-                html += `
                         </div>
                     </div>`; // đóng content-list và col-13
 
-                $(".ins_main").html(html); // hiển thị danh sách sản phẩm
-                if (tongSoTrang > 1) {
-                    if (!document.getElementById("phantrang")) {
-                        $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
+                    $(".ins_main").html(html); // hiển thị danh sách sản phẩm
+                    if (tongSoTrang > 1) {
+                        if (!document.getElementById("phantrang")) {
+                            $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
+                        }
                     }
                 }
-            }
 
-            function hienThiPhanTrang() {
-                if (tongSoTrang <= 1) {
-                    $("#phantrang").html("");
-                    return;
-                } else {
-                    $("#phantrang").html("");
-                    if (!document.getElementById("phantrang")) {
-                        $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
-                    }
+                function hienThiPhanTrang() {
+                    if (tongSoTrang <= 1) {
+                        $("#phantrang").html("");
+                        return;
+                    } else {
+                        $("#phantrang").html("");
+                        if (!document.getElementById("phantrang")) {
+                            $(".ins_main").after('<div id="phantrang" style="margin-top: 10px;"></div>');
+                        }
 
-                    // Tạo CSS nếu chưa có
-                    if (!document.getElementById('phantrang-style')) {
-                        const style = document.createElement('style');
-                        style.id = 'phantrang-style';
-                        style.innerHTML = `
+                        // Tạo CSS nếu chưa có
+                        if (!document.getElementById('phantrang-style')) {
+                            const style = document.createElement('style');
+                            style.id = 'phantrang-style';
+                            style.innerHTML = `
                             #phantrang {
                                 text-align: center;
                                 margin-top: 20px;
@@ -986,73 +1079,73 @@ document.getElementById("timkiem").addEventListener("click", function (e) {
                                 background-color: #2e7d32;
                                 font-weight: bold;
                             }`;
-                        document.head.appendChild(style);
-                    }
+                            document.head.appendChild(style);
+                        }
 
-                    // Tạo HTML các nút trang
-                    let html = "";
-                    for (let i = 1; i <= tongSoTrang; i++) {
-                        html += `<button class="nut-trang" data-trang="${i}">${i}</button> `;
+                        // Tạo HTML các nút trang
+                        let html = "";
+                        for (let i = 1; i <= tongSoTrang; i++) {
+                            html += `<button class="nut-trang" data-trang="${i}">${i}</button> `;
+                        }
+                        $("#phantrang").html(html);
                     }
-                    $("#phantrang").html(html);
                 }
+                hienThiTrang(1);
+                hienThiPhanTrang();   // Tạo các nút trước
+                // Rồi mới hiển thị trang đầu
+
+
+
+
+                // Bắt sự kiện chuyển trang
+                $(document).off("click", ".nut-trang").on("click", ".nut-trang", function () {
+                    let trang = parseInt($(this).data("trang"));
+                    hienThiTrang(trang);
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Lỗi AJAX:", {
+                    status: jqXHR.status,
+                    message: textStatus,
+                    error: errorThrown,
+                    response: jqXHR.responseText
+                });
+                alert("Có lỗi xảy ra khi tìm kiếm.");
             }
-            hienThiTrang(1);
-            hienThiPhanTrang();   // Tạo các nút trước
-            // Rồi mới hiển thị trang đầu
-
-
-
-
-            // Bắt sự kiện chuyển trang
-            $(document).off("click", ".nut-trang").on("click", ".nut-trang", function () {
-                let trang = parseInt($(this).data("trang"));
-                hienThiTrang(trang);
-            });
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Lỗi AJAX:", {
-                status: jqXHR.status,
-                message: textStatus,
-                error: errorThrown,
-                response: jqXHR.responseText
-            });
-            alert("Có lỗi xảy ra khi tìm kiếm.");
-        }
+        });
+        document.querySelector(".owl-carousel").style.display = 'none';
     });
-    document.querySelector(".owl-carousel").style.display = 'none';
-});
-function toast({
-    title = "",
-    message = "",
-    type = "success",
-    duration = 3000,
-}) {
-    const main = document.getElementById("toast");
-    if (main) {
-        const toast = document.createElement("div");
-        const autoremoveId = setTimeout(function () {
-            main.removeChild(toast);
-        }, duration + 1000);
-        toast.onclick = function (e) {
-            if (e.target.closest(".toast_close")) {
+    function toast({
+        title = "",
+        message = "",
+        type = "success",
+        duration = 3000,
+    }) {
+        const main = document.getElementById("toast");
+        if (main) {
+            const toast = document.createElement("div");
+            const autoremoveId = setTimeout(function () {
                 main.removeChild(toast);
-                clearTimeout(autoremoveId);
-            }
-        };
-        const colors = {
-            success: "#47d864",
-            info: "#2f86eb",
-            warning: "#ffc021",
-            error: "#ff6243",
-        };
-        const icon = {
-            success: "fa fa-check-circle",
-            errol: "fa fa-times",
-            warning: "fa fa-info",
-        };
-        toast.classList.add("toast", `toast--${type}`);
-        toast.innerHTML = `
+            }, duration + 1000);
+            toast.onclick = function (e) {
+                if (e.target.closest(".toast_close")) {
+                    main.removeChild(toast);
+                    clearTimeout(autoremoveId);
+                }
+            };
+            const colors = {
+                success: "#47d864",
+                info: "#2f86eb",
+                warning: "#ffc021",
+                error: "#ff6243",
+            };
+            const icon = {
+                success: "fa fa-check-circle",
+                errol: "fa fa-times",
+                warning: "fa fa-info",
+            };
+            toast.classList.add("toast", `toast--${type}`);
+            toast.innerHTML = `
 <div class="toast_icon">
     <i class="${icon[type]}"></i>
 </div>
@@ -1065,9 +1158,14 @@ function toast({
 </div>
  <div class="toast__background"style="background-color: ${colors[type]};">
         `;
-        delay = (duration / 1000).toFixed(2);
-        toast.style.animation = `slideInLeft ease 0.3s,fadeOut linear 1s ${delay}s forwards`;
-        main.appendChild(toast);
+            delay = (duration / 1000).toFixed(2);
+            toast.style.animation = `slideInLeft ease 0.3s,fadeOut linear 1s ${delay}s forwards`;
+            main.appendChild(toast);
+        }
     }
-}
 
+    // Đưa từ khóa lên URL
+    history.pushState(null, "", window.location.pathname + "?TuKhoa=" + encodeURIComponent(tuKhoa));
+    let sql = "SELECT Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE  Ten_Sach like '%" + tuKhoa + "%'";
+    timKiemSachNangCao(sql);
+});
