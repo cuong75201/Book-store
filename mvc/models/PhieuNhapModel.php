@@ -106,13 +106,40 @@ public function deletePhieuNhap($id_phieunhap) {
 }
 
 
-    public function getChiTietPhieu($idPhieu) {
-        $sql = "SELECT ct.ID_Sach, s.Ten_Sach, ct.SoLuong, ct.GiaNhap, pn.ID_NV 
-                FROM chi_tiet_phieu_nhap ct
-                JOIN sach s ON ct.ID_Sach = s.ID_Sach
-                JOIN phieu_nhap pn ON ct.ID_PhieuNhap = pn.ID_PhieuNhap
-                WHERE ct.ID_PhieuNhap = $idPhieu";
+public function getChiTietPhieu($idPhieu) {
+    $sql = "SELECT ct.ID_Sach, s.Ten_Sach, ct.SoLuong, ct.GiaNhap, pn.ID_NV 
+            FROM chi_tiet_phieu_nhap ct
+            JOIN sach s ON ct.ID_Sach = s.ID_Sach
+            JOIN phieu_nhap pn ON ct.ID_PhieuNhap = pn.ID_PhieuNhap
+            WHERE ct.ID_PhieuNhap = $idPhieu";
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+    
+    public function searchPhieu($type, $keyword) {
+    $sql = "SELECT pn.*, ncc.Ten_NCC, nv.Ten_NV 
+            FROM phieu_nhap pn
+            LEFT JOIN nha_cung_cap ncc ON pn.ID_NCC = ncc.ID_NCC
+            LEFT JOIN nhanvien nv ON pn.ID_NV = nv.ID_NV";
+
+    switch ($type) {
+        case 'date':
+            $sql .= " WHERE DATE(pn.NgayNhap) = ?";
+            break;
+        case 'staff':
+            $sql .= " WHERE pn.ID_NV = ?";
+            break;
+        case 'product':
+            $sql .= " JOIN chi_tiet_phieu_nhap ct ON pn.ID_PhieuNhap = ct.ID_PhieuNhap WHERE ct.ID_Sach = ?";
+            break;
+        default:
+            return [];
+    }
+
+    $stmt = $this->con->prepare($sql);
+    $stmt->bind_param("s", $keyword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 }

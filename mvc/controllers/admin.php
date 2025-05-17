@@ -679,4 +679,11 @@ class Admin extends Controller
         }
         echo "0";
     }
+    function searchPhieuNhap() {
+    $type = $_POST['type'];
+    $keyword = $_POST['keyword'];
+    
+    $result = $this->phieunhapModel->searchPhieu($type, $keyword);
+    echo json_encode($result);
+}
 }
