@@ -36,8 +36,8 @@
             <tbody id="product-details">
                 <?php
                 require_once "mvc/models/NccModel.php";
-                $model = new NccModel();
-                $result = $model->getAllNCC();
+                $model = new NhaCungCapModel();
+                $result = $model->getAllNCC1();
                 foreach ($result as $ncc) {
                     echo '
                     <tr id=' .  $ncc["ID_NCC"] . '>
