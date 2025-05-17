@@ -13,8 +13,7 @@ class Admin extends Controller
     public $ctietquyenModel;
     public $phieunhapModel;
     public $nhaCungCapModel;
-    public $userModel;
-    public $nccModel;
+
     function __construct()
     {
         if (!isset($_SESSION)) session_start();
@@ -31,8 +30,7 @@ class Admin extends Controller
         $this->nhomquyenModel = $this->model("NhomQuyenModel");
         $this->phieunhapModel = $this->model("PhieuNhapModel");
         $this->nhaCungCapModel = $this->model("NhaCungCapModel");
-        $this->userModel = $this->model("UsersModel");
-        $this->nccModel = $this->model("NccModel");
+       // $this->nccModel = $this->model("NccModel");
     }
 
     function default($params = "")
@@ -100,7 +98,7 @@ class Admin extends Controller
                 return;
             }
         }
-        $list_user = $this->userModel->getAllUser();
+        $list_user = $this->khachhangModel->getAllUser();
         $this->view("admin_view", [
             "title" => "Khách hàng - Admin Web",
             "content" => "Khách hàng",
@@ -123,7 +121,7 @@ class Admin extends Controller
                 return;
             }
         }
-        $list_ncc = $this->nccModel->getAllNCC();
+        $list_ncc = $this->nhaCungCapModel->getAllNCC1();
         $this->view("admin_view", [
             "title" => "Nhà cung cấp - Admin Web",
             "content" => "Nhà cung cấp",
@@ -532,14 +530,14 @@ class Admin extends Controller
     {
         if (isset($_POST['idkhachhang'])) {
 
-            echo json_encode($this->userModel->getUserById($_POST['idkhachhang']));
+            echo json_encode($this->khachhangModel->getUserById($_POST['idkhachhang']));
         }
     }
     function getNCCap()
     {
         if (isset($_POST['id'])) {
 
-            echo json_encode($this->nccModel->getNCC($_POST['id']));
+            echo json_encode($this->nhaCungCapModel->getNCC1($_POST['id']));
         }
     }
     function themKhachHang()
@@ -547,12 +545,12 @@ class Admin extends Controller
         $lastName = (isset($_POST["lastName"])) ? $_POST["lastName"] : "";
         $firstName = (isset($_POST["firstName"])) ? $_POST["firstName"] : "";
         $email = (isset($_POST["email"])) ? $_POST["email"] : "";
-        $matKhau = (isset($_POST["matKhau"])) ? $_POST["matKhau"] : "";
-        $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
-        $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
+         $matKhau = (isset($_POST["matKhau"])) ? $_POST["matKhau"] : "";
+        // $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
+     //   $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
         $ngayDangKy = (isset($_POST["ngayDangKy"])) ? $_POST["ngayDangKy"] : "";
 
-        $check = $this->userModel->create($lastName, $firstName, $email, $phone, $matKhau, $ngayDangKy, $diaChi);
+        $check = $this->khachhangModel->createByAdmin($lastName, $firstName, $email, $matKhau, $ngayDangKy);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -562,9 +560,9 @@ class Admin extends Controller
     {
         $name = (isset($_POST["name"])) ? $_POST["name"] : "";
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
-        $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
+        $email = (isset($_POST["email"])) ? $_POST["email"] : "";
 
-        $check = $this->userModel->updateUserByAdmin($id, $name, $phone);
+        $check = $this->khachhangModel->updateUserByAdmin1($id, $name, $email);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -574,7 +572,7 @@ class Admin extends Controller
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
         $status = (isset($_POST["status"])) ? $_POST["status"] : "";
-        $check = $this->userModel->setStatusByAdmin($id, $status);
+        $check = $this->khachhangModel->setStatusByAdmin($id, $status);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -583,7 +581,7 @@ class Admin extends Controller
     function xoaKhachHang()
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
-        $check = $this->userModel->xoaUserByAdmin($id);
+        $check = $this->khachhangModel->xoaUserByAdmin($id);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -592,7 +590,7 @@ class Admin extends Controller
     function layDanhSachKhachHang()
     {
         // Lấy danh sách khách hàng từ model
-        $data['list_khachhang'] = $this->userModel->getAllUser();
+       $data['list_khachhang'] = $this->khachhangModel->getAllUser();
 
         foreach ($data['list_khachhang'] as $user) {
             $trangThai = ($user["status"] == 0) ? "bị khóa" : "hoạt động";
@@ -601,8 +599,6 @@ class Admin extends Controller
             <td>' . $user["ID_Khach_Hang"] . '</td>
             <td>' . $user["Ten_Khach_Hang"] . '</td>
             <td>' . $user["Email"] . '</td>
-            <td>' . $user["So_Dien_Thoai"] . '</td>
-            <td>' . $user["Dia_Chi"] . '</td>
             <td>' . $user["Ngay_Dang_Ky"] . '</td>
             <td>' . $trangThai . '</td>
         </tr>
@@ -614,7 +610,7 @@ class Admin extends Controller
         $name = (isset($_POST["name"])) ? $_POST["name"] : "";
         $lienHe = (isset($_POST["lienHe"])) ? $_POST["lienHe"] : "";
         $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
-        $check = $this->nccModel->addNCC($name, $diaChi, $lienHe);
+        $check = $this->nhaCungCapModel->addNCC1($name, $diaChi, $lienHe);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -627,7 +623,7 @@ class Admin extends Controller
         $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
 
-        $check = $this->nccModel->updateNCC($id, $name, $diaChi, $lienHe);
+        $check = $this->nhaCungCapModel->updateNCC1($id, $name, $diaChi, $lienHe);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -637,7 +633,7 @@ class Admin extends Controller
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
         $status = (isset($_POST["status"])) ? $_POST["status"] : "";
-        $check = $this->nccModel->setStatus($id, $status);
+        $check = $this->nhaCungCapModel->setStatus1($id, $status);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -646,7 +642,7 @@ class Admin extends Controller
     function xoaNhaCungCap()
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
-        $check = $this->nccModel->xoaNhaCungCap($id);
+        $check = $this->nhaCungCapModel->xoaNhaCungCap1($id);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -655,7 +651,7 @@ class Admin extends Controller
     function layDanhSachNCC()
     {
         // Lấy danh sách khách hàng từ model
-        $result = $this->nccModel->getAllNCC();
+        $result = $this->nhaCungCapModel->getAllNCC1();
         foreach ($result as $ncc) {
             echo '
         <tr  id="' . $ncc["ID_NCC"] . '">
@@ -670,7 +666,7 @@ class Admin extends Controller
     public function checkEmail()
     {
         $email = isset($_POST['email']) ? $_POST['email'] : "";
-        $result = $this->userModel->getAllUser();
+        $result = $this->khachhangModel->getAllUser();
         foreach ($result as $user) {
             if ($user["Email"] === $email) {
                 echo "1";
