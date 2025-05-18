@@ -134,14 +134,14 @@ async function AddKhachHang() {
         alert("Email đã tồn tại");
         return;
     }
-    const checkPhone = await $.ajax({
-        url : "admin/checkPhone",
-        method : "POST",
-        data : {
-            email : email,
-            id : ''
-        },
-    })
+    // const checkPhone = await $.ajax({
+    //     url : "admin/checkPhone",
+    //     method : "POST",
+    //     data : {
+    //         phone : phone,
+    //         id : ''
+    //     },
+    // })
       if(checkPhone == 1){
         alert("Số điện thoại đã tồn tại");
         return;
@@ -182,7 +182,7 @@ async function UpdateKhachHang(id) {
     }
     const regexEmail = /^[^\s@]+@(gmail\.com|sgu\.edu\.vn)$/;
     if (!regexEmail.test(email)) {
-        alert("Email không hợp lệ không hợp lệ");
+        alert("Email không hợp lệ");
         return;
     }
    // const regexEmail = /^[^\s@]+@(gmail\.com|sgu\.edu\.vn)$/;
@@ -328,3 +328,4 @@ function loadDanhSachKhachHang(){
         }
     })
 }
+
