@@ -30,7 +30,8 @@
                     <th>ID</th>
                     <th>Tên Nhà cung cấp</th>
                     <th>Địa chỉ</th>
-                    <th>Liên hệ</th>
+                    <th>SĐT</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody id="product-details">
@@ -43,8 +44,9 @@
                     <tr id=' .  $ncc["ID_NCC"] . '>
                         <td>' . $ncc["ID_NCC"] . '</td>
                         <td>' . $ncc["Ten_NCC"] . '</td>
-                        <td>' .  $ncc["DiaChi"] . '</td>
-                        <td>' .  $ncc["LienHe"] . '</td>
+                        <td>' .  $ncc["Dia_Chi"] . '</td>
+                        <td>' .  $ncc["SDT"] . '</td>
+                        <td>' .  $ncc["Email"] . '</td>
                     </tr>
                     ';
                 }
