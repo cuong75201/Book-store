@@ -198,7 +198,7 @@ class Admin extends Controller
         foreach ($list_khachhang as &$khachhang) {
             $khachhang['nameKH'] = $this->khachhangModel->getNamebyId($khachhang['ID_Khach_Hang'])[0];
         }
-        $list_sach = $this->ctietpnhModel->getAllbyIDSach();
+        $list_sach = $this->ctietdonhangModel->getAllbyIDSach();
         foreach ($list_sach as &$sach) {
             $sach['name_sach'] = $this->sachModel->getSachfromID($sach['ID_Sach'])[0];
         }

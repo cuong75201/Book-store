@@ -64,7 +64,6 @@ $(document).ready(function () {
                     return acc;
                 }, []);
 
-                console.log(mergedData);
                 let Von = {};
                 mergedData.forEach(item => {
                     Von[item.Ngay_Nhap] = item.Tong_Tien;
@@ -101,8 +100,6 @@ $(document).ready(function () {
                         mergeRes.forEach(item => {
                             DoanhThu[item.Ngay_Dat_Hang] = item.Tong_Tien;
                         });
-                        console.log(Von);
-                        console.log(DoanhThu);
                         let thongkedh = {};
                         let startDate = new Date(startDateString);
                         let endDate = new Date(endDateString);
@@ -119,7 +116,6 @@ $(document).ready(function () {
                             thongkedh[currentDate] = [von, doanhthu];
 
                         }
-                        console.log(thongkedh);
                         let rowtb = "";
                         let tong = 0;
                         for (let key in thongkedh) {
@@ -182,7 +178,6 @@ $(document).ready(function () {
                     return acc;
                 }, []);
                 mergedOrders.sort((a, b) => b.Tong_Tien - a.Tong_Tien);
-                console.log(mergedOrders);
                 let rowtb = "";
 
                 for (key of mergedOrders) {
@@ -198,6 +193,34 @@ $(document).ready(function () {
                 `
                 }
                 $(".thongkekh").html(rowtb);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", error);
+                console.log("XHR:", xhr);
+                console.log("Status:", status);
+            }
+        });
+        $.ajax({
+            url: "donhangController/getProduct",
+            method: "POST",
+            data: { start: startDateString, end: endDateString },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                let rowtb = "";
+                for (let key of data) {
+                    rowtb += `
+                <tr>
+                    <td> ${key.ID_Sach}</td>
+                    <td>${key.Ten_Sach}</td>
+                    <td>${key.soluong}</td>
+                    <td >${key.thanhtien}</td>
+
+                </tr>
+                `
+                    $(".tksanpham").html(rowtb);
+                }
+
             },
             error: function (xhr, status, error) {
                 console.error("AJAX Error:", error);
@@ -235,7 +258,6 @@ function detail(button) {
             data: { id: id },
             dataType: 'json',
             success: function (data) {
-                console.log(data);
                 row = "";
                 for (let key of data) {
                     row += `
@@ -277,7 +299,6 @@ function detail(button) {
             data: { id: id, start: params['start'], end: params['end'] },
             dataType: 'json',
             success: function (data) {
-                console.log(data);
                 row = "";
                 for (let key of data) {
                     row += `
@@ -341,6 +362,34 @@ $(document).ready(function () {
     if (!params.start && !params.end && !params.city && !params.district) {
         return;
     }
+    $.ajax({
+        url: "donhangController/getProduct",
+        method: "POST",
+        data: { start: params['start'], end: params['end'] },
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            let rowtb = "";
+            for (let key of data) {
+                rowtb += `
+                <tr>
+                    <td> ${key.ID_Sach}</td>
+                    <td>${key.Ten_Sach}</td>
+                    <td>${key.soluong}</td>
+                    <td >${key.thanhtien}</td>
+
+                </tr>
+                `
+                $(".tksanpham").html(rowtb);
+            }
+
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", error);
+            console.log("XHR:", xhr);
+            console.log("Status:", status);
+        }
+    })
     $.ajax({
         url: "donhangController/locdonhang",
         method: "POST",
@@ -422,7 +471,6 @@ $(document).ready(function () {
                 return acc;
             }, []);
 
-            console.log(mergedData);
             let Von = {};
             mergedData.forEach(item => {
                 Von[item.Ngay_Nhap] = item.Tong_Tien;
@@ -459,8 +507,7 @@ $(document).ready(function () {
                     mergeRes.forEach(item => {
                         DoanhThu[item.Ngay_Dat_Hang] = item.Tong_Tien;
                     });
-                    console.log(Von);
-                    console.log(DoanhThu);
+
                     let thongkedh = {};
                     let startDate = new Date(params['start']);
                     let endDate = new Date(params['end']);
@@ -477,7 +524,6 @@ $(document).ready(function () {
                         thongkedh[currentDate] = [von, doanhthu];
 
                     }
-                    console.log(thongkedh);
                     let rowtb = "";
                     let tong = 0;
                     for (let key in thongkedh) {
@@ -553,7 +599,6 @@ $(".search-btn").click(function () {
                 return acc;
             }, []);
 
-            console.log(mergedData);
             let Von = {};
             mergedData.forEach(item => {
                 Von[item.Ngay_Nhap] = item.Tong_Tien;
@@ -590,8 +635,6 @@ $(".search-btn").click(function () {
                     mergeRes.forEach(item => {
                         DoanhThu[item.Ngay_Dat_Hang] = item.Tong_Tien;
                     });
-                    console.log(Von);
-                    console.log(DoanhThu);
                     let thongkedh = {};
                     let startDate = new Date(params['start']);
                     let endDate = new Date(params['end']);
@@ -608,7 +651,6 @@ $(".search-btn").click(function () {
                         thongkedh[currentDate] = [von, doanhthu];
 
                     }
-                    console.log(thongkedh);
                     let rowtb = "";
                     let tong = 0;
                     for (let key in thongkedh) {

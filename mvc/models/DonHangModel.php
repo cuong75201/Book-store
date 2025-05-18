@@ -89,4 +89,10 @@ class DonHangModel extends dbconnect
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+    public function getIDdonhangbyDate($start, $end)
+    {
+        $sql = "SELECT ID_Don_Hang FROM don_hang WHERE Ngay_Dat_Hang BETWEEN '$start 00:00:00' AND '$end 23:59:59'";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
 }

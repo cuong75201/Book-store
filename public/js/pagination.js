@@ -158,7 +158,7 @@ $(document).ready(function () {
                             <a href="${detailUrl}">
                                     <img src="media/logo-banner/eye.png" alt="">
                                 </a>
-                                <a href="#">
+                                <a href="#" class="add-to-card">
                                     <img src="media/logo-banner/cart.png" alt="">
                                 </a>
                             </div>
@@ -190,4 +190,5 @@ $(document).ready(function () {
             console.log("Status:", status);
         }
     })
+
 })  

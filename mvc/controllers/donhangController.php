@@ -95,4 +95,20 @@ AND LOWER(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(Dia_Chi_Giao_Hang, ',', 2), ',', 
         }
         echo json_encode($result);
     }
+    function getProduct()
+    {
+        $start = $_POST['start'];
+        $end = $_POST['end'];
+        $list_dh = $this->donhangModel->getIDdonhangbyDate($start, $end);
+        if (empty($list_dh)) {
+            echo json_encode($list_dh);
+            return;
+        }
+        $list_iddh = [];
+        foreach ($list_dh as $dh) {
+            $list_iddh[] = $dh['ID_Don_Hang'];
+        }
+        $result = $this->ctietdonhangModel->getProduct($list_iddh);
+        echo json_encode($result);
+    }
 }

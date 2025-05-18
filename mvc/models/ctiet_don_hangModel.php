@@ -40,4 +40,30 @@ class ctiet_don_hangModel extends dbconnect
         $result = mysqli_query($this->con, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+    public function getProduct($ids)
+    {
+        $values = "";
+        foreach ($ids as $id) {
+            $values .= $id . ",";
+        }
+        $values = substr($values, 0, -1);
+        $sql = "SELECT ct.ID_Sach, sach.Ten_Sach, SUM(ct.So_Luong) as soluong, SUM(ct.Thanh_Tien) as thanhtien  
+FROM chi_tiet_don_hang ct  
+JOIN sach ON ct.ID_Sach = sach.ID_Sach  
+WHERE ct.ID_Don_Hang IN ($values)
+GROUP BY ct.ID_Sach, sach.Ten_Sach";
+
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    public function getAllbyIDSach()
+    {
+        $sql = "SELECT ID_Sach,SUM(So_Luong) as soluong,SUM(Thanh_Tien) as thanhtien FROM chi_tiet_don_hang GROUP BY ID_sach";
+        $result = mysqli_query($this->con, $sql);
+        $rows = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }
