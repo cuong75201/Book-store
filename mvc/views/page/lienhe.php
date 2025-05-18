@@ -49,4 +49,7 @@
             <p><strong>Email:</strong> <a href="mailto:banquyen@minhlongbook.com.vn">banquyen@minhlongbook.com.vn</a></p>
 
             <h5>Gửi tin nhắn cho chúng tôi</h5>
+        </div>
+    </div>
+</div>
             
