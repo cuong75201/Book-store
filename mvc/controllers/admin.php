@@ -526,7 +526,7 @@ class Admin extends Controller
         $result = $this->phieunhapModel->updatephieunhap($id_phieunhap, $id_ncc, $ngaynhap, $tongtien, $id_nv);
         echo json_encode($result);
     }
-    function getUser()
+   function getUser()
     {
         if (isset($_POST['idkhachhang'])) {
 
@@ -610,7 +610,8 @@ class Admin extends Controller
         $name = (isset($_POST["name"])) ? $_POST["name"] : "";
         $lienHe = (isset($_POST["lienHe"])) ? $_POST["lienHe"] : "";
         $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
-        $check = $this->nhaCungCapModel->addNCC1($name, $diaChi, $lienHe);
+        $email = (isset($_POST["email"])) ? $_POST["email"] : "";
+        $check = $this->nhaCungCapModel->addNCC1($name, $diaChi, $lienHe,$email);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -657,18 +658,62 @@ class Admin extends Controller
         <tr  id="' . $ncc["ID_NCC"] . '">
             <td>' . $ncc["ID_NCC"] . '</td>
             <td>' . $ncc["Ten_NCC"] . '</td>
-            <td>' . $ncc["DiaChi"] . '</td>
-            <td>' . $ncc["LienHe"] . '</td>
+            <td>' . $ncc["Dia_Chi"] . '</td>
+            <td>' . $ncc["SDT"] . '</td>
+            <td>' . $ncc["Email"] . '</td>
         </tr>
         ';
         }
     }
+    public function checkPhone()
+    {
+        $phone = isset($_POST['phone']) ? $_POST['phone'] : "";
+          $id = isset($_POST['id']) ? $_POST['id'] : ""; 
+        $result = $this->khachhangModel->getAllUser();
+        foreach ($result as $user) {
+            if ($user["So_Dien_Thoai"] === $phone && $user["ID_Khach_Hang"] != $id ) {
+                echo "1";
+                return;
+            }
+        }
+        echo "0";
+    }
     public function checkEmail()
     {
         $email = isset($_POST['email']) ? $_POST['email'] : "";
+          $id = isset($_POST['id']) ? $_POST['id'] : ""; 
         $result = $this->khachhangModel->getAllUser();
         foreach ($result as $user) {
-            if ($user["Email"] === $email) {
+            if ($user["Email"] === $email&& $user["ID_Khach_Hang"] != $id) {
+                echo "1";
+                return;
+            }
+        }
+        echo "0";
+    }
+    public function checkEmailNCC()
+{
+    $email = isset($_POST['email']) ? $_POST['email'] : "";
+    $id = isset($_POST['id']) ? $_POST['id'] : ""; // Lấy ID hiện tại
+
+    $result = $this->nhaCungCapModel->getAllNCC1();
+    foreach ($result as $ncc) {
+        // Nếu email trùng và KHÁC id thì mới báo trùng
+        if ($ncc["Email"] === $email && $ncc["ID_NCC"] != $id) {
+            echo "1";
+            return;
+        }
+    }
+    echo "0";
+}
+
+     public function checkPhoneNCC()
+    {
+        $phone = isset($_POST['lienhe']) ? $_POST['lienhe'] : "";
+          $id = isset($_POST['id']) ? $_POST['id'] : ""; 
+        $result = $this->nhaCungCapModel->getAllNCC1();
+        foreach ($result as $ncc) {
+            if ($ncc["SDT"] === $phone&& $ncc["ID_NCC"] != $id) {
                 echo "1";
                 return;
             }
