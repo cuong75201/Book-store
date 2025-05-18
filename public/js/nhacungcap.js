@@ -29,7 +29,12 @@ function openModal(action) {
                     <label for="name">Liên hệ:</label>
                     <input type="text" id="lienhe" placeholder="Nhập Liên hệ">
                     <br>
-                </div>      
+                </div>  
+                <div class="adding-content-item">
+                    <label for="name">Email:</label>
+                    <input type="text" id="email" placeholder="email">
+                    <br>
+                </div>       
             </div>
         </form>
     </div>
@@ -89,8 +94,8 @@ function openModal(action) {
 
                  //Đổ dữ liệu vào form
                 $("#name").val(ncc.Ten_NCC);
-                $("#diachi").val(ncc.DiaChi);
-                $("#lienhe").val(ncc.LienHe);
+                $("#diachi").val(ncc.Dia_Chi);
+                $("#lienhe").val(ncc.SDT);
             },
             error: function (xhr, status, error) {
                 console.error("AJAX Error:", error);
@@ -107,42 +112,82 @@ function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
 }
-function AddNhaCungCap() {
-        let name = $("#name").val().trim();
-        let diachi = $("#diachi").val().trim();
-        let lienhe = $("#lienhe").val().trim();   
-    if ( !name  || !lienhe || !diachi ) {
+async function AddNhaCungCap() {
+    let name = $("#name").val().trim();
+    let diachi = $("#diachi").val().trim();
+    let lienhe = $("#lienhe").val().trim();  
+    let email = $("#email").val().trim();    
+
+    if (!name || !lienhe || !diachi || !email) {
         alert("Vui lòng điền đầy đủ thông tin!");
         return;
     }
-     const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
-      if (!regexPhone.test(lienhe)) {
+
+    const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
+    if (!regexPhone.test(lienhe)) {
         alert("Số điện thoại liên hệ không hợp lệ");
         return;
     }
+
+    const regexEmail = /^[^\s@]+@(gmail\.com|sgu\.edu\.vn)$/;
+    if (!regexEmail.test(email)) {
+        alert("Email không hợp lệ");
+        return;
+    }
+
+    // Kiểm tra email có tồn tại chưa
+    const emailTonTai = await $.ajax({
+        url: "admin/checkEmailNCC",
+        method: "POST",
+        data: { email: email ,
+            id : ''
+        }
+    });
+
+    if (emailTonTai == 1) {
+        alert("Email đã tồn tại");
+        return;
+    }
+
+    // Kiểm tra số điện thoại có tồn tại chưa
+    const sdtTonTai = await $.ajax({
+        url: "admin/checkPhoneNCC",
+        method: "POST",
+        data: { lienhe: lienhe,
+                 id : ''
+
+         }
+    });
+
+    if (sdtTonTai == 1) {
+        alert("Số điện thoại đã tồn tại");
+        return;
+    }
+
+    // Nếu hợp lệ hết thì thêm nhà cung cấp
     $.ajax({
         url: "admin/themNhaCungCap",
         method: "POST",
         data: {
-            name : name,
-            diaChi : diachi,
-            lienHe : lienhe,
-        
+            name: name,
+            diaChi: diachi,
+            lienHe: lienhe,
+            email: email
         },
         success: function (data) {
             loadDanhSachNCC();
-           // location.reload();
-            console.log(data);
             closeModal();
+            console.log(data);
         },
         error: function (xhr, status, error) {
             console.error("AJAX Error:", error);
             console.log("XHR:", xhr);
             console.log("Status:", status);
         }
-    })
-};
-function UpdateNhaCungCap(id) {
+    });
+}
+
+async function UpdateNhaCungCap(id) {
         let name = $("#name").val().trim();
         let diachi = $("#diachi").val().trim();
         let lienhe = $("#lienhe").val().trim();    
@@ -154,6 +199,18 @@ function UpdateNhaCungCap(id) {
      const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
       if (!regexPhone.test(lienhe)) {
         alert("Số điện thoại liên hệ không hợp lệ");
+        return;
+    }
+     const checkPhone = await $.ajax({
+        url : "admin/checkPhoneNCC",
+        method : "POST",
+        data : {
+            lienhe : lienhe,
+            id : id
+        }     
+    })
+    if(checkPhone == 1){
+        alert("Số điện thoại đã tồn tại ");
         return;
     }
     $.ajax({
