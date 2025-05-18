@@ -14,26 +14,33 @@ class  UserModel extends dbconnect
         }
         return $check;
     }
-    public function createByAdmin($lastname, $firstname, $email, $password, $date) {
+    public function createByAdmin($lastname, $firstname, $email, $password, $date)
+    {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $name = $lastname . " " . $firstname;
-        
+
         // Sửa lại câu SQL với backtick chính xác
         $sql = "INSERT INTO `khach_hang` 
                 (`Ten_Khach_Hang`, `Email` , `Mat_Khau`, `Ngay_Dang_Ky`, `status`, `Trang_Thai`) 
                 VALUES (?, ?, ?, ?, 1, 1)";
-        
+
         // Chuẩn bị statement
         $stmt = $this->con->prepare($sql);
-        
+
         // Bind parameters
-        $stmt->bind_param("ssss", $name, $email,$password , $date);
-    
-    // Thực thi
-    return $stmt->execute();
-}
+        $stmt->bind_param("ssss", $name, $email, $password, $date);
+
+        // Thực thi
+        return $stmt->execute();
+    }
     public function creatUserLog($lastname, $fisrtname, $email,  $password, $date)
     {
+        $sql="SELECT * FROM `khach_hang` WHERE `Email`='$email'";
+        $result = mysqli_query($this->con, $sql);
+        if(mysqli_fetch_assoc($result)){
+            return false;
+        }
+
         $password = password_hash($password, PASSWORD_DEFAULT);
         $name = $lastname . " " . $fisrtname;
         $sql = "INSERT INTO `khach_hang`( `Ten_Khach_Hang`, `Email`, `Mat_Khau`, `Ngay_Dang_Ky`,`status`,`Trang_Thai`)
@@ -60,7 +67,7 @@ class  UserModel extends dbconnect
         $result = mysqli_query($this->con, $sql);
         return $result;
     }
-    public function updateUserByAdmin1($id,$name, $email)
+    public function updateUserByAdmin1($id, $name, $email)
     {
 
         $sql = "UPDATE `khach_hang` SET `Ten_Khach_Hang`='$name', Email = '$email' WHERE `ID_Khach_Hang`=$id";
@@ -77,7 +84,7 @@ class  UserModel extends dbconnect
         return true;
     }
 
-   public function setStatusByAdmin( $id,$status)
+    public function setStatusByAdmin($id, $status)
     {
         $sql = "UPDATE `khach_hang` SET `status`= $status WHERE ID_Khach_Hang = $id";
         $result = mysqli_query($this->con, $sql);
@@ -137,7 +144,8 @@ class  UserModel extends dbconnect
         $user = $result->fetch_assoc();
         return $user;
     }
-        public function getUserById($id){
+    public function getUserById($id)
+    {
         $sql = "SELECT * FROM `khach_hang` where ID_Khach_Hang = $id";
         $result = mysqli_query($this->con, $sql);
         $rows = array();
@@ -145,7 +153,6 @@ class  UserModel extends dbconnect
             $rows[] = $row;
         }
         return $rows;
-        
     }
 
     public function getAddresses($email)
@@ -371,4 +378,3 @@ class  UserModel extends dbconnect
         return $stmt->execute();
     }
 }
-

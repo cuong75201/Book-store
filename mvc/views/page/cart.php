@@ -50,12 +50,12 @@
     </div>
 
     <div style="margin-top: 20px; text-align: right;">
-        <a href="/checkout" style="display: inline-block; padding: 10px 20px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">Thanh Toán</a>
+        <a href="checkout" style="display: inline-block; padding: 10px 20px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">Thanh Toán</a>
     </div>
     <?php if (empty($data['cart_item'])): ?>
         <p style="text-align: center; color: #666; font-size: 18px;">Giỏ hàng của bạn trống!</p>
         <div style="text-align: center; margin-top: 20px;">
-            <a href="/Book-store/" style="display: inline-block; padding: 10px 20px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">Tiếp tục mua sắm</a>
+            <a href="/Book_store/" style="display: inline-block; padding: 10px 20px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">Tiếp tục mua sắm</a>
         </div>
     <?php endif; ?>
 </div>

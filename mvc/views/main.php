@@ -68,7 +68,7 @@ $result10 = $sachModel->get15SP(5, 50);
                                                         <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
                                                             <img src="media/logo-banner/eye.png" alt="">
                                                         </a>
-                                                        <a href="#">
+                                                        <a href="#" class ="add-to-card" id=<?php echo $product['ID_Sach'];?>>
                                                             <img src="media/logo-banner/cart.png" alt="">
                                                         </a>
                                                     </div>
@@ -124,7 +124,7 @@ $result10 = $sachModel->get15SP(5, 50);
                                                         <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
                                                             <img src="media/logo-banner/eye.png" alt="">
                                                         </a>
-                                                        <a href="#">
+                                                        <a href="#"  class ="add-to-card" id=<?php echo $product['ID_Sach'];?>>
                                                             <img src="media/logo-banner/cart.png" alt="">
                                                         </a>
                                                     </div>

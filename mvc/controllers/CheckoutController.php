@@ -18,8 +18,8 @@ class CheckoutController extends Controller
         }
 
         $email = $_COOKIE['user_email'];
-        $customerId = $this->userModel->getCustomerIdByEmail($email);
-        if (!$customerId) {
+        //$customerId = $this->userModel->getCustomerIdByEmail($email);
+        if (!$email) {
             $this->view("main_layout", [
                 "page" => "404",
                 "Title" => "Lỗi – MINH LONG BOOK"
@@ -29,9 +29,11 @@ class CheckoutController extends Controller
 
         $products = [];
         $total = 0;
+        $isFromCart = true;
 
         if ($productId) {
             // Trường hợp thanh toán trực tiếp từ sản phẩm
+            $isFromCart = false;
             $product = $this->cartModel->getProductById($productId);
             if (empty($product)) {
                 $this->view("main_layout", [
@@ -47,17 +49,17 @@ class CheckoutController extends Controller
             $total = $product['FinalPrice'] * $quantity;
         } else {
             // Trường hợp thanh toán từ giỏ hàng
-            $products = $this->cartModel->getCartItems($customerId);
+            $products = $this->cartModel->getCartItems($email);
             foreach ($products as $item) {
                 $total += $item['FinalPrice'] * $item['So_Luong'];
             }
         }
 
         if (isset($_COOKIE['user_email'])) {
-            $email = $_COOKIE['user_email'];
-            $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
-            $defaultAddress = $this->userModel->getDefaultAddress($email);
-            $addresses = $this->userModel->getAddresses($email);
+        $email = $_COOKIE['user_email'];
+        $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
+        $defaultAddress = $this->userModel->getDefaultAddress($email);
+        $addresses = $this->userModel->getAddresses($email);
         }
         $this->view("main_layout", [
             "Title" => "Thanh toán – MINH LONG BOOK",
@@ -75,17 +77,34 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function processCheckout()
+   public function processCheckout()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = json_decode(file_get_contents('php://input'), true);
+            $email = $_COOKIE['user_email'];
             $customerId = $this->userModel->getCustomerIdByEmail($_COOKIE['user_email'] ?? '');
-            if (!$customerId) {
+            if (!$email) {
                 echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
                 return;
             }
 
-            // Tạo đơn hàng mới
+            // Kiểm tra số lượng tồn kho dựa trên $data['products']
+            $stockIssues = [];
+            foreach ($data['products'] as $productId => $item) {
+                $requestedQuantity = (int)$item['quantity'];
+                $productStock = $this->cartModel->getProductStock($productId);
+                if ($productStock && $requestedQuantity > $productStock['So_Luong_Ton']) {
+                    $stockIssues[] = "Sản phẩm {$productStock['Ten_Sach']}: chỉ còn {$productStock['So_Luong_Ton']} cuốn (yêu cầu: {$requestedQuantity}).";
+                }
+                error_log("Requested Quantity for ID $productId: $requestedQuantity");
+            }
+
+            if (!empty($stockIssues)) {
+                echo json_encode(['status' => 'error', 'message' => implode('<br>', $stockIssues)]);
+                return;
+            }
+
+            // Nếu không có vấn đề về số lượng, tiếp tục xử lý đơn hàng
             $orderData = [
                 'ID_Khach_Hang' => $customerId,
                 'Ngay_Dat_Hang' => date('Y-m-d H:i:s'),
@@ -93,23 +112,31 @@ class CheckoutController extends Controller
                 'Trang_Thai' => 1,
                 'Phuong_Thuc_Thanh_Toan' => $data['paymentMethod'],
                 'Dia_Chi_Giao_Hang' => $this->userModel->getAddressById($data['addressId'], $_COOKIE['user_email'])['Dia_Chi'] ?? 'Không có địa chỉ',
-                'Ghi_Chu' => $data['note'] ?? ''
+                'Ghi_Chu' => $data['note'] ?? '',
+                'isFromCart' => $data['isFromCart'] ?? false,
             ];
 
             $orderId = $this->userModel->createOrder($orderData);
 
             if ($orderId) {
-                // Lưu chi tiết đơn hàng
+                // Lưu chi tiết đơn hàng và giảm số lượng tồn
                 foreach ($data['products'] as $productId => $item) {
                     $quantity = (int)$item['quantity'];
                     $price = (float)$item['price'];
-                    $thanhTien = $quantity * $price;
-
-                    error_log("Product ID: $productId, Quantity: $quantity, Price: $price, ThanhTien: $thanhTien");
+                    $thanhTien = ($quantity * $price) + ($quantity * $price * 0.05);
 
                     $this->userModel->addOrderDetail($orderId, $productId, $quantity, $price, $thanhTien);
+                    $success = $this->cartModel->reduceStock($productId, $quantity);
+                    if (!$success) {
+                        echo json_encode(['status' => 'error', 'message' => "Không thể giảm số lượng tồn cho sản phẩm ID $productId"]);
+                        return;
+                    }
                 }
 
+                // Xóa giỏ hàng nếu mua từ giỏ hàng
+                if (isset($data['isFromCart']) && $data['isFromCart'] === true) {
+                    $this->cartModel->clearCart($email);
+                }
 
                 echo json_encode(['status' => 'success', 'message' => 'Đơn hàng đã được đặt thành công']);
             } else {
@@ -118,33 +145,31 @@ class CheckoutController extends Controller
         }
     }
     public function updateCart()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $email = $_COOKIE['user_email'] ?? null;
-            if (!$email) {
-                echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
-                return;
-            }
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $_COOKIE['user_email'] ?? null;
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            return;
+        }
 
-            $customerId = $this->userModel->getCustomerIdByEmail($email);
-            if (!$customerId) {
-                echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy thông tin khách hàng']);
-                return;
-            }
+        $customerId = $this->userModel->getCustomerIdByEmail($email);
+        if (!$customerId) {
+            echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy thông tin khách hàng']);
+            return;
+        }
 
-            $productId = $_POST['product_id'] ?? null;
-            $quantity = $_POST['quantity'] ?? 1;
+        $productId = $_POST['product_id'] ?? null;
+        $quantity = $_POST['quantity'] ?? 1;
 
-            if ($productId && $quantity >= 1) {
-                $result = $this->cartModel->updateCartItem($customerId, $productId, $quantity);
-                if ($result) {
-                    echo json_encode(['status' => 'success', 'message' => 'Cập nhật số lượng thành công']);
-                } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Không thể cập nhật số lượng']);
-                }
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ']);
-            }
+        if ($productId && $quantity >= 0) {
+            $result = $this->cartModel->updateCartItem($customerId, $productId, $quantity);
+            if (!$result) {
+                echo json_encode(['status' => 'error', 'message' => 'Không thể cập nhật số lượng']);
+            } 
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ']);
         }
     }
+}
 }
