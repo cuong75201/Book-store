@@ -38,7 +38,7 @@ class NhaCungCapModel extends dbconnect {
         return mysqli_stmt_execute($stmt);
     }
       public function getAllNCC1 () {
-        $sql = "SELECT * FROM `ncc` WHERE Trang_Thai = 1";
+        $sql = "SELECT * FROM `nha_cung_cap` WHERE TrangThai = 1";
         $query = mysqli_query($this->con, $sql);
         $result = array();
         while ($row = mysqli_fetch_assoc($query)) {
@@ -47,28 +47,28 @@ class NhaCungCapModel extends dbconnect {
         return $result;
     }
     public function getNCC1 ($id_ncc) {
-        $sql = "SELECT * FROM `ncc` WHERE `ID_NCC` = '$id_ncc'";
+        $sql = "SELECT * FROM `nha_cung_cap` WHERE `ID_NCC` = '$id_ncc'";
         $query = mysqli_query($this->con, $sql);
         return mysqli_fetch_assoc($query);
     }
-    public function addNCC1 ($ten_ncc, $dchi, $lienhe) {
-        $sql = "INSERT INTO `ncc` (`Ten_NCC`, `DiaChi`, `LienHe`,`Trang_Thai`) VALUES ('$ten_ncc', '$dchi', '$lienhe',1)";
+    public function addNCC1 ($ten_ncc, $dchi, $lienhe,$email) {
+        $sql = "INSERT INTO `nha_cung_cap` (`Ten_NCC`, `Dia_Chi`, `SDT`,`Email`,`TrangThai`) VALUES ('$ten_ncc', '$dchi', '$lienhe','$email',1)";
         return mysqli_query($this->con, $sql);
     }
     public function updateNCC1 ($id_ncc, $ten_ncc, $dchi, $lienhe) {
-        $sql = "UPDATE `ncc` SET `Ten_NCC` = '$ten_ncc', `DiaChi` = '$dchi', `LienHe` = '$lienhe' WHERE `ID_NCC` = '$id_ncc'";
+        $sql = "UPDATE `nha_cung_cap` SET `Ten_NCC` = '$ten_ncc', `Dia_Chi` = '$dchi', `SDT` = '$lienhe' WHERE `ID_NCC` = '$id_ncc'";
         return mysqli_query($this->con, $sql);
     }
     public function deleteNCC1 ($id_ncc) {
-        $sql = "DELETE FROM `ncc` WHERE `ID_NCC` = '$id_ncc'";
+        $sql = "DELETE FROM `nha_cung_cap` WHERE `ID_NCC` = '$id_ncc'";
         return mysqli_query($this->con, $sql);
     }
     // public function setStatus ($id_ncc,$status) {
-    //     $sql = "update ncc set `status` = $status  WHERE `ID_NCC` = $id_ncc";
+    //     $sql = "update nha_cung_cap set `status` = $status  WHERE `ID_NCC` = $id_ncc";
     //     return mysqli_query($this->con, $sql);
     // }
      public function xoaNhaCungCap1 ($id_ncc) {
-        $sql = "update ncc set `Trang_Thai` = 0  WHERE `ID_NCC` = $id_ncc";
+        $sql = "update nha_cung_cap set `TrangThai` = 0  WHERE `ID_NCC` = $id_ncc";
         return mysqli_query($this->con, $sql);
     }
 }
