@@ -1191,3 +1191,27 @@ function toast({
         main.appendChild(toast);
     }
 }
+$(document).ready(function () {
+    $(".add-to-card").on("click", function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "cart/add",
+            method: "POST",
+            data: { id: $(this).attr("id"), quantity: 1 },
+            dataType: "json",
+            success: function (data) {
+                if (data == true) {
+                    toast({ title: 'SUCCESS', message: 'Thêm vào giỏ hàng thành công!', type: 'success', duration: 3000 });
+                }
+                else {
+                    toast({ title: 'WARNING', message: 'Vui lòng đăng nhập để tiếp tục!', type: 'warning', duration: 3000 });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", error);
+                console.log("XHR:", xhr);
+                console.log("Status:", status);
+            }
+        })
+    })
+})

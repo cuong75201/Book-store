@@ -1,4 +1,3 @@
-<?php print_r($data['cart_item']) ?>
 <div class="cart-container" style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
     <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Giỏ Hàng Của Bạn</h2>
     <?php if (!empty($data['cart_item'])) {

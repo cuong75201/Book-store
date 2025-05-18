@@ -57,6 +57,7 @@ header .header__item i {
 
 header .header__item .header__cart {
     cursor: pointer;
+    position: relative;
 }
 
 header .header__item .header__user {
@@ -1749,4 +1750,22 @@ strong {
 
 .toast+.toast {
     margin-top: 24px;
+}
+
+.header-cart-count {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background-color: #026e36;
+    color: #fff;
+    text-align: center;
+    min-width: 19px;
+    min-height: 19px;
+    line-height: 19px;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    font-size: 11px;
 }

@@ -127,6 +127,8 @@ class CartModel extends dbconnect
 
     public function addToCTCart($cart_id, $book_id, $quantity = 1)
     {
+        
+        
         $sql = "INSERT INTO `ctiet_cart` (`ID_Cart`, `ID_Sach`, `So_Luong`) VALUES (?, ?, ?) 
                 ON DUPLICATE KEY UPDATE `So_Luong` = `So_Luong` + ?";
         $stmt = $this->con->prepare($sql);
@@ -178,6 +180,14 @@ class CartModel extends dbconnect
     }
     public function addTocart($id, $email, $quantity)
     {
+        $query="SELECT * FROM `cart` WHERE ID_Sach=$id AND Email_khachhang='$email'";
+        $result = mysqli_query($this->con, $query);
+        if($row=mysqli_fetch_assoc($result)){
+            $quantity=$quantity+$row['So_Luong'];
+           $result= $this->UpdateCart($id,$quantity,$email);
+           return $result;
+        }
+
         $sql = "INSERT INTO `cart`( `Email_khachhang`, `ID_Sach`, `So_Luong`) VALUES ('$email',$id,$quantity)";
         $result = mysqli_query($this->con, $sql);
         return $result;
@@ -197,5 +207,10 @@ class CartModel extends dbconnect
         $sql="DELETE FROM `cart` WHERE `Email_khachhang`='$email' AND `ID_Sach`=$id";
          $result = mysqli_query($this->con, $sql);
         return $result;
+    }
+    public function getAllProduct($email){
+        $sql = "SELECT * from cart WHERE Email_khachhang='$email'";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 }

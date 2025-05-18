@@ -57,7 +57,7 @@ $(document).ready(function () {
                     $(".error_login").html(data.message);
                 }
                 else {
-                    window.location = "/Book-store";
+                    window.location = "/Book_store";
                 }
             },
             error: function (xhr, status, error) {

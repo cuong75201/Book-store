@@ -166,7 +166,6 @@
         </div>
     </div>
 </footer>
-<script src="public/js/script.js"></script>
 <?php
 require  __DIR__ . '/script.php'; ?>
 <?php

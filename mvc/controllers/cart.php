@@ -195,11 +195,10 @@ class Cart extends Controller
         }
         echo json_encode(false);
     }
-    function delItem()
-    {
+    function delItem(){
         $id = $_POST['id'];
         $user_email = $_COOKIE['user_email'] ?? null;
-        $result = $this->cartModel->deleteCart($id, $user_email);
-        echo json_encode($result);
+       $result=$this->cartModel->deleteCart($id,$user_email);
+       echo json_encode($result)
     }
 }

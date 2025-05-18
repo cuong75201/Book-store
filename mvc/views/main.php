@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Thêm ở đầu file main.php
 require_once 'mvc/models/SachModel.php'; // Đường dẫn đến file SachModel
 $sachModel = new SachModel();
@@ -16,20 +16,21 @@ $result5 = $sachModel->get4SPfromDanhMuc(5);
 $result6 = $sachModel->get4SPfromDanhMuc(6);
 $result7 = $sachModel->get4SPfromDanhMuc(7);
 $result8 = $sachModel->get4SPfromDanhMuc(8);
-$result9 =$sachModel->get15SP(5,1);
-$result10 =$sachModel->get15SP(5,50);
+$result9 = $sachModel->get15SP(5, 1);
+$result10 = $sachModel->get15SP(5, 50);
 // ... Thêm các danh mục khác
 ?>
 <?php require 'inc/head.php'; ?>
 
 
 <body>
-<?php require 'inc/header.php'; ?>
-<?php require 'inc/navbar.php'; ?>
-<?php require 'inc/carousel.php'; ?>
+    <div id="toast"></div>
 
-  
-  
+    <?php require 'inc/header.php'; ?>
+    <?php require 'inc/navbar.php'; ?>
+    <?php require 'inc/carousel.php'; ?>
+
+
     <!-- PRODUCT  -->
     <div class="ins_main  col-12">
         <div class="container">
@@ -58,31 +59,31 @@ $result10 =$sachModel->get15SP(5,50);
 
                                     <div class="owl-item">
                                         <div class="chir_loop">
-                                         <?php foreach ($newProducts as $product): ?>                                           
-                                            <div class="chir_img">
-                                                <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
-                                                    <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
+                                            <?php foreach ($newProducts as $product): ?>
+                                                <div class="chir_img">
+                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                        <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
                                                     </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
+                                                    <div class="insActionloop">
+                                                        <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                            <img src="media/logo-banner/eye.png" alt="">
+                                                        </a>
+                                                        <a href="#">
+                                                            <img src="media/logo-banner/cart.png" alt="">
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="chir_content">
-                                            <h3><?= $product['Ten_Sach'] ?></h3>
+                                                <div class="chir_content">
+                                                    <h3><?= $product['Ten_Sach'] ?></h3>
 
-                                                <p class="pro-price">
-                                                <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
-                                                <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
-                                                <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
-                                                </p>
+                                                    <p class="pro-price">
+                                                        <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
+                                                        <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫
+                                                        <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
+                                                    </p>
 
-                                            </div>
-                                        <?php endforeach; ?>
+                                                </div>
+                                            <?php endforeach; ?>
 
                                         </div>
                                     </div>
@@ -114,13 +115,13 @@ $result10 =$sachModel->get15SP(5,50);
 
                                     <div class="owl-item">
                                         <div class="chir_loop">
-                                            <?php foreach ($newProducts as $product): ?>                                           
+                                            <?php foreach ($newProducts as $product): ?>
                                                 <div class="chir_img">
                                                     <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
                                                         <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
                                                     </a>
                                                     <div class="insActionloop">
-                                                        <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
+                                                        <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
                                                             <img src="media/logo-banner/eye.png" alt="">
                                                         </a>
                                                         <a href="#">
@@ -129,16 +130,16 @@ $result10 =$sachModel->get15SP(5,50);
                                                     </div>
                                                 </div>
                                                 <div class="chir_content">
-                                                <h3><?= $product['Ten_Sach'] ?></h3>
+                                                    <h3><?= $product['Ten_Sach'] ?></h3>
 
                                                     <p class="pro-price">
-                                                    <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
-                                                    <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
-                                                    <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
+                                                        <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
+                                                        <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫
+                                                        <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
                                                     </p>
                                                 </div>
                                             <?php endforeach; ?>
-                                       </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,24 +172,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>SÁCH MẦM NON</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result1 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";                        
-                        echo '<div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result1 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo '<div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="'.$detailUrl.'">
+                                            <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -196,20 +197,20 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
                                     </div>
                                 </div>';
-                        }         
-                        ?>
+                                }
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-mam-non">Xem tất cả</a>
@@ -221,23 +222,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>SÁCH THIẾU NHI</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result2 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";                              echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result2 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -245,13 +247,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -260,40 +262,40 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-thieu-nhi">Xem tất cả</a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-12 skill-books px-0 list-book">
                         <div class="books_title">
                             <h3>SÁCH kỸ NĂNG</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result3 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
-                            echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result3 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -301,13 +303,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -316,10 +318,10 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-ki-nang">Xem tất cả</a>
@@ -331,24 +333,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>SÁCH KINH DOANH</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result4 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
-                            echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result4 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -356,13 +358,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -371,10 +373,10 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-kinh-doanh">Xem tất cả</a>
@@ -386,24 +388,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>SÁCH MẸ VÀ BÉ</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result5 as $row){
-                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
-                            echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result5 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -411,13 +413,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -426,10 +428,10 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-me-va-be">Xem tất cả</a>
@@ -441,24 +443,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>SÁCH VĂN HỌC</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result6 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
-                            echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result6 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -466,13 +468,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -481,10 +483,10 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-van-hoc">Xem tất cả</a>
@@ -496,24 +498,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>SÁCH THAM KHẢO</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result7 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
-                            echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result7 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -521,13 +523,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -536,10 +538,10 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/sach-tham-khao">Xem tất cả</a>
@@ -551,24 +553,24 @@ $result10 =$sachModel->get15SP(5,50);
                             <h3>NOTEBOOK</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex"> 
-                        <?php foreach($result8 as $row){
-                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
-                        $GiaGoc = (int) $row['Gia_Ban'];
-                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
-                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
-                        $slug = $sachModel->slugify($row['Ten_Sach']);
-                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
-                            echo ' <div class="chir_loop">
+                            <div class="list_product  d-flex">
+                                <?php foreach ($result8 as $row) {
+                                    $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                                    $GiaGoc = (int) $row['Gia_Ban'];
+                                    $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                                    $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                                    $slug = $sachModel->slugify($row['Ten_Sach']);
+                                    $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";
+                                    echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="'.$detailUrl.'">
-                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        <a href="' . $detailUrl . '">
+                                            <img src="media/img_product/' . $row['Images'] . '" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                        <a href="'.$detailUrl.'">
+                                        <a href="' . $detailUrl . '">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
-                                            <a href="#">
+                                            <a href="#" class="add-to-card" id=' . $row['ID_Sach'] . '>
                                                 <img src="media/logo-banner/cart.png" alt="">
                                             </a>
                                         </div>
@@ -576,13 +578,13 @@ $result10 =$sachModel->get15SP(5,50);
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                '.$row["Ten_Sach"].'
+                                                ' . $row["Ten_Sach"] . '
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>'.$GiaGoc.'</del>
-                                            '.$GiaGiam.' <span class="sale-price">
-                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            <del>' . $GiaGoc . '</del>
+                                            ' . $GiaGiam . ' <span class="sale-price">
+                                                <span>' . $row['GiamGia(%)'] . '</span>
                                             </span>
                                         </p>
 
@@ -591,10 +593,10 @@ $result10 =$sachModel->get15SP(5,50);
 
 
                                 </div>';
-                        }
-                                                    
-                               
-                        ?>
+                                }
+
+
+                                ?>
                             </div>
                             <div class="show-all">
                                 <a href="collections/notebook">Xem tất cả</a>
