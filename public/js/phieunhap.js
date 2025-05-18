@@ -32,17 +32,7 @@ function openModal() {
                         </div>
                         <button type="button" class="button add-button" onclick="themDongChiTiet()">Thêm chi tiết</button>
                         <div class="adding-content-item">
-                            <table id="chiTietTable">
-                                <thead>
-                                    <tr>
-                                        <th>Sách</th>
-                                        <th>Số lượng</th>
-                                        <th>Giá nhập</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                            <div id="chiTietContainer" class="chi-tiet-container"></div>
                         </div>
                 </div>
             `;
@@ -71,15 +61,27 @@ function themDongChiTiet() {
             `).join('');
 
             const newRow = `
-                <tr>
-                    <td><select class="select-sach">${options}</select></td>
-                    <td><input type="number" class="soLuong" min="1" value="1"></td>
-                    <td><input type="number" class="giaNhap" min="0" value="0"></td>
-                    <td><button type="button" onclick="xoaDong(this)">Xóa</button></td>
-                </tr>
-            `;
-            $("#chiTietTable tbody").append(newRow);
+            <div class="chi-tiet-row">
+                <div>
+                    <label>Sách:</label>
+                    <select class="select-sach">${options}</select>
+                </div>
+                <div>
+                    <label>Số lượng:</label>
+                    <input type="number" class="soLuong" min="1" value="1">
+                </div>
+                <div>
+                    <label>Giá nhập:</label>
+                    <input type="number" class="giaNhap" min="0" value="0">
+                </div>
+                <div>
+                    <button type="button" onclick="xoaDong(this)">Xóa</button>
+                </div>
+            </div>
+        `;
+            $("#chiTietContainer").append(newRow)
         },
+
         error: function (xhr) {
             console.error("Lỗi khi lấy danh sách sách:", xhr.responseText);
         }
@@ -87,12 +89,7 @@ function themDongChiTiet() {
 }
 
 function xoaDong(btn) {
-    $(btn).closest('tr').remove();
-}
-
-// Xóa dòng chi tiết
-function xoaDong(btn) {
-    $(btn).closest('tr').remove();
+    $(btn).closest('.chi-tiet-row').remove();
 }
 
 // Lưu phiếu
@@ -103,7 +100,7 @@ function savePhieu() {
         ChiTiet: []
     };
 
-    $("#chiTietTable tbody tr").each(function () {
+    $(".chi-tiet-container .chi-tiet-row").each(function () {
         const row = {
             ID_Sach: $(this).find('.select-sach').val(),
             SoLuong: $(this).find('.soLuong').val(),
@@ -122,72 +119,90 @@ function savePhieu() {
     }
     console.log("Dữ liệu gửi đi:", JSON.stringify(data, null, 2)); // Debug
 
-$.ajax({
-    url: 'admin/addPhieuNhap',
-    method: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify(data),
-    success: function (response) {
-        console.log(response); // In ra để kiểm tra phản hồi từ server
-        if (!response.success) {
-            alert('Them phieu nhap thanh cong');
-            closeModal();
-            location.reload();
-        } else {
-            alert('Thêm thất bại: ' + (response.message || 'Có lỗi xảy ra'));
+    $.ajax({
+        url: 'admin/addPhieuNhap',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            console.log(response); // In ra để kiểm tra phản hồi từ server
+            if (!response.success) {
+                alert('Them phieu nhap thanh cong');
+                closeModal();
+
+            } else {
+                alert('Thêm thất bại: ' + (response.message || 'Có lỗi xảy ra'));
+            }
+        },
+        error: function (xhr) {
+            alert('Lỗi khi gửi dữ liệu: ' + xhr.responseText);
         }
-    },
-    error: function (xhr) {
-        alert('Lỗi khi gửi dữ liệu: ' + xhr.responseText);
-    }
-});
+    });
 
 }
 
 // Xem chi tiết
 function viewDetail(idPhieu) {
-  $.ajax({
-    url: 'admin/getChiTietPhieu',
-    method: 'POST',
-    dataType: 'json',
-    data: { id: idPhieu },
-    success: function(chiTiet) {
-      let html = `
-        <div class="detail-header">
-          <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
-        </div>
-        <ul class="detail-list">
-        <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
-      `;
-      chiTiet.forEach(ct => {
-        html += `<li>${ct.Ten_Sach} — SL: ${ct.SoLuong} — Giá: ${ct.GiaNhap}</li>`;
-      });
-      html += `</ul>`;
-      $("#phieuModal .modal-body").html(html);
-      $("#phieuModal").addClass('active');
-    },
-    error: function(xhr) {
-      alert('Không thể lấy chi tiết phiếu.');
-    }
-  });
+    $.ajax({
+        url: 'admin/getChiTietPhieu',
+        method: 'POST',
+        dataType: 'json',
+        data: { id: idPhieu },
+        success: function (chiTiet) {
+            const idNv = chiTiet.length > 0 ? chiTiet[0].ID_NV : 'Không xác định';
+            
+            let html = `
+                <div class="detail-header">
+                    <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
+                    <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
+                </div>
+                <ul class="detail-list">
+                    <p><strong>Mã nhân viên:</strong> ${idNv}</p>
+                    <table class="detail-table">
+                        <tr>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Số lượng</th>
+                            <th>Giá nhập</th>
+                        </tr>
+            `;
+            
+            chiTiet.forEach(ct => {
+                html += `
+                    <tr>
+                        <td>${ct.ID_Sach}</td>
+                        <td>${ct.Ten_Sach}</td>
+                        <td>${ct.SoLuong}</td>
+                        <td>${ct.GiaNhap.toLocaleString()}₫</td>
+                    </tr>
+                `;
+            });
+            
+            html += `</table></ul>`;
+            $("#phieuModal .modal-body").html(html);
+            $("#phieuModal").addClass('active');
+        },
+        error: function (xhr) {
+            alert('Không thể lấy chi tiết phiếu.');
+        }
+    });
 }
-
 // Thêm hàm ẩn modal
 function closePhieuModal() {
-  $('#phieuModal').removeClass('active');
+    $('#phieuModal').removeClass('active');
 }
 function closeModal() {
     $('#phieuModal').removeClass('active');
 }
 
 function deletePhieu(id) {
-    if(confirm('Xóa phiếu này?')) {
+    if (confirm('Xóa phiếu này?')) {
         $.ajax({
             url: 'admin/deletePhieu',
             method: 'POST',
             data: { id: id },
-            success: function(response) {
-                if(response.success) {
+            success: function (response) {
+                if (response.success) {
                     $(`tr[data-id="${id}"]`).remove();
                 }
             }
@@ -198,9 +213,47 @@ function deletePhieu(id) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
+    location.reload();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".add-button").addEventListener("click", openModal);
+    document.querySelector(".add-button").addEventListener("click", openModal);
 });
 
+function searchPhieu() {
+    const searchType = $('#searchType').val();
+    const keyword = $('#searchInput').val().trim();
+
+    $.ajax({
+        url: 'admin/searchPhieuNhap',
+        method: 'POST',
+        data: { type: searchType, keyword: keyword },
+        dataType: 'json',
+        success: function (data) {
+            // Xóa dữ liệu cũ
+            $('tbody').empty();
+            
+            // Cập nhật dữ liệu mới
+            data.forEach(phieu => {
+                const row = `
+                    <tr data-id="${phieu.ID_PhieuNhap}">
+                        <td>${phieu.ID_PhieuNhap}</td>
+                        <td>${phieu.Ten_NV || 'Không xác định'}</td>
+                        <td>${phieu.NgayNhap}</td>
+                        <td>${phieu.Ten_NCC || 'Không xác định'}</td>
+                        <td>${phieu.TongTien}₫</td>
+                        <td>${phieu.TrangThai == 1 ? 'Đã hoàn thành' : 'Đã hủy'}</td>
+                        <td>
+                            <button class="button edit-button" onclick="viewDetail(${phieu.ID_PhieuNhap})">Chi tiết</button>
+                            <button class="button delete-button" onclick="deletePhieu(${phieu.ID_PhieuNhap})">Xóa</button>
+                        </td>
+                    </tr>
+                `;
+                $('tbody').append(row);
+            });
+        },
+        error: function (xhr) {
+            alert('Lỗi tìm kiếm: ' + xhr.responseText);
+        }
+    });
+}

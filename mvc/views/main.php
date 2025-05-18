@@ -8,6 +8,16 @@ $newProducts = $sachModel->getNewProducts(6); // Sách mới
 $comboProducts = $sachModel->getProductsByCategory(2); // Ví dụ: Combo (ID_DanhMuc = 2)
 $skillBooks = $sachModel->getProductsByCategory(3); // Sách kỹ năng sống
 $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
+$result1 = $sachModel->get4SPfromDanhMuc(1);
+$result2 = $sachModel->get4SPfromDanhMuc(2);
+$result3 = $sachModel->get4SPfromDanhMuc(3);
+$result4 = $sachModel->get4SPfromDanhMuc(4);
+$result5 = $sachModel->get4SPfromDanhMuc(5);
+$result6 = $sachModel->get4SPfromDanhMuc(6);
+$result7 = $sachModel->get4SPfromDanhMuc(7);
+$result8 = $sachModel->get4SPfromDanhMuc(8);
+$result9 =$sachModel->get15SP(5,1);
+$result10 =$sachModel->get15SP(5,50);
 // ... Thêm các danh mục khác
 ?>
 <?php require 'inc/head.php'; ?>
@@ -29,7 +39,7 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                         <div class="tabs-container">
                             <div>
                                 <h2>
-                                    <a href="#">Sách mới phát hành</a>
+                                    <a href="#">SÁCH BÁN CHẠY</a>
                                 </h2>
                             </div>
                             <div class="control-owl">
@@ -74,291 +84,6 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                             </div>
                                         <?php endforeach; ?>
 
-                                </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/img_product/5.1.png" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="chir_loop">
-                                            <div class="chir_img">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach1.jpg" alt="">
-                                                </a>
-                                                <div class="insActionloop">
-                                                    <a href="/product/detail/<?= $product['ID_Sach'] ?>">
-                                                        <img src="media/logo-banner/eye.png" alt="">
-                                                    </a>
-                                                    <a href="#">
-                                                        <img src="media/logo-banner/cart.png" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="chir_content">
-                                                <h3>
-                                                    <a href="#">
-                                                        Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                                    </a>
-                                                </h3>
-                                                <p class="pro-price">
-                                                    <del>74,000đ</del>
-                                                    59,200₫ <span class="sale-price">
-                                                        <span>-20%</span>
-                                                    </span>
-                                                </p>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -366,812 +91,59 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                             </div>
                         </div>
                     </div>
-                    <div class="information-blocks product_combo">
+                    <div class="information-blocks product_top_bestseller">
                         <div class="tabs-container">
                             <div>
                                 <h2>
-                                    <a href="#">combo bán chạy</a>
+                                    <a href="#">Sách mới phát hành</a>
                                 </h2>
                             </div>
                             <div class="control-owl">
-                                <div class="owl-prev" data-id='2'>
+                                <div class="owl-prev" data-id='1'>
                                     <i class="fa fa-angle-left"></i>
                                 </div>
-                                <div class="owl-next" data-id='2'>
+                                <div class="owl-next" data-id='1'>
                                     <i class="fa fa-angle-right"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="article-container">
                             <div class="content-product-list">
-                                <div class="owl-stage" id='2' style=" transform: translate3d(0px, 0px, 0px);
+                                <div class="owl-stage" id='1' style=" transform: translate3d(0px, 0px, 0px);
                                 transition: all .5s;">
+
                                     <div class="owl-item">
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
+                                        <div class="chir_loop">
+                                            <?php foreach ($newProducts as $product): ?>                                           
+                                                <div class="chir_img">
+                                                    <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']) . '-' . $product['ID_Sach'] ?>">
+                                                        <img src="media/img_product/<?= $product['Images'] ?>" alt="<?= $product['Ten_Sach'] ?>">
                                                     </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
+                                                    <div class="insActionloop">
+                                                        <a href="product/detail/<?= $sachModel->slugify($product['Ten_Sach']).'-'.$product['ID_Sach'] ?>">
+                                                            <img src="media/logo-banner/eye.png" alt="">
+                                                        </a>
+                                                        <a href="#">
+                                                            <img src="media/logo-banner/cart.png" alt="">
+                                                        </a>
                                                     </div>
-                                                    <del class="compare-price "> 255,000₫</del>
                                                 </div>
+                                                <div class="chir_content">
+                                                <h3><?= $product['Ten_Sach'] ?></h3>
 
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
                                                     <p class="pro-price">
-                                                        191,250₫
+                                                    <del><?= number_format($product['Gia_Ban'] * 1.2, 0, ',', '.') ?>đ</del>
+                                                    <?= number_format($product['Gia_Ban'], 0, ',', '.') ?>₫ 
+                                                    <span class="sale-price">-<?= $product['GiamGia(%)'] ?>%</span>
                                                     </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
                                                 </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                            <?php endforeach; ?>
+                                       </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                    <div class="information-blocks focus_product_combo">
-                        <div class="tabs-container">
-                            <div>
-                                <h2>
-                                    <a href="#">tiêu điểm sách hay</a>
-                                </h2>
-                            </div>
-                            <div class="control-owl">
-                                <div class="owl-prev" data-id='3'>
-                                    <i class="fa fa-angle-left"></i>
-                                </div>
-                                <div class="owl-next" data-id='3'>
-                                    <i class="fa fa-angle-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="article-container">
-                            <div class="content-product-list">
-                                <div class="owl-stage" id='3' style=" transform: translate3d(0px, 0px, 0px);
-                                transition: all .5s;">
-                                    <div class="owl-item">
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item">
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="chir_loop2">
-                                            <div class="img_product_combo col-4">
-                                                <a href="#">
-                                                    <img src="media/logo-banner/sach2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="detail_product_combo col-8">
-                                                <h3>
-                                                    <a href="#" title="Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang ">
-                                                        Sách: Combo Tri Thức Cho Một Thai Kì Khỏe Mạnh + Thai Giáo Theo Chuyên Gia 280 Ngày - Mỗi Ngày Đọc Một Trang
-                                                    </a>
-                                                </h3>
-                                                <div class="compair-price d-flex justify-content-between flex-wrap">
-                                                    <p class="pro-price">
-                                                        191,250₫
-                                                    </p>
-                                                    <div class="sale-price">
-                                                        <span>-25%</span>
-                                                    </div>
-                                                    <del class="compare-price "> 255,000₫</del>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
                 <div class="col-9">
                     <div class="banner_bottom_home">
@@ -1196,17 +168,24 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                     </div>
                     <div class="col-12 skill-books px-0 list-book">
                         <div class="books_title">
-                            <h3>SÁCH KỸ NĂNG SỐNG</h3>
+                            <h3>SÁCH MẦM NON</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex">
-                                <div class="chir_loop">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result1 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";                        
+                        echo '<div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                            <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -1217,137 +196,45 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                                '.$row["Ten_Sach"].'
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
                                             </span>
                                         </p>
 
                                     </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-
+                                </div>';
+                        }         
+                        ?>
                             </div>
                             <div class="show-all">
-                                <a href="#">Xem tất cả</a>
+                                <a href="collections/sach-mam-non">Xem tất cả</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 bestseller-books px-0 list-book">
+                    <div class="col-12 skill-books px-0 list-book">
                         <div class="books_title">
-                            <h3>TOP SÁCH BÁN CHẠY</h3>
+                            <h3>SÁCH THIẾU NHI</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex">
-                                <div class="chir_loop">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result2 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";                              echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -1358,13 +245,13 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                                '.$row["Ten_Sach"].'
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
                                             </span>
                                         </p>
 
@@ -1372,123 +259,38 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
 
 
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
                             </div>
                             <div class="show-all">
-                                <a href="#">Xem tất cả</a>
+                                <a href="collections/sach-thieu-nhi">Xem tất cả</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 child-books px-0 list-book">
+                    
+                    <div class="col-12 skill-books px-0 list-book">
                         <div class="books_title">
-                            <h3>SÁCH THIẾU NHI </h3>
+                            <h3>SÁCH kỸ NĂNG</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex">
-                                <div class="chir_loop">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result3 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
+                            echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -1499,13 +301,13 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                                '.$row["Ten_Sach"].'
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
                                             </span>
                                         </p>
 
@@ -1513,135 +315,37 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
 
 
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
                             </div>
                             <div class="show-all">
-                                <a href="#">Xem tất cả</a>
+                                <a href="collections/sach-ki-nang">Xem tất cả</a>
                             </div>
                         </div>
                     </div>
-                    <div class="banner_bottom_module_product">
-                        <div class="col-6 pr-1 pl-0">
-                            <a href="#">
-                                <img src="media/logo-banner/banner7.png" alt="">
-                            </a>
-                        </div>
-                        <div class="col-6 pl-1 pr-0">
-                            <a href="#">
-                                <img src="media/logo-banner/banner8.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-12 business-books px-0 list-book">
+                    <div class="col-12 skill-books px-0 list-book">
                         <div class="books_title">
-                            <h3>SÁCH KINH DOANH </h3>
+                            <h3>SÁCH KINH DOANH</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex">
-                                <div class="chir_loop">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result4 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
+                            echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -1652,13 +356,13 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                                '.$row["Ten_Sach"].'
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
                                             </span>
                                         </p>
 
@@ -1666,123 +370,37 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
 
 
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
                             </div>
                             <div class="show-all">
-                                <a href="#">Xem tất cả</a>
+                                <a href="collections/sach-kinh-doanh">Xem tất cả</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 literature-books px-0 list-book">
+                    <div class="col-12 skill-books px-0 list-book">
                         <div class="books_title">
-                            <h3>SÁCH VĂN HỌC </h3>
+                            <h3>SÁCH MẸ VÀ BÉ</h3>
                         </div>
                         <div class="content_product">
-                            <div class="list_product  d-flex">
-                                <div class="chir_loop">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result5 as $row){
+                            $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
+                            echo ' <div class="chir_loop">
                                     <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
                                         </a>
                                         <div class="insActionloop">
-                                            <a href="#">
+                                        <a href="'.$detailUrl.'">
                                                 <img src="media/logo-banner/eye.png" alt="">
                                             </a>
                                             <a href="#">
@@ -1793,13 +411,13 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                     <div class="chir_content">
                                         <h3>
                                             <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
+                                                '.$row["Ten_Sach"].'
                                             </a>
                                         </h3>
                                         <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
                                             </span>
                                         </p>
 
@@ -1807,104 +425,179 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
 
 
 
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-                                </div>
-                                <div class="chir_loop">
-                                    <div class="chir_img">
-                                        <a href="#">
-                                            <img src="media/logo-banner/sach1.jpg" alt="">
-                                        </a>
-                                        <div class="insActionloop">
-                                            <a href="#">
-                                                <img src="media/logo-banner/eye.png" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="media/logo-banner/cart.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="chir_content">
-                                        <h3>
-                                            <a href="#">
-                                                Sách: Đặt Nỗi Lo Âu Của Bạn Vào Đây
-                                            </a>
-                                        </h3>
-                                        <p class="pro-price">
-                                            <del>74,000đ</del>
-                                            59,200₫ <span class="sale-price">
-                                                <span>-20%</span>
-                                            </span>
-                                        </p>
-
-                                    </div>
-
-
-
-                                </div>
-
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
                             </div>
                             <div class="show-all">
-                                <a href="#">Xem tất cả</a>
+                                <a href="collections/sach-me-va-be">Xem tất cả</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 skill-books px-0 list-book">
+                        <div class="books_title">
+                            <h3>SÁCH VĂN HỌC</h3>
+                        </div>
+                        <div class="content_product">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result6 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
+                            echo ' <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                        <a href="'.$detailUrl.'">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                '.$row["Ten_Sach"].'
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
+                            </div>
+                            <div class="show-all">
+                                <a href="collections/sach-van-hoc">Xem tất cả</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 skill-books px-0 list-book">
+                        <div class="books_title">
+                            <h3>SÁCH THAM KHẢO</h3>
+                        </div>
+                        <div class="content_product">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result7 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
+                            echo ' <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                        <a href="'.$detailUrl.'">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                '.$row["Ten_Sach"].'
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
+                            </div>
+                            <div class="show-all">
+                                <a href="collections/sach-tham-khao">Xem tất cả</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 skill-books px-0 list-book">
+                        <div class="books_title">
+                            <h3>NOTEBOOK</h3>
+                        </div>
+                        <div class="content_product">
+                            <div class="list_product  d-flex"> 
+                        <?php foreach($result8 as $row){
+                        $GiaGiam = (int)((float) $row['Gia_Ban'] - ((float)$row['Gia_Ban'] * (float) $row['GiamGia(%)'] / 100));
+                        $GiaGoc = (int) $row['Gia_Ban'];
+                        $GiaGiam = number_format($GiaGiam, 0, '', '.') . 'đ';
+                        $GiaGoc = number_format($GiaGoc, 0, '', '.') . 'đ';
+                        $slug = $sachModel->slugify($row['Ten_Sach']);
+                        $detailUrl = "product/detail/{$slug}-{$row['ID_Sach']}";   
+                            echo ' <div class="chir_loop">
+                                    <div class="chir_img">
+                                        <a href="'.$detailUrl.'">
+                                            <img src="media/img_product/'.$row['Images'].'" alt="">
+                                        </a>
+                                        <div class="insActionloop">
+                                        <a href="'.$detailUrl.'">
+                                                <img src="media/logo-banner/eye.png" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="media/logo-banner/cart.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="chir_content">
+                                        <h3>
+                                            <a href="#">
+                                                '.$row["Ten_Sach"].'
+                                            </a>
+                                        </h3>
+                                        <p class="pro-price">
+                                            <del>'.$GiaGoc.'</del>
+                                            '.$GiaGiam.' <span class="sale-price">
+                                                <span>'.$row['GiamGia(%)'].'</span>
+                                            </span>
+                                        </p>
+
+                                    </div>
+
+
+
+                                </div>';
+                        }
+                                                    
+                               
+                        ?>
+                            </div>
+                            <div class="show-all">
+                                <a href="collections/notebook">Xem tất cả</a>
                             </div>
                         </div>
                     </div>
@@ -1926,7 +619,7 @@ $childBooks = $sachModel->getProductsByCategory(4); // Sách thiếu nhi
                                 <div class="blog-content">
                                     <div class="blog-heading">
                                         <h2>BIẾT LÀ ĐƯỜNG GẬP GHỀNH, NHƯNG TA VẪN CHỌN BƯỚC ĐI!</h2>
-                                        <p>Đăng bởi: Hằng haravan</p>
+                                        <p>Đăng bởi: haravan</p>
                                     </div>
 
                                     <div class="blog-end">

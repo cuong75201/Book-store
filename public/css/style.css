@@ -819,256 +819,333 @@ span.repassword_warning {
 
 /* CSS Information */
 .content-wrap {
-  padding: 1.25rem 0; /* 20px chuyển thành 1.25rem (20/16) */
-  width: 100%;
-  max-width: 73.125rem; /* 1170px chuyển thành 73.125rem (1170/16) */
-  height: 26.85rem;
-  margin: 0 auto;
+    padding: 1.25rem 0;
+    /* 20px chuyển thành 1.25rem (20/16) */
+    width: 100%;
+    max-width: 73.125rem;
+    /* 1170px chuyển thành 73.125rem (1170/16) */
+    height: 26.85rem;
+    margin: 0 auto;
 }
+
 .fancy-title h3 {
-	font-size: 1.5rem;
+    font-size: 1.5rem;
 }
+
 div.account-table {
-	margin-bottom: 0rem;
+    margin-bottom: 0rem;
 }
-.table > thead > tr > th {
-	vertical-align: bottom;
-	border-bottom: 0.125rem solid #ddd;
-	padding: 0.5rem;
+
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 0.125rem solid #ddd;
+    padding: 0.5rem;
 }
-.table > tbody tr > td {
-	padding: 0.5rem;
-	vertical-align: middle;
+
+.table>tbody tr>td {
+    padding: 0.5rem;
+    vertical-align: middle;
 }
+
 .fancy-title {
-	position: relative;
-	margin-bottom: 0.625rem;
+    position: relative;
+    margin-bottom: 0.625rem;
 }
+
 #content p {
-	line-height: 1.8;
+    line-height: 1.8;
 }
+
 div.account-table p {
-	margin-bottom: 0.625rem;
+    margin-bottom: 0.625rem;
 }
+
 a.logout {
     position: absolute;
-	right: 30rem;
-	top: 2rem;
-	text-decoration: underline;
-	color: #000;
-	font-size: 0.75rem;
-	font-family: 'brandon_textregular';
+    right: 30rem;
+    top: 2rem;
+    text-decoration: underline;
+    color: #000;
+    font-size: 0.75rem;
+    font-family: 'brandon_textregular';
 }
+
 a.viewADR {
     position: absolute;
-	right: 15rem;
-	top: 0.3rem;
-	text-decoration: underline;
-	color: #000;
-	font-size: 0.75rem;
-	font-family: 'brandon_textregular';
+    right: 15rem;
+    top: 0.3rem;
+    text-decoration: underline;
+    color: #000;
+    font-size: 0.75rem;
+    font-family: 'brandon_textregular';
 }
+
 .accountAddress a.logout.clickOut {
     right: 25rem;
 }
+
 .accountSidebar {
-	float: left;
-	width: 20%;
+    float: left;
+    width: 20%;
 }
+
 .accountSidebar.bg_w {
-    background-color: #ffffff; /* bg_w thường đại diện cho background màu trắng */
+    background-color: #ffffff;
+    /* bg_w thường đại diện cho background màu trắng */
 }
+
 .feature_user {
-	padding: 0.625rem;
-	background: #026e36;
-	color: #fff;
-	margin-bottom: 0.625rem;
+    padding: 0.625rem;
+    background: #026e36;
+    color: #fff;
+    margin-bottom: 0.625rem;
 }
+
 .accountNeworder tr td:first-child a {
-	color: #026e36;
+    color: #026e36;
 }
+
 .feature_user span {
-	font-size: 0.75rem;
-	line-height: 1.5;
-	display: block;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    display: block;
 }
+
 .feature_user h3 {
-	font-size: 0.9375rem;
-	line-height: normal;
-	color: #fff;
+    font-size: 0.9375rem;
+    line-height: normal;
+    color: #fff;
 }
+
 .link_account {
-	padding: 0.625rem;
+    padding: 0.625rem;
 }
+
 .link_account li {
-	padding: 0.3125rem 0.3125rem 0.3125rem 0.9375rem;
+    padding: 0.3125rem 0.3125rem 0.3125rem 0.9375rem;
 }
+
 .link_account li.active {
-	background: #f1f1f1;
-	font-weight: bold;
+    background: #f1f1f1;
+    font-weight: bold;
 }
+
+.address-list {
+    overflow-y: auto;
+}
+
 .link_account li a {
-	color: #000;
+    color: #000;
 }
+
 .ctAccount {
-	float: left;
-	width: 80%;
-	padding: 0rem 0.625rem;
+    float: left;
+    width: 80%;
+    padding: 0rem 0.625rem;
 }
+
 .detailAccount {
-	padding: 0.625rem;
+    padding: 0.625rem;
 }
+
 .feature_user .icon {
-	width: 2.8125rem;
-	margin-right: 0.3125rem;
-	display: inline-block;
-	vertical-align: middle;
+    width: 2.8125rem;
+    margin-right: 0.3125rem;
+    display: inline-block;
+    vertical-align: middle;
 }
+
 .feature_user .user {
-	display: inline-block;
-	vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
-.accountInfo > h3 {
-	font-size: 1rem;
-	font-weight: bold;
-	margin-bottom: 1.25rem;
-	text-transform: uppercase;
+
+.accountInfo>h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
 }
+
 .user_info {
-	width: 50%;
+    width: 50%;
 }
-.user_info h3, .accountNeworder h3, .accountAddress > h3, #addNewaddress > h3 {
-	font-size: 1rem;
-	margin-bottom: 0.625rem;
-	color: #333;
+
+.user_info h3,
+.accountNeworder h3,
+.accountAddress>h3,
+#addNewaddress>h3 {
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+    color: #333;
 }
+
 .user_info .main {
-	padding: 0.625rem;
-	border: 0.0625rem solid #eaeaea;
-	font-size: 0.75rem;
-	margin-bottom: 1.25rem;
+    padding: 0.625rem;
+    border: 0.0625rem solid #eaeaea;
+    font-size: 0.75rem;
+    margin-bottom: 1.25rem;
 }
+
 .user_info .main li {
-	display: block;
-	line-height: 1.25rem;
+    display: block;
+    line-height: 1.25rem;
 }
+
 .user_info .main li span.first {
-	width: 30%;
-	display: inline-block;
+    width: 30%;
+    display: inline-block;
 }
-.account-table > p {
-	line-height: normal;
-	padding: 0rem 0.9375rem;
-	font-style: italic;
+
+.account-table>p {
+    line-height: normal;
+    padding: 0rem 0.9375rem;
+    font-style: italic;
 }
+
 .view_address p {
-	line-height: 1.4 !important;
-	font-size: 0.8125rem;
+    line-height: 1.4 !important;
+    font-size: 0.8125rem;
 }
-.accountAddress > h3 {
-	margin-bottom: 1.25rem;
-	position: relative;
+
+.accountAddress>h3 {
+    margin-bottom: 1.25rem;
+    position: relative;
 }
+
 .view_address {
-	padding: 0.625rem;
-	border: 0.0625rem dashed #ccc;
-	position: relative;
+    padding: 0.625rem;
+    border: 0.0625rem dashed #ccc;
+    position: relative;
 }
+
 .address_defaul .view_address {
-	border: 0.0625rem dashed #090;
+    border: 0.0625rem dashed #090;
 }
+
 .view_address p.name {
-	font-size: 0.9375rem;
-	font-weight: bold;
+    font-size: 0.9375rem;
+    font-weight: bold;
 }
-.address_actions > span {
-	display: inline-block;
-	margin-right: 0.625rem;
-	font-size: 0.75rem;
-	margin-top: 0.3125rem;
+
+.address_actions>span {
+    display: inline-block;
+    margin-right: 0.625rem;
+    font-size: 0.75rem;
+    margin-top: 0.3125rem;
 }
-.address_actions > span a {
-	color: #333;
-	padding: 0.3125rem 0.9375rem;
-	border: 0.0625rem solid #ccc;
-	display: block;
+
+.address_actions>span a {
+    color: #333;
+    padding: 0.3125rem 0.9375rem;
+    border: 0.0625rem solid #ccc;
+    display: block;
 }
+
 span.label_defaul {
-	font-size: 0.6875rem;
-	position: absolute;
-	right: 0.625rem;
-	color: #090;
+    font-size: 0.6875rem;
+    position: absolute;
+    right: 0.625rem;
+    color: #090;
 }
+
 .address_table .input-group {
-	margin-bottom: 0.3125rem;
+    margin-bottom: 0.3125rem;
 }
+
 .action_bottom .btn {
-	padding: 0;
-	font-size: 0.75rem;
-	width: 6.25rem;
-	height: 2.1875rem;
-	border-radius: 0;
-	border: 0.0625rem solid #026e36;
-	color: #fff !important;
-	background: #026e36;
-	text-transform: uppercase;
-	outline: none;
+    padding: 0;
+    font-size: 0.75rem;
+    width: 6.25rem;
+    height: 2.1875rem;
+    border-radius: 0;
+    border: 0.0625rem solid #026e36;
+    color: #fff !important;
+    background: #026e36;
+    text-transform: uppercase;
+    outline: none;
 }
+
 .action_bottom .btn:hover {
-	color: #026e36 !important;
-	background: transparent;
+    color: #026e36 !important;
+    background: transparent;
 }
-.address_table .input-group, .edit_address .input-group {
-	margin-bottom: 0.3125rem;
+
+.address_table .input-group,
+.edit_address .input-group {
+    margin-bottom: 0.3125rem;
 }
-.address > div {
-	margin-bottom: 1.25rem;
+
+.address>div {
+    margin-bottom: 1.25rem;
 }
+
 .detailAccount .header-page h1 {
-	font-size: 1.125rem;
-	font-weight: bold;
-	margin-bottom: 0.625rem;
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 0.625rem;
 }
+
 .detailAccount .content-page {
-	margin: 0.9375rem 0rem;
+    margin: 0.9375rem 0rem;
 }
+
 .detailAccount.bg_w {
-    background-color: #ffffff; /* bg_w thường đại diện cho background màu trắng */
-    padding: 0.625rem; /* Khoảng 10px */
+    background-color: #ffffff;
+    /* bg_w thường đại diện cho background màu trắng */
+    padding: 0.625rem;
+    /* Khoảng 10px */
     padding-bottom: 0rem;
-    border-radius: 0.25rem; /* Bo góc nhẹ, khoảng 4px */
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+    border-radius: 0.25rem;
+    /* Bo góc nhẹ, khoảng 4px */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+    /* Đổ bóng nhẹ */
     width: 100%;
-    max-width: 54.25rem; /* 868px / 16 = 54.25rem */
-    min-height: 25.8rem; /* 428.8px / 16 = 26.8rem */
-  }
+    overflow-y: auto;
+    max-width: 54.25rem;
+    /* 868px / 16 = 54.25rem */
+    min-height: 25.8rem;
+    /* 428.8px / 16 = 26.8rem */
+    max-height: 420px;
+}
+
 @media screen and (min-width: 62rem) and (max-width: 74.9375rem) {
-	.feature_user .icon {
-		width: 1.875rem;
-	}
-	.feature_user span {
-		font-size: 0.625rem;
-	}
-	.feature_user h3 {
-		font-size: 0.75rem;
-	}
+    .feature_user .icon {
+        width: 1.875rem;
+    }
+
+    .feature_user span {
+        font-size: 0.625rem;
+    }
+
+    .feature_user h3 {
+        font-size: 0.75rem;
+    }
 }
+
 @media screen and (max-width: 61.9375rem) {
-	.accountSidebar, .ctAccount, .user_info {
-		width: 100% !important;
-	}
-	.accountSidebar {
-		margin-bottom: 1.25rem;
-	}
-	.detailAccount div#layout-page > div {
-		padding: 0;
-	}
+
+    .accountSidebar,
+    .ctAccount,
+    .user_info {
+        width: 100% !important;
+    }
+
+    .accountSidebar {
+        margin-bottom: 1.25rem;
+    }
+
+    .detailAccount div#layout-page>div {
+        padding: 0;
+    }
 }
+
 @media screen and (max-width: 47.9375rem) {
-	.accountAddress {
-		margin-top: 1.25rem;
-	}
+    .accountAddress {
+        margin-top: 1.25rem;
+    }
 }
+
 .accountAddress .address-header {
     display: flex;
     justify-content: space-between;
@@ -1133,11 +1210,15 @@ span.label_defaul {
     margin-bottom: 8px;
     color: #555;
     font-size: 14px;
-    word-wrap: break-word; /* Đảm bảo xuống dòng */
+    word-wrap: break-word;
+    /* Đảm bảo xuống dòng */
     overflow-wrap: break-word;
-    white-space: normal; /* Cho phép xuống dòng */
-    max-width: 100%; /* Giới hạn chiều rộng */
+    white-space: normal;
+    /* Cho phép xuống dòng */
+    max-width: 100%;
+    /* Giới hạn chiều rộng */
 }
+
 .address-box.is-default {
     border-color: #e74c3c;
 }
@@ -1161,8 +1242,10 @@ span.label_defaul {
 
 .address-box .address {
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Giới hạn số dòng */
-    line-clamp: 2; /* Standard property for compatibility */
+    -webkit-line-clamp: 2;
+    /* Giới hạn số dòng */
+    line-clamp: 2;
+    /* Standard property for compatibility */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1211,6 +1294,7 @@ span.label_defaul {
     font-size: 12px;
     z-index: 1;
 }
+
 .modal-title {
     font-weight: bold;
     color: #333;
@@ -1243,11 +1327,12 @@ textarea.form-control {
 .checkbox {
     margin: 15px 0;
 }
+
 @media screen and (max-width: 767px) {
     .address-list .col-sm-6 {
         width: 100%;
     }
-    
+
     .address-box {
         min-height: 200px;
     }
@@ -1264,172 +1349,174 @@ textarea.form-control {
     box-shadow: 0 0 12px rgba(0, 128, 0, 0.1);
     z-index: 1;
     flex-wrap: wrap;
-  }
-  
-  .left-section {
+}
+
+.left-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 450px;
-  }
-  
-  .right-section {
+}
+
+.right-section {
     flex: 2;
     display: flex;
     flex-direction: column;
     min-width: 300px;
-  }
-  
-  .product-image {
+}
+
+.product-image {
     width: 100%;
     max-width: 420px;
     height: auto;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 128, 0, 0.1);
-  }
-  
-  .action-buttons {
+}
+
+.action-buttons {
     margin-top: 20px;
     display: flex;
     gap: 15px;
-  }
-  
-  .btn-outline,
-  .btn-solid {
+}
+
+.btn-outline,
+.btn-solid {
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
-  
-  .btn-outline {
+}
+
+.btn-outline {
     border: 2px solid #4caf50;
     color: #4caf50;
     background-color: white;
-  }
-  
-  .btn-outline:hover {
+}
+
+.btn-outline:hover {
     background-color: #e6fbe6;
-  }
-  
-  .btn-solid {
+}
+
+.btn-solid {
     border: none;
     background-color: #4caf50;
     color: white;
-  }
-  
-  .btn-solid:hover {
+}
+
+.btn-solid:hover {
     background-color: #449d48;
-  }
-  
-  .product-info {
+}
+
+.product-info {
     border: 1px solid #b4e6b4;
     background-color: #e8fbe8;
     padding: 25px;
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 128, 0, 0.08);
-  }
-  
-  .info-row {
+}
+
+.info-row {
     display: flex;
     flex-wrap: wrap;
     gap: 15px 25px;
     margin-top: 15px;
-  }
-  
-  .info-row span {
+}
+
+.info-row span {
     font-size: 14px;
     line-height: 1.5;
     color: #333;
     white-space: wrap;
     margin-right: 6%;
-  }
-  
-  
-  .product-description {
+}
+
+
+.product-description {
     margin-top: 24px;
     padding: 25px 30px;
     border-radius: 16px;
     border: 1px solid #b4e6b4;
     box-shadow: 0 2px 10px rgba(0, 128, 0, 0.05);
-  }
-  
-  .product-description h2 {
+}
+
+.product-description h2 {
     color: #2e7d32;
     margin-bottom: 15px;
-  }
-  
-  .product-description div {
+}
+
+.product-description div {
     font-size: 16px;
     line-height: 1.6;
     color: #333;
-  }
-  
-  h1 {
-      color: #1a8f1a;
-      font-size: 28px;
-      margin-bottom: 15px;
-    }
-  
-    .price {
-      background-color: #e8fbe8;
-      padding: 5px 10px;
-      color:hsl(8, 100.00%, 50.60%);
-    }
-  
-    .stock {
-      font-weight: bold;
-      color: #2e7d32;
-    }
-  
-    p {
-      margin: 8px 0;
-      font-size: 16px;
-    }
-    strong {
-      color: #2e7d32;
-    }
-  
-  
-  /* ✅ Responsive cho màn hình nhỏ */
-  @media screen and (max-width: 768px) {
+}
+
+h1 {
+    color: #1a8f1a;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.price {
+    background-color: #e8fbe8;
+    padding: 5px 10px;
+    color: hsl(8, 100.00%, 50.60%);
+}
+
+.stock {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+strong {
+    color: #2e7d32;
+}
+
+
+/* ✅ Responsive cho màn hình nhỏ */
+@media screen and (max-width: 768px) {
     #product-container {
-      flex-direction: column;
-      padding: 20px;
-      margin-top: 100px;
+        flex-direction: column;
+        padding: 20px;
+        margin-top: 100px;
     }
-  
+
     .left-section,
     .right-section {
-      width: 100%;
+        width: 100%;
     }
-  
+
     .action-buttons {
-      flex-direction: column;
-      width: 100%;
+        flex-direction: column;
+        width: 100%;
     }
-  
+
     .btn-outline,
     .btn-solid {
-      width: 100%;
-      text-align: center;
+        width: 100%;
+        text-align: center;
     }
-  
+
     .product-image {
-      max-width: 100%;
+        max-width: 100%;
     }
-  }
-  
-  
+}
+
+
 /* Đảm bảo bảng đơn hàng hiển thị đẹp */
 .account-table table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.account-table th, .account-table td {
+.account-table th,
+.account-table td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -1485,11 +1572,13 @@ textarea.form-control {
 
 /* Responsive cho màn hình nhỏ */
 @media screen and (max-width: 767px) {
-    .account-table th, .account-table td {
+
+    .account-table th,
+    .account-table td {
         padding: 8px;
         font-size: 14px;
     }
-    
+
     .account-table td:nth-child(3) {
         max-width: 200px !important;
     }
@@ -1500,5 +1589,163 @@ textarea.form-control {
     }
 
 
-    
+
+}
+
+/* TOAST */
+#toast {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 10000;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 20px 0;
+    border-left: 4px solid;
+    box-shadow: 0 5px 8px #00000013;
+    min-width: 400px;
+    max-width: 450px;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.toast__background {
+    height: 4px;
+    background-color: #47d864;
+    animation: background_time 3s linear;
+    position: absolute;
+    bottom: 0;
+}
+
+@keyframes background_time {
+    0% {
+        width: 100%;
+    }
+
+    10% {
+        width: 90%;
+    }
+
+    20% {
+        width: 80%;
+    }
+
+    30% {
+        width: 70%;
+    }
+
+    40% {
+        width: 60%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    60% {
+        width: 40%;
+    }
+
+    70% {
+        width: 30%;
+    }
+
+    80% {
+        width: 20%;
+    }
+
+    90% {
+        width: 10%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+.toast--success {
+    border-color: #47d864;
+
+
+}
+
+.toast--success .toast_icon {
+    color: #47d864;
+
+}
+
+.toast_body {
+    flex-grow: 1;
+}
+
+.toast--warning {
+    border-color: #ffc021;
+}
+
+.toast--warning .toast_icon {
+    color: #ffc021;
+}
+
+.toast--errol {
+    border-color: #ff623d;
+}
+
+.toast--errol .toast_icon {
+    color: #ff623d;
+}
+
+.toast_icon {
+    font-size: 24px;
+
+}
+
+.toast_icon,
+.toast_close {
+    padding: 0 16px;
+
+}
+
+.toast_close {
+    cursor: pointer;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.toast_title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+}
+
+.toast_msg {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+.toast+.toast {
+    margin-top: 24px;
 }

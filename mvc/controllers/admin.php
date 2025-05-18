@@ -8,16 +8,16 @@ class Admin extends Controller
     public $donhangModel;
     public $ctietdonhangModel;
     public $nhomquyenModel;
-<<<<<<< HEAD
     public $khachhangModel;
     public $ctietpnhModel;
     public $ctietquyenModel;
-=======
     public $phieunhapModel;
     public $nhaCungCapModel;
->>>>>>> 69a78782e45b6eba0e05f132a4b3617c40fe8201
+
     function __construct()
     {
+        if (!isset($_SESSION)) session_start();
+        parent::__construct();
         $this->ctietquyenModel = $this->model("ctiet_quyenModel");
         $this->ctietpnhModel = $this->model("ctiet_pnhModel");
         $this->khachhangModel = $this->model("UserModel");
@@ -30,15 +30,47 @@ class Admin extends Controller
         $this->nhomquyenModel = $this->model("NhomQuyenModel");
         $this->phieunhapModel = $this->model("PhieuNhapModel");
         $this->nhaCungCapModel = $this->model("NhaCungCapModel");
-
+       // $this->nccModel = $this->model("NccModel");
     }
 
-    function default()
+    function default($params = "")
     {
-        $this->view("page/loginAdmin", []);
+        if (!empty($params)) {
+            $this->view("page/myerrol", [
+                'href' => 'login'
+            ]);
+            return;
+        }
+        if (isset($_SESSION['hanhdong'])) {
+            $this->dashboard();
+        } else {
+            $this->view("page/loginAdmin", []);
+        }
     }
+
+    function dashboard()
+    {
+        $this->view("admin_view", [
+            "title" => "Trang chủ - Admin Web",
+            "content" => "Trang chủ",
+            "Page" => "dashboard"
+        ]);
+    }
+
     function product()
     {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(1, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_product = $this->sachModel->getSach();
         foreach ($list_product as &$product) {
             $product['DanhMuc'] = $this->danhmucModel->getNamebyId($product['ID_DanhMuc'])[0];
@@ -52,8 +84,66 @@ class Admin extends Controller
             "script" => "product",
         ]);
     }
+    function khachhang()
+    {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(4, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
+        $list_user = $this->khachhangModel->getAllUser();
+        $this->view("admin_view", [
+            "title" => "Khách hàng - Admin Web",
+            "content" => "Khách hàng",
+            "Page" => "khachhang",
+            "list_khachhang" => $list_user,
+            "script" => "khachhang",
+        ]);
+    }
+    function nhacungcap()
+    {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(2, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
+        $list_ncc = $this->nhaCungCapModel->getAllNCC1();
+        $this->view("admin_view", [
+            "title" => "Nhà cung cấp - Admin Web",
+            "content" => "Nhà cung cấp",
+            "Page" => "nhacungcap",
+            "list_nhacungcap" => $list_ncc,
+            "script" => "nhacungcap",
+        ]);
+    }
     function nhanvien()
     {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(3, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_nhanvien = $this->nhanvienModel->getAll();
         foreach ($list_nhanvien as &$nhanvien) {
             $nhanvien['TenQuyen'] = $this->nhomquyenModel->getNamebyId($nhanvien['MaQuyen'])[0];
@@ -68,6 +158,18 @@ class Admin extends Controller
     }
     function donhang()
     {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(5, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_donhang = $this->donhangModel->getAll();
         $this->view("admin_view", [
             "title" => "Đơn hàng - Admin Web",
@@ -79,6 +181,18 @@ class Admin extends Controller
     }
     function thongke()
     {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(7, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_khachhang = $this->donhangModel->getAllKH();
 
         foreach ($list_khachhang as &$khachhang) {
@@ -100,6 +214,18 @@ class Admin extends Controller
     }
     function phanquyen()
     {
+        if (!isset($_SESSION['hanhdong'])) {
+            // $this->view("page/loginAdmin", []);
+            header("Location: login");
+            return;
+        } else {
+            if (!in_array(8, $_SESSION['hanhdong'])) {
+                $this->view("page/myerrol", [
+                    'href' => 'dashboard'
+                ]);
+                return;
+            }
+        }
         $list_quyen = $this->nhomquyenModel->getAll();
         $this->view("admin_view", [
             "title" => "Phân quyền - Admin Web",
@@ -109,29 +235,30 @@ class Admin extends Controller
             "script" => "phanquyen",
         ]);
     }
+    function login()
+    {
+        session_destroy();
+        $this->view("page/loginAdmin", []);
+    }
     function checkLogin()
     {
-
         $sdt = isset($_POST['username']) ? $_POST['username'] : "";
         $password = isset($_POST["password"]) ? $_POST['password'] : "";
         $result = $this->nhanvienModel->KiemTraNhanVien($sdt, $password);
+        
         if ($result) {
-
-
             $nv = $this->nhanvienModel->getNVfromSDT($sdt);
-            $idnv = $nv['ID_NV'];
-            $ctiet = $this->ctietquyenModel->getById($nv['MaQuyen'])[0];
-            $hanhdong = [];
+            $_SESSION['id_nv'] = $nv['ID_NV'];
+            
+            // Khởi tạo mảng trước khi sử dụng
+            $_SESSION['hanhdong'] = []; // <-- Thêm dòng này
+            
+            $ctiet = $this->ctietquyenModel->getById($nv['MaQuyen']);
             foreach ($ctiet as $ct) {
-                $hanhdong[] = $ct['hanhdong'];
+                $_SESSION['hanhdong'][] = $ct['hanhdong']; // <-- Sử dụng [] để thêm phần tử
             }
-            if (!setcookie("id_nv", 5, time() + 3600 * 248 * 30, "/")) {
-                return;
-            };
-            echo "Đăng nhập thành công";
-        } else {
-            echo "Fail";
         }
+        echo json_encode($result);
     }
     function getDanhMuc()
     {
@@ -188,7 +315,8 @@ class Admin extends Controller
             echo json_encode(["status" => "error", "message" => "Không tìm thấy file."]);
         }
     }
-    public function getSach() {
+    public function getSach()
+    {
         if (!empty($_POST['id']) && $_POST['id'] !== 'all') {
             echo json_encode($this->sachModel->getSachfromID($_POST['id']));
         } else {
@@ -298,41 +426,64 @@ class Admin extends Controller
         $result = $this->nhanvienModel->remove($id);
         echo json_encode($result);
     }
-// Action chính
-function phieunhap() {
-    $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
-    $this->view("admin_view", [
-        "title" => "Quản lý Phiếu nhập",
-        "content" => "Phiếu nhập",
-        "Page" => "phieunhap",
-        "script" => "phieunhap",
-        "listPhieu" => $listPhieu
-    ]);
-}
-function getPhieuNhap()
-{
-    if (isset($_POST['id'])) {
-        echo json_encode($this->phieunhapModel->getphieunhap($_POST['id']));
+    // Action chính
+    function phieunhap()
+    {
+        // Kiểm tra session tồn tại
+        if (!isset($_SESSION) || !isset($_SESSION['hanhdong'])) {
+            $this->view("page/loginAdmin", []);
+            return;
+        }
+
+        // Kiểm tra quyền với mảng đã được khởi tạo
+        if (!in_array(6, $_SESSION['hanhdong'])) {
+            $this->view("page/myerrol", ['href' => 'dashboard']);
+            return;
+        }
+
+        $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
+        $this->view("admin_view", [
+            "title" => "Quản lý Phiếu nhập",
+            "content" => "Phiếu nhập",
+            "Page" => "phieunhap",
+            "script" => "phieunhap",
+            "listPhieu" => $listPhieu
+        ]);
     }
-}
-function getChiTietPhieu() {
-    if (isset($_POST['id'])) {
-        echo json_encode($this->phieunhapModel->getChiTietPhieu($_POST['id']));
+    function getPhieuNhap()
+    {
+        if (isset($_POST['id'])) {
+            echo json_encode($this->phieunhapModel->getphieunhap($_POST['id']));
+        }
     }
-}
-public function getNCC() {
-    header('Content-Type: application/json');
-    echo json_encode($this->nhaCungCapModel->getAllNCC());
-}
+    function getChiTietPhieu()
+    {
+        if (isset($_POST['id'])) {
+            echo json_encode($this->phieunhapModel->getChiTietPhieu($_POST['id']));
+        }
+    }
+    public function getNCC()
+    {
+        header('Content-Type: application/json');
+        echo json_encode($this->nhaCungCapModel->getAllNCC());
+    }
 
 
-// API: Xử lý thêm phiếu
-function addPhieuNhap()
-{
+    // API: Xử lý thêm phiếu
+    function addPhieuNhap() {
     // Nhận dữ liệu JSON gửi từ client
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Kiểm tra dữ liệu đầu vào
+    // Kiểm tra session nhân viên
+    if (!isset($_SESSION['id_nv'])) {
+        echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập']);
+        return;
+    }
+
+    // Lấy ID_NV từ session
+    $id_nv = $_SESSION['id_nv'];
+
+    // Kiểm tra dữ liệu đầu vào (LOẠI BỎ KIỂM TRA id_nv TRONG $data)
     if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['ChiTiet'])) {
         echo json_encode([
             'success' => false,
@@ -341,40 +492,194 @@ function addPhieuNhap()
         return;
     }
 
-    // Tách dữ liệu
-    $ngayNhap = $data['NgayNhap'];
-    $idNCC = $data['ID_NCC'];
-    $chiTiet = $data['ChiTiet']; // Mảng chứa các sách: [ ['ID_Sach'=>..., 'SoLuong'=>..., 'GiaNhap'=>...], ...]
+    // Gọi model và truyền ID_NV từ session
+    $result = $this->phieunhapModel->addPhieuNhap(
+        $data['NgayNhap'], 
+        $data['ID_NCC'], 
+        $data['ChiTiet'], 
+        $id_nv // Truyền ID_NV từ session vào đây
+    );
 
-    // Gọi model để thêm phiếu nhập
-    $result = $this->phieunhapModel->addPhieuNhap($ngayNhap, $idNCC, $chiTiet);
-
-    // Trả về kết quả JSON
+    // Trả về kết quả
     if ($result) {
-        echo json_encode(['success' => true, 'message' => 'Them phieu nhap thanh cong']);
+        echo json_encode(['success' => true, 'message' => 'Thêm phiếu nhập thành công']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
     }
 }
+    // API: Xóa phiếu
+    function deletePhieu()
+    {
+        $id = $_POST['id'];
+        $result = $this->phieunhapModel->deletePhieuNhap($id);
+        echo json_encode(['success' => $result]);
+    }
 
+    function updatePhieuNhap()
+    {
+        $id_phieunhap = $_POST['id_phieunhap'];
+        $id_ncc = $_POST['id_ncc'];
+        $ngaynhap = $_POST['ngaynhap'];
+        $tongtien = $_POST['tongtien'];
+        $id_nv = $_POST['id_nv'];
 
-// API: Xóa phiếu
-function deletePhieu() {
-    $id = $_POST['id'];
-    $result = $this->phieunhapModel->deletePhieuNhap($id);
-    echo json_encode(['success' => $result]);
-}
+        $result = $this->phieunhapModel->updatephieunhap($id_phieunhap, $id_ncc, $ngaynhap, $tongtien, $id_nv);
+        echo json_encode($result);
+    }
+    function getUser()
+    {
+        if (isset($_POST['idkhachhang'])) {
 
-function updatePhieuNhap()
-{
-    $id_phieunhap = $_POST['id_phieunhap'];
-    $id_ncc = $_POST['id_ncc'];
-    $ngaynhap = $_POST['ngaynhap'];
-    $tongtien = $_POST['tongtien'];
-    $id_nv = $_POST['id_nv'];
+            echo json_encode($this->khachhangModel->getUserById($_POST['idkhachhang']));
+        }
+    }
+    function getNCCap()
+    {
+        if (isset($_POST['id'])) {
 
-    $result = $this->phieunhapModel->updatephieunhap($id_phieunhap, $id_ncc, $ngaynhap, $tongtien, $id_nv);
+            echo json_encode($this->nhaCungCapModel->getNCC1($_POST['id']));
+        }
+    }
+    function themKhachHang()
+    {
+        $lastName = (isset($_POST["lastName"])) ? $_POST["lastName"] : "";
+        $firstName = (isset($_POST["firstName"])) ? $_POST["firstName"] : "";
+        $email = (isset($_POST["email"])) ? $_POST["email"] : "";
+         $matKhau = (isset($_POST["matKhau"])) ? $_POST["matKhau"] : "";
+        // $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
+     //   $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
+        $ngayDangKy = (isset($_POST["ngayDangKy"])) ? $_POST["ngayDangKy"] : "";
+
+        $check = $this->khachhangModel->createByAdmin($lastName, $firstName, $email, $matKhau, $ngayDangKy);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function suaKhachHang()
+    {
+        $name = (isset($_POST["name"])) ? $_POST["name"] : "";
+        $id = (isset($_POST["id"])) ? $_POST["id"] : "";
+        $email = (isset($_POST["email"])) ? $_POST["email"] : "";
+
+        $check = $this->khachhangModel->updateUserByAdmin1($id, $name, $email);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function setStatusKhachHang()
+    {
+        $id = (isset($_POST["id"])) ? $_POST["id"] : "";
+        $status = (isset($_POST["status"])) ? $_POST["status"] : "";
+        $check = $this->khachhangModel->setStatusByAdmin($id, $status);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function xoaKhachHang()
+    {
+        $id = (isset($_POST["id"])) ? $_POST["id"] : "";
+        $check = $this->khachhangModel->xoaUserByAdmin($id);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function layDanhSachKhachHang()
+    {
+        // Lấy danh sách khách hàng từ model
+       $data['list_khachhang'] = $this->khachhangModel->getAllUser();
+
+        foreach ($data['list_khachhang'] as $user) {
+            $trangThai = ($user["status"] == 0) ? "bị khóa" : "hoạt động";
+            echo '
+        <tr  id="' . $user["ID_Khach_Hang"] . '">
+            <td>' . $user["ID_Khach_Hang"] . '</td>
+            <td>' . $user["Ten_Khach_Hang"] . '</td>
+            <td>' . $user["Email"] . '</td>
+            <td>' . $user["Ngay_Dang_Ky"] . '</td>
+            <td>' . $trangThai . '</td>
+        </tr>
+        ';
+        }
+    }
+    function themNhaCungCap()
+    {
+        $name = (isset($_POST["name"])) ? $_POST["name"] : "";
+        $lienHe = (isset($_POST["lienHe"])) ? $_POST["lienHe"] : "";
+        $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
+        $check = $this->nhaCungCapModel->addNCC1($name, $diaChi, $lienHe);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function suaNhaCungCap()
+    {
+        $name = (isset($_POST["name"])) ? $_POST["name"] : "";
+        $lienHe = (isset($_POST["lienHe"])) ? $_POST["lienHe"] : "";
+        $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
+        $id = (isset($_POST["id"])) ? $_POST["id"] : "";
+
+        $check = $this->nhaCungCapModel->updateNCC1($id, $name, $diaChi, $lienHe);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function setStatusNCC()
+    {
+        $id = (isset($_POST["id"])) ? $_POST["id"] : "";
+        $status = (isset($_POST["status"])) ? $_POST["status"] : "";
+        $check = $this->nhaCungCapModel->setStatus1($id, $status);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function xoaNhaCungCap()
+    {
+        $id = (isset($_POST["id"])) ? $_POST["id"] : "";
+        $check = $this->nhaCungCapModel->xoaNhaCungCap1($id);
+        if (!$check) {
+            echo json_encode("không thành coong");
+        }
+        echo json_encode("thành coong");
+    }
+    function layDanhSachNCC()
+    {
+        // Lấy danh sách khách hàng từ model
+        $result = $this->nhaCungCapModel->getAllNCC1();
+        foreach ($result as $ncc) {
+            echo '
+        <tr  id="' . $ncc["ID_NCC"] . '">
+            <td>' . $ncc["ID_NCC"] . '</td>
+            <td>' . $ncc["Ten_NCC"] . '</td>
+            <td>' . $ncc["DiaChi"] . '</td>
+            <td>' . $ncc["LienHe"] . '</td>
+        </tr>
+        ';
+        }
+    }
+    public function checkEmail()
+    {
+        $email = isset($_POST['email']) ? $_POST['email'] : "";
+        $result = $this->khachhangModel->getAllUser();
+        foreach ($result as $user) {
+            if ($user["Email"] === $email) {
+                echo "1";
+                return;
+            }
+        }
+        echo "0";
+    }
+    function searchPhieuNhap() {
+    $type = $_POST['type'];
+    $keyword = $_POST['keyword'];
+    
+    $result = $this->phieunhapModel->searchPhieu($type, $keyword);
     echo json_encode($result);
 }
-
 }

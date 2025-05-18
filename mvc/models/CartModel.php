@@ -1,7 +1,6 @@
 <?php
 class CartModel extends dbconnect
 {
-<<<<<<< Updated upstream
     // Lấy thông tin sản phẩm từ ID
     public function getProductById($productId)
     {
@@ -98,7 +97,6 @@ public function updateCartItem($customerId, $productId, $quantity)
         return $result;
     }
 
-=======
     public function getUserIdByEmail($email)
     {
         $sql = "SELECT ID_Khach_Hang FROM users WHERE email = ?";
@@ -184,5 +182,4 @@ public function updateCartItem($customerId, $productId, $quantity)
         $total = $result->fetch_assoc();
         return $total['Thanh_Tien'] ?? 0;
     }
->>>>>>> Stashed changes
 }

@@ -20,21 +20,35 @@ public function save() {
         return;
     }
 
+    // 👉 Lấy ID_NV từ session
+    session_start();
+    if (!isset($_SESSION['nhanvien']['ID_NV'])) {
+        echo json_encode(['success' => false, 'message' => 'Chưa đăng nhập hoặc thiếu ID nhân viên']);
+        return;
+    }
+    $id_nv = $_SESSION['nhanvien']['ID_NV'];
+
     try {
         $phieuNhapModel = new PhieuNhapModel();
 
-        // Thêm phiếu nhập mới, trả về ID mới
-        $idPhieu = $phieuNhapModel->addphieunhap($data['Ngay_Nhap'], $data['ID_NCC']);
+        // ✅ Gọi đúng hàm có cả danh sách chi tiết
+        $result = $phieuNhapModel->addPhieuNhap(
+            $data['Ngay_Nhap'],
+            $data['ID_NCC'],
+            $data['ChiTiet'],
+            $id_nv
+        );
 
-        // Thêm từng chi tiết
-        foreach ($data['ChiTiet'] as $chiTiet) {
-            $phieuNhapModel->addChiTiet($idPhieu, $chiTiet['ID_Sach'], $chiTiet['SoLuong'], $chiTiet['GiaNhap']);
+        if ($result === true) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Không thể lưu phiếu nhập']);
         }
 
-        echo json_encode(['success' => true]);
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
 }
+
 
 ?>

@@ -97,11 +97,11 @@
                                 <a href="pages/about"><span>Giới thiệu</span></a>
                                 <!-- ?url=pages/about -->
                             </li>
-                            <li>
-                                <a href="blogs/all"><span>Điểm sách</span></a>
+                             <li>
+                                <a href="pages/diemsach"><span>Điểm sách</span></a>
                             </li>
                             <li>
-                                <a href="blogs/tuyen-dung"><span>Tuyển dụng</span></a>
+                                <a href="pages/diemsach"><span>Tuyển dụng</span></a>
                             </li>
                             <li>
                                 <a href="/blogs/su-kien"><span>Sự kiện</span></a>
@@ -157,7 +157,7 @@
                                 <a href="/pages/tra-cuu-don-hang"><span>Tra cứu đơn hàng</span></a>
                             </li>
                             <li>
-                                <a href="https://minhlongbook.vn/pages/lien-he"><span>Liên hệ</span></a>
+                                <a href="pages/lienhe"><span>Liên hệ</span></a>
                             </li>
                         </ul>
                     </div>

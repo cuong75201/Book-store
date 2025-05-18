@@ -1,3 +1,70 @@
+<?php
+$hanhdong = $_SESSION['hanhdong'];
+$list_menu = [
+    1 => ' <div class="sidebar-item">
+                    <a href="admin/product">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <h3>Sản phẩm</h3>
+                    </a>
+                </div>',
+    2 => '<div class="sidebar-item">
+                    <a href="admin/nhacungcap">
+                        <i class="fa fa-briefcase"></i>
+                        <h3>Nhà cung cấp</h3>
+                    </a>
+                </div>',
+    3 => '<div class="sidebar-item">
+                    <a href="admin/nhanvien">
+                        <i class="fa fa-user-tie"></i>
+                        <h3>Nhân viên</h3>
+                    </a>
+                </div>',
+    4 => '
+                 <div class="sidebar-item">
+                    <a href="admin/khachhang">
+                        <i class="fa-solid fa-user"></i>
+                        <h3>Khách hàng</h3>
+                    </a>
+                </div>
+                ',
+    5 => '
+                <div class="sidebar-item">
+                    <a href="admin/donhang">
+                        <i class="fa-solid fa-receipt"></i>
+                        <h3>Đơn hàng</h3>
+                    </a>
+                </div>',
+    6 => '
+                <div class="sidebar-item">
+                    <a href="admin/phieunhap">
+                        <i class="fa fa-file-invoice-dollar"></i>
+                        <h3>Phiếu nhập</h3>
+                    </a>
+                </div>
+                ',
+    7 => '
+                <div class="sidebar-item">
+                    <a href="admin/thongke">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <h3>Thống kê</h3>
+                    </a>
+                </div>
+                ',
+    8 => '
+                <div class="sidebar-item">
+                    <a href="admin/phanquyen">
+                        <i class="fab fa-500px"></i>
+                        <h3>Phân quyền</h3>
+                    </a>
+                </div>
+                '
+];
+$menu = "";
+for ($i = 0; $i < count($hanhdong); $i++) {
+    $menu .= "\n" . $list_menu[$hanhdong[$i]];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +80,8 @@
 </head>
 
 <body>
+    <div id="toast"></div>
+
     <div class="container " style="display: flex;">
         <div class="sidebar">
             <div class="top-sidebar">
@@ -27,59 +96,11 @@
                 </div>
             </div>
             <div class="sidebar-content">
-                <div class="sidebar-item">
-                    <a href="admin/product">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <h3>Sản phẩm</h3>
-                    </a>
-                </div>
-                <div class="sidebar-item">
-                    <a href="admin/nhacungcap">
-                        <i class="fa fa-briefcase"></i>
-                        <h3>Nhà cung cấp</h3>
-                    </a>
-                </div>
-                <div class="sidebar-item">
-                    <a href="admin/nhanvien">
-                        <i class="fa fa-user-tie"></i>
-                        <h3>Nhân viên</h3>
-                    </a>
-                </div>
+                <?php echo $menu;
+                ?>
 
                 <div class="sidebar-item">
-                    <a href="admin/khachhang">
-                        <i class="fa-solid fa-user"></i>
-                        <h3>Khách hàng</h3>
-                    </a>
-                </div>
-                <div class="sidebar-item">
-                    <a href="admin/donhang">
-                        <i class="fa-solid fa-receipt"></i>
-                        <h3>Đơn hàng</h3>
-                    </a>
-                </div>
-                <div class="sidebar-item">
-                    <a href="admin/phieunhap">
-                        <i class="fa fa-file-invoice-dollar"></i>
-                        <h3>Phiếu nhập</h3>
-                    </a>
-                </div>
-                <div class="sidebar-item">
-                    <a href="admin/thongke">
-                        <i class="fa-solid fa-chart-simple"></i>
-                        <h3>Thống kê</h3>
-                    </a>
-                </div>
-                <div class="sidebar-item">
-                    <a href="admin/phanquyen">
-                        <i class="fab fa-500px"></i>
-                        <h3>Phân quyền</h3>
-                    </a>
-                </div>
-
-
-                <div class="sidebar-item">
-                    <a href="#">
+                    <a href="admin/login">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <h3>Đăng xuất</h3>
                     </a>

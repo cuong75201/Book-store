@@ -105,7 +105,8 @@ function openModal(action) {
     }
     else if (action === "Sửa") {
         if (!$("tr").hasClass("selected")) {
-            alert("Vui lòng chọn dòng cần sửa");
+            toast({ title: 'WARNING', message: 'Vui lòng chọn dòng cần sửa', type: 'warning', duration: 3000 });
+
         }
         else {
             let id = $("tr.selected").attr("id");
@@ -231,7 +232,7 @@ function openModal(action) {
     }
     else {
         if (!$("tr").hasClass("selected")) {
-            alert("Vui lòng chọn dòng cần xóa");
+            toast({ title: 'WARNING', message: 'Vui lòng chọn dòng cần xóa', type: 'warning', duration: 3000 });
         }
         else {
             modal.classList.add('active');
@@ -251,7 +252,7 @@ function openModal(action) {
                     method: "POST",
                     dataType: "json",
                     success: function (data) {
-                        alert("Xóa thành công");
+                        toast({ title: 'SUCCESS', message: "Xóa thành công", type: 'success', duration: 3000 });
                         closeModal();
                         $("tr.selected").remove();
                     },
@@ -271,6 +272,8 @@ function openModal(action) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
+    location.reload()
+
 }
 function AddNhanvien() {
     let name = $("#name").val();
@@ -282,12 +285,14 @@ function AddNhanvien() {
     let pass = $("#pass").val();
     if (!name || !$("#thanhpho").val() || !$("#quan").val() || !$("#tenduong").val() || !sdt || !luong || !pass) {
         data = { name: name, diachi: diachi, sdt: sdt, luong: luong, quyen: quyen, status: status, pass: pass };
-        alert("Các trường không được để trống");
+        toast({ title: 'ERROL', message: 'Các trường không được để trống', type: 'errol', duration: 3000 });
+
         return;
     }
     let pattern = /^(03|05|07|08|09)[0-9]{8}$/;
     if (!pattern.test(sdt)) {
-        alert("Số điện thoại không hợp lệ (Chỉ chấp nhận đầu số 03,05,07,08,09)");
+        toast({ title: 'ERROL', message: 'Số điện thoại không hợp lệ (Chỉ chấp nhận đầu số 03,05,07,08,09)', type: 'errol', duration: 3000 });
+
         return;
     }
     $.ajax({
@@ -296,8 +301,7 @@ function AddNhanvien() {
         data: { name: name, diachi: diachi, sdt: sdt, luong: luong, quyen: quyen, status: status, pass: pass },
         dataType: "json",
         success: function (data) {
-            alert("Thêm thành công");
-            location.reload()
+            toast({ title: 'SUCCESS', message: 'Thêm thành công', type: 'success', duration: 3000 });
             closeModal();
         },
         error: function (xhr, status, error) {
@@ -317,12 +321,13 @@ function UpdateNhanVien() {
     let status = $("#status-select").val();
     let pass = $("#pass").val();
     if (!name || !$("#thanhpho").val() || !$("#quan").val() || !$("#tenduong").val() || !sdt || !luong) {
-        alert("Các trường không được để trống");
+        toast({ title: 'WARNING', message: 'Các trường không được để trống', type: 'warning', duration: 3000 });
+
         return;
     }
     let pattern = /^(03|05|07|08|09)[0-9]{8}$/;
     if (!pattern.test(sdt)) {
-        alert("Số điện thoại không hợp lệ (Chỉ chấp nhận đầu số 03,05,07,08,09)");
+        toast({ title: 'ERROL', message: 'Số điện thoại không hợp lệ (Chỉ chấp nhận đầu số 03,05,07,08,09)', type: 'errol', duration: 3000 });
         return;
     }
     $.ajax({
@@ -332,7 +337,8 @@ function UpdateNhanVien() {
         dataType: "json",
         success: function (data) {
             console.log(data);
-            alert("Sửa thành công");
+            toast({ title: 'SUCCESS', message: "Sửa thành công", type: 'success', duration: 3000 });
+
             location.reload()
             closeModal();
         },

@@ -3,7 +3,7 @@ function openModal(action) {
     const title = document.getElementById('modalTitle');
     title.textContent = action + " đơn hàng";
     if (!$("tr").hasClass("selected")) {
-        alert("Vui lòng chọn dòng cần xem");
+        toast({ title: 'WARNING', message: "Vui lòng chọn dòng cần xem", type: 'warning', duration: 3000 });
     }
     else {
         modal.classList.add('active');
@@ -68,8 +68,7 @@ function openModal(action) {
                         dataType: "json",
                         success: function (data) {
                             console.log(data);
-                            alert("Cập nhật thành công");
-                            location.reload();
+                            toast({ title: 'SUCCESS', message: "Cập nhật thành công", type: 'success', duration: 3000 });
                         },
                         error: function (xhr, status, error) {
                             console.error("AJAX Error:", error);
@@ -77,6 +76,7 @@ function openModal(action) {
                             console.log("Status:", status);
                         }
                     });
+
                 });
             },
             error: function (xhr, status, error) {
@@ -93,6 +93,8 @@ function openModal(action) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
+    location.reload();
+
 }
 $(document).ready(function () {
     $(".sort-submt span").on("click", function () {
@@ -105,15 +107,16 @@ $(document).ready(function () {
             return;
         }
         if (!city && district) {
-            alert("Vui lòng nhập tên thành phố");
+            toast({ title: 'WARNING', message: "Vui lòng nhập tên thành phố", type: 'warning', duration: 3000 });
             return;
         }
         if (($("#start-date").val().trim() && !$("#end-date").val().trim()) || (!$("#start-date").val().trim() && $("#end-date").val().trim())) {
-            alert("Vui lòng chọn cả ngày bắt đầu và ngày kết thúc");
+            toast({ title: 'WARNING', message: "Vui lòng chọn cả ngày bắt đầu và ngày kết thúc", type: 'warning', duration: 3000 });
+
             return;
         }
         if (enddate < startdate) {
-            alert("Ngày kết thúc phải lớn hơn ngày bắt đầu");
+            toast({ title: 'WARNING', message: "Ngày kết thúc phải lớn hơn ngày bắt đầu", type: 'warning', duration: 3000 });
             return;
         }
         let startDateString = "";
@@ -494,7 +497,7 @@ $(document).ready(function () {
             }
         } else {
             // Fallback nếu không có toastr
-            alert(message);
+            toast({ title: 'WARNING', message: message, type: 'warning', duration: 3000 });
         }
     }
 
@@ -759,7 +762,7 @@ $(document).ready(function () {
                 toastr.error(message);
             }
         } else {
-            alert(message);
+            toast({ title: 'WARNING', message: message, type: 'warning', duration: 3000 });
         }
     }
 
@@ -821,7 +824,7 @@ document.getElementById("timkiemnangcao").addEventListener("click", function (e)
 
     // Kiểm tra nếu mảng value rỗng
     if (value.length === 0) {
-        alert("Vui lòng nhập ít nhất một tiêu chí tìm kiếm.");
+        toast({ title: 'WARNING', message: "Vui lòng nhập ít nhất một tiêu chí tìm kiếm.", type: 'warning', duration: 3000 });
         return;
     }
 
@@ -959,7 +962,7 @@ document.getElementById("timkiemnangcao").addEventListener("click", function (e)
                 error: errorThrown,
                 response: jqXHR.responseText
             });
-            alert("Có lỗi xảy ra khi tìm kiếm.");
+            toast({ title: 'WARNING', message: "Có lỗi xảy ra khi tìm kiếm.", type: 'warning', duration: 3000 });
         }
     });
     document.getElementById("advancedSearchForm").style.display = 'none';
@@ -969,7 +972,7 @@ document.getElementById("timkiem").addEventListener("click", function (e) {
     e.preventDefault();
     var tuKhoa = document.getElementById("tuKhoa").value.trim();
     if (tuKhoa === "") {
-        alert("Vui lòng nhập từ khóa tìm kiếm");
+        toast({ title: 'WARNING', message: "Vui lòng nhập từ khóa tìm kiếm", type: 'warning', duration: 3000 });
         return;
     }
 
@@ -1105,7 +1108,8 @@ document.getElementById("timkiem").addEventListener("click", function (e) {
                 error: errorThrown,
                 response: jqXHR.responseText
             });
-            alert("Có lỗi xảy ra khi tìm kiếm.");
+            toast({ title: 'ERROL', message: 'Có lỗi xảy ra khi tìm kiếm.', type: 'errol', duration: 3000 });
+
         }
     });
     document.querySelector(".owl-carousel").style.display = 'none';

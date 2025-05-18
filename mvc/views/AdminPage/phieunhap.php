@@ -2,13 +2,23 @@
     <h1>Danh sách Phiếu nhập</h1>
 </div>
 <div class="button-group">
-<button type="button" class="button add-button">Thêm phiếu</button>
+    <button type="button" class="button add-button">Thêm phiếu</button>
+    <div class="search-container">
+        <select id="searchType">
+            <option value="date">Ngày nhập (yyyy-mm-dd)</option>
+            <option value="staff">Mã nhân viên</option>
+            <option value="product">Mã hàng hóa</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Nhập từ khóa...">
+        <button type="button" class="button add-button" onclick="searchPhieu()">Tìm kiếm</button>
+    </div>
 </div>
 <div class="product-content">
     <table>
         <thead>
             <tr>
                 <th>Mã phiếu</th>
+                <th>Nhân viên</th>
                 <th>Ngày nhập</th>
                 <th>Nhà cung cấp</th>
                 <th>Tổng tiền</th>
@@ -21,6 +31,7 @@
             <?php foreach ($data['listPhieu'] as $phieu): ?>
             <tr data-id="<?= $phieu['ID_PhieuNhap'] ?>">
                 <td><?= $phieu['ID_PhieuNhap'] ?></td>
+                <td><?= $phieu['Ten_NV'] ?? 'Không xác định'?></td>
                 <td><?= date('d/m/Y', strtotime($phieu['NgayNhap'])) ?></td>
                 <td><?= $phieu['Ten_NCC'] ?? 'Không xác định' ?></td>
                 <td><?= number_format($phieu['TongTien']) ?>₫</td>
