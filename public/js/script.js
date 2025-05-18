@@ -943,7 +943,7 @@ function timKiemSachNangCao(sql){
                                         <a href="product/detail/${toSlug(product.Ten_Sach)}-${product.ID_Sach}">
                                             <img src="media/logo-banner/eye.png" alt="View">
                                             </a>
-                                        <a href="#"><img src="media/logo-banner/cart.png" alt="Add to Cart"></a>
+                                        <a href="#"  class ="add-to-card" id ="${product.ID_Sach}" ><img src="media/logo-banner/cart.png" alt="Add to Cart"></a>
                                     </div>
                                 </div>
                                 <div class="chir_content">
@@ -1086,7 +1086,7 @@ document.getElementById("timkiemnangcao").addEventListener("click", function (e)
     let urll = "?" + url.join("&");
     history.pushState(null, "", window.location.pathname + urll);
 
-     let sql = "SELECT Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE "+ value.join(' AND ');
+     let sql = "SELECT ID_Sach,Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE "+ value.join(' AND ');
     console.log(sql);
     // Đưa từ khóa lên URL
     timKiemSachNangCao(sql);
@@ -1130,7 +1130,7 @@ $(document).ready(function () {
         return;
     }
 
-    let sql = "SELECT Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE "+ value.join(' AND ');
+    let sql = "SELECT ID_Sach, Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE "+ value.join(' AND ');
     console.log(sql);
     timKiemSachNangCao(sql); // Gọi hàm xử lý truy vấn
 });
@@ -1145,7 +1145,7 @@ document.getElementById("timkiem").addEventListener("click", function (e) {
     }
     // Đưa từ khóa lên URL
     history.pushState(null, "", window.location.pathname + "?TuKhoa=" + encodeURIComponent(tuKhoa));
-    let sql =  "SELECT Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE  Ten_Sach like '%"+tuKhoa+"%'";
+    let sql =  "SELECT ID_Sach, Ten_Sach, Tac_Gia, Ten_Nha_Xuat_Ban, Nam_Xuat_Ban, ID_DanhMuc, ID_TheLoai, Gia_Ban, `GiamGia(%)` AS GiamGia, So_Luong_Ton, Mo_Ta, Images, ID_Cart, TrangThai FROM sach WHERE  Ten_Sach like '%"+tuKhoa+"%'";
     timKiemSachNangCao(sql);
     document.getElementById("tuKhoa").value = "";
 });
