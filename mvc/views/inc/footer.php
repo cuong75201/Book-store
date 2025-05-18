@@ -97,7 +97,7 @@
                                 <a href="pages/about"><span>Giới thiệu</span></a>
                                 <!-- ?url=pages/about -->
                             </li>
-                             <li>
+                            <li>
                                 <a href="pages/diemsach"><span>Điểm sách</span></a>
                             </li>
                             <li>
@@ -166,8 +166,7 @@
         </div>
     </div>
 </footer>
-
+<script src="public/js/script.js"></script>
 <?php
 require  __DIR__ . '/script.php'; ?>
-<script src="public/js/script.js"></script>
 <?php

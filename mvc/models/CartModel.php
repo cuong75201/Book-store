@@ -102,4 +102,100 @@ class CartModel extends dbconnect
         $stmt->close();
         return $result;
     }
+    public function getUserIdByEmail($email)
+    {
+        $sql = "SELECT ID_Khach_Hang FROM users WHERE email = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        return $user ? $user['ID_Khach_Hang'] : null;
+    }
+
+    public function getCart($user_id)
+    {
+        $sql = "SELECT * FROM `cart` WHERE `ID_Khach_Hang` = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+    public function addToCTCart($cart_id, $book_id, $quantity = 1)
+    {
+        $sql = "INSERT INTO `ctiet_cart` (`ID_Cart`, `ID_Sach`, `So_Luong`) VALUES (?, ?, ?) 
+                ON DUPLICATE KEY UPDATE `So_Luong` = `So_Luong` + ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("iiii", $cart_id, $book_id, $quantity, $quantity);
+        return $stmt->execute();
+    }
+
+    public function getCTCart($cart_id)
+    {
+        $sql = "SELECT ct.*, b.Ten_Sach, b.Gia 
+                FROM `ctiet_cart` ct 
+                JOIN `books` b ON ct.ID_Sach = b.ID 
+                WHERE ct.ID_Cart = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $cart_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateCTCart($cart_id, $book_id, $quantity)
+    {
+        $sql = "UPDATE `ctiet_cart` SET `So_Luong` = ? WHERE `ID_Cart` = ? AND `ID_Sach` = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("iii", $quantity, $cart_id, $book_id);
+        return $stmt->execute();
+    }
+
+    public function deleteFromCart($cart_id, $book_id)
+    {
+        $sql = "DELETE FROM `ctiet_cart` WHERE `ID_Cart` = ? AND `ID_Sach` = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("ii", $cart_id, $book_id);
+        return $stmt->execute();
+    }
+
+    public function getTotalPrice($cart_id)
+    {
+        $sql = "SELECT SUM(ct.So_Luong * b.Gia) AS Thanh_Tien 
+                FROM `ctiet_cart` ct 
+                JOIN `books` b ON ct.ID_Sach = b.ID 
+                WHERE ct.ID_Cart = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $cart_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $total = $result->fetch_assoc();
+        return $total['Thanh_Tien'] ?? 0;
+    }
+    public function addTocart($id, $email, $quantity)
+    {
+        $sql = "INSERT INTO `cart`( `Email_khachhang`, `ID_Sach`, `So_Luong`) VALUES ('$email',$id,$quantity)";
+        $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function getProduct($email)
+    {
+        $sql = "SELECT c.ID_Sach,c.So_Luong,sach.Ten_Sach,sach.Gia_Ban,sach.So_Luong_Ton from cart c JOIN sach on c.ID_Sach=sach.ID_Sach WHERE c.Email_khachhang='$email'";
+        $result = mysqli_query($this->con, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    public function UpdateCart($id,$quantity,$email){
+        $sql="UPDATE `cart` SET `So_Luong`=$quantity WHERE `Email_khachhang`='$email' AND `ID_Sach`=$id";
+         $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
+    public function deleteCart($id,$email){
+        $sql="DELETE FROM `cart` WHERE `Email_khachhang`='$email' AND `ID_Sach`=$id";
+         $result = mysqli_query($this->con, $sql);
+        return $result;
+    }
 }

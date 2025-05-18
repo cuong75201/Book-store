@@ -39,7 +39,7 @@ $(document).ready(function () {
                                 <a href="${detailUrl}">
                                     <img src="media/logo-banner/eye.png" alt="">
                                 </a>
-                                <a href="#">
+                                <a href="#" class="add-to-cart" id=${product.ID_Sach}>
                                     <img src="media/logo-banner/cart.png" alt="">
                                 </a>
                             </div>
@@ -63,6 +63,10 @@ $(document).ready(function () {
                     `
                 }
                 $('.content-list').html(str);
+                $(".add-to-card").on("click", function (event) {
+                    event.preventDefault();
+                    console.log("aa");
+                })
 
             },
             error: function (xhr, status, error) {
@@ -158,7 +162,7 @@ $(document).ready(function () {
                             <a href="${detailUrl}">
                                     <img src="media/logo-banner/eye.png" alt="">
                                 </a>
-                                <a href="#" class="add-to-card">
+                                <a href="#" class="add-to-card" id=${product.ID_Sach}>
                                     <img src="media/logo-banner/cart.png" alt="">
                                 </a>
                             </div>
@@ -182,6 +186,28 @@ $(document).ready(function () {
                     `
             }
             $('.content-list').html(str);
+            $(".add-to-card").on("click", function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "cart/add",
+                    method: "POST",
+                    data: { id: $(this).attr("id"), quantity: 1 },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data == true) {
+                            toast({ title: 'SUCCESS', message: 'Thêm vào giỏ hàng thành công!', type: 'success', duration: 3000 });
+                        }
+                        else {
+                            toast({ title: 'WARNING', message: 'Vui lòng đăng nhập để tiếp tục!', type: 'warning', duration: 3000 });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error:", error);
+                        console.log("XHR:", xhr);
+                        console.log("Status:", status);
+                    }
+                })
+            })
 
         },
         error: function (xhr, status, error) {

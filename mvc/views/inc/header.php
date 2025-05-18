@@ -19,10 +19,12 @@
               </div>
               <div class="col-2">
                   <div class="header__item d-flex justify-content-between text-center ">
-                      <div class="header__cart">
-                          <i class="fa fa-shopping-cart"></i>
-                          <span class="d-block">Giỏ hàng</span>
-                      </div>
+                        <div class="header__cart">
+                            <a href="cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span class="d-block">Giỏ hàng</span>
+                        </a>
+                        </div>
                       <?php
                         if (isset($_COOKIE['user_email'])) {
                             echo ' <div class="header__user">
