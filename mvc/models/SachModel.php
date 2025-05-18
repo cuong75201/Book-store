@@ -160,7 +160,12 @@ class SachModel extends dbconnect
         return $result->fetch_all(MYSQLI_ASSOC);
     }
     public function searchSachNangCao($sql)
-    {
+    {    
+            $sql = str_replace(
+            "SELECT Ten_Sach, Tac_Gia", 
+            "SELECT ID_Sach, Ten_Sach, Tac_Gia", // Thêm ID_Sach
+            $sql
+        );
         $result = mysqli_query($this->con, $sql);
 
         // Kiểm tra nếu có lỗi trong truy vấn

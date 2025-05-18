@@ -1,3 +1,13 @@
+function toSlug(str) {
+    return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
+}
 let i = 0;
 // Chuyển cảnh trong list sách dọc
 document.querySelectorAll('.owl-prev').forEach((element) => {
@@ -926,11 +936,13 @@ function timKiemSachNangCao(sql){
                         <div class="item-product col-3">
                             <div class="chir_loop">
                                 <div class="chir_img">
-                                    <a href="#">
+                                    <a href="product/detail/${toSlug(product.Ten_Sach)}-${product.ID_Sach}">
                                         <img src="media/img_product/${product.Images}" alt="${product.Ten_Sach}">
                                     </a>
                                     <div class="insActionloop">
-                                        <a href="#"><img src="media/logo-banner/eye.png" alt="View"></a>
+                                        <a href="product/detail/${toSlug(product.Ten_Sach)}-${product.ID_Sach}">
+                                            <img src="media/logo-banner/eye.png" alt="View">
+                                            </a>
                                         <a href="#"><img src="media/logo-banner/cart.png" alt="Add to Cart"></a>
                                     </div>
                                 </div>

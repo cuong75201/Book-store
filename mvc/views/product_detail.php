@@ -22,6 +22,7 @@ $product = $data['product'];
 </head>
 <body>
 <?php require 'inc/header.php'; ?>
+<?php require 'inc/navbar.php'; ?>
 
     <div id="product-container">
         <div class="left-section">
