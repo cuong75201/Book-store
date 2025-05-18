@@ -23,7 +23,7 @@ $product = $data['product'];
 <body>
 <?php require 'inc/header.php'; ?>
 <?php require 'inc/navbar.php'; ?>
-
+<div class="ins_main" >
     <div id="product-container">
         <div class="left-section">
             <img class="product-image" src="media/img_product/<?= htmlspecialchars($product['Images']) ?>" alt="<?= htmlspecialchars($product['Ten_Sach']) ?>">
@@ -55,6 +55,7 @@ $product = $data['product'];
             </div>
         </div>
     </div>
+</div>
     <script src="public/js/script.js"></script>
     </body>
 </html>
