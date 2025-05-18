@@ -149,17 +149,36 @@ function viewDetail(idPhieu) {
         dataType: 'json',
         data: { id: idPhieu },
         success: function (chiTiet) {
+            const idNv = chiTiet.length > 0 ? chiTiet[0].ID_NV : 'Không xác định';
+            
             let html = `
-        <div class="detail-header">
-          <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
-        </div>
-        <ul class="detail-list">
-        <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
-      `;
+                <div class="detail-header">
+                    <h2>Chi tiết phiếu nhập #${idPhieu}</h2>
+                    <button class="close-btn" onclick="closePhieuModal()" style="margin: 10px">Đóng</button>
+                </div>
+                <ul class="detail-list">
+                    <p><strong>Mã nhân viên:</strong> ${idNv}</p>
+                    <table class="detail-table">
+                        <tr>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Số lượng</th>
+                            <th>Giá nhập</th>
+                        </tr>
+            `;
+            
             chiTiet.forEach(ct => {
-                html += `<li>${ct.Ten_Sach} — SL: ${ct.SoLuong} — Giá: ${ct.GiaNhap}</li>`;
+                html += `
+                    <tr>
+                        <td>${ct.ID_Sach}</td>
+                        <td>${ct.Ten_Sach}</td>
+                        <td>${ct.SoLuong}</td>
+                        <td>${ct.GiaNhap.toLocaleString()}₫</td>
+                    </tr>
+                `;
             });
-            html += `</ul>`;
+            
+            html += `</table></ul>`;
             $("#phieuModal .modal-body").html(html);
             $("#phieuModal").addClass('active');
         },
@@ -168,7 +187,6 @@ function viewDetail(idPhieu) {
         }
     });
 }
-
 // Thêm hàm ẩn modal
 function closePhieuModal() {
     $('#phieuModal').removeClass('active');
@@ -202,3 +220,40 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".add-button").addEventListener("click", openModal);
 });
 
+function searchPhieu() {
+    const searchType = $('#searchType').val();
+    const keyword = $('#searchInput').val().trim();
+
+    $.ajax({
+        url: 'admin/searchPhieuNhap',
+        method: 'POST',
+        data: { type: searchType, keyword: keyword },
+        dataType: 'json',
+        success: function (data) {
+            // Xóa dữ liệu cũ
+            $('tbody').empty();
+            
+            // Cập nhật dữ liệu mới
+            data.forEach(phieu => {
+                const row = `
+                    <tr data-id="${phieu.ID_PhieuNhap}">
+                        <td>${phieu.ID_PhieuNhap}</td>
+                        <td>${phieu.Ten_NV || 'Không xác định'}</td>
+                        <td>${phieu.NgayNhap}</td>
+                        <td>${phieu.Ten_NCC || 'Không xác định'}</td>
+                        <td>${phieu.TongTien}₫</td>
+                        <td>${phieu.TrangThai == 1 ? 'Đã hoàn thành' : 'Đã hủy'}</td>
+                        <td>
+                            <button class="button edit-button" onclick="viewDetail(${phieu.ID_PhieuNhap})">Chi tiết</button>
+                            <button class="button delete-button" onclick="deletePhieu(${phieu.ID_PhieuNhap})">Xóa</button>
+                        </td>
+                    </tr>
+                `;
+                $('tbody').append(row);
+            });
+        },
+        error: function (xhr) {
+            alert('Lỗi tìm kiếm: ' + xhr.responseText);
+        }
+    });
+}

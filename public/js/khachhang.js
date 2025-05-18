@@ -29,17 +29,7 @@ function openModal(action) {
                     <label for="name">Email:</label>
                     <input type="text" id="email" placeholder="Nhập email">
                     <br>
-                </div>
-                <div class="adding-content-item">
-                    <label for="name">Số điện thoại:</label>
-                    <input type="number" id="sodienthoai" placeholder="Nhập số điện thoại">
-                    <br>
-                </div>
-                <div class="adding-content-item">
-                    <label for="name">Địa chỉi:</label>
-                    <input type="text" id="diachi" placeholder="Nhập địa chỉiii">
-                    <br>
-                </div>      
+                </div>     
             </div>
         </form>
     </div>
@@ -78,8 +68,8 @@ function openModal(action) {
                                 <br>
                             </div>
                             <div class="adding-content-item">
-                                <label for="sodienthoai">Số điện thoại:</label>
-                                <input type="number" id="sodienthoai" placeholder="Nhập số điện thoại">
+                                <label for="email">Email:</label>
+                                <input type="text" id="email" placeholder="Nhập email">
                                 <br>
                             </div>     
                         </div>
@@ -91,7 +81,7 @@ function openModal(action) {
                  //Đổ dữ liệu vào form
                 $("#tenkhachhang").val(khachhang[0].Ten_Khach_Hang);
                 $("#email").val(khachhang[0].Email);
-                $("#sodienthoai").val(khachhang[0].So_Dien_Thoai);
+                // $("#sodienthoai").val(khachhang[0].So_Dien_Thoai);
             },
             error: function (xhr, status, error) {
                 console.error("AJAX Error:", error);
@@ -113,11 +103,11 @@ function AddKhachHang() {
         let firstName = $("#firstName").val().trim();
         let email = $("#email").val().trim();
         let matkhau = "12345678";
-        let sodienthoai = $("#sodienthoai").val().trim();
-        let diachi = $("#diachi").val().trim();
+        // let sodienthoai = $("#sodienthoai").val().trim();
+        // let diachi = $("#diachi").val().trim();
         const ngayHienTai = new Date();    
         let ngaydangky = ngayHienTai.toISOString().split('T')[0];
-    if (!lastName||!firstName || !email  || !sodienthoai || !diachi || !ngaydangky) {
+    if (!lastName||!firstName || !email   || !ngaydangky) {
         alert("Vui lòng điền đầy đủ thông tin!");
         return;
     }
@@ -126,11 +116,11 @@ function AddKhachHang() {
         alert("Email không hợp lệ không hợp lệ");
         return;
     }
-     const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
-      if (!regexPhone.test(sodienthoai)) {
-        alert("Số điện thoại không hợp lệ");
-        return;
-    }
+    //  const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
+    //   if (!regexPhone.test(sodienthoai)) {
+    //     alert("Số điện thoại không hợp lệ");
+    //     return;
+    // }
     $.ajax({
         url : "admin/checkEmail",
         method : "POST",
@@ -153,8 +143,8 @@ function AddKhachHang() {
             firstName : firstName,
             email : email,
             matKhau : matkhau,
-            phone : sodienthoai,
-            diaChi : diachi,
+            // phone : sodienthoai,
+            // diaChi : diachi,
             ngayDangKy : ngaydangky
             
 
@@ -174,23 +164,28 @@ function AddKhachHang() {
 };
 function UpdateKhachHang(id) {
         let name = $("#tenkhachhang").val().trim();
-        let sodienthoai = $("#sodienthoai").val().trim(); 
-    if (!name   || !sodienthoai ) {
+        let email = $("#email").val().trim(); 
+    if (!name   || !email ) {
         alert("Vui lòng điền đầy đủ thông tin!");
         return;
     }
-   // const regexEmail = /^[^\s@]+@(gmail\.com|sgu\.edu\.vn)$/;
-     const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
-      if (!regexPhone.test(sodienthoai)) {
-        alert("Số điện thoại không hợp lệ");
+    const regexEmail = /^[^\s@]+@(gmail\.com|sgu\.edu\.vn)$/;
+    if (!regexEmail.test(email)) {
+        alert("Email không hợp lệ không hợp lệ");
         return;
     }
+   // const regexEmail = /^[^\s@]+@(gmail\.com|sgu\.edu\.vn)$/;
+    //  const regexPhone = /^0(3|5|7|8|9)\d{8}$/;
+    //   if (!regexPhone.test(sodienthoai)) {
+    //     alert("Số điện thoại không hợp lệ");
+    //     return;
+    // }
     $.ajax({
         url: "admin/suaKhachHang",
         method: "POST",
         data: {
             name : name,
-            phone : sodienthoai,
+            email : email,
             id : id
         
             

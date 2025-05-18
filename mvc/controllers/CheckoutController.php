@@ -54,10 +54,10 @@ class CheckoutController extends Controller
         }
 
         if (isset($_COOKIE['user_email'])) {
-        $email = $_COOKIE['user_email'];
-        $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
-        $defaultAddress = $this->userModel->getDefaultAddress($email);
-        $addresses = $this->userModel->getAddresses($email);
+            $email = $_COOKIE['user_email'];
+            $user = $this->userModel->getUserByEmail($email); // bạn cần có hàm này trong UserModel
+            $defaultAddress = $this->userModel->getDefaultAddress($email);
+            $addresses = $this->userModel->getAddresses($email);
         }
         $this->view("main_layout", [
             "Title" => "Thanh toán – MINH LONG BOOK",
@@ -76,75 +76,75 @@ class CheckoutController extends Controller
     }
 
     public function processCheckout()
-{
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $data = json_decode(file_get_contents('php://input'), true);
-        $customerId = $this->userModel->getCustomerIdByEmail($_COOKIE['user_email'] ?? '');
-        if (!$customerId) {
-            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
-            return;
-        }
-
-        // Tạo đơn hàng mới
-        $orderData = [
-            'ID_Khach_Hang' => $customerId,
-            'Ngay_Dat_Hang' => date('Y-m-d H:i:s'),
-            'Tong_Tien' => $data['total'],
-            'Trang_Thai' => 1,
-            'Phuong_Thuc_Thanh_Toan' => $data['paymentMethod'],
-            'Dia_Chi_Giao_Hang' => $this->userModel->getAddressById($data['addressId'], $_COOKIE['user_email'])['Dia_Chi'] ?? 'Không có địa chỉ',
-            'Ghi_Chu' => $data['note'] ?? ''
-        ];
-
-        $orderId = $this->userModel->createOrder($orderData);
-
-        if ($orderId) {
-            // Lưu chi tiết đơn hàng
-            foreach ($data['products'] as $productId => $item) {
-                $quantity = (int)$item['quantity'];
-                $price = (float)$item['price'];
-                $thanhTien = $quantity * $price;
-
-                error_log("Product ID: $productId, Quantity: $quantity, Price: $price, ThanhTien: $thanhTien");
-
-                $this->userModel->addOrderDetail($orderId, $productId, $quantity, $price, $thanhTien);
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $customerId = $this->userModel->getCustomerIdByEmail($_COOKIE['user_email'] ?? '');
+            if (!$customerId) {
+                echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+                return;
             }
-            
 
-            echo json_encode(['status' => 'success', 'message' => 'Đơn hàng đã được đặt thành công']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Không thể tạo đơn hàng']);
-        }
-    }
-}
-    public function updateCart()
-{
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = $_COOKIE['user_email'] ?? null;
-        if (!$email) {
-            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
-            return;
-        }
+            // Tạo đơn hàng mới
+            $orderData = [
+                'ID_Khach_Hang' => $customerId,
+                'Ngay_Dat_Hang' => date('Y-m-d H:i:s'),
+                'Tong_Tien' => $data['total'],
+                'Trang_Thai' => 1,
+                'Phuong_Thuc_Thanh_Toan' => $data['paymentMethod'],
+                'Dia_Chi_Giao_Hang' => $this->userModel->getAddressById($data['addressId'], $_COOKIE['user_email'])['Dia_Chi'] ?? 'Không có địa chỉ',
+                'Ghi_Chu' => $data['note'] ?? ''
+            ];
 
-        $customerId = $this->userModel->getCustomerIdByEmail($email);
-        if (!$customerId) {
-            echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy thông tin khách hàng']);
-            return;
-        }
+            $orderId = $this->userModel->createOrder($orderData);
 
-        $productId = $_POST['product_id'] ?? null;
-        $quantity = $_POST['quantity'] ?? 1;
+            if ($orderId) {
+                // Lưu chi tiết đơn hàng
+                foreach ($data['products'] as $productId => $item) {
+                    $quantity = (int)$item['quantity'];
+                    $price = (float)$item['price'];
+                    $thanhTien = $quantity * $price;
 
-        if ($productId && $quantity >= 1) {
-            $result = $this->cartModel->updateCartItem($customerId, $productId, $quantity);
-            if ($result) {
-                echo json_encode(['status' => 'success', 'message' => 'Cập nhật số lượng thành công']);
+                    error_log("Product ID: $productId, Quantity: $quantity, Price: $price, ThanhTien: $thanhTien");
+
+                    $this->userModel->addOrderDetail($orderId, $productId, $quantity, $price, $thanhTien);
+                }
+
+
+                echo json_encode(['status' => 'success', 'message' => 'Đơn hàng đã được đặt thành công']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Không thể cập nhật số lượng']);
+                echo json_encode(['status' => 'error', 'message' => 'Không thể tạo đơn hàng']);
             }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ']);
         }
     }
-}
+    public function updateCart()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_COOKIE['user_email'] ?? null;
+            if (!$email) {
+                echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+                return;
+            }
+
+            $customerId = $this->userModel->getCustomerIdByEmail($email);
+            if (!$customerId) {
+                echo json_encode(['status' => 'error', 'message' => 'Không tìm thấy thông tin khách hàng']);
+                return;
+            }
+
+            $productId = $_POST['product_id'] ?? null;
+            $quantity = $_POST['quantity'] ?? 1;
+
+            if ($productId && $quantity >= 1) {
+                $result = $this->cartModel->updateCartItem($customerId, $productId, $quantity);
+                if ($result) {
+                    echo json_encode(['status' => 'success', 'message' => 'Cập nhật số lượng thành công']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Không thể cập nhật số lượng']);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ']);
+            }
+        }
+    }
 }

@@ -13,10 +13,11 @@ class Admin extends Controller
     public $ctietquyenModel;
     public $phieunhapModel;
     public $nhaCungCapModel;
-    public $userModel;
-    public $nccModel;
+
     function __construct()
     {
+        if (!isset($_SESSION)) session_start();
+        parent::__construct();
         $this->ctietquyenModel = $this->model("ctiet_quyenModel");
         $this->ctietpnhModel = $this->model("ctiet_pnhModel");
         $this->khachhangModel = $this->model("UserModel");
@@ -29,8 +30,7 @@ class Admin extends Controller
         $this->nhomquyenModel = $this->model("NhomQuyenModel");
         $this->phieunhapModel = $this->model("PhieuNhapModel");
         $this->nhaCungCapModel = $this->model("NhaCungCapModel");
-        $this->userModel = $this->model("UsersModel");
-        $this->nccModel = $this->model("NccModel");
+       // $this->nccModel = $this->model("NccModel");
     }
 
     function default($params = "")
@@ -98,7 +98,7 @@ class Admin extends Controller
                 return;
             }
         }
-        $list_user = $this->userModel->getAllUser();
+        $list_user = $this->khachhangModel->getAllUser();
         $this->view("admin_view", [
             "title" => "Khách hàng - Admin Web",
             "content" => "Khách hàng",
@@ -121,7 +121,7 @@ class Admin extends Controller
                 return;
             }
         }
-        $list_ncc = $this->nccModel->getAllNCC();
+        $list_ncc = $this->nhaCungCapModel->getAllNCC1();
         $this->view("admin_view", [
             "title" => "Nhà cung cấp - Admin Web",
             "content" => "Nhà cung cấp",
@@ -242,22 +242,21 @@ class Admin extends Controller
     }
     function checkLogin()
     {
-
         $sdt = isset($_POST['username']) ? $_POST['username'] : "";
         $password = isset($_POST["password"]) ? $_POST['password'] : "";
         $result = $this->nhanvienModel->KiemTraNhanVien($sdt, $password);
+        
         if ($result) {
-
-
             $nv = $this->nhanvienModel->getNVfromSDT($sdt);
-            $idnv = $nv['ID_NV'];
+            $_SESSION['id_nv'] = $nv['ID_NV'];
+            
+            // Khởi tạo mảng trước khi sử dụng
+            $_SESSION['hanhdong'] = []; // <-- Thêm dòng này
+            
             $ctiet = $this->ctietquyenModel->getById($nv['MaQuyen']);
-            $hanhdong = [];
             foreach ($ctiet as $ct) {
-                $hanhdong[] = $ct['hanhdong'];
+                $_SESSION['hanhdong'][] = $ct['hanhdong']; // <-- Sử dụng [] để thêm phần tử
             }
-            $_SESSION['id_nv'] = $idnv;
-            $_SESSION['hanhdong'] = $hanhdong;
         }
         echo json_encode($result);
     }
@@ -430,31 +429,17 @@ class Admin extends Controller
     // Action chính
     function phieunhap()
     {
-        if (!isset($_SESSION['hanhdong'])) {
-            // $this->view("page/loginAdmin", []);
-            header("Location: login");
+        // Kiểm tra session tồn tại
+        if (!isset($_SESSION) || !isset($_SESSION['hanhdong'])) {
+            $this->view("page/loginAdmin", []);
             return;
-        } else {
-            if (!in_array(6, $_SESSION['hanhdong'])) {
-                $this->view("page/myerrol", [
-                    'href' => 'dashboard'
-                ]);
-                return;
-            }
         }
-        // if (!isset($_SESSION)) {
-        //     $this->view("page/loginAdmin", []);
-        //     return;
-        // } else {
-        //     if (!in_array(6, $_SESSION['hanhdong'])) {
-        //         $this->view("page/myerrol", [
-        //             'href' => 'dashboard'
-        //         ]);
-        //         return;
-        //     }
-        // }
-        if (!isset($_SESSION)) session_start();
-        if (!isset($_SESSION['hanhdong'])) $_SESSION['hanhdong'] = []; // gán rỗng nếu chưa có
+
+        // Kiểm tra quyền với mảng đã được khởi tạo
+        if (!in_array(6, $_SESSION['hanhdong'])) {
+            $this->view("page/myerrol", ['href' => 'dashboard']);
+            return;
+        }
 
         $listPhieu = $this->phieunhapModel->getAllPhieuNhap();
         $this->view("admin_view", [
@@ -485,37 +470,43 @@ class Admin extends Controller
 
 
     // API: Xử lý thêm phiếu
-    function addPhieuNhap()
-    {
-        // Nhận dữ liệu JSON gửi từ client
-        $data = json_decode(file_get_contents('php://input'), true);
+    function addPhieuNhap() {
+    // Nhận dữ liệu JSON gửi từ client
+    $data = json_decode(file_get_contents('php://input'), true);
 
-        // Kiểm tra dữ liệu đầu vào
-        if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['ChiTiet'])) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Dữ liệu không hợp lệ!'
-            ]);
-            return;
-        }
-
-        // Tách dữ liệu
-        $ngayNhap = $data['NgayNhap'];
-        $idNCC = $data['ID_NCC'];
-        $chiTiet = $data['ChiTiet']; // Mảng chứa các sách: [ ['ID_Sach'=>..., 'SoLuong'=>..., 'GiaNhap'=>...], ...]
-
-        // Gọi model để thêm phiếu nhập
-        $result = $this->phieunhapModel->addPhieuNhap($ngayNhap, $idNCC, $chiTiet);
-
-        // Trả về kết quả JSON
-        if ($result) {
-            echo json_encode(['success' => true, 'message' => 'Them phieu nhap thanh cong']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
-        }
+    // Kiểm tra session nhân viên
+    if (!isset($_SESSION['id_nv'])) {
+        echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập']);
+        return;
     }
 
+    // Lấy ID_NV từ session
+    $id_nv = $_SESSION['id_nv'];
 
+    // Kiểm tra dữ liệu đầu vào (LOẠI BỎ KIỂM TRA id_nv TRONG $data)
+    if (!isset($data['NgayNhap']) || !isset($data['ID_NCC']) || !isset($data['ChiTiet']) || !is_array($data['ChiTiet'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Dữ liệu không hợp lệ!'
+        ]);
+        return;
+    }
+
+    // Gọi model và truyền ID_NV từ session
+    $result = $this->phieunhapModel->addPhieuNhap(
+        $data['NgayNhap'], 
+        $data['ID_NCC'], 
+        $data['ChiTiet'], 
+        $id_nv // Truyền ID_NV từ session vào đây
+    );
+
+    // Trả về kết quả
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Thêm phiếu nhập thành công']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Thêm phiếu nhập thất bại.']);
+    }
+}
     // API: Xóa phiếu
     function deletePhieu()
     {
@@ -539,14 +530,14 @@ class Admin extends Controller
     {
         if (isset($_POST['idkhachhang'])) {
 
-            echo json_encode($this->userModel->getUserById($_POST['idkhachhang']));
+            echo json_encode($this->khachhangModel->getUserById($_POST['idkhachhang']));
         }
     }
     function getNCCap()
     {
         if (isset($_POST['id'])) {
 
-            echo json_encode($this->nccModel->getNCC($_POST['id']));
+            echo json_encode($this->nhaCungCapModel->getNCC1($_POST['id']));
         }
     }
     function themKhachHang()
@@ -554,12 +545,12 @@ class Admin extends Controller
         $lastName = (isset($_POST["lastName"])) ? $_POST["lastName"] : "";
         $firstName = (isset($_POST["firstName"])) ? $_POST["firstName"] : "";
         $email = (isset($_POST["email"])) ? $_POST["email"] : "";
-        $matKhau = (isset($_POST["matKhau"])) ? $_POST["matKhau"] : "";
-        $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
-        $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
+         $matKhau = (isset($_POST["matKhau"])) ? $_POST["matKhau"] : "";
+        // $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
+     //   $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
         $ngayDangKy = (isset($_POST["ngayDangKy"])) ? $_POST["ngayDangKy"] : "";
 
-        $check = $this->userModel->create($lastName, $firstName, $email, $phone, $matKhau, $ngayDangKy, $diaChi);
+        $check = $this->khachhangModel->createByAdmin($lastName, $firstName, $email, $matKhau, $ngayDangKy);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -569,9 +560,9 @@ class Admin extends Controller
     {
         $name = (isset($_POST["name"])) ? $_POST["name"] : "";
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
-        $phone = (isset($_POST["phone"])) ? $_POST["phone"] : "";
+        $email = (isset($_POST["email"])) ? $_POST["email"] : "";
 
-        $check = $this->userModel->updateUserByAdmin($id, $name, $phone);
+        $check = $this->khachhangModel->updateUserByAdmin1($id, $name, $email);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -581,7 +572,7 @@ class Admin extends Controller
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
         $status = (isset($_POST["status"])) ? $_POST["status"] : "";
-        $check = $this->userModel->setStatusByAdmin($id, $status);
+        $check = $this->khachhangModel->setStatusByAdmin($id, $status);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -590,7 +581,7 @@ class Admin extends Controller
     function xoaKhachHang()
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
-        $check = $this->userModel->xoaUserByAdmin($id);
+        $check = $this->khachhangModel->xoaUserByAdmin($id);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -599,7 +590,7 @@ class Admin extends Controller
     function layDanhSachKhachHang()
     {
         // Lấy danh sách khách hàng từ model
-        $data['list_khachhang'] = $this->userModel->getAllUser();
+       $data['list_khachhang'] = $this->khachhangModel->getAllUser();
 
         foreach ($data['list_khachhang'] as $user) {
             $trangThai = ($user["status"] == 0) ? "bị khóa" : "hoạt động";
@@ -608,8 +599,6 @@ class Admin extends Controller
             <td>' . $user["ID_Khach_Hang"] . '</td>
             <td>' . $user["Ten_Khach_Hang"] . '</td>
             <td>' . $user["Email"] . '</td>
-            <td>' . $user["So_Dien_Thoai"] . '</td>
-            <td>' . $user["Dia_Chi"] . '</td>
             <td>' . $user["Ngay_Dang_Ky"] . '</td>
             <td>' . $trangThai . '</td>
         </tr>
@@ -621,7 +610,7 @@ class Admin extends Controller
         $name = (isset($_POST["name"])) ? $_POST["name"] : "";
         $lienHe = (isset($_POST["lienHe"])) ? $_POST["lienHe"] : "";
         $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
-        $check = $this->nccModel->addNCC($name, $diaChi, $lienHe);
+        $check = $this->nhaCungCapModel->addNCC1($name, $diaChi, $lienHe);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -634,7 +623,7 @@ class Admin extends Controller
         $diaChi = (isset($_POST["diaChi"])) ? $_POST["diaChi"] : "";
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
 
-        $check = $this->nccModel->updateNCC($id, $name, $diaChi, $lienHe);
+        $check = $this->nhaCungCapModel->updateNCC1($id, $name, $diaChi, $lienHe);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -644,7 +633,7 @@ class Admin extends Controller
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
         $status = (isset($_POST["status"])) ? $_POST["status"] : "";
-        $check = $this->nccModel->setStatus($id, $status);
+        $check = $this->nhaCungCapModel->setStatus1($id, $status);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -653,7 +642,7 @@ class Admin extends Controller
     function xoaNhaCungCap()
     {
         $id = (isset($_POST["id"])) ? $_POST["id"] : "";
-        $check = $this->nccModel->xoaNhaCungCap($id);
+        $check = $this->nhaCungCapModel->xoaNhaCungCap1($id);
         if (!$check) {
             echo json_encode("không thành coong");
         }
@@ -662,7 +651,7 @@ class Admin extends Controller
     function layDanhSachNCC()
     {
         // Lấy danh sách khách hàng từ model
-        $result = $this->nccModel->getAllNCC();
+        $result = $this->nhaCungCapModel->getAllNCC1();
         foreach ($result as $ncc) {
             echo '
         <tr  id="' . $ncc["ID_NCC"] . '">
@@ -677,7 +666,7 @@ class Admin extends Controller
     public function checkEmail()
     {
         $email = isset($_POST['email']) ? $_POST['email'] : "";
-        $result = $this->userModel->getAllUser();
+        $result = $this->khachhangModel->getAllUser();
         foreach ($result as $user) {
             if ($user["Email"] === $email) {
                 echo "1";
@@ -686,4 +675,11 @@ class Admin extends Controller
         }
         echo "0";
     }
+    function searchPhieuNhap() {
+    $type = $_POST['type'];
+    $keyword = $_POST['keyword'];
+    
+    $result = $this->phieunhapModel->searchPhieu($type, $keyword);
+    echo json_encode($result);
+}
 }

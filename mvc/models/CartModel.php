@@ -36,15 +36,15 @@ class CartModel extends dbconnect
     }
 
     // Cập nhật số lượng sản phẩm trong giỏ hàng
-public function updateCartItem($customerId, $productId, $quantity)
-{
-    $query = "UPDATE cart SET So_Luong = ? WHERE ID_Khach_Hang = ? AND ID_Sach = ?";
-    $stmt = $this->con->prepare($query);
-    $stmt->bind_param("iii", $quantity, $customerId, $productId);
-    $result = $stmt->execute();
-    $stmt->close();
-    return $result;
-}
+    public function updateCartItem($customerId, $productId, $quantity)
+    {
+        $query = "UPDATE cart SET So_Luong = ? WHERE ID_Khach_Hang = ? AND ID_Sach = ?";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param("iii", $quantity, $customerId, $productId);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
 
     // Lấy địa chỉ mặc định của khách hàng
     public function getDefaultAddress($customerId)
@@ -78,9 +78,15 @@ public function updateCartItem($customerId, $productId, $quantity)
         $query = "INSERT INTO don_hang (ID_Khach_Hang, Ngay_Dat_Hang, Tong_Tien, Trang_Thai, Phuong_Thuc_Thanh_Toan, Dia_Chi_Giao_Hang) 
                   VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->con->prepare($query);
-        $stmt->bind_param("ississ", $orderData['ID_Khach_Hang'], $orderData['Ngay_Dat_Hang'], 
-                          $orderData['Tong_Tien'], $orderData['Trang_Thai'], 
-                          $orderData['Phuong_Thuc_Thanh_Toan'], $orderData['Dia_Chi_Giao_Hang']);
+        $stmt->bind_param(
+            "ississ",
+            $orderData['ID_Khach_Hang'],
+            $orderData['Ngay_Dat_Hang'],
+            $orderData['Tong_Tien'],
+            $orderData['Trang_Thai'],
+            $orderData['Phuong_Thuc_Thanh_Toan'],
+            $orderData['Dia_Chi_Giao_Hang']
+        );
         $stmt->execute();
         $orderId = $this->con->insert_id;
         $stmt->close();
@@ -96,5 +102,4 @@ public function updateCartItem($customerId, $productId, $quantity)
         $stmt->close();
         return $result;
     }
-
 }

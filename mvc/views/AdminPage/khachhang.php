@@ -30,8 +30,6 @@
                     <th>ID</th>
                     <th>Tên Khách hàng</th>
                     <th>Email</th>
-                    <th>Số điện thoại</th>
-                    <th>Địa chỉ</th>
                     <th>Ngày đăng kí</th>
                     <th>status</th>
                 </tr>
@@ -49,8 +47,6 @@
                         <td>' . $user["ID_Khach_Hang"] . '</td>
                         <td>' . $user["Ten_Khach_Hang"] . '</td>
                         <td>' . $user["Email"] . '</td>
-                        <td>' . $user["So_Dien_Thoai"] . '</td>
-                        <td>' . $user["Dia_Chi"] . '</td>
                         <td>' . $user["Ngay_Dang_Ky"] . '</td>
                         <td>' . $trangThai . '</td>
                     </tr>
