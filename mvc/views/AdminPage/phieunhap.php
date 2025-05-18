@@ -3,6 +3,10 @@
 </div>
 <div class="button-group">
     <button type="button" class="button add-button">Thêm phiếu</button>
+    <button type="button" class="button edit-button" id="btnViewDetail">Chi tiết</button>
+    <button type="button" class="button delete-button" id="btnDelete">Xóa</button>
+</div>
+<div class="button-group">
     <div class="search-container">
         <select id="searchType">
             <option value="date">Ngày nhập (yyyy-mm-dd)</option>
@@ -10,7 +14,7 @@
             <option value="product">Mã hàng hóa</option>
         </select>
         <input type="text" id="searchInput" placeholder="Nhập từ khóa...">
-        <button type="button" class="button add-button" onclick="searchPhieu()">Tìm kiếm</button>
+        <button type="button" class="button reset-button" onclick="searchPhieu()">Tìm kiếm</button>
     </div>
 </div>
 <div class="product-content">
@@ -23,9 +27,7 @@
                 <th>Nhà cung cấp</th>
                 <th>Tổng tiền</th>
                 <th>Trạng thái</th>
-                <th>Thao tác</th>
             </tr>
-
         </thead>
         <tbody>
             <?php foreach ($data['listPhieu'] as $phieu): ?>
@@ -36,16 +38,11 @@
                 <td><?= $phieu['Ten_NCC'] ?? 'Không xác định' ?></td>
                 <td><?= number_format($phieu['TongTien']) ?>₫</td>
                 <td><?= ($phieu['TrangThai'] == 1) ? 'Đã hoàn thành' : 'Đã hủy' ?></td>
-                <td>
-                    <button class="button edit-button" onclick="viewDetail(<?= $phieu['ID_PhieuNhap'] ?>)">Chi tiết</button>
-                    <button class="button delete-button" onclick="deletePhieu(<?= $phieu['ID_PhieuNhap'] ?>)">Xóa</button>
-                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
-
 <!-- Modal Thêm phiếu -->
 <div class="modal" id="myModal">
   <div class="modal-content">

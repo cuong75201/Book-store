@@ -219,7 +219,48 @@ function closeModal() {
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".add-button").addEventListener("click", openModal);
 });
+// Thêm sự kiện chọn hàng
+function attachRowClickEvent() {
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.addEventListener('click', function() {
+            document.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+}
 
+// Gán sự kiện khi trang tải xong
+document.addEventListener('DOMContentLoaded', function() {
+    attachRowClickEvent();
+    
+    // Gán sự kiện cho nút Chi tiết và Xóa
+    document.getElementById('btnViewDetail').addEventListener('click', handleViewDetail);
+    document.getElementById('btnDelete').addEventListener('click', handleDelete);
+});
+
+// Xử lý xem chi tiết
+function handleViewDetail() {
+    const selectedRow = document.querySelector('tr.selected');
+    if (!selectedRow) {
+        alert('Vui lòng chọn một phiếu từ bảng.');
+        return;
+    }
+    const id = selectedRow.getAttribute('data-id');
+    viewDetail(id);
+}
+
+// Xử lý xóa
+function handleDelete() {
+    const selectedRow = document.querySelector('tr.selected');
+    if (!selectedRow) {
+        alert('Vui lòng chọn một phiếu từ bảng.');
+        return;
+    }
+    const id = selectedRow.getAttribute('data-id');
+    deletePhieu(id);
+}
+
+// Cập nhật hàm searchPhieu để gán lại sự kiện
 function searchPhieu() {
     const searchType = $('#searchType').val();
     const keyword = $('#searchInput').val().trim();
@@ -230,10 +271,7 @@ function searchPhieu() {
         data: { type: searchType, keyword: keyword },
         dataType: 'json',
         success: function (data) {
-            // Xóa dữ liệu cũ
             $('tbody').empty();
-            
-            // Cập nhật dữ liệu mới
             data.forEach(phieu => {
                 const row = `
                     <tr data-id="${phieu.ID_PhieuNhap}">
@@ -243,14 +281,11 @@ function searchPhieu() {
                         <td>${phieu.Ten_NCC || 'Không xác định'}</td>
                         <td>${phieu.TongTien}₫</td>
                         <td>${phieu.TrangThai == 1 ? 'Đã hoàn thành' : 'Đã hủy'}</td>
-                        <td>
-                            <button class="button edit-button" onclick="viewDetail(${phieu.ID_PhieuNhap})">Chi tiết</button>
-                            <button class="button delete-button" onclick="deletePhieu(${phieu.ID_PhieuNhap})">Xóa</button>
-                        </td>
                     </tr>
                 `;
                 $('tbody').append(row);
             });
+            attachRowClickEvent(); // Gán lại sự kiện sau khi tải dữ liệu mới
         },
         error: function (xhr) {
             alert('Lỗi tìm kiếm: ' + xhr.responseText);
