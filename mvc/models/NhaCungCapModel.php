@@ -37,7 +37,7 @@ class NhaCungCapModel extends dbconnect {
         mysqli_stmt_bind_param($stmt, "i", $id_ncc);
         return mysqli_stmt_execute($stmt);
     }
-      public function getAllNCC1 () {
+   public function getAllNCC1 () {
         $sql = "SELECT * FROM `nha_cung_cap` WHERE TrangThai = 1";
         $query = mysqli_query($this->con, $sql);
         $result = array();
@@ -64,7 +64,7 @@ class NhaCungCapModel extends dbconnect {
         return mysqli_query($this->con, $sql);
     }
     // public function setStatus ($id_ncc,$status) {
-    //     $sql = "update nha_cung_cap set `status` = $status  WHERE `ID_NCC` = $id_ncc";
+    //     $sql = "update ncc set `status` = $status  WHERE `ID_NCC` = $id_ncc";
     //     return mysqli_query($this->con, $sql);
     // }
      public function xoaNhaCungCap1 ($id_ncc) {
