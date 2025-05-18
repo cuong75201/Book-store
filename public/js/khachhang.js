@@ -98,7 +98,7 @@ function closeModal() {
     const modal = document.getElementById('myModal');
     modal.classList.remove('active');
 }
-function AddKhachHang() {
+async function AddKhachHang() {
         let lastName = $("#lastName").val().trim();
         let firstName = $("#firstName").val().trim();
         let email = $("#email").val().trim();
@@ -121,20 +121,31 @@ function AddKhachHang() {
     //     alert("Số điện thoại không hợp lệ");
     //     return;
     // }
-    $.ajax({
+
+    const checkEmail = await $.ajax({
         url : "admin/checkEmail",
         method : "POST",
         data : {
             email : email,
+            id : ''
         },
-        success : function(boolean){
-            console.log(boolean);
-            if(boolean == 1){
-                alert("Email da ton tai");
-                return;
-            }
-        }
     })
+    if(checkEmail == 1){
+        alert("Email đã tồn tại");
+        return;
+    }
+    const checkPhone = await $.ajax({
+        url : "admin/checkPhone",
+        method : "POST",
+        data : {
+            email : email,
+            id : ''
+        },
+    })
+      if(checkPhone == 1){
+        alert("Số điện thoại đã tồn tại");
+        return;
+    }
     $.ajax({
         url: "admin/themKhachHang",
         method: "POST",
@@ -162,7 +173,7 @@ function AddKhachHang() {
         }
     })
 };
-function UpdateKhachHang(id) {
+async function UpdateKhachHang(id) {
         let name = $("#tenkhachhang").val().trim();
         let email = $("#email").val().trim(); 
     if (!name   || !email ) {
@@ -180,6 +191,18 @@ function UpdateKhachHang(id) {
     //     alert("Số điện thoại không hợp lệ");
     //     return;
     // }
+     const checkEmail = await $.ajax({
+        url : "admin/checkEmail",
+        method : "POST",
+        data : {
+            email : email,
+            id : id
+        },
+    })
+    if(checkEmail == 1){
+        alert("Email đã tồn tại");
+        return;
+    }
     $.ajax({
         url: "admin/suaKhachHang",
         method: "POST",
